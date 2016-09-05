@@ -1,0 +1,947 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS多线程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言 这篇文章主要讲GCD的使用，相关博客如下：
+ iOS开发之多线程理论部分
+ NSOperation
+NSThread
+什么是GCD全称是Grand Central Dispath，纯C语言，提供非常多强大的函数，是目前苹果官网推荐的多线程开发方法，NSOperation便是基于GCD的封装。
+GCD的优势所在
+为多核的并行运算提出了解决方案
+GCD会自动利用更多的CPU内核，比如双核，四核。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程GCD">
+<meta property="og:url" content="http://yoursite.com/2016/09/01/多线程GCD/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="前言 这篇文章主要讲GCD的使用，相关博客如下：
+ iOS开发之多线程理论部分
+ NSOperation
+NSThread
+什么是GCD全称是Grand Central Dispath，纯C语言，提供非常多强大的函数，是目前苹果官网推荐的多线程开发方法，NSOperation便是基于GCD的封装。
+GCD的优势所在
+为多核的并行运算提出了解决方案
+GCD会自动利用更多的CPU内核，比如双核，四核。">
+<meta property="og:updated_time" content="2016-09-02T02:58:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程GCD">
+<meta name="twitter:description" content="前言 这篇文章主要讲GCD的使用，相关博客如下：
+ iOS开发之多线程理论部分
+ NSOperation
+NSThread
+什么是GCD全称是Grand Central Dispath，纯C语言，提供非常多强大的函数，是目前苹果官网推荐的多线程开发方法，NSOperation便是基于GCD的封装。
+GCD的优势所在
+为多核的并行运算提出了解决方案
+GCD会自动利用更多的CPU内核，比如双核，四核。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/01/多线程GCD/"/>
+
+  <title> 多线程GCD | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                多线程GCD
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-01T10:00:43+08:00" content="2016-09-01">
+              2016-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/01/多线程GCD/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/01/多线程GCD/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 这篇文章主要讲GCD的使用，相关博客如下：</p>
+<p> <a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/" target="_blank" rel="external">iOS开发之多线程理论部分</a></p>
+<p> <a href="https://wangliguang.github.io/2016/09/01/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSOperation/" target="_blank" rel="external">NSOperation</a></p>
+<p><a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSThread/" target="_blank" rel="external">NSThread</a></p>
+<h1 id="什么是GCD"><a href="#什么是GCD" class="headerlink" title="什么是GCD"></a>什么是GCD</h1><p>全称是Grand Central Dispath，纯C语言，提供非常多强大的函数，是目前苹果官网推荐的多线程开发方法，NSOperation便是基于GCD的封装。</p>
+<h1 id="GCD的优势所在"><a href="#GCD的优势所在" class="headerlink" title="GCD的优势所在"></a>GCD的优势所在</h1><ol>
+<li>为多核的并行运算提出了解决方案</li>
+<li>GCD会自动利用更多的CPU内核，比如双核，四核。</li>
+<li>GCD会自动管理线程的生命周期(创建线程、调度任务、销毁线程)</li>
+<li>程序员只需要告诉GCD想要执行什么任务，不需要编写任何线程管理代码</li>
+</ol>
+<h1 id="GCD中有2个核心概念"><a href="#GCD中有2个核心概念" class="headerlink" title="GCD中有2个核心概念"></a>GCD中有2个核心概念</h1><ul>
+<li><strong>任务：</strong> 执行什么操作 </li>
+<li><strong>队列：</strong> 用来存放任务</li>
+</ul>
+<h1 id="队列可以分为两大类型"><a href="#队列可以分为两大类型" class="headerlink" title="队列可以分为两大类型"></a>队列可以分为两大类型</h1><ul>
+<li>串行队列(Serial Dispatch Queue)：只有一个线程，加入到队列中的操作按添加顺序依次执行，一个任务执行完毕后，才能再执行下一个任务。</li>
+<li>并发队列(Concurrent Dispatch Queue)：有多个线程，操作进来以后他会将这些线程安排在可用的处理器上，同时保证先进来的任务优先处理。</li>
+<li><strong>其实在GCD中还有一个特殊队列就是主队列，用来执行主线程上的操作任务</strong></li>
+</ul>
+<h1 id="GCD其实可以抽象为两步"><a href="#GCD其实可以抽象为两步" class="headerlink" title="GCD其实可以抽象为两步"></a>GCD其实可以抽象为两步</h1><h2 id="找到队列"><a href="#找到队列" class="headerlink" title="找到队列"></a>找到队列</h2><pre><code>//这是找到了更新UI的主线程所在的队列
+dispatch_queue_t mainQueue= dispatch_get_main_queue(); 
+
+/*
+  *  创建一个队列
+  *  第一个参数：队列名字
+  *  第二个参数：队列类类型
+         并行队列：DISPATCH_QUEUE_CONCURRENT
+         串行队列：DISPATCH_QUEUE_SERIAL
+  *
+  */
+dispatch_queue_t serialQueue = dispatch_queue_create(&quot;mySerialQueue&quot;, DISPATCH_QUEUE_SERIAL);
+
+/* 
+  * 系统内部给我们提供有一个现成的并发队列
+  * 第一个参数：线程的优先级, DISPATCH_QUEUE_PRIORITY_BACKGROUND是最低的。
+  * 第二个参数：系统保留的参数，永远传0
+  */
+ dispatch_queue_t queue = dispatch_get_global_queue(0 , 0);
+</code></pre><h2 id="在队列中确定想做的事"><a href="#在队列中确定想做的事" class="headerlink" title="在队列中确定想做的事"></a>在队列中确定想做的事</h2><pre><code>//在找到的队列中确定想要做的事情，这里我采用的同步方式执行任务，asyn是异步。 
+dispatch_sync(mainQueue, ^{  
+
+});
+</code></pre><h2 id="执行队列中任务的两种方式"><a href="#执行队列中任务的两种方式" class="headerlink" title="执行队列中任务的两种方式"></a>执行队列中任务的两种方式</h2><ol>
+<li><p><strong>用同步的方式执行任务(同步：synchronization</strong>)，只能在当前线程中执行任务，不具备开启新线程的能力</p>
+<pre><code>/*
+ *  第一个参数：该任务所在的队列
+ *  第二个参数：该任务要做的事情
+ */
+dispatch_sync(dispatch_queue_t queue, dispatch_block_t block);
+
+假如我指定的队列A是串行队列，则该队列中只能有一个线程，也就是说我放在队列A中的任务，所以必须得一个一个的执行。不仅如此，在上面我们还手动选择了在队列A中用同步的方式执行任务，这也限制了，队列中的任务只能一个一个执行。
+
+假如我指定的队列A是并行队列，则该队列中可以开辟多个线程去执行任务，虽然如此，但由于我们在上面手动选择了在队列A中用同步的方式执行线程，所以队列A中的任务也只能一个一个去执行，**不能开辟多线程同时执行**。
+</code></pre></li>
+<li><p><strong>用异步的方式执行任务(异步：asynchronous</strong>)，可以在新的线程中执行任务，具备开启新线程的能力。</p>
+<pre><code>dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
+
+假如此时我指定的队列B是并行队列，则表明该队列中可以存在多个线程，又因为我们采用的是异步的方式执行任务，所以在这个队列的任务可以实现同时运行。
+
+假如此时我指定的队列B是串行队列，则表明该队列中，只能有一个线程，所以尽管我采用异步的方式执行任务，但该队列中的任务还是只能一个一个的运行。
+</code></pre></li>
+</ol>
+<h1 id="GCD创建的线程任务有四种执行方式"><a href="#GCD创建的线程任务有四种执行方式" class="headerlink" title="GCD创建的线程任务有四种执行方式"></a>GCD创建的线程任务有四种执行方式</h1><h2 id="串行队列同步执行任务"><a href="#串行队列同步执行任务" class="headerlink" title="串行队列同步执行任务"></a>串行队列同步执行任务</h2><ul>
+<li><p>同步不具有开辟新线程的能力，不会开辟新的线程去执行任务，会在当前程序的主线程中执行任务。</p>
+</li>
+<li><p>按照串行的方式去执行任务</p>
+</li>
+</ul>
+<pre><code>#pragma mark ------------------串行队列同步执行任务--------------
+
+dispatch_queue_t serialQueue = dispatch_queue_create(&quot;serialQueue&quot;, DISPATCH_QUEUE_SERIAL);
+
+dispatch_sync(serialQueue, ^{
+
+     NSLog(@&quot;-%@&quot;,[NSThread currentThread]);
+
+});
+
+dispatch_sync(serialQueue, ^{
+
+     NSLog(@&quot;1 - %@&quot;, [NSThread currentThread]);
+
+ });
+
+ dispatch_sync(serialQueue, ^{
+
+     NSLog(@&quot;2 - %@&quot;, [NSThread currentThread]);
+
+ });
+
+ dispatch_sync(serialQueue, ^{
+
+      NSLog(@&quot;3 - %@&quot;, [NSThread currentThread]);
+
+ });
+</code></pre><p><strong>打印结果</strong></p>
+<blockquote>
+<p><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 1 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong><br><br><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 2 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong><br><br><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 3 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong><br><br><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 4 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong></p>
+</blockquote>
+<pre><code>**由于是同步操作，不能开辟线程，所以都是在主线程并按照顺序执行**
+</code></pre><h2 id="串行队列异步执行任务"><a href="#串行队列异步执行任务" class="headerlink" title="串行队列异步执行任务"></a>串行队列异步执行任务</h2><ul>
+<li><p>异步具有创建新线程的能力，会开辟新的线程去执行任务</p>
+</li>
+<li><p>按照串行的方式去执行任务</p>
+<pre><code>#pragma mark ------------------串行队列异步执行任务------------
+
+dispatch_queue_t serialQueue1 = dispatch_queue_create(&quot;serialQueue1&quot;, DISPATCH_QUEUE_SERIAL);
+
+dispatch_async(serialQueue1, ^{
+
+    NSLog(@&quot;1 = %@&quot;,[NSThread currentThread]);
+
+});
+
+dispatch_async(serialQueue1, ^{
+
+     NSLog(@&quot;2 = %@&quot;,[NSThread currentThread]);
+
+});
+
+dispatch_async(serialQueue1, ^{
+
+     NSLog(@&quot;3 = %@&quot;,[NSThread currentThread]);
+
+});
+</code></pre><p>  <strong>打印结果</strong></p>
+<blockquote>
+<p><strong>2016-03-01 11:56:04.116 GCD[22310:2039747] 1 = <nsthread: 0x7f90ba60be60="">{number = 2, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 11:56:04.117 GCD[22310:2039747] 2 = <nsthread: 0x7f90ba60be60="">{number = 2, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 11:56:04.118 GCD[22310:2039747] 3 = <nsthread: 0x7f90ba60be60="">{number = 2, name = (null)}</nsthread:></strong></p>
+</blockquote>
+<p> <strong>因为是异步操作，所以有个编号为2的子线程被开辟，但有因为是串行队列，所以只开辟了一个线程。最终造就了三个线程顺序执行。</strong></p>
+</li>
+</ul>
+<h2 id="并行队列同步执行任务"><a href="#并行队列同步执行任务" class="headerlink" title="并行队列同步执行任务"></a>并行队列同步执行任务</h2><ul>
+<li><p>同步不具有创建新线程的能力，不会开辟新的线程去执行任务，会在当前程序的主线程去执行任务</p>
+</li>
+<li><p>按照同步的方式去执行任务</p>
+<pre><code>dispatch_queue_t concurrentQueue = dispatch_queue_create(&quot;concurrentQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+
+dispatch_sync(concurrentQueue, ^{
+
+     NSLog(@&quot;1 = %@&quot;,[NSThread currentThread]);
+
+});
+
+dispatch_sync(concurrentQueue, ^{
+
+     NSLog(@&quot;2 = %@&quot;,[NSThread currentThread]);
+
+});
+
+dispatch_sync(concurrentQueue, ^{
+
+     NSLog(@&quot;3 = %@&quot;,[NSThread currentThread]);
+
+});
+</code></pre><p>  <strong>虽然并行队列决定了该队列中可以有多个线程，但由于是同步操作，不能开辟线程，所以还都是在主线程中按顺序执行。</strong></p>
+</li>
+</ul>
+<h2 id="并发队列异步执行任务-常用"><a href="#并发队列异步执行任务-常用" class="headerlink" title="并发队列异步执行任务(常用)"></a>并发队列异步执行任务(常用)</h2><ul>
+<li><p>异步具有创建新线程的能力，会开辟新的线程去执行任务，不会在当前程序的主线程去执行任务</p>
+</li>
+<li><p>按照并发的方式去执行任务</p>
+<pre><code>dispatch_queue_t concurrentQueue1 = dispatch_queue_create(&quot;concurrentQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+
+dispatch_async(concurrentQueue1, ^{
+
+     NSLog(@&quot;1 = %@&quot;,[NSThread currentThread]);
+
+});
+
+dispatch_async(concurrentQueue1, ^{
+
+     NSLog(@&quot;2 = %@&quot;,[NSThread currentThread]);
+
+});
+
+dispatch_async(concurrentQueue1, ^{
+
+     NSLog(@&quot;3 = %@&quot;,[NSThread currentThread]);
+
+});
+</code></pre><p> <strong>打印结果</strong></p>
+<blockquote>
+<p><strong>2016-03-01 14:32:35.880 GCD[22990:2122064] 2 = <nsthread: 0x7f997ae09f00="">{number = 3, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 14:32:35.880 GCD[22990:2122063] 1 = <nsthread: 0x7f997af25510="">{number = 2, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 14:32:35.880 GCD[22990:2122065] 3 = <nsthread: 0x7f997ac02a10="">{number = 4, name = (null)}</nsthread:></strong></p>
+</blockquote>
+<p> <strong>并行队列可以里可以有多个线程，同步执行的方式又可以开辟多个线程，所以这里实现了多个线程并行执行。</strong></p>
+</li>
+</ul>
+<h1 id="线程锁"><a href="#线程锁" class="headerlink" title="线程锁"></a>线程锁</h1><p>   <strong>没线程锁的情况下：</strong>  我走进购票大厅，买票的人都没有排队，我好不容易挤到窗口前，正打算掏钱买票的时候，旁边有人已经把钱给了售票员。虽然你的线程已经开始执行买票的方法，但当你去拿票时，也就是将票数减一时，CPU将你的线程给中断，开始执行其他的线程，CPU返回继续执行你的线程的时候，票已经没了。</p>
+<p>  <strong>有线程锁的情况下：*</strong> 我走进购票大厅，买票的人都在排队，当我到柜台能保证我买票的关键过程，也就是报站、掏钱、拿票过程不受干扰，我采用线程锁将这个关键过程给锁起来，以保证我能顺利的买到票。</p>
+<pre><code>//
+//  ViewController.m
+//  GCD_ Train_Ticket 
+//
+//  Created by GG on 16/3/2.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;GCDLockViewController.h&quot;
+
+@interface  GCDLockViewController()
+{
+   NSLock *lock;
+}
+
+@end
+
+@implementation GCDLockViewController
+
+- (void)viewDidLoad {
+
+    [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @&quot;线程锁&quot;;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
+    lock = [NSLock new];
+
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    __block int ticketNum = 10;
+
+    for (int index = 0; index&lt;15; index++) {
+
+          dispatch_async(concurrentQueue, ^{
+
+              #pragma mark *****************不用线程锁，下面的购票的关键      过程就可能会被打断，无法确认剩余的票数***********************
+              //            if (ticketNum&gt;0) {
+              //
+              //                ticketNum--;
+              //
+              //                NSLog(@&quot;还剩%d张票&quot;,ticketNum);
+              //            }
+
+             #pragma  mark *****************NSLock实现线程锁，能保证票数是按照预知的一张一张减少，对比不用线程所的输出可知*******************
+
+             //            //上锁，lock是一个NSLock的对象
+             //            [lock lock];
+             //
+             //            if (ticketNum&gt;0) {
+             //
+             //                ticketNum--;                   
+             //
+             //                NSLog(@&quot;还剩%d张票&quot;,ticketNum);
+             //            }
+             //            //解锁
+             //            [lock unlock];
+
+             #pragma mark *****************synchronized方式实现线程锁，能保证票数是按照预知的一张一张减少**********
+
+             //保证此时没有其它线程对self里的对象进行修改
+             @synchronized(self){
+
+                if (ticketNum&gt;0) {
+
+                  ticketNum--;
+
+                  NSLog(@&quot;还剩%d张票&quot;,ticketNum);
+
+                }
+
+             }
+
+         });
+
+
+     }
+
+ }
+
+@end
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS多线程/" rel="tag">#iOS多线程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/01/多线程NSOperation/" rel="next" title="多线程NSOperation">
+                <i class="fa fa-chevron-left"></i> 多线程NSOperation
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/02/多线程NSThread/" rel="prev" title="多线程NSThread">
+                多线程NSThread <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/01/多线程GCD/"
+           data-title="多线程GCD" data-url="http://yoursite.com/2016/09/01/多线程GCD/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是GCD"><span class="nav-number">2.</span> <span class="nav-text">什么是GCD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GCD的优势所在"><span class="nav-number">3.</span> <span class="nav-text">GCD的优势所在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GCD中有2个核心概念"><span class="nav-number">4.</span> <span class="nav-text">GCD中有2个核心概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#队列可以分为两大类型"><span class="nav-number">5.</span> <span class="nav-text">队列可以分为两大类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GCD其实可以抽象为两步"><span class="nav-number">6.</span> <span class="nav-text">GCD其实可以抽象为两步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#找到队列"><span class="nav-number">6.1.</span> <span class="nav-text">找到队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在队列中确定想做的事"><span class="nav-number">6.2.</span> <span class="nav-text">在队列中确定想做的事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行队列中任务的两种方式"><span class="nav-number">6.3.</span> <span class="nav-text">执行队列中任务的两种方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GCD创建的线程任务有四种执行方式"><span class="nav-number">7.</span> <span class="nav-text">GCD创建的线程任务有四种执行方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#串行队列同步执行任务"><span class="nav-number">7.1.</span> <span class="nav-text">串行队列同步执行任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串行队列异步执行任务"><span class="nav-number">7.2.</span> <span class="nav-text">串行队列异步执行任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行队列同步执行任务"><span class="nav-number">7.3.</span> <span class="nav-text">并行队列同步执行任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发队列异步执行任务-常用"><span class="nav-number">7.4.</span> <span class="nav-text">并发队列异步执行任务(常用)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程锁"><span class="nav-number">8.</span> <span class="nav-text">线程锁</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

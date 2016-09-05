@@ -1,0 +1,946 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS地图," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言  学习地图，我们必须要接触两个框架：
+
+Core Location，主要包含定位、地理编码、反编码功能
+
+MapKit，利用他可以对地图进行精准的控制，如需了解请移步iOS开发之地图-地图显示/大头针
+本文我们主要介绍的是使用Core Location来实现定位、地理编码(包括反编码)功能。
+
+
+定位 定位是一个很常用的功能，打开地图软件后如果用户允许软件定位的话，软件便会自动锁定到手机所在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="定位/编码与反编码">
+<meta property="og:url" content="http://yoursite.com/2016/08/31/定位-编码与反编码/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="前言  学习地图，我们必须要接触两个框架：
+
+Core Location，主要包含定位、地理编码、反编码功能
+
+MapKit，利用他可以对地图进行精准的控制，如需了解请移步iOS开发之地图-地图显示/大头针
+本文我们主要介绍的是使用Core Location来实现定位、地理编码(包括反编码)功能。
+
+
+定位 定位是一个很常用的功能，打开地图软件后如果用户允许软件定位的话，软件便会自动锁定到手机所在">
+<meta property="og:updated_time" content="2016-09-01T01:06:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="定位/编码与反编码">
+<meta name="twitter:description" content="前言  学习地图，我们必须要接触两个框架：
+
+Core Location，主要包含定位、地理编码、反编码功能
+
+MapKit，利用他可以对地图进行精准的控制，如需了解请移步iOS开发之地图-地图显示/大头针
+本文我们主要介绍的是使用Core Location来实现定位、地理编码(包括反编码)功能。
+
+
+定位 定位是一个很常用的功能，打开地图软件后如果用户允许软件定位的话，软件便会自动锁定到手机所在">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/31/定位-编码与反编码/"/>
+
+  <title> 定位/编码与反编码 | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                定位/编码与反编码
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T08:28:39+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/31/定位-编码与反编码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/定位-编码与反编码/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  学习地图，我们必须要接触两个框架：</p>
+<ol>
+<li><p>Core Location，主要包含定位、地理编码、反编码功能</p>
+</li>
+<li><p>MapKit，利用他可以对地图进行精准的控制，如需了解请移步<a href="https://wangliguang.github.io/2016/08/30/iOS%E5%9C%B0%E5%9B%BE-%E5%9C%B0%E5%9B%BE%E6%98%BE%E7%A4%BA:%E5%A4%A7%E5%A4%B4%E9%92%88/" target="_blank" rel="external">iOS开发之地图-地图显示/大头针</a></p>
+<p>本文我们主要介绍的是使用Core Location来实现定位、地理编码(包括反编码)功能。</p>
+</li>
+</ol>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p> 定位是一个很常用的功能，打开地图软件后如果用户允许软件定位的话，软件便会自动锁定到手机所在位置，并且地图上的位置会随着手机的移动而移动。定位使用到的类是Core Location框架中的CLLocationManager类。</p>
+<h2 id="CLLocationManager中常用的方法"><a href="#CLLocationManager中常用的方法" class="headerlink" title="CLLocationManager中常用的方法"></a>CLLocationManager中常用的方法</h2><pre><code>  *******类方法**********
+  //当前系统是否打开定位服务,在设置-&gt;隐私里控制。这是能够控制手机上所有App的定位授权     
+  +(BOOL)locationServicesEnabled;
+
+  /* 定位服务授权状态，返回枚举类型，下面是类型解释
+
+   * kCLAuthorizationStatusNotDetermined： 用户尚未做出决定是否启用定位服务
+
+   * kCLAuthorizationStatusRestricted： 没有获得用户授权使用定位服务,可能用户没有自己禁止访问授权
+
+   * kCLAuthorizationStatusDenied ：用户已经明确禁止应用使用定位服务或者当前系统定位服务处于关闭状态
+
+   * kCLAuthorizationStatusAuthorizedAlways： 应用获得授权可以一直使用定位服务，即使应用不在使用状态
+
+   * kCLAuthorizationStatusAuthorizedWhenInUse： 使用此应用过程中允许访问定位服务
+
+   */ 
+   +(CLAuthorizationStatus)authorizationStatus;
+
+---
+
+   *******对象方法**********
+   //开始定位追踪，开始定位后将按照用户设置的更新频率执行-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;方法反馈定位信息
+   startUpdatingLocation
+
+   //停止定位追踪
+   stopUpdatingLocation
+
+   //请求获得应用使用时的定位服务授权，注意使用此方法前在要在info.plist中配置NSLocationWhenInUseUsageDescription
+   requestWhenInUseAuthorization
+
+   //请求获得应用一直使用定位服务授权，注意使用此方法前要在info.plist中配置NSLocationAlwaysUsageDescription
+   requestAlwaysAuthorization
+
+   //开始导航方向追踪
+   startUpdatingHeading
+
+   //停止导航方向追踪
+   stopUpdatingHeading
+
+   //开始对某个区域进行定位追踪，开始对某个区域进行定位后。如果用户进入或者走出某个区域会调用相应的代理方法反馈相关信息
+
+   //停止对某区域追踪
+   stopMonitoringForRegion:
+
+ ---
+
+   *******代理方法*******
+   //位置发生改变后执行（第一次定位到某个位置之后也会执行）
+   -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
+
+   //导航方向发生变化后执行
+   - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading;
+
+   // 进入某个区域之后执行
+   - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region;
+
+    //走出某个区域之后执行
+     - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+</code></pre><h2 id="实现定位的步骤"><a href="#实现定位的步骤" class="headerlink" title="实现定位的步骤"></a>实现定位的步骤</h2><pre><code>1. 导入框架         
+       #import &lt;CoreLocation/CoreLocation.h&gt;
+
+2. **声明全局**的定位管理器，因为定位是持续性动作，如果声明为局部变量，还没有退出这个界面，定位管理器对象就会被释放，从而造成定位失败，而如果声明为全局变量，只有该界面对象被释放，这个定位管理器才会被释放。另外如果是该定位管理器是局部变量，第一次打开的授权提示框会出现闪退现象。
+       CLLocationManager *_locationManager;
+
+3. 实例化定位管理器
+       _locationManager = [[CLLocationManager alloc]init];
+
+4. 判断当前系统是否打开定位服务,在设置-&gt;隐私里。这是能够控制手机上所有App的定位授权
+        if ([CLLocationManager locationServicesEnabled] == NO) {
+
+              //判断是否可以打开设置界面
+              if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
+
+                    //跳转到设置页面
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+
+              };
+
+              return;
+        }
+
+5. **定位授权，如果不授权就无法定位**
+
+       //使用中授权
+       [_locationManager requestWhenInUseAuthorization]; 
+
+       //永久授权，这种情况下，有时你应用没打开也会定位,如果苹果手机上有地图软件的话，你没有打开该软件，系统有时也会突然给你个提示框说某应用一直在使用定位功能，是否关闭。
+       // [_locationManager requestAlwaysAuthorization];  
+6. **在info.plist插入两个字段，不添加就无法定位**
+
+       //都string类型，和第五步的两种授权，写入的内容会出现在定位授权提示框上
+       NSLocationWhenInUseUsageDescription//使用中授权描述
+       NSLocationAlwaysUsageDescription//永久授权描述
+
+7.  挂上代理
+        _locationManager.delegate = self;
+
+8. 使用后台定位
+        _locationManager.allowsBackgroundLocationUpdates = YES;
+
+9. 设置定位信息
+
+       //设置定位精度
+       _locationManager.desiredAccuracy = 10;
+
+       //设置定位频率定位频率和定位精度并不应当越精确越好，需要视实际情况而定，因为越精确越耗性能，也就越费电。
+       CLLocationDistance distance=1.0;//1米定位一次
+       _locationManager.distanceFilter = distance;
+
+10. 开始追踪,**如果不需要定位了记得停止定位，要不然会有很大的耗电量**
+        [_locationManager startUpdatingLocation];
+
+11. 实现代理方法,**以后我们会常看到一个CLLocation类，它用于表示位置信息，包含地理坐标、海拔等信息，包含在CoreLoaction框架中。**
+         #pragma  mark delegate 
+        //定位成功，因为定位时刻都在进行，所以苹果将瞬时获得的多个位置信息放在一个数组中，我们只需获取到数组中的最后一个。
+        - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray&lt;CLLocation *&gt; *)locations{
+
+        /*
+         * 如果不需要定位了记得停止定位，要不然会有很大的耗电量
+         */
+        CLLocation *curLoc = locations.lastObject;
+
+        /*
+          * 当前位置的经纬度
+          *
+              typedef struct {
+                 CLLocationDegrees latitude;
+                 CLLocationDegrees longitude;
+              } CLLocationCoordinate2D;
+          *
+          */
+          CLLocationCoordinate2D coordinate = curLoc.coordinate;
+          NSLog(@&quot;经度:%f 纬度:%f&quot;,coordinate.longitude,coordinate.latitude);
+
+          //海拔高度
+          NSLog(@&quot;海拔高度:%f&quot;,curLoc.altitude);
+
+           //位置的精度，位置精度通过一个圆表示，实际位置可能位于这个圆内的任何地方。这个圆是由coordinate(坐标)和horizontalAccuracy(半径)共同决定的，horizontalAccuracy的值越大，那么定义的圆就越大，因此位置精度就越低。如果horizontalAccuracy的值为负，则表明coordinate的值无效。
+          NSLog(@&quot;位置的精度:%f&quot;,curLoc.horizontalAccuracy);
+
+          //海拔高度的精度。为正值表示海拔高度的误差为对应的米数；为负表示altitude(海拔高度)的值无效。
+          NSLog(@&quot;海拔的精度:%f&quot;,curLoc.verticalAccuracy);
+
+          //speed — 速度。该属性是通过比较当前位置和前一个位置，并比较它们之间的时间差异和距离计算得到的。鉴于Core Location更新的频率，speed属性的值不是非常精确，除非移动速度变化很小。
+          NSLog(@&quot;行驶速度：%f&quot;,curLoc.speed);
+
+          //当前定位的日期
+          NSLog(@&quot;定位日期%@&quot;,curLoc.timestamp);
+
+          //得到两个位置之间的距离，通过不断累加，来获取总距离
+          //    [curLoc distanceFromLocation:nil];
+
+          //得到两次更新的时间之间的间隔，通过累加来获取行驶总时间
+          //    [curLoc.timestamp timeIntervalSinceDate:lastLoc.timestamp];
+
+          //floor 楼层的高度 -&gt; level 几层
+          NSLog(@&quot;当前楼层%ld层&quot;,curLoc.floor.level);
+
+        } 
+
+         //定位失败
+        - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+
+           NSLog(@&quot;定位失败%@&quot;,error);
+
+        }
+</code></pre><h2 id="总结：如果定位失败，首先检查一下几点："><a href="#总结：如果定位失败，首先检查一下几点：" class="headerlink" title="总结：如果定位失败，首先检查一下几点："></a>总结：如果定位失败，首先检查一下几点：</h2><ol>
+<li><p>定位管理器是否为全局变量</p>
+</li>
+<li><p>info.plist中的字段是否配置</p>
+</li>
+<li><p>在代码中是否做授权处理</p>
+</li>
+<li><p><strong> 如果用模拟器的话，可能是因为没有给模拟器设置经纬度，点击模拟器模拟器 -&gt; 菜单栏Debug -&gt; Location -&gt; CustomLocation -&gt; 设置经纬度，如果想要让模拟器自动定位选择Location —&gt; Apple。</strong></p>
+</li>
+</ol>
+<h1 id="编码反编码"><a href="#编码反编码" class="headerlink" title="编码反编码"></a>编码反编码</h1><p>   编码与反编码用到的类都是CLGeocoder</p>
+<pre><code>1. 编码：将地址转化为经纬度
+2. 反编码：将经纬度转化为地址
+</code></pre><p>   <strong>之后我们会接触到一个CLPlacemark类，他是定位框架中地标类，封装了详细的地理信息</strong></p>
+<pre><code>  //编码
+  - (void)geocodeAddressString:(NSString *)addressString completionHandler:(CLGeocodeCompletionHandler)completionHandler;
+
+//反编码
+- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler;
+</code></pre><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>//
+//  CLGeocoderViewController.m
+//  Location
+//
+//  Created by GG on 16/3/9.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;CLGeocoderViewController.h&quot;
+#import &lt;CoreLocation/CoreLocation.h&gt;
+@interface CLGeocoderViewController ()
+{
+    CLGeocoder *_geocoder;
+}
+@end
+
+@implementation CLGeocoderViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    _geocoder=[[CLGeocoder alloc]init];
+    [self getCoordinateByAddress:@&quot;北京&quot;];
+    [self getAddressByLatitude:39.54 longitude:116.28];
+}
+
+#pragma mark 根据地名确定地理坐标
+-(void)getCoordinateByAddress:(NSString *)address{
+    //地理编码
+    [_geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error) {
+        //取得第一个地标，地标中存储了详细的地址信息，注意：一个地名可能搜索出多个地址
+        CLPlacemark *placemark=[placemarks firstObject];
+
+        CLLocation *location=placemark.location;//位置
+        CLRegion *region=placemark.region;//区域
+        NSDictionary *addressDic= placemark.addressDictionary;//详细地址信息字典,包含以下部分信息
+        //        NSString *name=placemark.name;//地名
+        //        NSString *thoroughfare=placemark.thoroughfare;//街道
+        //        NSString *subThoroughfare=placemark.subThoroughfare; //街道相关信息，例如门牌等
+        //        NSString *locality=placemark.locality; // 城市
+        //        NSString *subLocality=placemark.subLocality; // 城市相关信息，例如标志性建筑
+        //        NSString *administrativeArea=placemark.administrativeArea; // 州
+        //        NSString *subAdministrativeArea=placemark.subAdministrativeArea; //其他行政区域信息
+        //        NSString *postalCode=placemark.postalCode; //邮编
+        //        NSString *ISOcountryCode=placemark.ISOcountryCode; //国家编码
+        //        NSString *country=placemark.country; //国家
+        //        NSString *inlandWater=placemark.inlandWater; //水源、湖泊
+        //        NSString *ocean=placemark.ocean; // 海洋
+        //        NSArray *areasOfInterest=placemark.areasOfInterest; //关联的或利益相关的地标
+        NSLog(@&quot;位置:%@,区域:%@,详细信息:%@&quot;,location,region,addressDic);
+    }];
+}
+
+#pragma mark 根据坐标取得地名
+-(void)getAddressByLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude{
+    //反地理编码
+    CLLocation *location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
+    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *placemark=[placemarks firstObject];
+        NSLog(@&quot;详细信息:%@&quot;,placemark.addressDictionary);
+    }];
+}
+
+@end
+</code></pre><h2 id="总结我们目前在地图上接触到的几个类："><a href="#总结我们目前在地图上接触到的几个类：" class="headerlink" title="总结我们目前在地图上接触到的几个类："></a>总结我们目前在地图上接触到的几个类：</h2><pre><code>1.  CLLocationManager：定位管理器,用来设置管理定位，设置定位的精度、定位频率、后台运行等。
+
+2. CLGeocoder：主要用来编码与反编码。
+
+3. CLLocation：用于表示位置信息，包含地理坐标、海拔等信息，包含在CoreLoaction框架中。
+
+4. CLPlacemark：定位框架中地标类，封装了详细的地理信息。
+
+5. CLLocationCoordinate2D：他是一个结构体，用来表示经纬度。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS地图/" rel="tag">#iOS地图</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/30/地图显示:大头针/" rel="next" title="地图显示/大头针">
+                <i class="fa fa-chevron-left"></i> 地图显示/大头针
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/01/多线程NSOperation/" rel="prev" title="多线程NSOperation">
+                多线程NSOperation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/31/定位-编码与反编码/"
+           data-title="定位/编码与反编码" data-url="http://yoursite.com/2016/08/31/定位-编码与反编码/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定位"><span class="nav-number">2.</span> <span class="nav-text">定位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CLLocationManager中常用的方法"><span class="nav-number">2.1.</span> <span class="nav-text">CLLocationManager中常用的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现定位的步骤"><span class="nav-number">2.2.</span> <span class="nav-text">实现定位的步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结：如果定位失败，首先检查一下几点："><span class="nav-number">2.3.</span> <span class="nav-text">总结：如果定位失败，首先检查一下几点：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码反编码"><span class="nav-number">3.</span> <span class="nav-text">编码反编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">3.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结我们目前在地图上接触到的几个类："><span class="nav-number">3.2.</span> <span class="nav-text">总结我们目前在地图上接触到的几个类：</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

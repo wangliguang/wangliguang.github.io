@@ -1,0 +1,707 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="描述下“reset”CSS文件的作用和使用它的好处。因为浏览器的品种很多，每个浏览器的默认样式也是不同的，所以定义一个css reset可以使各浏览器的默认样式统一。
+解释下浮动和它的工作原理。关于浮动我们需要了解，浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。要想使元素浮动，必须为元素设置一个宽度（width）。虽然浮动元素不是文档流之中，但是它浮动后所处的位置依">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS面试题">
+<meta property="og:url" content="http://yoursite.com/2016/09/02/CSS面试题/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="描述下“reset”CSS文件的作用和使用它的好处。因为浏览器的品种很多，每个浏览器的默认样式也是不同的，所以定义一个css reset可以使各浏览器的默认样式统一。
+解释下浮动和它的工作原理。关于浮动我们需要了解，浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。要想使元素浮动，必须为元素设置一个宽度（width）。虽然浮动元素不是文档流之中，但是它浮动后所处的位置依">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/716683/201510/716683-20151013142822460-1264753317.jpg">
+<meta property="og:updated_time" content="2016-09-02T09:46:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS面试题">
+<meta name="twitter:description" content="描述下“reset”CSS文件的作用和使用它的好处。因为浏览器的品种很多，每个浏览器的默认样式也是不同的，所以定义一个css reset可以使各浏览器的默认样式统一。
+解释下浮动和它的工作原理。关于浮动我们需要了解，浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。要想使元素浮动，必须为元素设置一个宽度（width）。虽然浮动元素不是文档流之中，但是它浮动后所处的位置依">
+<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/716683/201510/716683-20151013142822460-1264753317.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/02/CSS面试题/"/>
+
+  <title> CSS面试题 | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS面试题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T14:37:54+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/H5面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">H5面试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/02/CSS面试题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/CSS面试题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="描述下“reset”CSS文件的作用和使用它的好处。"><a href="#描述下“reset”CSS文件的作用和使用它的好处。" class="headerlink" title="描述下“reset”CSS文件的作用和使用它的好处。"></a>描述下“reset”CSS文件的作用和使用它的好处。</h1><p>因为浏览器的品种很多，每个浏览器的默认样式也是不同的，所以定义一个css reset可以使各浏览器的默认样式统一。</p>
+<h1 id="解释下浮动和它的工作原理。"><a href="#解释下浮动和它的工作原理。" class="headerlink" title="解释下浮动和它的工作原理。"></a>解释下浮动和它的工作原理。</h1><p>关于浮动我们需要了解，浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。要想使元素浮动，必须为元素设置一个宽度（width）。虽然浮动元素不是文档流之中，但是它浮动后所处的位置依然是在浮动之前的水平方向上。由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样，下面的元素填补原来的位置。有些元素会在浮动元素的下方，但是这些元素的内容并不一定会被浮动的元素所遮盖，对内联元素进行定位时，这些元素会考虑浮动元素的边界，会围绕着浮动元素放置。也可以把浮动元素想象成是被块元素忽略的元素，而内联元素会关注浮动元素的。  </p>
+<h1 id="列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。"><a href="#列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。" class="headerlink" title="列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。"></a>列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。</h1><ol>
+<li><p>使用空标签清除浮动。这种方法是在所有浮动标签后面添加一个空标签定义css clear:both.弊端就是增加了无意义标签。</p>
+</li>
+<li><p>使用overflow。给包含浮动元素的父标签添加css属性overflow:auto;zoom:1;zoom:1用于兼容IE6。</p>
+</li>
+<li><p>使用after伪对象清除浮动。该方法只适用于非IE浏览器。具体写法可参照以下示例。使用中需注意以下几点。一、该方法中必须为需要清除浮 动元素的伪对象中设置height:0，否则该元素会比实际高出若干像素；二、content属性是必须的，但其值可以为空，content属性的值设 为”.”，空亦是可以的。</p>
+</li>
+<li><p>浮动外部元素</p>
+</li>
+</ol>
+<p><strong>此三种方法各有利弊，使用时应择优选择，比较之下第二种方法更为可取。</strong></p>
+<h1 id="解释下CSS-sprites，以及你要如何在页面或网站中使用它。"><a href="#解释下CSS-sprites，以及你要如何在页面或网站中使用它。" class="headerlink" title="解释下CSS sprites，以及你要如何在页面或网站中使用它。"></a>解释下CSS sprites，以及你要如何在页面或网站中使用它。</h1><p>CSS Sprites其实就是把网页中一些背景图片整合到一张图片文件中，再利用CSS的“background- image”，“background-repeat”，“background-position”的组合进行背景定位，background- position可以用数字能精确的定位出背景图片的位置。</p>
+<h1 id="讨论CSS-hacks，条件引用或者其他。"><a href="#讨论CSS-hacks，条件引用或者其他。" class="headerlink" title="讨论CSS hacks，条件引用或者其他。"></a>讨论CSS hacks，条件引用或者其他。</h1><pre><code>各个浏览器都认识，这里给firefox用；
+
+background-color:red\9;\9所有的ie浏览器可识别；
+
+background-color:yellow\0;\0是留给ie8的+background-color:pink;+ie7定了；
+
+_background-color:orange;_专门留给神奇的ie6；:root#test{background-color:purple\9;}:root是给ie9的，
+
+@media all and(min-width:0px){#test{background-color:black\0;}}这个是老是跟ie抢着认\0的神奇的opera，必须加个\0,不然firefox，chrome，safari也都认识。
+
+@media screen and(-webkit-min-device-pixel-ratio:0){#test{background-color:gray;}}最后这个是浏览器新贵chrome和safari的。
+</code></pre><h1 id="在书写高效CSS时会有哪些问题需要考虑？"><a href="#在书写高效CSS时会有哪些问题需要考虑？" class="headerlink" title="在书写高效CSS时会有哪些问题需要考虑？"></a>在书写高效CSS时会有哪些问题需要考虑？</h1><ol>
+<li>样式是：从右向左的解析一个选择器；</li>
+<li>ID最快，Universal最慢有四种类型的key selector，解析速度由快到慢依次是：ID、class、tag和universal ；</li>
+<li>不要tag-qualify（永远不要这样做ul#main-navigation{}ID已经是唯一的，不需要Tag来标识，这样做会让选择器变慢。）；</li>
+<li>后代选择器最糟糕（换句话说，下面这个选择器是很低效的：html body ul li a{}）；</li>
+<li>想清楚你为什么这样写；</li>
+<li>CSS3的效率问题（CSS3选择器（比如:nth-child）能够漂亮的定位我们想要的元素，又能保证我们的CSS整洁易读。但是这些神奇的选择器会浪费很多的浏览器资源。）；</li>
+<li>我们知道#ID速度是最快的，那么我们都用ID，是不是很快。但是我们不应该为了效率而牺牲可读性和可维护性。</li>
+</ol>
+<h1 id="使用CSS预处理器的优缺点有哪些？"><a href="#使用CSS预处理器的优缺点有哪些？" class="headerlink" title="使用CSS预处理器的优缺点有哪些？"></a>使用CSS预处理器的优缺点有哪些？</h1><ul>
+<li><p>LESS&amp;SassLESS是受Sass启发而开发的工具，它列出了如下开发的理由：</p>
+<p>  “为什么要开发一个Sass的替代品呢？原因很简单：首先是语法。Sass的一个关键特性是缩进式的语法，这种语法可以产生柱式外观的代码。但是你需要 花费时间学习一门新的语法以及重新构建你现在的样式表。LESS给CSS带来了很多特性，使得LESS能够和CSS无缝地紧密结合在一起。因此，你可以平 滑地由CSS迁移到LESS，如果你只是对使用变量或者操作感兴趣的话，你不需要学习一整门全新的语言。”</p>
+</li>
+<li><p>StylusStylus相对前两者较新，可以看官方文档介绍的功能。</p>
+<ol>
+<li>来自NodeJS社区，所以和NodeJS走得很近，与JavaScript联系非常紧密。还有专门JavaScript API：<a href="http://learnboost.github.io/stylus/docs/js.html" target="_blank" rel="external">http://learnboost.github.io/stylus/docs/js.html</a></li>
+<li>支持Ruby之类等等框架；</li>
+<li>更多更强大的支持和功能总结：Sass看起来在提供的特性上占有优势，但是LESS能够让开发者平滑地从现存CSS文件过渡到LESS，而不需要像Sass那样需要将CSS文件转换成Sass格式。Stylus功能上更为强壮，和js联系更加紧密。</li>
+</ol>
+</li>
+</ul>
+<h1 id="请解释一下-box-sizing-border-box-的作用-并且说明使用它有什么好处？"><a href="#请解释一下-box-sizing-border-box-的作用-并且说明使用它有什么好处？" class="headerlink" title="请解释一下*{box-sizing:border-box;}的作用,并且说明使用它有什么好处？"></a>请解释一下*{box-sizing:border-box;}的作用,并且说明使用它有什么好处？</h1><p>说到IE的bug，在IE6以前的版本中，IE对盒模型的解析出现一些问题，跟其它浏览器不同，将border与padding都包含在width之内。而另外一些浏览器则与它相反，是不包括border和padding的。</p>
+<p>在我们开发的过程中会发现，有时候，如果对页面中的大区域进行设置时，将border、padding计算到width和height之内，反而更 灵活。但W3C的CSS2.1规范却规定了他们并不能被包含其中。考虑到这个问题，css3中引入了一个新的属性：box-sizing，它具有 “content-box”和”border-box“两个值。</p>
+<pre><code>box-sizing:content-box
+</code></pre><p>当我们设置box-sizing:content-box;时，浏览器对盒模型的解释遵从我们之前认识到的W3C标准，当它定义width和height时，它的宽度不包括border和padding。</p>
+<pre><code>box-sizing:border-box
+</code></pre><p>当我们设置box-sizing:border-box;时，浏览器对盒模型的解释与IE6之前的版本相同，当它定义width和height 时，border和padding则是被包含在宽高之内的。内容的宽和高可以通过定义的“width”和“height”减去相应方向的 “padding”和“border”的宽度得到。内容的宽和高必须保证不能为负，必要时将自动增大该元素border box的尺寸以使其内容的宽或高 最小为0。</p>
+<h1 id="请罗列出你所知道的display属性的全部值"><a href="#请罗列出你所知道的display属性的全部值" class="headerlink" title="请罗列出你所知道的display属性的全部值"></a>请罗列出你所知道的display属性的全部值</h1><p><img src="http://images2015.cnblogs.com/blog/716683/201510/716683-20151013142822460-1264753317.jpg" alt="jlkjklj"></p>
+<h1 id="你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？"><a href="#你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？" class="headerlink" title="你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？"></a>你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？</h1><p>Bootstrap,PureCSS,Foundation等等</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/02/JavaScript面试题/" rel="next" title="JavaScript面试题">
+                <i class="fa fa-chevron-left"></i> JavaScript面试题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/02/H5杂项面试题/" rel="prev" title="H5杂项面试题">
+                H5杂项面试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/02/CSS面试题/"
+           data-title="CSS面试题" data-url="http://yoursite.com/2016/09/02/CSS面试题/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#描述下“reset”CSS文件的作用和使用它的好处。"><span class="nav-number">1.</span> <span class="nav-text">描述下“reset”CSS文件的作用和使用它的好处。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解释下浮动和它的工作原理。"><span class="nav-number">2.</span> <span class="nav-text">解释下浮动和它的工作原理。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。"><span class="nav-number">3.</span> <span class="nav-text">列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解释下CSS-sprites，以及你要如何在页面或网站中使用它。"><span class="nav-number">4.</span> <span class="nav-text">解释下CSS sprites，以及你要如何在页面或网站中使用它。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#讨论CSS-hacks，条件引用或者其他。"><span class="nav-number">5.</span> <span class="nav-text">讨论CSS hacks，条件引用或者其他。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在书写高效CSS时会有哪些问题需要考虑？"><span class="nav-number">6.</span> <span class="nav-text">在书写高效CSS时会有哪些问题需要考虑？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用CSS预处理器的优缺点有哪些？"><span class="nav-number">7.</span> <span class="nav-text">使用CSS预处理器的优缺点有哪些？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请解释一下-box-sizing-border-box-的作用-并且说明使用它有什么好处？"><span class="nav-number">8.</span> <span class="nav-text">请解释一下*{box-sizing:border-box;}的作用,并且说明使用它有什么好处？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请罗列出你所知道的display属性的全部值"><span class="nav-number">9.</span> <span class="nav-text">请罗列出你所知道的display属性的全部值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？"><span class="nav-number">10.</span> <span class="nav-text">你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,967 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS地图," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言   编程之前，需要了解以下知识：
+   iOS开发之地图-地图显示/大头针
+   iOS开发之地图-定位/编码与反编码
+代码实现  下面直接将我建的MVC给大家，我已经尽可能的加上注释了，如有不清楚建议先看看上面推荐的两篇文章，如果还不清楚，请留言。
+ViewController.m（声明文件中我没有写代码）//
+//  ViewController.m
+//  AddManyCustomA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="添加多个自定义的大头针及自定义大头针动画">
+<meta property="og:url" content="http://yoursite.com/2016/08/30/添加多个自定义的大头针及自定义大头针动画/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="前言   编程之前，需要了解以下知识：
+   iOS开发之地图-地图显示/大头针
+   iOS开发之地图-定位/编码与反编码
+代码实现  下面直接将我建的MVC给大家，我已经尽可能的加上注释了，如有不清楚建议先看看上面推荐的两篇文章，如果还不清楚，请留言。
+ViewController.m（声明文件中我没有写代码）//
+//  ViewController.m
+//  AddManyCustomA">
+<meta property="og:updated_time" content="2016-09-01T01:07:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="添加多个自定义的大头针及自定义大头针动画">
+<meta name="twitter:description" content="前言   编程之前，需要了解以下知识：
+   iOS开发之地图-地图显示/大头针
+   iOS开发之地图-定位/编码与反编码
+代码实现  下面直接将我建的MVC给大家，我已经尽可能的加上注释了，如有不清楚建议先看看上面推荐的两篇文章，如果还不清楚，请留言。
+ViewController.m（声明文件中我没有写代码）//
+//  ViewController.m
+//  AddManyCustomA">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/30/添加多个自定义的大头针及自定义大头针动画/"/>
+
+  <title> 添加多个自定义的大头针及自定义大头针动画 | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                添加多个自定义的大头针及自定义大头针动画
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T19:57:07+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/30/添加多个自定义的大头针及自定义大头针动画/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/添加多个自定义的大头针及自定义大头针动画/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>   编程之前，需要了解以下知识：</p>
+<p>   <a href="https://wangliguang.github.io/2016/08/30/iOS%E5%9C%B0%E5%9B%BE-%E5%9C%B0%E5%9B%BE%E6%98%BE%E7%A4%BA:%E5%A4%A7%E5%A4%B4%E9%92%88/" target="_blank" rel="external">iOS开发之地图-地图显示/大头针</a></p>
+<p>   <a href="https://wangliguang.github.io/2016/08/31/iOS%E5%9C%B0%E5%9B%BE-%E5%AE%9A%E4%BD%8D-%E7%BC%96%E7%A0%81%E4%B8%8E%E5%8F%8D%E7%BC%96%E7%A0%81/" target="_blank" rel="external">iOS开发之地图-定位/编码与反编码</a></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>  下面直接将我建的MVC给大家，我已经尽可能的加上注释了，如有不清楚建议先看看上面推荐的两篇文章，如果还不清楚，请留言。</p>
+<h2 id="ViewController-m（声明文件中我没有写代码）"><a href="#ViewController-m（声明文件中我没有写代码）" class="headerlink" title="ViewController.m（声明文件中我没有写代码）"></a>ViewController.m（声明文件中我没有写代码）</h2><pre><code>//
+//  ViewController.m
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/10.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+#import &lt;MapKit/MapKit.h&gt;
+#import &quot;MyAnnotation.h&quot;
+#import &lt;CoreLocation/CoreLocation.h&gt;
+#import &quot;CustomAnnotationView.h&quot;
+@interface ViewController ()&lt;MKMapViewDelegate&gt;
+{
+    CLLocationManager *_locationManager;
+
+    MKMapView *_mapView;
+
+}
+
+@property (nonatomic,retain) NSMutableArray *locationArray;
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    //定位授权
+    _locationManager = [[CLLocationManager alloc]init];
+    [_locationManager requestAlwaysAuthorization];
+
+    //地图试图
+    _mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
+    _mapView.showsUserLocation = YES;
+    _mapView.delegate = self;
+     [self.view addSubview:_mapView];
+
+}
+
+#pragma mark  private Method
+
+//添加大头针
+- (void)loadData{
+
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;PinData&quot; ofType:@&quot;plist&quot;];
+
+    NSArray *tempArray = [NSArray arrayWithContentsOfFile:filePath];
+
+    //将pist数据转换成大头针model
+    for (NSDictionary *dict in tempArray) {
+
+    MyAnnotation *myAnnotationModel = [[MyAnnotation alloc]initAnnotationModelWithDict:dict];
+
+    [self.locationArray addObject:myAnnotationModel];
+
+    }
+
+    [_mapView addAnnotations:self.locationArray];
+
+}
+
+#pragma mark delegate
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+
+    userLocation.title = @&quot;1234&quot;;
+    _mapView.centerCoordinate = userLocation.coordinate;
+
+    [_mapView setRegion:MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.3, 0.3)) animated:YES];
+
+    //如果你是在ViewDidload方法中添加大头针，大头针显示时会没有掉落效果，定位结束以后添加大头针才会有掉落效果
+    [self loadData];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id &lt;MKAnnotation&gt;)annotation{
+
+    /*
+
+     * 大头针分两种
+
+     * 1. MKPinAnnotationView：他是系统自带的大头针，继承于MKAnnotationView，形状跟棒棒糖类似，可以设置糖的颜色，和显示的时候是否有动画效果
+
+     * 2. MKAnnotationView：可以用指定的图片作为大头针的样式，但显示的时候没有动画效果，如果没有给图片的话会什么都不显示
+
+     * 3. mapview有个代理方法，当大头针显示在试图上时会调用，可以实现这个方法来自定义大头针的动画效果，我下面写有可以参考一下
+
+     * 4. 在这里我为了自定义大头针的样式，使用的是MKAnnotationView
+
+     */
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc]init];
+
+        annotationView.image = [UIImage imageNamed:@&quot;user.png&quot;];
+
+        annotationView.canShowCallout = YES;
+
+       return annotationView;
+
+    }
+
+    CustomAnnotationView *annotationView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@&quot;otherAnnotationView&quot;];
+
+    if (annotationView == nil) {
+
+        annotationView = [[CustomAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@&quot;otherAnnotationView&quot;];
+
+    }
+
+    MyAnnotation *myAnnotation = annotation;
+
+    switch ([myAnnotation.type intValue]) {
+
+        case SUPER_MARKET:{
+
+            annotationView.image = [UIImage imageNamed:@&quot;buy.png&quot;];
+            annotationView.label.text = @&quot;超市&quot;;
+
+        }break;
+
+        case CREMATORY:{
+
+            annotationView.image = [UIImage imageNamed:@&quot;fire.png&quot;];
+            annotationView.label.text = @&quot;火葬场&quot;;
+
+        }break;
+
+        case INTEREST:{
+
+            annotationView.image = [UIImage imageNamed:@&quot;cammer.png&quot;];
+            annotationView.label.text = @&quot;景点&quot;;
+
+        }break;
+
+    }
+    return annotationView;
+
+}
+
+//大头针显示在试图上时调用，我在这里给大头针设置显示动画
+- (void) mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+
+    //获取到mapview的frame
+    CGRect visibleRect = [mapView annotationVisibleRect];
+
+    for (MKAnnotationView *view in views) {
+
+        CGRect endFrame = view.frame;
+        CGRect startFrame = endFrame;
+        startFrame.origin.y = visibleRect.origin.y - startFrame.size.height;
+        view.frame = startFrame;
+        [UIView beginAnimations:@&quot;drop&quot; context:NULL];
+        [UIView setAnimationDuration:1];
+        view.frame = endFrame;
+        [UIView commitAnimations];
+    }
+}
+
+#pragma mark lazy load
+
+- (NSMutableArray *)locationArray{
+
+    if (_locationArray == nil) {
+
+        _locationArray = [NSMutableArray new];
+
+    }
+    return _locationArray;
+}
+
+@end
+</code></pre><p>PS: 大头针的显示跟cell的显示机制一样，都是采用复用机制，可以对比着来理解。</p>
+<h2 id="大头针数据模型-MyAnnotation-h"><a href="#大头针数据模型-MyAnnotation-h" class="headerlink" title="大头针数据模型   MyAnnotation.h"></a>大头针数据模型   MyAnnotation.h</h2><pre><code>//
+//  MyAnnotation.h
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;MapKit/MapKit.h&gt;
+
+typedef NS_ENUM(NSInteger, PinType) {
+    /**
+     *  超市
+     */
+    SUPER_MARKET = 0,
+    /**
+     *  火化场
+     */
+    CREMATORY,
+    /**
+     *  景点
+     */
+    INTEREST
+};
+
+//该模型是大头针模型，所以我必须实现MKAnnotation协议，而且必须实现CLLocationCoordinate2D coordinate属性
+@interface MyAnnotation : NSObject &lt;MKAnnotation&gt;
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+
+@property (nonatomic, copy) NSString *name;
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, retain) NSNumber *type;
+
+- (instancetype)initAnnotationModelWithDict:(NSDictionary *)dict;
+
+@end
+</code></pre><h2 id="大头针数据模型-MyAnnotation-m"><a href="#大头针数据模型-MyAnnotation-m" class="headerlink" title="大头针数据模型   MyAnnotation.m"></a>大头针数据模型   MyAnnotation.m</h2><pre><code>//
+//  MyAnnotation.m
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;MyAnnotation.h&quot;
+
+@implementation MyAnnotation
+
+- (instancetype)initAnnotationModelWithDict:(NSDictionary *)dict{
+
+    self = [super init];
+
+    if (self) {
+
+        self.coordinate = CLLocationCoordinate2DMake([dict[@&quot;coordinate&quot;][@&quot;latitude&quot;] doubleValue], [dict[@&quot;coordinate&quot;][@&quot;longitude&quot;] doubleValue]);
+
+        self.title = dict[@&quot;detail&quot;];
+
+        self.name = dict[@&quot;name&quot;];
+
+        self.type = dict[@&quot;type&quot;];
+
+    }
+
+    return self;
+
+}
+
+@end
+</code></pre><h2 id="大头针试图-CustomPinAnnotationView-h"><a href="#大头针试图-CustomPinAnnotationView-h" class="headerlink" title="大头针试图  CustomPinAnnotationView.h"></a>大头针试图  CustomPinAnnotationView.h</h2><pre><code>//
+//  CustomPinAnnotationView.h
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &lt;MapKit/MapKit.h&gt;
+#import &quot;MyAnnotation.h&quot;
+@interface CustomAnnotationView : MKAnnotationView
+
+@property (nonatomic, retain)UILabel *label;
+
+@end
+</code></pre><h2 id="大头针试图-CustomPinAnnotationView-m"><a href="#大头针试图-CustomPinAnnotationView-m" class="headerlink" title="大头针试图  CustomPinAnnotationView.m"></a>大头针试图  CustomPinAnnotationView.m</h2><pre><code>//
+//  CustomPinAnnotationView.m
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;CustomAnnotationView.h&quot;
+
+@implementation CustomAnnotationView
+
+- (instancetype)initWithAnnotation:(id&lt;MKAnnotation&gt;)annotation reuseIdentifier:(NSString *)reuseIdentifier{
+
+    if ([super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier]) {
+        //在大头针旁边加一个label
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, -15, 50, 20)];
+        self.label.textColor = [UIColor grayColor];
+        self.label.textAlignment = NSTextAlignmentCenter;
+        self.label.font = [UIFont systemFontOfSize:10];
+        [self addSubview:self.label];
+
+    }
+
+    return self;
+}
+
+@end
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS地图/" rel="tag">#iOS地图</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/30/H5面试题集合/" rel="next" title="H5面试题集合">
+                <i class="fa fa-chevron-left"></i> H5面试题集合
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/30/地图显示:大头针/" rel="prev" title="地图显示/大头针">
+                地图显示/大头针 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/30/添加多个自定义的大头针及自定义大头针动画/"
+           data-title="添加多个自定义的大头针及自定义大头针动画" data-url="http://yoursite.com/2016/08/30/添加多个自定义的大头针及自定义大头针动画/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewController-m（声明文件中我没有写代码）"><span class="nav-number">2.1.</span> <span class="nav-text">ViewController.m（声明文件中我没有写代码）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大头针数据模型-MyAnnotation-h"><span class="nav-number">2.2.</span> <span class="nav-text">大头针数据模型   MyAnnotation.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大头针数据模型-MyAnnotation-m"><span class="nav-number">2.3.</span> <span class="nav-text">大头针数据模型   MyAnnotation.m</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大头针试图-CustomPinAnnotationView-h"><span class="nav-number">2.4.</span> <span class="nav-text">大头针试图  CustomPinAnnotationView.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大头针试图-CustomPinAnnotationView-m"><span class="nav-number">2.5.</span> <span class="nav-text">大头针试图  CustomPinAnnotationView.m</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

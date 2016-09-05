@@ -1,0 +1,830 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS多线程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言
+线程是用来执行任务的，线程彻底执行完任务A才能去执行任务B。为了同时执行两个任务，产生了多线程。
+
+我打开一个视频软件，我开辟一个线程A让它执行下载任务，我开辟一个线程B，用来播放视频。我开辟两个线程后，这两个任务能同时执行，如果我开辟一个线程，只有下载任务完成，才能去执行播放任务。
+
+线程相当于店里的服务员，一个服务员同时只能做一件事情，多顾几个服务员，就能同时做很多事情。
+
+
+什么是多线">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程理论部分">
+<meta property="og:url" content="http://yoursite.com/2016/09/02/多线程理论部分/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="前言
+线程是用来执行任务的，线程彻底执行完任务A才能去执行任务B。为了同时执行两个任务，产生了多线程。
+
+我打开一个视频软件，我开辟一个线程A让它执行下载任务，我开辟一个线程B，用来播放视频。我开辟两个线程后，这两个任务能同时执行，如果我开辟一个线程，只有下载任务完成，才能去执行播放任务。
+
+线程相当于店里的服务员，一个服务员同时只能做一件事情，多顾几个服务员，就能同时做很多事情。
+
+
+什么是多线">
+<meta property="og:updated_time" content="2016-09-02T02:55:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程理论部分">
+<meta name="twitter:description" content="前言
+线程是用来执行任务的，线程彻底执行完任务A才能去执行任务B。为了同时执行两个任务，产生了多线程。
+
+我打开一个视频软件，我开辟一个线程A让它执行下载任务，我开辟一个线程B，用来播放视频。我开辟两个线程后，这两个任务能同时执行，如果我开辟一个线程，只有下载任务完成，才能去执行播放任务。
+
+线程相当于店里的服务员，一个服务员同时只能做一件事情，多顾几个服务员，就能同时做很多事情。
+
+
+什么是多线">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/02/多线程理论部分/"/>
+
+  <title> 多线程理论部分 | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                多线程理论部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T10:33:06+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/02/多线程理论部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/多线程理论部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li><p>线程是用来执行任务的，线程彻底执行完任务A才能去执行任务B。为了同时执行两个任务，产生了多线程。</p>
+</li>
+<li><p>我打开一个视频软件，我开辟一个线程A让它执行下载任务，我开辟一个线程B，用来播放视频。我开辟两个线程后，这两个任务能同时执行，如果我开辟一个线程，只有下载任务完成，才能去执行播放任务。</p>
+</li>
+<li><p>线程相当于店里的服务员，一个服务员同时只能做一件事情，多顾几个服务员，就能同时做很多事情。</p>
+</li>
+</ul>
+<h1 id="什么是多线程"><a href="#什么是多线程" class="headerlink" title="什么是多线程"></a>什么是多线程</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><ul>
+<li><p>进程是应用程序的执行实例,简单来说就是在操作系统中<code>运行的</code>程序。例如我在手机上只打开QQ和微信这两个软件，系统中就会有两个进程存在。</p>
+</li>
+<li><p>进程不能执行任务</p>
+</li>
+<li><p>进程在运行时创建的资源随着进程的终止而死亡。</p>
+</li>
+</ul>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><ul>
+<li>进程本身是不能执行任务的,进程想要执行任务必须的有线程,线程是进程内部的一个独立的执行单元，同时只能执行一个任务，相当于一个子程序。线程被分为两种,<code>主线程</code>(用户界面线程)和<code>子线程</code>(工作线程或称为后台线程)。我在望京(操作系统)开了一个橘子产品体验店(进程)，里面有很多工作人员，有店长帮我布置门面(主线程)，咨询人员(子线程)、销售人员(子线程)。</li>
+</ul>
+<ul>
+<li><p>线程执行完毕就会被销毁。</p>
+</li>
+<li><p><strong><em>主线程(也称父线程)</em></strong>：当应用程序启动时自动创建和启动，通常用来处理用户的输入并响应各种事件和消息。主线程的终止也意味着该程序的结束。</p>
+</li>
+<li><p><strong><em>子线程</em></strong>：由主线程来创建,用来帮助主线程执行程序的后台处理任务。如果子线程A中又创建一个子线程B，在创建之后，这两者就是相互独立的，多个子线程之间<code>效果上</code>可以同时执行。</p>
+</li>
+<li><p>一个进程中可以有多个线程，并且所有线程都在该进程的虚拟地址空间中，可以使用进程的全局变量和系统资源。</p>
+</li>
+<li><p>线程状态：<a href="http://blog.csdn.net/peter_teng/article/details/10197785" target="_blank" rel="external">线程的五种状态</a></p>
+</li>
+</ul>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><ul>
+<li><p>目前大多数的app,都需要连接服务器，而访问服务器的速度可能快也可能很慢。如果一个app访问服务器的操作没有在子线程操作的话，在该app访问服务器的过程中，该软件是不能响应用户的操作的，只有该app访问结束以后，app才能响应用户的操作，这就造成线程阻塞，也就是我们常见的卡顿现象。一条线程在同一时间内只能执行一个任务,但是进程可以有多条线程。可以开启多条线程来执行不同的任务,从而提高程序的执行效率，避免线程阻塞。  </p>
+</li>
+<li><p>操作系统会根据线程的优先级(线程的优先级可以手动设置)来安排CPU的时间，优先级高的线程，优先调用的几率会更大，同级的话，看线程执行的先后。</p>
+</li>
+<li><p>同一时间内，CPU只能处理一条线程，只有一条线程在工作。多线程并行执行，其实就是各个线程不断切换，因为执行切换的时间很快很快，就造成了同时执行的假象，原理如下，比如A，B两个线程；</p>
+<ol>
+<li><p>A执行到某一时间段要切换了，可A任务没完成，系统就会把A当前执行的位置和数据以入栈的方式保存起来</p>
+</li>
+<li><p>然后B线程执行，B执行时间到了，它的位置状态等也会被系统保存到B的栈中。</p>
+</li>
+<li><p>系统自动找到A的栈，将A之前保存的数据恢复，又可以从A之前断开的状态继续执行下去，如此循环</p>
+</li>
+</ol>
+<ul>
+<li>系统每开一个线程都有比较大的开销。若线程开的过多，不仅会占用大量内存和让程序变得更加复杂，而且会加重CPU的负担，这样的软件，会使你的手机在冬天变成暖手宝。</li>
+</ul>
+</li>
+</ul>
+<h1 id="为什么使用多线程"><a href="#为什么使用多线程" class="headerlink" title="为什么使用多线程"></a>为什么使用多线程</h1><ul>
+<li>提高程序执行效率，避免线程阻塞造成的卡顿现象。</li>
+<li><p>能适当提高资源利用率(CPU,内存)。</p>
+</li>
+<li><p><strong>不可滥用多线程</strong>：</p>
+<ol>
+<li>开启线程需要占用一定的内存空间（默认情况下，主线程占用1M，子线程占用512KB，可以自己设置内存大小，但必须是4的倍数），如果开启大量的线程，会占用大量的内存空间，降低程序的性能</li>
+<li>线程越多，CPU在调度线程上的开销就越大</li>
+<li>程序设计更加复杂：比如线程之间的通信、多线程的数据共享</li>
+</ol>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><strong>线程与进程的关系</strong><ol>
+<li>线程是CPU执行任务的基本单位，一个进程可以有多个线程，但同时只能执行一个任务。</li>
+<li>进程就是运行中的软件，是动态的。</li>
+<li>一个操作系统可以对应多个进程,一个进程可以有多条线程,但至少有一个线程</li>
+<li>同一个进程内的线程共享进程里的资源</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p><strong>主线程</strong></p>
+<ol>
+<li>进程一启动就自动创建</li>
+<li>显示和刷新UI界面</li>
+<li>处理UI事件</li>
+</ol>
+</li>
+<li><p><strong>子线程的作用</strong> </p>
+<ol>
+<li>处理耗时的操作</li>
+<li>子线程不能用来刷新UI</li>
+</ol>
+</li>
+</ul>
+<h1 id="三种多线程编程技术"><a href="#三种多线程编程技术" class="headerlink" title="三种多线程编程技术"></a>三种多线程编程技术</h1><h2 id="NSThread"><a href="#NSThread" class="headerlink" title="NSThread"></a>NSThread</h2><ul>
+<li><p>NSThread是轻量级的多线程开发，使用并不复杂，但使用NSThread需要自己管理线程的声明周期。</p>
+</li>
+<li><p><a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSThread/" target="_blank" rel="external">NSThread详解</a></p>
+</li>
+</ul>
+<h2 id="Cocoa-NSOperation"><a href="#Cocoa-NSOperation" class="headerlink" title="Cocoa NSOperation"></a>Cocoa NSOperation</h2><ul>
+<li><p>使用NSOperation和NSOperationQueue进行多线程开发类似于线程池，只要将一个NSOperation(实际开发中需要使用其子类NSInvocationOperation、NSBlockOperation)放到NSOperationQueue这个队列中线程就会依次启动。NSOperationQueue负责管理、执行所有的NSOperation，在这个过程中可以更加容易管理线程总数和控制线程之间的依赖关系。</p>
+</li>
+<li><p>NSOperation有两常用子类用于创建线程操作：NSInvocationOperation和NSBlockOperation，两种方式本质没有区别，但后者使用block形式进行代码组织，使用相对方便。</p>
+</li>
+<li><p><a href="https://wangliguang.github.io/2016/09/01/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSOperation/" target="_blank" rel="external">NSOperation详解</a></p>
+</li>
+</ul>
+<h2 id="GCD-Grand-Central-Dispatch"><a href="#GCD-Grand-Central-Dispatch" class="headerlink" title="GCD(Grand Central Dispatch)"></a>GCD(Grand Central Dispatch)</h2><ul>
+<li><p>GCD是基于C语言开发的一套多线程开发机制，也是目前苹果官网推荐的多线程开发方法。</p>
+</li>
+<li><p>GCD会自动管理线程的生命周期（创建线程、调度任务、销毁线程），程序员只需要告诉GCD想要执行什么任务，不需要编写任何线程管理代码</p>
+</li>
+<li><p>GCD是这三种多线程开发方式中抽象层次最高的，使用起来也是最为方便的，只是基于C语言开发，并不像前两种是面向对象开发，而是完全面向过程的。这种机制相比较于前面两种多线程开发方式最显著的优点就是<code>它对于多核运算更加有效，会自动利用更多的CPU内核(比如双核、四核)</code>。</p>
+</li>
+<li><p>GCD中也有一个类似于NSOperationQueue的队列，GCD统一管理整个队列中的任务。但是GCD中的队列分为并行队列和串行队列两类：         </p>
+<blockquote>
+<p>串行队列：只有一个线程，加入到队列中的操作按添加顺序依次执行。<br>并发队列：有多个线程，操作进来以后他会将这些线程安排在可用的处理器上，同时保证先进来的任务优先处理。</p>
+<p>其实在GCD中还有一个特殊队列就是主队列，用来执行主线程上的操作任务。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><a href="https://wangliguang.github.io/2016/09/01/%E5%A4%9A%E7%BA%BF%E7%A8%8BGCD/" target="_blank" rel="external">GCD详解</a></li>
+</ul>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
+<li><p>无论使用哪种方法进行多线程开发，每个线程启动后并不一定立即执行相应的操作，具体什么时候由系统调度（CPU空闲时就会执行）</p>
+</li>
+<li><p>更新UI应该在主线程（UI线程）中进行，并且推荐使用同步调用，常用的方法如下：</p>
+<pre><code>- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg waitUntilDone:(BOOL)wait 
+
+- (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL) wait;方法传递主线程[NSThread mainThread])
+
+[[NSOperationQueue mainQueue] addOperationWithBlock:^{}];
+
+dispatch_sync(dispatch_get_main_queue(), ^{})  
+</code></pre></li>
+</ul>
+<ul>
+<li><p>NSThread适合轻量级多线程开发，控制线程顺序比较难，同时线程总数无法控制（每次创建并不能重用之前的线程，只能创建一个新的线程）。</p>
+</li>
+<li><p>对于简单的多线程开发建议使用NSObject的扩展方法完成，而不必使用NSThread。</p>
+</li>
+<li><p>可以使用NSThread的currentThread方法取得当前线程，使用 sleepForTimeInterval:方法让当前线程休眠。</p>
+</li>
+<li><p>NSOperation进行多线程开发可以控制线程总数及线程依赖关系。</p>
+</li>
+<li><p>创建一个NSOperation不应该直接调用start方法（如果直接start则会在主线程中调用）而是应该放到NSOperationQueue中启动。</p>
+</li>
+<li><p>相比NSInvocationOperation推荐使用NSBlockOperation，代码简单，同时由于闭包性使它没有传参问题。</p>
+</li>
+<li><p>NSOperation是对GCD面向对象的ObjC封装，但是相比GCD基于C语言开发，效率却更高，建议如果任务之间有依赖关系或者想要监听任务完成状态的情况下优先选择NSOperation否则使用GCD。</p>
+</li>
+<li><p>在GCD中串行队列中的任务被安排到一个单一线程执行（不是主线程），可以方便地控制执行顺序；并发队列在多个线程中执行（前提是使用异步方法），顺序控制相对复杂，但是更高效。</p>
+</li>
+<li><p>在GDC中一个操作是多线程执行还是单线程执行取决于当前队列类型和执行方法，只有队列类型为并行队列并且使用异步方法执行时才能在多个线程中执行（如果是并行队列使用同步方法调用则会在主线程中执行）。</p>
+</li>
+<li><p>相比使用NSLock，@synchronized更加简单，推荐使用后者。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS多线程/" rel="tag">#iOS多线程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/02/多线程NSThread/" rel="next" title="多线程NSThread">
+                <i class="fa fa-chevron-left"></i> 多线程NSThread
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/02/HTML面试题/" rel="prev" title="HTML面试题">
+                HTML面试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/02/多线程理论部分/"
+           data-title="多线程理论部分" data-url="http://yoursite.com/2016/09/02/多线程理论部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是多线程"><span class="nav-number">2.</span> <span class="nav-text">什么是多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">2.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">2.2.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.3.</span> <span class="nav-text">多线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么使用多线程"><span class="nav-number">3.</span> <span class="nav-text">为什么使用多线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三种多线程编程技术"><span class="nav-number">5.</span> <span class="nav-text">三种多线程编程技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSThread"><span class="nav-number">5.1.</span> <span class="nav-text">NSThread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cocoa-NSOperation"><span class="nav-number">5.2.</span> <span class="nav-text">Cocoa NSOperation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCD-Grand-Central-Dispatch"><span class="nav-number">5.3.</span> <span class="nav-text">GCD(Grand Central Dispatch)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number">5.3.1.</span> <span class="nav-text">总结：</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

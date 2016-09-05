@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo搭建," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言  之前共用过两个博客平台，一个是做开发时使用的博客园，另一个是做教育工作时用得简书，其中我更喜欢简书。因为最近感觉有必要对自己的博客进行一个大整理，所以就自己搭建了一个个人博客平台，现在我就把搭建这个平台的流程(流程参考的是潘柏信大牛的博客)
+配置环境
+安装Node(必须)作用：用来生成静态页面。 到Node.js官网下载相应平台的最新版本，一路安装即可。
+
+安装Git(必须) 作用：把本地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建个人博客">
+<meta property="og:url" content="http://yoursite.com/2016/08/30/搭建个人博客/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="前言  之前共用过两个博客平台，一个是做开发时使用的博客园，另一个是做教育工作时用得简书，其中我更喜欢简书。因为最近感觉有必要对自己的博客进行一个大整理，所以就自己搭建了一个个人博客平台，现在我就把搭建这个平台的流程(流程参考的是潘柏信大牛的博客)
+配置环境
+安装Node(必须)作用：用来生成静态页面。 到Node.js官网下载相应平台的最新版本，一路安装即可。
+
+安装Git(必须) 作用：把本地">
+<meta property="og:image" content="http://i4.buimg.com/567571/b019939baf9d73ec.png">
+<meta property="og:updated_time" content="2016-08-30T07:52:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建个人博客">
+<meta name="twitter:description" content="前言  之前共用过两个博客平台，一个是做开发时使用的博客园，另一个是做教育工作时用得简书，其中我更喜欢简书。因为最近感觉有必要对自己的博客进行一个大整理，所以就自己搭建了一个个人博客平台，现在我就把搭建这个平台的流程(流程参考的是潘柏信大牛的博客)
+配置环境
+安装Node(必须)作用：用来生成静态页面。 到Node.js官网下载相应平台的最新版本，一路安装即可。
+
+安装Git(必须) 作用：把本地">
+<meta name="twitter:image" content="http://i4.buimg.com/567571/b019939baf9d73ec.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/30/搭建个人博客/"/>
+
+  <title> 搭建个人博客 | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                搭建个人博客
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T09:03:33+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/30/搭建个人博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/搭建个人博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  之前共用过两个博客平台，一个是做开发时使用的<a href="http://www.cnblogs.com/g-ios/" target="_blank" rel="external">博客园</a>，另一个是做教育工作时用得<a href="www.baidu.com">简书</a>，其中我更喜欢简书。因为最近感觉有必要对自己的博客进行一个大整理，所以就自己搭建了一个个人博客平台，现在我就把搭建这个平台的流程(流程参考的是<a href="http://baixin.io/2015/08/HEXO搭建个人博客/" target="_blank" rel="external">潘柏信大牛的博客</a>)</p>
+<h1 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h1><ul>
+<li><h2 id="安装Node-必须"><a href="#安装Node-必须" class="headerlink" title="安装Node(必须)"></a>安装Node(必须)</h2><p>作用：用来生成静态页面。 到Node.js<a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>下载相应平台的最新版本，一路安装即可。</p>
+</li>
+<li><h2 id="安装Git-必须"><a href="#安装Git-必须" class="headerlink" title="安装Git(必须)"></a>安装Git(必须)</h2><p> 作用：把本地的hexo内容提交到gitHub上，安装Xcode就自带有git,我就不多说了。</p>
+</li>
+<li><h2 id="申请GitHub-必须"><a href="#申请GitHub-必须" class="headerlink" title="申请GitHub(必须)"></a>申请GitHub(必须)</h2><p> 作用：是用来做博客的远程仓库、域名、服务器之类的，github的申请可以在网上搜教程，按教程一步一步配置即可。<strong>怎么与本地hexo建立连接等下讲</strong></p>
+</li>
+</ul>
+<h1 id="安装Hexo环境"><a href="#安装Hexo环境" class="headerlink" title="安装Hexo环境"></a>安装Hexo环境</h1><p>   Node和Git都安装好后，可执行如下命令安装hexo</p>
+<pre><code>sudo npm install -g hexo
+</code></pre><h1 id="Hexo的基础配置"><a href="#Hexo的基础配置" class="headerlink" title="Hexo的基础配置"></a>Hexo的基础配置</h1><ol>
+<li><h2 id="Hexo初始化"><a href="#Hexo初始化" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h2><p>执行init命令初始化hexo到你终端此时所在的目录。</p>
+<pre><code>hexo init //结束以后hexo会有如下一堆文件
+</code></pre><p>效果图</p>
+<p><img src="http://i4.buimg.com/567571/b019939baf9d73ec.png" alt="">   </p>
+</li>
+<li><h2 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h2><p>cd到你的init目录，执行如下命令，生成静态页面至public\目录</p>
+<pre><code>hexo generate (hexo g 也可以)
+</code></pre></li>
+<li><h2 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h2><pre><code>hexo server (hexo s 也可以)
+</code></pre><p> 浏览器输入<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> ,便能看到初始化界面了。</p>
+</li>
+<li><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>至此，我们搭建出来一个最为基本的一个hexo环境，但现在我们只能本地访问,而且还不知道怎么写博客，部署博客。下面我们讲这部分内容。</p>
+</li>
+<li><p>另外在做基本配置的时候，碰到的一些问题，在文章的最后面会做整理。</p>
+</li>
+<li><p><strong>使用hexo命令时，一定要保证终端的路径处于hexo初始化时的路径下</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="配置GitHub"><a href="#配置GitHub" class="headerlink" title="配置GitHub"></a>配置GitHub</h1><h2 id="建立与你用户名对应的仓库，"><a href="#建立与你用户名对应的仓库，" class="headerlink" title="建立与你用户名对应的仓库，"></a>建立与你用户名对应的仓库，</h2><p>   在自己的Github账号上创建一个仓库，仓库名必须为<strong>【your_user_name.github.io】</strong>，固定写法 </p>
+<h2 id="建立关联，"><a href="#建立关联，" class="headerlink" title="建立关联，"></a>建立关联，</h2><p>   我的blog在本地/Users/GG/hexo，有以下文件</p>
+<pre><code>_config.yml  node_modules  public  source　
+ 　　　
+db.json  package.json  scaffolds  themes　　      
+</code></pre><p>   现在我们需要_config.yml文件，来建立关联,打开_config.yml文件，翻到最下面，改成我这样子的，<strong>注意： : 后面要有空格</strong>，改完后保存</p>
+<pre><code>deploy:
+type: git
+repository: https://github.com/wangliguang/wangliguang.github.io.git
+branch: master
+</code></pre><h2 id="执行如下命令才能使用git部署"><a href="#执行如下命令才能使用git部署" class="headerlink" title="执行如下命令才能使用git部署"></a>执行如下命令才能使用git部署</h2><pre><code>npm install hexo-deployer-git --save
+</code></pre><h2 id="最后执行如下命令部署一下"><a href="#最后执行如下命令部署一下" class="headerlink" title="最后执行如下命令部署一下"></a>最后执行如下命令部署一下</h2><pre><code>hexo deploy (hexo d也可以)
+</code></pre><p>   现在在浏览器中输入 <a href="http://wangliguang.github.io/" target="_blank" rel="external">http://wangliguang.github.io/</a> 就行了，我的github的账户叫wangliguang,把这个改成你github的账户名就行了</p>
+<h1 id="hexo的写作配置"><a href="#hexo的写作配置" class="headerlink" title="hexo的写作配置"></a>hexo的写作配置</h1><ol>
+<li><p>上面我们做的基础配置，只需要做一次就行，但每次我们写作完成以后，需要把我们的文章部署到github服务器上，需要做一下三步。</p>
+<pre><code>hexo clean
+hexo generate
+hexo deploy
+</code></pre></li>
+<li><p>hexo一些常用的命令</p>
+<pre><code>hexo new &quot;postName&quot; #新建文章
+ hexo new page &quot;pageName&quot; #新建页面
+ hexo generate #生成静态页面至public目录
+ hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）
+ hexo deploy #将.deploy目录部署到GitHub
+ hexo help  # 查看帮助
+ hexo version  #查看Hexo的版本
+</code></pre></li>
+<li><p>总结</p>
+<ol>
+<li><p>至于写作的详情自己按按上面的操作来就型。</p>
+</li>
+<li><p><strong>使用hexo命令时，一定要保证终端的路径处于hexo初始化时的路径下</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="博客主题"><a href="#博客主题" class="headerlink" title="博客主题"></a>博客主题</h1><ol>
+<li><p>如果不想用hexo默认的主题，可以在<a href="https://hexo.io/themes/" target="_blank" rel="external">hexo主题</a>进行更换，上面的流程人家说的也比较详细。</p>
+</li>
+<li><p>主题配置过后，可以先使用hexo s命令在本地查看一下，再通过命令行部署到服务器上</p>
+<pre><code>hexo clean
+hexo generate
+hexo deploy
+</code></pre></li>
+<li><p>目前做的比较好的主题是next,<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">官网</a>里面有超级超级详细的说明，强烈推荐。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo搭建/" rel="tag">#hexo搭建</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/30/H5面试题集合/" rel="prev" title="H5面试题集合">
+                H5面试题集合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/30/搭建个人博客/"
+           data-title="搭建个人博客" data-url="http://yoursite.com/2016/08/30/搭建个人博客/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置环境"><span class="nav-number">2.</span> <span class="nav-text">配置环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Node-必须"><span class="nav-number">2.1.</span> <span class="nav-text">安装Node(必须)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Git-必须"><span class="nav-number">2.2.</span> <span class="nav-text">安装Git(必须)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#申请GitHub-必须"><span class="nav-number">2.3.</span> <span class="nav-text">申请GitHub(必须)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Hexo环境"><span class="nav-number">3.</span> <span class="nav-text">安装Hexo环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo的基础配置"><span class="nav-number">4.</span> <span class="nav-text">Hexo的基础配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo初始化"><span class="nav-number">4.1.</span> <span class="nav-text">Hexo初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成静态页面"><span class="nav-number">4.2.</span> <span class="nav-text">生成静态页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地启动"><span class="nav-number">4.3.</span> <span class="nav-text">本地启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置GitHub"><span class="nav-number">5.</span> <span class="nav-text">配置GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立与你用户名对应的仓库，"><span class="nav-number">5.1.</span> <span class="nav-text">建立与你用户名对应的仓库，</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立关联，"><span class="nav-number">5.2.</span> <span class="nav-text">建立关联，</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行如下命令才能使用git部署"><span class="nav-number">5.3.</span> <span class="nav-text">执行如下命令才能使用git部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后执行如下命令部署一下"><span class="nav-number">5.4.</span> <span class="nav-text">最后执行如下命令部署一下</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo的写作配置"><span class="nav-number">6.</span> <span class="nav-text">hexo的写作配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#博客主题"><span class="nav-number">7.</span> <span class="nav-text">博客主题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
