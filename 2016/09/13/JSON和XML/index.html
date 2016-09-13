@@ -1,0 +1,786 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="XML什么是XML
+XML是一种使信息具有结构性的标记语言，很类似HTML，XML文档是一种树结构，它从”根部”开始，然后扩展到”枝叶”。
+
+XML被设计为具有自我描述性，例如：
+&amp;lt;note&amp;gt;
+&amp;lt;to&amp;gt;George&amp;lt;/to&amp;gt;
+&amp;lt;from&amp;gt;John&amp;lt;/from&amp;gt;
+&amp;lt;heading&amp;gt;Reminder&amp;lt;/heading&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSON和XML">
+<meta property="og:url" content="http://yoursite.com/2016/09/13/JSON和XML/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="XML什么是XML
+XML是一种使信息具有结构性的标记语言，很类似HTML，XML文档是一种树结构，它从”根部”开始，然后扩展到”枝叶”。
+
+XML被设计为具有自我描述性，例如：
+&amp;lt;note&amp;gt;
+&amp;lt;to&amp;gt;George&amp;lt;/to&amp;gt;
+&amp;lt;from&amp;gt;John&amp;lt;/from&amp;gt;
+&amp;lt;heading&amp;gt;Reminder&amp;lt;/heading&amp;gt;">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-a4d5d451aae221a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-13T09:57:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSON和XML">
+<meta name="twitter:description" content="XML什么是XML
+XML是一种使信息具有结构性的标记语言，很类似HTML，XML文档是一种树结构，它从”根部”开始，然后扩展到”枝叶”。
+
+XML被设计为具有自我描述性，例如：
+&amp;lt;note&amp;gt;
+&amp;lt;to&amp;gt;George&amp;lt;/to&amp;gt;
+&amp;lt;from&amp;gt;John&amp;lt;/from&amp;gt;
+&amp;lt;heading&amp;gt;Reminder&amp;lt;/heading&amp;gt;">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-a4d5d451aae221a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/13/JSON和XML/"/>
+
+  <title> JSON和XML | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JSON和XML
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T17:48:30+08:00" content="2016-09-13">
+              2016-09-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/13/JSON和XML/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/JSON和XML/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h1><h2 id="什么是XML"><a href="#什么是XML" class="headerlink" title="什么是XML"></a>什么是XML</h2><ol>
+<li><p>XML是一种使信息具有结构性的标记语言，很类似HTML，XML文档是一种树结构，它从”根部”开始，然后扩展到”枝叶”。</p>
+</li>
+<li><p>XML被设计为具有自我描述性，例如：</p>
+<pre><code>&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&apos;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre><p>上面的这条便签就具有自我描述性,它拥有标题以及留言，同时包含了发送者和接受者的信息。阅读上面代码可知，这是John发送给George，主题为Reminder,内容为Dont’t forget the metting!的一条便签。</p>
+</li>
+<li><p>XML标签没有被预定义，需要自行定义标签。上例中的标签其实没有在任何XML标准中定义过，比如<to>和<from>,这些标签是由文档的创作者发明的。</from></to></p>
+</li>
+<li><p>XML的设计宗旨是传输数据，而非显示数据。XML自身是无作为的，也就是说XML文档不会做任何事情，他仅仅是包装在XML标签中纯粹的信息。我们需要编写软件或者程序，才能传送、接受和显示这个文档。</p>
+</li>
+</ol>
+<h2 id="与HTML的主要差异"><a href="#与HTML的主要差异" class="headerlink" title="与HTML的主要差异"></a>与HTML的主要差异</h2><ol>
+<li><p>XML不是HTML的替代</p>
+</li>
+<li><p>XML被设计为传输和存储数据，其焦点是数据的内容</p>
+</li>
+<li><p>HTML被设计用来显示数据，其焦点是数据的外观</p>
+</li>
+<li><p>HTML旨在显示信息，而XML旨在传输信息</p>
+</li>
+<li><p>在HTML中使用的标签是预定义的，HTML文档只能使用HTML标准中定义过的标签，XML允许创作者定义自己的标签。</p>
+</li>
+</ol>
+<h2 id="XML的用途"><a href="#XML的用途" class="headerlink" title="XML的用途"></a>XML的用途</h2><ol>
+<li><p>XML把数据从HTML分离。如果你需要在HTML文档中显示动态数据，那么每当数据改变时将花费大量的时间来编辑HTML，而通过XML，数据能够存储在独立的XML文件中。这样就可以专注于使用HTML进行布局和显示，并确保修改底层数据不再需要对HTML进行任何的改变。</p>
+</li>
+<li><p>简化数据的共享、传输、变更。因为XML数据以纯文本格式进行存储，是一种独立于软件和硬件的数据存储方法，这给不同应用程序数据的共享、不同系统之间数据的传输、平台的变更时数据的转移带来了极大的便利。</p>
+</li>
+</ol>
+<h2 id="XML的写法"><a href="#XML的写法" class="headerlink" title="XML的写法"></a>XML的写法</h2><p>其实大家之前都写过XML。为什么这么说呢，因为之前咱们写的<code>plis</code>文件的底层便是是XML写的。</p>
+<p>在Xcode中新建一个plist文件，并右键plist文件open as -&gt; source code，然后将下面内复制粘贴到该文件的<code>plist</code>标签中，</p>
+<pre><code>&lt;dict&gt;
+&lt;key&gt;Books&lt;/key&gt;
+&lt;array&gt;
+&lt;dict&gt;
+&lt;key&gt;name&lt;/key&gt;
+&lt;string&gt;与时间做朋友&lt;/string&gt;
+&lt;key&gt;price&lt;/key&gt;
+&lt;integer&gt;56&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;dict&gt;
+&lt;key&gt;name&lt;/key&gt;
+&lt;string&gt;我想和这个世界谈谈&lt;/string&gt;
+&lt;key&gt;price&lt;/key&gt;
+&lt;integer&gt;40&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;dict&gt;
+&lt;key&gt;name&lt;/key&gt;
+&lt;string&gt;互联网+&lt;/string&gt;
+&lt;key&gt;price&lt;/key&gt;
+&lt;integer&gt;50&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;/array&gt;
+&lt;/dict&gt;
+</code></pre><p>然后在右键plist文件open as -&gt; source code,效果如下</p>
+<p> <img src="http://upload-images.jianshu.io/upload_images/1338564-a4d5d451aae221a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ol>
+<li>咱们已经了解XML的标签是能够自定义的，在上面的那些代码中，dict、array、key、string、integer等标签都是Xcode自定义的，比如xcode规定dict代表字典，array代表数组，既然人家规定的，我们必须按照他们的规定来，要不然在Xcode中不能读取该文件。</li>
+<li><p>如果脱离Xcode软件，那么这些标签可以按照自己的喜好随意取，只要自己能分辨出来即可。</p>
+</li>
+<li><p><a href="http://www.w3school.com.cn/xml/xml_syntax.asp" target="_blank" rel="external">点击详细写法</a></p>
+</li>
+</ol>
+<h1 id="JSON（JavaScript-Object-Notation）"><a href="#JSON（JavaScript-Object-Notation）" class="headerlink" title="JSON（JavaScript Object Notation）"></a>JSON（JavaScript Object Notation）</h1><h2 id="什么是JSON"><a href="#什么是JSON" class="headerlink" title="什么是JSON"></a>什么是JSON</h2><ol>
+<li><p>JSON是轻量级的文本数据交换格式</p>
+</li>
+<li><p>JSON具有自我描述性，易理解</p>
+</li>
+<li><p>JSON采用完全独立于语言的文本格式</p>
+</li>
+<li><p>JSON成为理想的数据交换语言</p>
+</li>
+</ol>
+<h2 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h2><pre><code>{
+&quot;programmers&quot;: [{
+&quot;firstName&quot;: &quot;Brett&quot;,
+&quot;lastName&quot;: &quot;McLaughlin&quot;,
+&quot;email&quot;: &quot;aaaa&quot;
+}, {
+&quot;firstName&quot;: &quot;Jason&quot;,
+&quot;lastName&quot;: &quot;Hunter&quot;,
+&quot;email&quot;: &quot;bbbb&quot;
+}, {
+&quot;firstName&quot;: &quot;Elliotte&quot;,
+&quot;lastName&quot;: &quot;Harold&quot;,
+&quot;email&quot;: &quot;cccc&quot;
+}],
+
+&quot;authors&quot;: [{
+&quot;firstName&quot;: &quot;Isaac&quot;,
+&quot;lastName&quot;: &quot;Asimov&quot;,
+&quot;genre&quot;: &quot;sciencefiction&quot;
+}, {
+&quot;firstName&quot;: &quot;Tad&quot;,
+&quot;lastName&quot;: &quot;Williams&quot;,
+&quot;genre&quot;: &quot;fantasy&quot;
+}, {
+&quot;firstName&quot;: &quot;Frank&quot;,
+&quot;lastName&quot;: &quot;Peretti&quot;,
+&quot;genre&quot;: &quot;christianfiction&quot;
+}],
+</code></pre><ol>
+<li>数据一般在键值对中</li>
+<li>数据由逗号分割</li>
+<li>花括号保存对象</li>
+<li>方括号保存数组</li>
+<li><a href="http://www.w3school.com.cn/json/json_syntax.asp" target="_blank" rel="external">点击详细写法</a></li>
+</ol>
+<h2 id="在JSON中数据类型"><a href="#在JSON中数据类型" class="headerlink" title="在JSON中数据类型"></a>在JSON中数据类型</h2><pre><code>&quot;&quot; : 用字符串接收  
+12 : 用NSNumber接受 
+</code></pre><h2 id="与XML的比较"><a href="#与XML的比较" class="headerlink" title="与XML的比较"></a>与XML的比较</h2><ol>
+<li><p>在可读性方面，JSON和XML的数据可读性基本相同。JSON和XML的可读性可谓不相上下，一边是建议的语法，一边是规范的标签形式，很难分出胜负。</p>
+</li>
+<li><p>在可扩展性方面，XML天生有很好的扩展性，JSON当然也有，没有什么是XML能扩展，JSON不能的。</p>
+</li>
+<li><p>在编码难度方面，XML有丰富的编码工具，比如Dom4j、JDom等，JSON也有json.org提供的工具，但是JSON的编码明显比XML容易许多，即使不借助工具也能写出JSON的代码，可是要写好XML就不太容易了。</p>
+</li>
+<li><p>在解码难度方面，XML的解析得考虑子节点父节点，让人头昏眼花，而JSON的解析难度几乎为0。这一点XML输的真是没话说。</p>
+</li>
+<li><p>在流行度方面，XML已经被业界广泛的使用，而JSON才刚刚开始。</p>
+</li>
+<li><p>JSON和XML同样拥有丰富的解析手段。</p>
+</li>
+<li><p>JSON相对于XML来讲，数据的体积小。</p>
+</li>
+<li><p>JSON与JavaScript的交互更加方便。</p>
+</li>
+<li><p>JSON对数据的描述性比XML较差。</p>
+</li>
+<li><p>JSON的速度要远远快于XML</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/02/H5杂项面试题/" rel="next" title="H5杂项面试题">
+                <i class="fa fa-chevron-left"></i> H5杂项面试题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/13/JSON和XML/"
+           data-title="JSON和XML" data-url="http://yoursite.com/2016/09/13/JSON和XML/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XML"><span class="nav-number">1.</span> <span class="nav-text">XML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是XML"><span class="nav-number">1.1.</span> <span class="nav-text">什么是XML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与HTML的主要差异"><span class="nav-number">1.2.</span> <span class="nav-text">与HTML的主要差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML的用途"><span class="nav-number">1.3.</span> <span class="nav-text">XML的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML的写法"><span class="nav-number">1.4.</span> <span class="nav-text">XML的写法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON（JavaScript-Object-Notation）"><span class="nav-number">2.</span> <span class="nav-text">JSON（JavaScript Object Notation）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是JSON"><span class="nav-number">2.1.</span> <span class="nav-text">什么是JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法规则"><span class="nav-number">2.2.</span> <span class="nav-text">语法规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在JSON中数据类型"><span class="nav-number">2.3.</span> <span class="nav-text">在JSON中数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与XML的比较"><span class="nav-number">2.4.</span> <span class="nav-text">与XML的比较</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -256,6 +256,244 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/13/JSON和XML/" itemprop="url">
+                  JSON和XML
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T17:48:30+08:00" content="2016-09-13">
+              2016-09-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/13/JSON和XML/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/JSON和XML/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h1><h2 id="什么是XML"><a href="#什么是XML" class="headerlink" title="什么是XML"></a>什么是XML</h2><ol>
+<li><p>XML是一种使信息具有结构性的标记语言，很类似HTML，XML文档是一种树结构，它从”根部”开始，然后扩展到”枝叶”。</p>
+</li>
+<li><p>XML被设计为具有自我描述性，例如：</p>
+<pre><code>&lt;note&gt;
+&lt;to&gt;George&lt;/to&gt;
+&lt;from&gt;John&lt;/from&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&apos;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;
+</code></pre><p>上面的这条便签就具有自我描述性,它拥有标题以及留言，同时包含了发送者和接受者的信息。阅读上面代码可知，这是John发送给George，主题为Reminder,内容为Dont’t forget the metting!的一条便签。</p>
+</li>
+<li><p>XML标签没有被预定义，需要自行定义标签。上例中的标签其实没有在任何XML标准中定义过，比如<to>和<from>,这些标签是由文档的创作者发明的。</from></to></p>
+</li>
+<li><p>XML的设计宗旨是传输数据，而非显示数据。XML自身是无作为的，也就是说XML文档不会做任何事情，他仅仅是包装在XML标签中纯粹的信息。我们需要编写软件或者程序，才能传送、接受和显示这个文档。</p>
+</li>
+</ol>
+<h2 id="与HTML的主要差异"><a href="#与HTML的主要差异" class="headerlink" title="与HTML的主要差异"></a>与HTML的主要差异</h2><ol>
+<li><p>XML不是HTML的替代</p>
+</li>
+<li><p>XML被设计为传输和存储数据，其焦点是数据的内容</p>
+</li>
+<li><p>HTML被设计用来显示数据，其焦点是数据的外观</p>
+</li>
+<li><p>HTML旨在显示信息，而XML旨在传输信息</p>
+</li>
+<li><p>在HTML中使用的标签是预定义的，HTML文档只能使用HTML标准中定义过的标签，XML允许创作者定义自己的标签。</p>
+</li>
+</ol>
+<h2 id="XML的用途"><a href="#XML的用途" class="headerlink" title="XML的用途"></a>XML的用途</h2><ol>
+<li><p>XML把数据从HTML分离。如果你需要在HTML文档中显示动态数据，那么每当数据改变时将花费大量的时间来编辑HTML，而通过XML，数据能够存储在独立的XML文件中。这样就可以专注于使用HTML进行布局和显示，并确保修改底层数据不再需要对HTML进行任何的改变。</p>
+</li>
+<li><p>简化数据的共享、传输、变更。因为XML数据以纯文本格式进行存储，是一种独立于软件和硬件的数据存储方法，这给不同应用程序数据的共享、不同系统之间数据的传输、平台的变更时数据的转移带来了极大的便利。</p>
+</li>
+</ol>
+<h2 id="XML的写法"><a href="#XML的写法" class="headerlink" title="XML的写法"></a>XML的写法</h2><p>其实大家之前都写过XML。为什么这么说呢，因为之前咱们写的<code>plis</code>文件的底层便是是XML写的。</p>
+<p>在Xcode中新建一个plist文件，并右键plist文件open as -&gt; source code，然后将下面内复制粘贴到该文件的<code>plist</code>标签中，</p>
+<pre><code>&lt;dict&gt;
+&lt;key&gt;Books&lt;/key&gt;
+&lt;array&gt;
+&lt;dict&gt;
+&lt;key&gt;name&lt;/key&gt;
+&lt;string&gt;与时间做朋友&lt;/string&gt;
+&lt;key&gt;price&lt;/key&gt;
+&lt;integer&gt;56&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;dict&gt;
+&lt;key&gt;name&lt;/key&gt;
+&lt;string&gt;我想和这个世界谈谈&lt;/string&gt;
+&lt;key&gt;price&lt;/key&gt;
+&lt;integer&gt;40&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;dict&gt;
+&lt;key&gt;name&lt;/key&gt;
+&lt;string&gt;互联网+&lt;/string&gt;
+&lt;key&gt;price&lt;/key&gt;
+&lt;integer&gt;50&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;/array&gt;
+&lt;/dict&gt;
+</code></pre><p>然后在右键plist文件open as -&gt; source code,效果如下</p>
+<p> <img src="http://upload-images.jianshu.io/upload_images/1338564-a4d5d451aae221a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ol>
+<li>咱们已经了解XML的标签是能够自定义的，在上面的那些代码中，dict、array、key、string、integer等标签都是Xcode自定义的，比如xcode规定dict代表字典，array代表数组，既然人家规定的，我们必须按照他们的规定来，要不然在Xcode中不能读取该文件。</li>
+<li><p>如果脱离Xcode软件，那么这些标签可以按照自己的喜好随意取，只要自己能分辨出来即可。</p>
+</li>
+<li><p><a href="http://www.w3school.com.cn/xml/xml_syntax.asp" target="_blank" rel="external">点击详细写法</a></p>
+</li>
+</ol>
+<h1 id="JSON（JavaScript-Object-Notation）"><a href="#JSON（JavaScript-Object-Notation）" class="headerlink" title="JSON（JavaScript Object Notation）"></a>JSON（JavaScript Object Notation）</h1><h2 id="什么是JSON"><a href="#什么是JSON" class="headerlink" title="什么是JSON"></a>什么是JSON</h2><ol>
+<li><p>JSON是轻量级的文本数据交换格式</p>
+</li>
+<li><p>JSON具有自我描述性，易理解</p>
+</li>
+<li><p>JSON采用完全独立于语言的文本格式</p>
+</li>
+<li><p>JSON成为理想的数据交换语言</p>
+</li>
+</ol>
+<h2 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h2><pre><code>{
+&quot;programmers&quot;: [{
+&quot;firstName&quot;: &quot;Brett&quot;,
+&quot;lastName&quot;: &quot;McLaughlin&quot;,
+&quot;email&quot;: &quot;aaaa&quot;
+}, {
+&quot;firstName&quot;: &quot;Jason&quot;,
+&quot;lastName&quot;: &quot;Hunter&quot;,
+&quot;email&quot;: &quot;bbbb&quot;
+}, {
+&quot;firstName&quot;: &quot;Elliotte&quot;,
+&quot;lastName&quot;: &quot;Harold&quot;,
+&quot;email&quot;: &quot;cccc&quot;
+}],
+
+&quot;authors&quot;: [{
+&quot;firstName&quot;: &quot;Isaac&quot;,
+&quot;lastName&quot;: &quot;Asimov&quot;,
+&quot;genre&quot;: &quot;sciencefiction&quot;
+}, {
+&quot;firstName&quot;: &quot;Tad&quot;,
+&quot;lastName&quot;: &quot;Williams&quot;,
+&quot;genre&quot;: &quot;fantasy&quot;
+}, {
+&quot;firstName&quot;: &quot;Frank&quot;,
+&quot;lastName&quot;: &quot;Peretti&quot;,
+&quot;genre&quot;: &quot;christianfiction&quot;
+}],
+</code></pre><ol>
+<li>数据一般在键值对中</li>
+<li>数据由逗号分割</li>
+<li>花括号保存对象</li>
+<li>方括号保存数组</li>
+<li><a href="http://www.w3school.com.cn/json/json_syntax.asp" target="_blank" rel="external">点击详细写法</a></li>
+</ol>
+<h2 id="在JSON中数据类型"><a href="#在JSON中数据类型" class="headerlink" title="在JSON中数据类型"></a>在JSON中数据类型</h2><pre><code>&quot;&quot; : 用字符串接收  
+12 : 用NSNumber接受 
+</code></pre><h2 id="与XML的比较"><a href="#与XML的比较" class="headerlink" title="与XML的比较"></a>与XML的比较</h2><ol>
+<li><p>在可读性方面，JSON和XML的数据可读性基本相同。JSON和XML的可读性可谓不相上下，一边是建议的语法，一边是规范的标签形式，很难分出胜负。</p>
+</li>
+<li><p>在可扩展性方面，XML天生有很好的扩展性，JSON当然也有，没有什么是XML能扩展，JSON不能的。</p>
+</li>
+<li><p>在编码难度方面，XML有丰富的编码工具，比如Dom4j、JDom等，JSON也有json.org提供的工具，但是JSON的编码明显比XML容易许多，即使不借助工具也能写出JSON的代码，可是要写好XML就不太容易了。</p>
+</li>
+<li><p>在解码难度方面，XML的解析得考虑子节点父节点，让人头昏眼花，而JSON的解析难度几乎为0。这一点XML输的真是没话说。</p>
+</li>
+<li><p>在流行度方面，XML已经被业界广泛的使用，而JSON才刚刚开始。</p>
+</li>
+<li><p>JSON和XML同样拥有丰富的解析手段。</p>
+</li>
+<li><p>JSON相对于XML来讲，数据的体积小。</p>
+</li>
+<li><p>JSON与JavaScript的交互更加方便。</p>
+</li>
+<li><p>JSON对数据的描述性比XML较差。</p>
+</li>
+<li><p>JSON的速度要远远快于XML</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/02/H5杂项面试题/" itemprop="url">
                   H5杂项面试题
                 </a>
@@ -3281,547 +3519,6 @@ NSOperationQueue *operationQueue = [NSOperationQueue new];
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/30/地图显示:大头针/" itemprop="url">
-                  地图显示/大头针
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-30T22:27:07+08:00" content="2016-08-30">
-              2016-08-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/30/地图显示:大头针/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/地图显示:大头针/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>   学习地图，我们必须要接触两个框架：</p>
-<ol>
-<li><p>Core Location，主要包含定位、地理编码、反编码功能，如需了解请移步<a href="https://wangliguang.github.io/2016/08/31/iOS%E5%9C%B0%E5%9B%BE-%E5%AE%9A%E4%BD%8D-%E7%BC%96%E7%A0%81%E4%B8%8E%E5%8F%8D%E7%BC%96%E7%A0%81/" target="_blank" rel="external">iOS开发之地图-定位/编码与反编码</a></p>
-</li>
-<li><p>MapKit，利用他可以对地图进行精准的控制,比如，放置大头针、地图类型切换，导航等等。</p>
-<p>本文我们主要介绍的是使用MapKit框架对地图试图进行精准的控制。</p>
-</li>
-</ol>
-<h1 id="MKMapView"><a href="#MKMapView" class="headerlink" title="MKMapView"></a>MKMapView</h1><p>   <strong>MKMapView是地图展示控件。</strong></p>
-<h2 id="MKMapView的常用属性"><a href="#MKMapView的常用属性" class="headerlink" title="MKMapView的常用属性"></a>MKMapView的常用属性</h2><pre><code>//跟踪类型，是一个枚举：MKUserTrackingModeNone :不进行用户位置跟踪；MKUserTrackingModeFollow :跟踪用户位置；MKUserTrackingModeFollowWithHeading :跟踪用户位置并且跟踪用户前进方向；
-userTrackingMode    
-
-//地图类型，是一个枚举：MKMapTypeStandard :标准地图，一般情况下使用此地图即可满足；MKMapTypeSatellite ：卫星地图；MKMapTypeHybrid ：混合地图，加载最慢比较消耗资源；
-mapType
-
-//用户位置，只读属性
-userLocation
-
-//当前地图中的所有大头针，只读属性
-annotations
-
-// 是否可以缩放 
-zoomEnabled = NO; 
-
-// 是否可以滚动 
-scrollEnabled = NO; 
-
-// 是否可以旋转  
-rotateEnabled = NO; 
-
-// 是否显示3D  
-pitchEnabled = NO;
-
-// 是否显示指南针
-showsCompass = YES;
-
-// 是否显示比例尺
-showsScale = YES;
-
-// 是否显示交通
-showsTraffic = YES;
-
-// 是否显示建筑物
-showsBuildings = YES;
-</code></pre><h2 id="MKMapView的常用方法"><a href="#MKMapView的常用方法" class="headerlink" title="MKMapView的常用方法"></a>MKMapView的常用方法</h2><pre><code>  ******对象方法*****
-  //添加大头针，对应的有添加大头针数组
-  - (void)addAnnotation:(id &lt;MKAnnotation&gt;)annotation;
-
-  //删除大头针，对应的有删除大头针数组
-  - (void)removeAnnotation:(id &lt;MKAnnotation&gt;)annotation;
-
-  //设置地图显示区域，用于控制当前屏幕显示地图范围
-  - (void)setRegion:(MKCoordinateRegion)region animated:(BOOL)animated;
-
-  //设置地图中心点位置
-  - (void)setCenterCoordinate:(CLLocationCoordinate2D)coordinate animated:(BOOL)animated;
-
-  //将地理坐标（经纬度）转化为数学坐标（UIKit坐标）
-  - (CGPoint)convertCoordinate:(CLLocationCoordinate2D)coordinate toPointToView:(UIView *)view;
-
-  //将数学坐标转换为地理坐标
-  - (CLLocationCoordinate2D)convertPoint:(CGPoint)point toCoordinateFromView:(UIView *)view;
-
-  //从缓存池中取出大头针，类似于UITableView中取出UITableViewCell，为了进行性能优化而设计
-  - (MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier;
-
-  //选中指定的大头针
-  - (void)selectAnnotation:(id &lt;MKAnnotation&gt;)annotation animated:(BOOL)animated;
-
-  //取消选中指定的大头针
-  - (void)deselectAnnotation:(id &lt;MKAnnotation&gt;)annotation animated:(BOOL)animated;
-
----
-
-  ******代理方法*****
-
- //用户位置发生改变时触发（第一次定位到用户位置也会触发该方法）
- - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation ;
-
- //显示区域发生改变后触发
- - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation ;
-
- //地图加载完成后触发
- - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView;
-
- //显示大头针时触发，返回大头针视图，通常自定义大头针可以通过此方法进行
- - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id &lt;MKAnnotation&gt;)annotation;
-
- //点击选中某个大头针时触发
- - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
-
- //取消选中大头针时触发
- - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
-
- //渲染地图覆盖物时触发
- - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id &lt;MKOverlay&gt;)overlay
-</code></pre><h2 id="MKMapView显示当前位置的步骤"><a href="#MKMapView显示当前位置的步骤" class="headerlink" title="MKMapView显示当前位置的步骤"></a>MKMapView显示当前位置的步骤</h2><pre><code>1. 导入MapKit框架
-
-       #import &lt;MapKit/MapKit.h&gt;
-
-2. 使用定位管理器CLLocationManager做定位授权
-       _locationManager = [[CLLocationManager alloc]init];
-       [_locationManager requestAlwaysAuthorization];//始终授权
-       [_locationManager requestWhenInUseAuthorization];// 使用时授权
-2. 创建MKMapView地图试图,并添加到他的父试图上面，我的_mapView已设为全局变量
-
-       _mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
-       [self.view addSubview:_mapView];
-
-3. 设置相应属性
-       //跟踪类型，是一个枚举：MKUserTrackingModeNone :不进行用户位置跟踪；MKUserTrackingModeFollow :跟踪用户位置；MKUserTrackingModeFollowWithHeading :跟踪用户位置并且跟踪用户前进方向；userTrackingMode
-       _mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
-
-       //地图类型，是一个枚举：MKMapTypeStandard :标准地图，一般情况下使用此地图即可满足；MKMapTypeSatellite ：卫星地图；MKMapTypeHybrid ：混合地图，加载最慢比较消耗资源；mapType
-       _mapView.mapType = MKMapTypeStandard;
-
-       // 显示标尺
-       _mapView.showsScale = YES;
-
-       // 显示交通状态
-       _mapView.showsTraffic = YES;
-
-       //    显示罗盘
-       _mapView.showsCompass = YES;
-5. 挂上代理
-
-       _mapView.delegate = self;
-
-6. 显示用户位置
-
-       _mapView.showsUserLocation = YES;
-
-7. 实现代理方法，不止有这些还有很多其他的代理方法。
-
-       - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-              //让用户定位到当前位置       
-               _mapView.centerCoordinate = userLocation.coordinate;
-
-                [_mapView setRegion:MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.1, 0.1))];
-
-             /*
-               * 设置地图上所显示的区域
-
-               *  CLLocationCoordinate2D 设置该区域的中心点
-
-               * MKCoordinateSpan 设置该区域的经纬度跨度
-
-               * 例如：中国经纬度
-
-               经度范围：73.33E 至 135.05E
-               纬度范围：2.51N  至 53.33N
-
-               为了简便，我们去掉小数
-
-               中国中心点的纬度是（3 + 53）/ 2 = 北纬28度
-
-               中国中心点的经度是（73 + 135）/ 2 = 东经104度
-
-               中国纬度跨度是53 - 3 = 50度
-
-               中国经度跨度是135 - 73 = 62度
-
-               */
-              //    MKCoordinateSpan span = MKCoordinateSpanMake(50, 62);//跨度越大，地图所显示的区域越大
-              //    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(28, 104);
-              //    MKCoordinateRegion regoin = MKCoordinateRegionMake(coordinate, span);
-              //    [_mapView setRegion:regoin animated:YES];
-
-       }
-
-       - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error{
-
-           NSLog(@&quot;定位失败%@&quot;,error);
-       }
-</code></pre><p>  总结，如果无法显示自己的位置，检查以下几点：</p>
-<pre><code>0. 是否将定位管理器设为全局变量
-
-1. 是否在项目中进行定位授权，是否在Info.plist中配置
-
-2. 是否将showsUserLocation设为YES。
-
-3. 是否配置模拟器 点击模拟器 -&gt; 菜单栏Dubug -&gt; Location -&gt; Apple来使模拟器定位，然后使用Custom Location配置模拟器的经纬度。
-</code></pre><p>   最终效果如下：</p>
-<p>   <img src="http://upload-images.jianshu.io/upload_images/1338564-0a79924b88d1bd98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="中间的原点就是用户所在的位置"></p>
-<h1 id="自定义用户位置的大头针"><a href="#自定义用户位置的大头针" class="headerlink" title="自定义用户位置的大头针"></a>自定义用户位置的大头针</h1><pre><code>其实上图中间的那个点就是一个大头针。现在我们要做的就是自定义这个大头针的样式，写代码之前需先了解以下知识：
-
-1.  **MKAnnotationView**：大头针试图，能够自定义，用户当前位置的大头针默认样式是一个原点，非用户当前位置的大头针，系统默认用一个类似图钉样式的试图显示。
-
-2. **MKAnnotation**：大头针的数据模型，只要一个NSObject类实现MKAnnotation协议就可以作为一个大头针数据模型，通常会重写协议中coordinate（标记位置）、title（标题）、**subtitle**（子标题）三个属性来自定义大头针的数据模型。
-
-3. **给地图试图添加大头针的原理如下**
-   &gt; 0. 准备大头针数据模型
-   &gt; 1. 使用地图试图调用addAnnotaion给地图试图添加大头针数据模型。
-
-   &gt; 2. 然后MKMapView会将数据模型传给一个代理方法，该代理方法会将该大头针数据模型包装到一个大头针试图（在该代理方法内可以自定义大头针试图），然后返回该大头针试图，返回的带有数据模型的大头针试图便会显示在地图上，如果返回为nil,则系统会默认一个大头针试图显示在地图上面。
-
-找到你上面所写的项目，我接着那个项目继续。
-
-实现MKMapView的如下代理方法，当一个大头针将要显示是会调用这个代理方法，该方法会返回一个大头针，如果返回为nil,则系统采用默认的大头针。
-
-       - (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id&lt;MKAnnotation&gt;)annotation{
-
-             //查看文档可以发现MKUserLocatio实现了协议MKAnnotation,所以MKUserLocation也是一个大头针数据模型，有名字可知，这个大头针数据模型是用户当前位置大头针上的数据模型，这里判断传进来的数据模型是不是当前位置的数据模型，如果是就将这个数据模型封装一个大头针试图中。
-             if ([annotation isKindOfClass:[MKUserLocation class]]) {
-
-                    MKAnnotationView *userAnnotationView = [[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@&quot;userAnnotation&quot;];
-
-                    userAnnotationView.image = [UIImage imageNamed:@&quot;person.png&quot;];
-
-                    //自定义大头针后，大头针是不可交互的，需要将canShowCallout设为YES方可再继续交互。
-                    userAnnotationView.canShowCallout = YES;
-
-                     //仅仅实现了让用户大头针在地图试图上往右偏了100
-                     //userAnnotationView.centerOffset = CGPointMake(100, 0);
-                     //让大头针的详情试图在地图试图上偏移，默认是在用户大头针的顶部
-                    //userAnnotationView.calloutOffset = CGPointMake(100, 0);
-
-                     //是否可以拖到大头针
-                    //userAnnotationView.draggable = YES;
-
-                    //leftCalloutAccessoryView的试图只有高度能够设置
-                    userAnnotationView.leftCalloutAccessoryView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@&quot;person.png&quot;]];
-                    userAnnotationView.rightCalloutAccessoryView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@&quot;person.png&quot;]];
-
-                    //会将detail给覆盖
-                    //userAnnotationView.detailCalloutAccessoryView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@&quot;person.png&quot;]];;
-
-                   return userAnnotationView;
-          }
-
-          return nil;
-
-       }
-</code></pre><h1 id="长按地图添加大头针"><a href="#长按地图添加大头针" class="headerlink" title="长按地图添加大头针"></a>长按地图添加大头针</h1><pre><code> 首先复习一些上面提到的放置大头针原理
- &gt; 0. 准备大头针数据模型
- &gt; 1. 使用地图试图调用addAnnotaion给地图试图添加大头针数据模型。
-
-&gt; 2. 然后MKMapView会将数据模型传给一个代理方法，该代理方法会将该大头针数据模型包装到一个大头针试图（在该代理方法内可以自定义大头针试图），然后返回该大头针试图，返回的带有数据模型的大头针试图便会显示在地图上，如果返回为nil,则系统会默认一个大头针试图显示在地图上面。
-
-废话不多说，直接上代码，这是所有的代码，建议你新建一个控制器或者项目直接将所有代码考入即可：
-
-  //
-  //  ViewController.m
-  //  Map
-  //
-  //  Created by GG on 16/3/9.
-  //  Copyright © 2016年 GG. All rights reserved.
-  //
-
-  #import &quot;AnnotationViewController.h&quot;
-  #import &lt;MapKit/MapKit.h&gt;
-  #import &quot;DetailViewController.h&quot;
-  @interface AnnotationViewController ()&lt;MKMapViewDelegate,CLLocationManagerDelegate&gt;
-  {
-
-      MKMapView *_mapView;
-
-  }
-
-  @property (nonatomic,retain) CLGeocoder *geocoder;
-  @property (nonatomic,retain) CLLocationManager *locationManager;
-  @end
-
-  @implementation AnnotationViewController
-
-  - (void)viewDidLoad {
-      [super viewDidLoad];
-
-      self.title = @&quot;大头针&quot;;
-      self.view.backgroundColor = [UIColor whiteColor];
-
-      _locationManager = [[CLLocationManager alloc]init];
-      [_locationManager requestAlwaysAuthorization];
-      [_locationManager requestWhenInUseAuthorization];
-      _mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
-
-      _mapView.delegate = self;
-
-      _mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
-
-      _mapView.mapType = MKMapTypeStandard;
-
-      //    显示标尺
-      _mapView.showsScale = YES;
-      //    显示交通状态
-      _mapView.showsTraffic = YES;
-      //    显示罗盘
-      _mapView.showsCompass = YES;
-
-      _mapView.delegate = self;
-
-      _mapView.showsUserLocation = YES;
-
-      [self.view addSubview:_mapView];
-
-      UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressClick:)];
-
-      [_mapView addGestureRecognizer:longPressGesture];
-
-  }
-
-  - (void)longPressClick:(UIGestureRecognizer *)sender{
-      //试试不加这个判断的效果
-      if (sender.state != UIGestureRecognizerStateBegan) {
-
-          return;
-
-      }
-
-      //根据在试图上点击的位置获取到所点的坐标位置
-      CLLocationCoordinate2D coordinate = [_mapView convertPoint:[sender locationInView:self.view] toCoordinateFromView:sender.view];
-
-      CLLocation *location = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-
-      // 反编码
-      [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) {
-
-          MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
-
-          annotation.coordinate = coordinate;
-
-          annotation.title = placemarks.firstObject.name;
-
-          [_mapView addAnnotation:annotation];
-      }];
-
-  }
-
-  - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-
-      MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);//跨度越大，地图所显示的区域越大
-      MKCoordinateRegion regoin = MKCoordinateRegionMake(userLocation.location.coordinate, span);
-      [mapView setRegion:regoin animated:YES];
-
-  }
-
-  - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
-
-      NSLog(@&quot;定位失败：%@&quot;,error);
-
-  }
-
-  - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
-
-      DetailViewController *detailVC = [DetailViewController new];
-
-      detailVC.view.backgroundColor = [UIColor whiteColor];
-
-      //获取到该大头针试图的数据模型
-      MKPointAnnotation *annotation = view.annotation;
-
-      detailVC.title = annotation.title;
-
-      //判断当前点击的大头针是不是显示当前用户位置的大头针，如果是就让他变色
-      /*
-       * MKPinAnnotationView是MKAnnotationView的子类，相比MKAnnotationView而言，他能够设置大头针颜色和显示大头针时的动画
-
-       */
-      if (![view.annotation isKindOfClass:[MKUserLocation class]]) {
-
-          MKPinAnnotationView *pinView = (MKPinAnnotationView *)view;
-
-          pinView.pinTintColor = [UIColor yellowColor];
-      }
-
-      [self.navigationController pushViewController:detailVC animated:YES];
-
-  }
-
-  - (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id&lt;MKAnnotation&gt;)annotation{
-
-      //系统定义的大头针数据模型专门用来表示用户当前位置大头针上的数据模型，遵守了MKAnnotation协议
-      if ([annotation isKindOfClass:[MKUserLocation class]]) {
-
-          MKAnnotationView *userAnnotationView = [[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@&quot;userAnnotation&quot;];
-
-          userAnnotationView.image = [UIImage imageNamed:@&quot;person.png&quot;];
-
-          //如果将大头针给自定义会变成不可交互，将canShowCallout设为YES便可恢复交互
-          userAnnotationView.canShowCallout = YES;
-
-          //仅仅实现了让用户大头针在地图试图上往右偏了100
-          //userAnnotationView.centerOffset = CGPointMake(100, 0);
-
-          //让大头针的详情试图在地图试图上偏移，默认是在用户大头针的顶部
-          //userAnnotationView.calloutOffset = CGPointMake(100, 0);
-
-          //是否可以移动大头针
-          userAnnotationView.draggable = YES;
-
-          //leftCalloutAccessoryView的试图只有高度能够设置
-    userAnnotationView.leftCalloutAccessoryView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@&quot;person.png&quot;]];
-          userAnnotationView.rightCalloutAccessoryView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@&quot;person.png&quot;]];
-
-           return userAnnotationView;
-      }
-
-      return nil;
-
-  }
-
-  - (CLGeocoder *)geocoder{
-
-      if (_geocoder == nil) {
-
-          _geocoder = [[CLGeocoder alloc]init];
-
-      }
-
-      return _geocoder;
-  }
-
-  @end
-</code></pre><h1 id="总结：本文地图学习过程中用到的类"><a href="#总结：本文地图学习过程中用到的类" class="headerlink" title="总结：本文地图学习过程中用到的类"></a>总结：本文地图学习过程中用到的类</h1><pre><code>1.  **大头针分有两种类**
-
-  1. MKPinAnnotationView：他是系统自带的大头针，继承于MKAnnotationView，形状跟棒棒糖类似，可以设置糖的颜色，和显示的时候是否有动画效果
-
-  2. MKAnnotationView：可以用指定的图片作为大头针的样式，但显示的时候没有动画效果，如果没有给图片的话会什么都不显示
-
-2. **MKAnnotation**：大头针的数据模型，只要一个NSObject类实现MKAnnotation协议就可以作为一个大头针数据模型，通常会重写协议中coordinate（标记位置）、title（标题）、**subtitle**（子标题）三个属性来自定义大头针的数据模型。
-
-3. **MKUserLocation**：系统定义的大头针数据模型专门用来表示用户当前位置大头针上的数据模型，遵守了MKAnnotation协议。
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -3867,7 +3564,7 @@ showsBuildings = YES;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
