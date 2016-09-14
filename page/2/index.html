@@ -256,6 +256,165 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/02/HTML面试题/" itemprop="url">
+                  HTML面试题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T11:06:38+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/H5面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">H5面试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/02/HTML面试题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/HTML面试题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HTML和XHTML有什么区别？"><a href="#HTML和XHTML有什么区别？" class="headerlink" title="HTML和XHTML有什么区别？"></a>HTML和XHTML有什么区别？</h1><h2 id="XHTML-HTML"><a href="#XHTML-HTML" class="headerlink" title="XHTML,HTML"></a>XHTML,HTML</h2><p>   XHTML 与 HTML 4.01 标准没有太多的不同， XHTML1.0 是 XML 风格的 HTML4.01 ,标签的规范更加严格 , W3C一直是推崇XHTML这种严格类型的语法, 但是 XHTML 从 1.0 升级到了 1.1 以后就夭折了。</p>
+<h2 id="html和xhtml最主要的不同："><a href="#html和xhtml最主要的不同：" class="headerlink" title="html和xhtml最主要的不同："></a>html和xhtml最主要的不同：</h2><ul>
+<li><p>XHTML 元素必须被正确地嵌套。</p>
+<pre><code>错误：&lt;Head&gt;&lt;/Head&gt;&lt;Body&gt;&lt;/Body&gt;
+正确：&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;
+</code></pre></li>
+<li><p>XHTML 元素必须被关闭。</p>
+<pre><code>错误：&lt;p&gt;xxxx
+正确: &lt;p&gt;xxxx&lt;/p&gt;
+</code></pre></li>
+<li><p>标签名必须用小写字母。</p>
+<pre><code>错误：&lt;Div&gt;&lt;/diV&gt;
+正确：&lt;div&gt;&lt;/div&gt;
+</code></pre></li>
+<li><p>XHTML 文档必须拥有根元素。</p>
+</li>
+<li><p>其他</p>
+<p>  不允许使用target=”_blank”</p>
+<p>  从XHTML 1.1开始全面禁止target属性，如果想要有开新窗口的功能，就必须改写为rel=”external”，并搭配JavaScript实现此效果。</p>
+<pre><code>错误：&lt;a href=&quot;http://blog.mukispace.com&quot; target=&quot;_blank&quot;&gt;MUKI space&lt;/a&gt;
+
+正确：&lt;a href=&quot;http://blog.mukispace.com&quot; rel=&quot;external&quot;&gt;MUKI space&lt;/a&gt;
+</code></pre></li>
+</ul>
+<h1 id="如果页面使用-‘application-xhtml-xml’-会有什么问题吗？"><a href="#如果页面使用-‘application-xhtml-xml’-会有什么问题吗？" class="headerlink" title="如果页面使用 ‘application/xhtml+xml’ 会有什么问题吗？"></a>如果页面使用 ‘application/xhtml+xml’ 会有什么问题吗？</h1><p>一些老的浏览器不支持，实际上，任何最新的浏览器都将支持application/xhtml+xml媒体类型。大多数浏览器也接受以application/xml发送的XHTML文档。</p>
+<h1 id="doctype（文档类型）的作用是什么？你知道多少种文档类型？"><a href="#doctype（文档类型）的作用是什么？你知道多少种文档类型？" class="headerlink" title="doctype（文档类型）的作用是什么？你知道多少种文档类型？"></a>doctype（文档类型）的作用是什么？你知道多少种文档类型？</h1><ul>
+<li><p>此标签可告知浏览器文档使用哪种HTML或XHTML规范。该标签可声明三种DTD类型，分别表示严格版本、过渡版本以及基于框架的HTML文档。</p>
+</li>
+<li><p>HTML 4.01规定了三种文档类型：Strict、Transitional以及Frameset。</p>
+</li>
+<li><p>XHTML 1.0规定了三种XML文档类型：Strict、Transitional以及Frameset。</p>
+</li>
+<li><p>Standards（标准）模式（也就是严格呈现模式）用于呈现遵循最新标准的网页，而Quirks（包容）模式（也就是松散呈现模式或者兼容模式）用于呈现为传统浏览器而设计的网页。</p>
+</li>
+</ul>
+<h1 id="浏览器标准模式和怪异模式之间的区别是什么？"><a href="#浏览器标准模式和怪异模式之间的区别是什么？" class="headerlink" title="浏览器标准模式和怪异模式之间的区别是什么？"></a>浏览器标准模式和怪异模式之间的区别是什么？</h1><p>W3C标准推出以后，浏览器都开始采纳新标准，但存在一个问题就是如何保证旧的网页还能继续浏览，在标准出来以前，很多页面都是根据旧的渲染方法编 写的，如果用的标准来渲染，将导致页面显示异常。为保持浏览器渲染的兼容性，使以前的页面能够正常浏览，浏览器都保留了旧的渲染方法（如：微软的IE）。 这样浏览器渲染上就产生了Quircks mode和Standars mode，两种渲染方法共存在一个浏览器上。IE盒子模型和标准W3C盒子模 型：ie的width包括：padding\border。标准的width不包括：padding\border</p>
+<h1 id="使用XHTML的局限有哪些？"><a href="#使用XHTML的局限有哪些？" class="headerlink" title="使用XHTML的局限有哪些？"></a>使用XHTML的局限有哪些？</h1><p>XHTML 与HTML的区别为：</p>
+<p>XHTML 元素必须被正确地嵌套。<br>XHTML 元素必须被关闭。<br>标签名必须用小写字母。<br>XHTML 文档必须拥有根元素。<br>局限：</p>
+<p>所有的 XHTML 元素都必须被正确地嵌套，XHTML 必须拥有良好的结构，所有的标签必须小写，并且所有的 XHTML 元素必须被关闭。所有的 XHTML 文档必须拥有 DOCTYPE 声明，并且 html、head、title 和 body 元素必须存在。虽然代码更加的优雅，但缺少容错性，不利于快速开发。</p>
+<h1 id="如果把HTML5看作做一个开放平台，那它的构建模块有哪些？"><a href="#如果把HTML5看作做一个开放平台，那它的构建模块有哪些？" class="headerlink" title="如果把HTML5看作做一个开放平台，那它的构建模块有哪些？"></a>如果把HTML5看作做一个开放平台，那它的构建模块有哪些？</h1><p><nav>,<header>,<section>,<footer>等。</footer></section></header></nav></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/02/多线程理论部分/" itemprop="url">
                   多线程理论部分
                 </a>
@@ -4047,7 +4206,7 @@ hexo deploy
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

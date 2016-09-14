@@ -256,6 +256,223 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/14/归档/" itemprop="url">
+                  归档
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T16:12:03+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/归档/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/归档/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>归档：将对转序列化成二级制数据，并保存在文件中。</li>
+<li><p>解归档：将归档后的数据反序列化成明码（能够看懂）对象，供我们使用。</p>
+</li>
+<li><p>说明：只有遵守了NSCoding或 NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。</p>
+<pre><code> //归档时会自动调用encodeWithCoder:(NSCoder *)aCoder
+- (void)encodeWithCoder:(NSCoder *)aCoder
+
+// 解归档的时候 会自动调用 initWithCoder:(NSCoder *)aDecoder
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder
+</code></pre></li>
+</ul>
+<hr>
+<h1 id="将单个对象归档与解归档"><a href="#将单个对象归档与解归档" class="headerlink" title="将单个对象归档与解归档"></a>将单个对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-0ed0360e9ee38616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将单个对象归档与解归档"></p>
+<ol>
+<li><p>看不懂是怎么找路径给path赋值的，请移步<a href="http://www.jianshu.com/p/2d9ca94b584d" target="_blank" rel="external">这里</a>查看。</p>
+</li>
+<li><p>采用archiveRootObject方法在同一路经下只能归档一个对象。但如果此时我想将我传进来的名字和年龄都归档，只需将这两个数据放到一个字典对象里。让后将字典给归档便可。将归档方法变为如下即可。</p>
+<pre><code>- (void)archiverName:(NSString *)name WithAge:(NSNumber *)age {
+
+  //[NSKeyedArchiver archiveRootObject:name toFile:path];
+
+  //[NSKeyedArchiver archiveRootObject:age toFile:path];
+
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+
+  dict[@&quot;name&quot;] = name;
+  dict[@&quot;age&quot;] = age;
+
+  [NSKeyedArchiver archiveRootObject:dict toFile:path];
+
+  //验证是否将字典给归档
+  id content =  [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+ NSLog(@&quot;%@&quot;,content);
+}
+</code></pre></li>
+</ol>
+<h1 id="对自定义的类的单个对象创建的对象归档与解归档"><a href="#对自定义的类的单个对象创建的对象归档与解归档" class="headerlink" title="对自定义的类的单个对象创建的对象归档与解归档"></a>对自定义的类的单个对象创建的对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-3c160d48a7c706e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对自定义的类的单个对象创建的对象归档与解归档"></p>
+<ol>
+<li>Person是我自定义的一个类</li>
+<li><p>在前言部分咱们说过只有遵守了NSCoding或NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。</p>
+<p>因此我们需要对Person类做以下操作。</p>
+<ul>
+<li>遵守NSCodeing协议（暂不考虑NSSecureCoding）</li>
+<li>实现-(void)encodeWithCoder:(NSCoder *)aCoder;</li>
+<li>实现-(nullable instancetype)initWithCoder:(NSCoder *)aDecoder;</li>
+</ul>
+</li>
+</ol>
+<h2 id="Person-h"><a href="#Person-h" class="headerlink" title="Person.h"></a>Person.h</h2><pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+@interface Person : NSObject&lt;NSCoding&gt;
+
+@property (nonatomic,copy) NSString *name;
+@property (nonatomic,assign) NSInteger age;
+@property (nonatomic,copy) NSString *sex;
+
+@end
+</code></pre><h2 id="Peroson-m"><a href="#Peroson-m" class="headerlink" title="Peroson.m"></a>Peroson.m</h2><pre><code>#import &quot;Person.h&quot;
+
+@implementation Person
+
+//被归档的时候会调用者方法，aCoder就是归档时传过来的归档对象
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+
+    [aCoder encodeObject:self.name forKey:@&quot;name&quot;];
+
+    [aCoder encodeInteger:self.age forKey:@&quot;age&quot;];
+
+    [aCoder encodeObject:self.sex forKey:@&quot;sex&quot;];
+
+}
+
+//解归档的时候会调用这个方法
+  - (instancetype)initWithCoder:(NSCoder *)aDecoder{
+
+      //解归档时会产生一个Person对象，这里是给这个Person对象赋值。
+
+      self = [super init];
+
+      if (self) {
+
+        self.name = [aDecoder decodeObjectForKey:@&quot;name&quot;];
+
+        self.age = [aDecoder decodeIntegerForKey:@&quot;age&quot;];
+
+        self.sex = [aDecoder decodeObjectForKey:@&quot;sex&quot;];
+
+        }
+
+        return self;
+   }
+
+@end
+</code></pre><h1 id="同时将多个的对象归档与解归档"><a href="#同时将多个的对象归档与解归档" class="headerlink" title="同时将多个的对象归档与解归档"></a>同时将多个的对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-209968fac461b8ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同时将多个系统类创建的对象归档与解归档"></p>
+<ol>
+<li>你自己可以试试在这里也将自定义的Person类给归档。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/14/Cocoapods配置/" itemprop="url">
                   Cocoapods配置
                 </a>
@@ -2785,165 +3002,6 @@ $(&apos;input&apos;).clickwhile(); // 当点击输入框会弹出该对象的Val
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/02/HTML面试题/" itemprop="url">
-                  HTML面试题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-02T11:06:38+08:00" content="2016-09-02">
-              2016-09-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/H5面试题/" itemprop="url" rel="index">
-                    <span itemprop="name">H5面试题</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/02/HTML面试题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/HTML面试题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTML和XHTML有什么区别？"><a href="#HTML和XHTML有什么区别？" class="headerlink" title="HTML和XHTML有什么区别？"></a>HTML和XHTML有什么区别？</h1><h2 id="XHTML-HTML"><a href="#XHTML-HTML" class="headerlink" title="XHTML,HTML"></a>XHTML,HTML</h2><p>   XHTML 与 HTML 4.01 标准没有太多的不同， XHTML1.0 是 XML 风格的 HTML4.01 ,标签的规范更加严格 , W3C一直是推崇XHTML这种严格类型的语法, 但是 XHTML 从 1.0 升级到了 1.1 以后就夭折了。</p>
-<h2 id="html和xhtml最主要的不同："><a href="#html和xhtml最主要的不同：" class="headerlink" title="html和xhtml最主要的不同："></a>html和xhtml最主要的不同：</h2><ul>
-<li><p>XHTML 元素必须被正确地嵌套。</p>
-<pre><code>错误：&lt;Head&gt;&lt;/Head&gt;&lt;Body&gt;&lt;/Body&gt;
-正确：&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;
-</code></pre></li>
-<li><p>XHTML 元素必须被关闭。</p>
-<pre><code>错误：&lt;p&gt;xxxx
-正确: &lt;p&gt;xxxx&lt;/p&gt;
-</code></pre></li>
-<li><p>标签名必须用小写字母。</p>
-<pre><code>错误：&lt;Div&gt;&lt;/diV&gt;
-正确：&lt;div&gt;&lt;/div&gt;
-</code></pre></li>
-<li><p>XHTML 文档必须拥有根元素。</p>
-</li>
-<li><p>其他</p>
-<p>  不允许使用target=”_blank”</p>
-<p>  从XHTML 1.1开始全面禁止target属性，如果想要有开新窗口的功能，就必须改写为rel=”external”，并搭配JavaScript实现此效果。</p>
-<pre><code>错误：&lt;a href=&quot;http://blog.mukispace.com&quot; target=&quot;_blank&quot;&gt;MUKI space&lt;/a&gt;
-
-正确：&lt;a href=&quot;http://blog.mukispace.com&quot; rel=&quot;external&quot;&gt;MUKI space&lt;/a&gt;
-</code></pre></li>
-</ul>
-<h1 id="如果页面使用-‘application-xhtml-xml’-会有什么问题吗？"><a href="#如果页面使用-‘application-xhtml-xml’-会有什么问题吗？" class="headerlink" title="如果页面使用 ‘application/xhtml+xml’ 会有什么问题吗？"></a>如果页面使用 ‘application/xhtml+xml’ 会有什么问题吗？</h1><p>一些老的浏览器不支持，实际上，任何最新的浏览器都将支持application/xhtml+xml媒体类型。大多数浏览器也接受以application/xml发送的XHTML文档。</p>
-<h1 id="doctype（文档类型）的作用是什么？你知道多少种文档类型？"><a href="#doctype（文档类型）的作用是什么？你知道多少种文档类型？" class="headerlink" title="doctype（文档类型）的作用是什么？你知道多少种文档类型？"></a>doctype（文档类型）的作用是什么？你知道多少种文档类型？</h1><ul>
-<li><p>此标签可告知浏览器文档使用哪种HTML或XHTML规范。该标签可声明三种DTD类型，分别表示严格版本、过渡版本以及基于框架的HTML文档。</p>
-</li>
-<li><p>HTML 4.01规定了三种文档类型：Strict、Transitional以及Frameset。</p>
-</li>
-<li><p>XHTML 1.0规定了三种XML文档类型：Strict、Transitional以及Frameset。</p>
-</li>
-<li><p>Standards（标准）模式（也就是严格呈现模式）用于呈现遵循最新标准的网页，而Quirks（包容）模式（也就是松散呈现模式或者兼容模式）用于呈现为传统浏览器而设计的网页。</p>
-</li>
-</ul>
-<h1 id="浏览器标准模式和怪异模式之间的区别是什么？"><a href="#浏览器标准模式和怪异模式之间的区别是什么？" class="headerlink" title="浏览器标准模式和怪异模式之间的区别是什么？"></a>浏览器标准模式和怪异模式之间的区别是什么？</h1><p>W3C标准推出以后，浏览器都开始采纳新标准，但存在一个问题就是如何保证旧的网页还能继续浏览，在标准出来以前，很多页面都是根据旧的渲染方法编 写的，如果用的标准来渲染，将导致页面显示异常。为保持浏览器渲染的兼容性，使以前的页面能够正常浏览，浏览器都保留了旧的渲染方法（如：微软的IE）。 这样浏览器渲染上就产生了Quircks mode和Standars mode，两种渲染方法共存在一个浏览器上。IE盒子模型和标准W3C盒子模 型：ie的width包括：padding\border。标准的width不包括：padding\border</p>
-<h1 id="使用XHTML的局限有哪些？"><a href="#使用XHTML的局限有哪些？" class="headerlink" title="使用XHTML的局限有哪些？"></a>使用XHTML的局限有哪些？</h1><p>XHTML 与HTML的区别为：</p>
-<p>XHTML 元素必须被正确地嵌套。<br>XHTML 元素必须被关闭。<br>标签名必须用小写字母。<br>XHTML 文档必须拥有根元素。<br>局限：</p>
-<p>所有的 XHTML 元素都必须被正确地嵌套，XHTML 必须拥有良好的结构，所有的标签必须小写，并且所有的 XHTML 元素必须被关闭。所有的 XHTML 文档必须拥有 DOCTYPE 声明，并且 html、head、title 和 body 元素必须存在。虽然代码更加的优雅，但缺少容错性，不利于快速开发。</p>
-<h1 id="如果把HTML5看作做一个开放平台，那它的构建模块有哪些？"><a href="#如果把HTML5看作做一个开放平台，那它的构建模块有哪些？" class="headerlink" title="如果把HTML5看作做一个开放平台，那它的构建模块有哪些？"></a>如果把HTML5看作做一个开放平台，那它的构建模块有哪些？</h1><p><nav>,<header>,<section>,<footer>等。</footer></section></header></nav></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2989,7 +3047,7 @@ $(&apos;input&apos;).clickwhile(); // 当点击输入框会弹出该对象的Val
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
