@@ -1,0 +1,701 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言在iOS开发中势必会用到一些第三方依赖库，比如大家都熟悉的ASIHttpRequest、AFNetworking、JSONKit等。使用这些第三方类库能极大的方便项目的开发，但是，集成这些依赖库需要我们手动去配置，例如集成ASIHttpRequest库时除了加入源码以外还需要手动去添加一些系统框架，比如CFNetwork、MobileCoreServices等，如果这些第三方库发生了更新，还需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocoapods配置">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/Cocoapods配置/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="前言在iOS开发中势必会用到一些第三方依赖库，比如大家都熟悉的ASIHttpRequest、AFNetworking、JSONKit等。使用这些第三方类库能极大的方便项目的开发，但是，集成这些依赖库需要我们手动去配置，例如集成ASIHttpRequest库时除了加入源码以外还需要手动去添加一些系统框架，比如CFNetwork、MobileCoreServices等，如果这些第三方库发生了更新，还需">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-e771007bf3c576ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-19797b3bc2e34241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-f218bd8bfe9d7155.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-59b24a5f8156aa11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-14T08:09:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocoapods配置">
+<meta name="twitter:description" content="前言在iOS开发中势必会用到一些第三方依赖库，比如大家都熟悉的ASIHttpRequest、AFNetworking、JSONKit等。使用这些第三方类库能极大的方便项目的开发，但是，集成这些依赖库需要我们手动去配置，例如集成ASIHttpRequest库时除了加入源码以外还需要手动去添加一些系统框架，比如CFNetwork、MobileCoreServices等，如果这些第三方库发生了更新，还需">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-e771007bf3c576ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/Cocoapods配置/"/>
+
+  <title> Cocoapods配置 | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Cocoapods配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T16:03:33+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/Cocoapods配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Cocoapods配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在iOS开发中势必会用到一些第三方依赖库，比如大家都熟悉的ASIHttpRequest、AFNetworking、JSONKit等。使用这些第三方类库能极大的方便项目的开发，但是，集成这些依赖库需要我们手动去配置，例如集成ASIHttpRequest库时除了加入源码以外还需要手动去添加一些系统框架，比如CFNetwork、MobileCoreServices等，如果这些第三方库发生了更新，还需要手动去更新项目。这就显得非常麻烦。有麻烦自然有解决办法，CocoaPods就是为了解决这个问题而生的。通过CocoaPods，我们可以将第三方的依赖库统一管理起来，配置和更新只需要通过简单的几行命令即可完成，大大的提高了实际开发中的工作效率，使我们的主要精力集中到更重要的事情上去。</p>
+<h1 id="安装Cocoapods"><a href="#安装Cocoapods" class="headerlink" title="安装Cocoapods"></a>安装Cocoapods</h1><blockquote>
+<p>mac系统自带ruby环境，网上有的教程是让你重新装svm,然后利用rvm再装ruby，注意区分。</p>
+</blockquote>
+<h2 id="将ruby的原生镜像移除"><a href="#将ruby的原生镜像移除" class="headerlink" title="将ruby的原生镜像移除"></a>将ruby的原生镜像移除</h2><pre><code>$ gem sources --remove https://rubygems.org/
+</code></pre><h2 id="用淘宝的镜像代替"><a href="#用淘宝的镜像代替" class="headerlink" title="用淘宝的镜像代替"></a>用淘宝的镜像代替</h2><pre><code>这一步是因为国内有墙的限制，会造成安装cocoapods的过程变的十分慢，替换为淘宝的镜像速度会相对较快。
+$ gem sources -a https://ruby.taobao.org/
+</code></pre><h2 id="查看是否设置成功"><a href="#查看是否设置成功" class="headerlink" title="查看是否设置成功"></a>查看是否设置成功</h2><pre><code>$ gem sources -l
+
+如果输出结果是如下这样，那说明这一步就成功了。
+ *** CURRENT SOURCES ***
+ http://ruby.taobao.org/
+</code></pre><h2 id="安装Cocoapods-1"><a href="#安装Cocoapods-1" class="headerlink" title="安装Cocoapods"></a>安装Cocoapods</h2><pre><code>$ sudo gem install cocoapods
+</code></pre><h2 id="查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。"><a href="#查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。" class="headerlink" title="查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。"></a>查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。</h2><pre><code>$ pod search 类库名
+支持模糊查询(如:AFNetworking),如果下面显示出AFNetworking框架的各个版本就代表Cocoapods安装完成。
+</code></pre><h2 id="可能碰到的问题"><a href="#可能碰到的问题" class="headerlink" title="可能碰到的问题"></a>可能碰到的问题</h2><p>1、ERROR:  While executing gem … (Errno::EACCES)    Permission denied - /Users/xxxxx/.gemrc</p>
+<pre><code>可以用sudo chown -R xxxx /Users/xxxx/.gemrc解决
+</code></pre><p>2、pod search 搜索库的时候报错Unable to find a specification for xxxxx</p>
+<pre><code>解决方法：在终端执行这两句代码，然后重新安装pod,在进行搜索。
+pod repo remove master  
+pod setup
+</code></pre><p>3、 安装的时候报错说selected xcode error<br>        解决方法:运行这句代码，然后重新安装</p>
+<pre><code>sudo xcode-select -switch /Applications/Xcode.app/
+</code></pre><p>–<br>Cocoapods相当于一款软件，在电脑上安装成功以后，以后就可以直接使用他来给项目集成框架。不需要重复上面的操作。</p>
+<h1 id="在项目中如何使用Cocoapods"><a href="#在项目中如何使用Cocoapods" class="headerlink" title="在项目中如何使用Cocoapods"></a>在项目中如何使用Cocoapods</h1><p>　　我们通过集成MJRefresh类库来演示如何使用CocoaPods来做依赖库管理。首先，建立一个xcode工程，命名为CocoaPodsTest，现在的工程结构如下图所示。<br><img src="http://upload-images.jianshu.io/upload_images/1338564-e771007bf3c576ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正常新建工程结构图"></p>
+<h2 id="检查MJRefresh是否支持Cocoapods-支持模糊查询"><a href="#检查MJRefresh是否支持Cocoapods-支持模糊查询" class="headerlink" title="检查MJRefresh是否支持Cocoapods,支持模糊查询"></a>检查MJRefresh是否支持Cocoapods,支持模糊查询</h2><pre><code>$ pod search mjrefresh
+</code></pre><p>　　出现Setting up CocoaPods master repo，说明Cocoapods正在将它的信息下载到 ~/.cocoapods里，<strong>保持这个终端不动，新打开一个终端</strong>，cd到该目录里，用du -sh <em>命令来查看文件大小，每隔几分钟查看一次，我的这个目录最终大小是211M，就是完成了。如果不成功，在下面会显示一个git的网址，在这个网址下载相应的文件放在~/.cocoapods相应的文件夹便可。<br>　　<strong>执</strong>行后通过输出结果可以看到mjrefresh是支持CocoaPods的，注意红框标记的内容，这是待会我们配置xcode时需要的信息，这条配置项就是告诉CocoaPods去下载和管理第三方库的哪一个版本。*</em>   如果搜索过后最下面出现一个：,则直接点击q便可退出。<br><img src="http://upload-images.jianshu.io/upload_images/1338564-19797b3bc2e34241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MJRefresh库的把版本信息"></p>
+<h2 id="检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。"><a href="#检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。" class="headerlink" title="检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。"></a>检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。</h2><pre><code>$ cd /Users/GG/Desktop/CocoaPodsTest  我这里是放在GG用户的桌面上了。你们需要改成你们自己的路径。
+</code></pre><h2 id="管理第三方库的PodFile文件"><a href="#管理第三方库的PodFile文件" class="headerlink" title="管理第三方库的PodFile文件"></a>管理第三方库的PodFile文件</h2><pre><code>$ vim Podfile　
+</code></pre><p>　　利用终端运行以上代码会在工程里打开一个名为Podfile（注意大小写）的文件。如果有这个文件会在终端中打开，如果没有这个文件会新建后打开。这个Podfile文件的作用是配置依赖库信息，就是告诉CocoaPods去下载和管理哪些依赖库。</p>
+<h2 id="在文件里写入你想用的框架。"><a href="#在文件里写入你想用的框架。" class="headerlink" title="在文件里写入你想用的框架。"></a>在文件里写入你想用的框架。</h2><p>　　文件创建好以后，需要写的内容就是在上图中的红圈表示的信息。版本号可以根据自己的需求改变。vim打开文件后按i进入插入模式，编辑完成后按esc退出编辑模式，接着输入:wq保存并退出文件。保存以后可以在C文件夹里验证一下是否有Cocoapods这个文件。下图中我写了好几个框架。<br> <img src="http://upload-images.jianshu.io/upload_images/1338564-f218bd8bfe9d7155.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在Podfile文件里写入你想用的框架"></p>
+<h2 id="将第三方库集成到项目中"><a href="#将第三方库集成到项目中" class="headerlink" title="将第三方库集成到项目中"></a>将第三方库集成到项目中</h2><p>　　如果之前的全部工作都完成了，工程目录下就会有一个Podfile文件了，注意必须和.xcodeproj在同一个目录下。接下来就可以使用CocoaPods来安装并管理JSONKit库了，首先确保终端当前路径是在CocoaPodsTest目录下。</p>
+<pre><code>$ pwd   可以查看当前终端所处的路径。
+</code></pre><p>路径没有问题后运行</p>
+<pre><code>$ pod install  将Podfile文件中的第三方库集成在项目中。
+</code></pre><p>安装结束以后会有如下提示</p>
+<pre><code>Analyzing dependencies
+Downloading dependencies
+Installing MJRefresh (3.0.8)
+Generating Pods project
+Integrating client project
+
+[!] Please close any current Xcode sessions and use     `CocoaPodsTest.xcworkspace` for this project from now on.
+Sending stats
+Pod installation complete! There is 1 dependency from the Podfile and 1 total
+pod installed.
+</code></pre><p>最重要的是这句话：</p>
+<pre><code>请关闭Xcode，从此使用CocoapodsTest.xcworkspace打开项目
+Please close any current Xcode sessions and use     `CocoaPodsTest.xcworkspace` for this project from now on. 
+</code></pre><h2 id="通过xcoworkspace打开项目"><a href="#通过xcoworkspace打开项目" class="headerlink" title="通过xcoworkspace打开项目"></a>通过xcoworkspace打开项目</h2><p><img src="http://upload-images.jianshu.io/upload_images/1338564-59b24a5f8156aa11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通过xcoworkspace打开项目的目录结果"></p>
+<p>会多出一个名为Pods的依赖工程，打开/Pods/Pods文件夹后，能找到我们在Podfile写的各种第三方库。</p>
+<h2 id="至此用Cocoapods管理第三方框架的所有工作做完。"><a href="#至此用Cocoapods管理第三方框架的所有工作做完。" class="headerlink" title="至此用Cocoapods管理第三方框架的所有工作做完。"></a>至此用Cocoapods管理第三方框架的所有工作做完。</h2><p>　　如果需要依赖多个第三方类库，只需要修改Podfile文件的配置，然后运行pod update命令即可，比如新增一个AFNetworking的依赖库，首先执行pod search AFNetworking查看一下AFNetworking的配置信息，修改Podfile文件，在后面增加AFNetworking的对应配置信息，然后运行pod update命令就完成了对AFNetworking的集成。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/14/Block/" rel="next" title="Block">
+                <i class="fa fa-chevron-left"></i> Block
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/14/Cocoapods配置/"
+           data-title="Cocoapods配置" data-url="http://yoursite.com/2016/09/14/Cocoapods配置/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Cocoapods"><span class="nav-number">2.</span> <span class="nav-text">安装Cocoapods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#将ruby的原生镜像移除"><span class="nav-number">2.1.</span> <span class="nav-text">将ruby的原生镜像移除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用淘宝的镜像代替"><span class="nav-number">2.2.</span> <span class="nav-text">用淘宝的镜像代替</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看是否设置成功"><span class="nav-number">2.3.</span> <span class="nav-text">查看是否设置成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Cocoapods-1"><span class="nav-number">2.4.</span> <span class="nav-text">安装Cocoapods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。"><span class="nav-number">2.5.</span> <span class="nav-text">查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能碰到的问题"><span class="nav-number">2.6.</span> <span class="nav-text">可能碰到的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在项目中如何使用Cocoapods"><span class="nav-number">3.</span> <span class="nav-text">在项目中如何使用Cocoapods</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检查MJRefresh是否支持Cocoapods-支持模糊查询"><span class="nav-number">3.1.</span> <span class="nav-text">检查MJRefresh是否支持Cocoapods,支持模糊查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。"><span class="nav-number">3.2.</span> <span class="nav-text">检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理第三方库的PodFile文件"><span class="nav-number">3.3.</span> <span class="nav-text">管理第三方库的PodFile文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在文件里写入你想用的框架。"><span class="nav-number">3.4.</span> <span class="nav-text">在文件里写入你想用的框架。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将第三方库集成到项目中"><span class="nav-number">3.5.</span> <span class="nav-text">将第三方库集成到项目中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过xcoworkspace打开项目"><span class="nav-number">3.6.</span> <span class="nav-text">通过xcoworkspace打开项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#至此用Cocoapods管理第三方框架的所有工作做完。"><span class="nav-number">3.7.</span> <span class="nav-text">至此用Cocoapods管理第三方框架的所有工作做完。</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
