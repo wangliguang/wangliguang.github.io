@@ -102,35 +102,30 @@
 
 
 
-<meta name="description" content="前言
-归档：将对转序列化成二级制数据，并保存在文件中。
-解归档：将归档后的数据反序列化成明码（能够看懂）对象，供我们使用。
-
-说明：只有遵守了NSCoding或 NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。
- //归档时会自动调用encodeWithCoder:(NSCoder *)aCoder">
+<meta name="description" content="前言如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。
+关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。
+准备工作
+创建NS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://yoursite.com/2016/09/14/归档/index.html">
+<meta property="og:title" content="日期NSDate">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/日期NSDate/index.html">
 <meta property="og:site_name" content="广广的技术博客">
-<meta property="og:description" content="前言
-归档：将对转序列化成二级制数据，并保存在文件中。
-解归档：将归档后的数据反序列化成明码（能够看懂）对象，供我们使用。
-
-说明：只有遵守了NSCoding或 NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。
- //归档时会自动调用encodeWithCoder:(NSCoder *)aCoder">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-0ed0360e9ee38616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-3c160d48a7c706e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-209968fac461b8ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-14T08:16:35.000Z">
+<meta property="og:description" content="前言如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。
+关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。
+准备工作
+创建NS">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-30f3836aa8be7bfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-74e276fe5e267ecb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-60f1483f05f739c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-9a81d42d818339d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-14T08:24:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="归档">
-<meta name="twitter:description" content="前言
-归档：将对转序列化成二级制数据，并保存在文件中。
-解归档：将归档后的数据反序列化成明码（能够看懂）对象，供我们使用。
-
-说明：只有遵守了NSCoding或 NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。
- //归档时会自动调用encodeWithCoder:(NSCoder *)aCoder">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-0ed0360e9ee38616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="日期NSDate">
+<meta name="twitter:description" content="前言如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。
+关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。
+准备工作
+创建NS">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-30f3836aa8be7bfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -151,9 +146,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/14/归档/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/日期NSDate/"/>
 
-  <title> 归档 | 广广的技术博客 </title>
+  <title> 日期NSDate | 广广的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -273,7 +268,7 @@
             
             
               
-                归档
+                日期NSDate
               
             
           </h1>
@@ -285,7 +280,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T16:12:03+08:00" content="2016-09-14">
+            <time itemprop="dateCreated" datetime="2016-09-14T16:19:17+08:00" content="2016-09-14">
               2016-09-14
             </time>
           </span>
@@ -315,8 +310,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/14/归档/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/归档/" itemprop="commentsCount"></span>
+                <a href="/2016/09/14/日期NSDate/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/日期NSDate/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -339,104 +334,16 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
-<li>归档：将对转序列化成二级制数据，并保存在文件中。</li>
-<li><p>解归档：将归档后的数据反序列化成明码（能够看懂）对象，供我们使用。</p>
-</li>
-<li><p>说明：只有遵守了NSCoding或 NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。</p>
-<pre><code> //归档时会自动调用encodeWithCoder:(NSCoder *)aCoder
-- (void)encodeWithCoder:(NSCoder *)aCoder
-
-// 解归档的时候 会自动调用 initWithCoder:(NSCoder *)aDecoder
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder
-</code></pre></li>
-</ul>
-<hr>
-<h1 id="将单个对象归档与解归档"><a href="#将单个对象归档与解归档" class="headerlink" title="将单个对象归档与解归档"></a>将单个对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-0ed0360e9ee38616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将单个对象归档与解归档"></p>
-<ol>
-<li><p>看不懂是怎么找路径给path赋值的，请移步<a href="http://www.jianshu.com/p/2d9ca94b584d" target="_blank" rel="external">这里</a>查看。</p>
-</li>
-<li><p>采用archiveRootObject方法在同一路经下只能归档一个对象。但如果此时我想将我传进来的名字和年龄都归档，只需将这两个数据放到一个字典对象里。让后将字典给归档便可。将归档方法变为如下即可。</p>
-<pre><code>- (void)archiverName:(NSString *)name WithAge:(NSNumber *)age {
-
-  //[NSKeyedArchiver archiveRootObject:name toFile:path];
-
-  //[NSKeyedArchiver archiveRootObject:age toFile:path];
-
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-
-  dict[@&quot;name&quot;] = name;
-  dict[@&quot;age&quot;] = age;
-
-  [NSKeyedArchiver archiveRootObject:dict toFile:path];
-
-  //验证是否将字典给归档
-  id content =  [NSKeyedUnarchiver unarchiveObjectWithFile:path];
- NSLog(@&quot;%@&quot;,content);
-}
-</code></pre></li>
-</ol>
-<h1 id="对自定义的类的单个对象创建的对象归档与解归档"><a href="#对自定义的类的单个对象创建的对象归档与解归档" class="headerlink" title="对自定义的类的单个对象创建的对象归档与解归档"></a>对自定义的类的单个对象创建的对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-3c160d48a7c706e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对自定义的类的单个对象创建的对象归档与解归档"></p>
-<ol>
-<li>Person是我自定义的一个类</li>
-<li><p>在前言部分咱们说过只有遵守了NSCoding或NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。</p>
-<p>因此我们需要对Person类做以下操作。</p>
-<ul>
-<li>遵守NSCodeing协议（暂不考虑NSSecureCoding）</li>
-<li>实现-(void)encodeWithCoder:(NSCoder *)aCoder;</li>
-<li>实现-(nullable instancetype)initWithCoder:(NSCoder *)aDecoder;</li>
-</ul>
-</li>
-</ol>
-<h2 id="Person-h"><a href="#Person-h" class="headerlink" title="Person.h"></a>Person.h</h2><pre><code>#import &lt;Foundation/Foundation.h&gt;
-
-@interface Person : NSObject&lt;NSCoding&gt;
-
-@property (nonatomic,copy) NSString *name;
-@property (nonatomic,assign) NSInteger age;
-@property (nonatomic,copy) NSString *sex;
-
-@end
-</code></pre><h2 id="Peroson-m"><a href="#Peroson-m" class="headerlink" title="Peroson.m"></a>Peroson.m</h2><pre><code>#import &quot;Person.h&quot;
-
-@implementation Person
-
-//被归档的时候会调用者方法，aCoder就是归档时传过来的归档对象
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-
-    [aCoder encodeObject:self.name forKey:@&quot;name&quot;];
-
-    [aCoder encodeInteger:self.age forKey:@&quot;age&quot;];
-
-    [aCoder encodeObject:self.sex forKey:@&quot;sex&quot;];
-
-}
-
-//解归档的时候会调用这个方法
-  - (instancetype)initWithCoder:(NSCoder *)aDecoder{
-
-      //解归档时会产生一个Person对象，这里是给这个Person对象赋值。
-
-      self = [super init];
-
-      if (self) {
-
-        self.name = [aDecoder decodeObjectForKey:@&quot;name&quot;];
-
-        self.age = [aDecoder decodeIntegerForKey:@&quot;age&quot;];
-
-        self.sex = [aDecoder decodeObjectForKey:@&quot;sex&quot;];
-
-        }
-
-        return self;
-   }
-
-@end
-</code></pre><h1 id="同时将多个的对象归档与解归档"><a href="#同时将多个的对象归档与解归档" class="headerlink" title="同时将多个的对象归档与解归档"></a>同时将多个的对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-209968fac461b8ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同时将多个系统类创建的对象归档与解归档"></p>
-<ol>
-<li>你自己可以试试在这里也将自定义的Person类给归档。</li>
-</ol>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。</p>
+<p>关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-30f3836aa8be7bfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h1 id="创建NSDate对象的几种方式以及区别"><a href="#创建NSDate对象的几种方式以及区别" class="headerlink" title="创建NSDate对象的几种方式以及区别"></a>创建NSDate对象的几种方式以及区别</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-74e276fe5e267ecb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>1、这上面的我用的都是类方法，用init方法也都可以的。例如：NSDate<em>date = [[NSDate alloc]init];和NSDate</em>date = [NSDatedate];是一样的。</p>
+<p>2、如果你用的时间戳是后台给你传过来的话，要记得核查是否该时间戳是否乘以1000。根据情况来决定是否除以1000。如果乘以过1000,表明后台给你传过来的是毫秒。<br>NSDate对象常用的方法</p>
+<h1 id="NSDate对象常用的方法"><a href="#NSDate对象常用的方法" class="headerlink" title="NSDate对象常用的方法"></a>NSDate对象常用的方法</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-60f1483f05f739c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>1、<a href="http://tool.chinaz.com/Tools/unixtime.aspx" target="_blank" rel="external">点击</a>进入时间戳在线转换工具。</p>
+<h1 id="时间格式转化器NSDateFormatter"><a href="#时间格式转化器NSDateFormatter" class="headerlink" title="时间格式转化器NSDateFormatter"></a>时间格式转化器NSDateFormatter</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-9a81d42d818339d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>1、啥也不说了，感情都在图里。</p>
 
       
     </div>
@@ -462,17 +369,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/14/Cocoapods配置/" rel="next" title="Cocoapods配置">
-                <i class="fa fa-chevron-left"></i> Cocoapods配置
+              <a href="/2016/09/14/归档/" rel="next" title="归档">
+                <i class="fa fa-chevron-left"></i> 归档
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/14/日期NSDate/" rel="prev" title="日期NSDate">
-                日期NSDate <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -498,8 +401,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/14/归档/"
-           data-title="归档" data-url="http://yoursite.com/2016/09/14/归档/">
+      <div class="ds-thread" data-thread-key="2016/09/14/日期NSDate/"
+           data-title="日期NSDate" data-url="http://yoursite.com/2016/09/14/日期NSDate/">
       </div>
     
   </div>
@@ -610,7 +513,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将单个对象归档与解归档"><span class="nav-number">2.</span> <span class="nav-text">将单个对象归档与解归档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对自定义的类的单个对象创建的对象归档与解归档"><span class="nav-number">3.</span> <span class="nav-text">对自定义的类的单个对象创建的对象归档与解归档</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Person-h"><span class="nav-number">3.1.</span> <span class="nav-text">Person.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Peroson-m"><span class="nav-number">3.2.</span> <span class="nav-text">Peroson.m</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同时将多个的对象归档与解归档"><span class="nav-number">4.</span> <span class="nav-text">同时将多个的对象归档与解归档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建NSDate对象的几种方式以及区别"><span class="nav-number">3.</span> <span class="nav-text">创建NSDate对象的几种方式以及区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSDate对象常用的方法"><span class="nav-number">4.</span> <span class="nav-text">NSDate对象常用的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时间格式转化器NSDateFormatter"><span class="nav-number">5.</span> <span class="nav-text">时间格式转化器NSDateFormatter</span></a></li></ol></div>
             
           </div>
         </section>
