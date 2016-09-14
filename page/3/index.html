@@ -256,6 +256,420 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/30/添加多个自定义的大头针及自定义大头针动画/" itemprop="url">
+                  添加多个自定义的大头针及自定义大头针动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T19:57:07+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/30/添加多个自定义的大头针及自定义大头针动画/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/添加多个自定义的大头针及自定义大头针动画/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>   编程之前，需要了解以下知识：</p>
+<p>   <a href="https://wangliguang.github.io/2016/08/30/iOS%E5%9C%B0%E5%9B%BE-%E5%9C%B0%E5%9B%BE%E6%98%BE%E7%A4%BA:%E5%A4%A7%E5%A4%B4%E9%92%88/" target="_blank" rel="external">iOS开发之地图-地图显示/大头针</a></p>
+<p>   <a href="https://wangliguang.github.io/2016/08/31/iOS%E5%9C%B0%E5%9B%BE-%E5%AE%9A%E4%BD%8D-%E7%BC%96%E7%A0%81%E4%B8%8E%E5%8F%8D%E7%BC%96%E7%A0%81/" target="_blank" rel="external">iOS开发之地图-定位/编码与反编码</a></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>  下面直接将我建的MVC给大家，我已经尽可能的加上注释了，如有不清楚建议先看看上面推荐的两篇文章，如果还不清楚，请留言。</p>
+<h2 id="ViewController-m（声明文件中我没有写代码）"><a href="#ViewController-m（声明文件中我没有写代码）" class="headerlink" title="ViewController.m（声明文件中我没有写代码）"></a>ViewController.m（声明文件中我没有写代码）</h2><pre><code>//
+//  ViewController.m
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/10.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+#import &lt;MapKit/MapKit.h&gt;
+#import &quot;MyAnnotation.h&quot;
+#import &lt;CoreLocation/CoreLocation.h&gt;
+#import &quot;CustomAnnotationView.h&quot;
+@interface ViewController ()&lt;MKMapViewDelegate&gt;
+{
+    CLLocationManager *_locationManager;
+
+    MKMapView *_mapView;
+
+}
+
+@property (nonatomic,retain) NSMutableArray *locationArray;
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    //定位授权
+    _locationManager = [[CLLocationManager alloc]init];
+    [_locationManager requestAlwaysAuthorization];
+
+    //地图试图
+    _mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
+    _mapView.showsUserLocation = YES;
+    _mapView.delegate = self;
+     [self.view addSubview:_mapView];
+
+}
+
+#pragma mark  private Method
+
+//添加大头针
+- (void)loadData{
+
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;PinData&quot; ofType:@&quot;plist&quot;];
+
+    NSArray *tempArray = [NSArray arrayWithContentsOfFile:filePath];
+
+    //将pist数据转换成大头针model
+    for (NSDictionary *dict in tempArray) {
+
+    MyAnnotation *myAnnotationModel = [[MyAnnotation alloc]initAnnotationModelWithDict:dict];
+
+    [self.locationArray addObject:myAnnotationModel];
+
+    }
+
+    [_mapView addAnnotations:self.locationArray];
+
+}
+
+#pragma mark delegate
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+
+    userLocation.title = @&quot;1234&quot;;
+    _mapView.centerCoordinate = userLocation.coordinate;
+
+    [_mapView setRegion:MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.3, 0.3)) animated:YES];
+
+    //如果你是在ViewDidload方法中添加大头针，大头针显示时会没有掉落效果，定位结束以后添加大头针才会有掉落效果
+    [self loadData];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id &lt;MKAnnotation&gt;)annotation{
+
+    /*
+
+     * 大头针分两种
+
+     * 1. MKPinAnnotationView：他是系统自带的大头针，继承于MKAnnotationView，形状跟棒棒糖类似，可以设置糖的颜色，和显示的时候是否有动画效果
+
+     * 2. MKAnnotationView：可以用指定的图片作为大头针的样式，但显示的时候没有动画效果，如果没有给图片的话会什么都不显示
+
+     * 3. mapview有个代理方法，当大头针显示在试图上时会调用，可以实现这个方法来自定义大头针的动画效果，我下面写有可以参考一下
+
+     * 4. 在这里我为了自定义大头针的样式，使用的是MKAnnotationView
+
+     */
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc]init];
+
+        annotationView.image = [UIImage imageNamed:@&quot;user.png&quot;];
+
+        annotationView.canShowCallout = YES;
+
+       return annotationView;
+
+    }
+
+    CustomAnnotationView *annotationView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@&quot;otherAnnotationView&quot;];
+
+    if (annotationView == nil) {
+
+        annotationView = [[CustomAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@&quot;otherAnnotationView&quot;];
+
+    }
+
+    MyAnnotation *myAnnotation = annotation;
+
+    switch ([myAnnotation.type intValue]) {
+
+        case SUPER_MARKET:{
+
+            annotationView.image = [UIImage imageNamed:@&quot;buy.png&quot;];
+            annotationView.label.text = @&quot;超市&quot;;
+
+        }break;
+
+        case CREMATORY:{
+
+            annotationView.image = [UIImage imageNamed:@&quot;fire.png&quot;];
+            annotationView.label.text = @&quot;火葬场&quot;;
+
+        }break;
+
+        case INTEREST:{
+
+            annotationView.image = [UIImage imageNamed:@&quot;cammer.png&quot;];
+            annotationView.label.text = @&quot;景点&quot;;
+
+        }break;
+
+    }
+    return annotationView;
+
+}
+
+//大头针显示在试图上时调用，我在这里给大头针设置显示动画
+- (void) mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+
+    //获取到mapview的frame
+    CGRect visibleRect = [mapView annotationVisibleRect];
+
+    for (MKAnnotationView *view in views) {
+
+        CGRect endFrame = view.frame;
+        CGRect startFrame = endFrame;
+        startFrame.origin.y = visibleRect.origin.y - startFrame.size.height;
+        view.frame = startFrame;
+        [UIView beginAnimations:@&quot;drop&quot; context:NULL];
+        [UIView setAnimationDuration:1];
+        view.frame = endFrame;
+        [UIView commitAnimations];
+    }
+}
+
+#pragma mark lazy load
+
+- (NSMutableArray *)locationArray{
+
+    if (_locationArray == nil) {
+
+        _locationArray = [NSMutableArray new];
+
+    }
+    return _locationArray;
+}
+
+@end
+</code></pre><p>PS: 大头针的显示跟cell的显示机制一样，都是采用复用机制，可以对比着来理解。</p>
+<h2 id="大头针数据模型-MyAnnotation-h"><a href="#大头针数据模型-MyAnnotation-h" class="headerlink" title="大头针数据模型   MyAnnotation.h"></a>大头针数据模型   MyAnnotation.h</h2><pre><code>//
+//  MyAnnotation.h
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;MapKit/MapKit.h&gt;
+
+typedef NS_ENUM(NSInteger, PinType) {
+    /**
+     *  超市
+     */
+    SUPER_MARKET = 0,
+    /**
+     *  火化场
+     */
+    CREMATORY,
+    /**
+     *  景点
+     */
+    INTEREST
+};
+
+//该模型是大头针模型，所以我必须实现MKAnnotation协议，而且必须实现CLLocationCoordinate2D coordinate属性
+@interface MyAnnotation : NSObject &lt;MKAnnotation&gt;
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+
+@property (nonatomic, copy) NSString *name;
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, retain) NSNumber *type;
+
+- (instancetype)initAnnotationModelWithDict:(NSDictionary *)dict;
+
+@end
+</code></pre><h2 id="大头针数据模型-MyAnnotation-m"><a href="#大头针数据模型-MyAnnotation-m" class="headerlink" title="大头针数据模型   MyAnnotation.m"></a>大头针数据模型   MyAnnotation.m</h2><pre><code>//
+//  MyAnnotation.m
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;MyAnnotation.h&quot;
+
+@implementation MyAnnotation
+
+- (instancetype)initAnnotationModelWithDict:(NSDictionary *)dict{
+
+    self = [super init];
+
+    if (self) {
+
+        self.coordinate = CLLocationCoordinate2DMake([dict[@&quot;coordinate&quot;][@&quot;latitude&quot;] doubleValue], [dict[@&quot;coordinate&quot;][@&quot;longitude&quot;] doubleValue]);
+
+        self.title = dict[@&quot;detail&quot;];
+
+        self.name = dict[@&quot;name&quot;];
+
+        self.type = dict[@&quot;type&quot;];
+
+    }
+
+    return self;
+
+}
+
+@end
+</code></pre><h2 id="大头针试图-CustomPinAnnotationView-h"><a href="#大头针试图-CustomPinAnnotationView-h" class="headerlink" title="大头针试图  CustomPinAnnotationView.h"></a>大头针试图  CustomPinAnnotationView.h</h2><pre><code>//
+//  CustomPinAnnotationView.h
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &lt;MapKit/MapKit.h&gt;
+#import &quot;MyAnnotation.h&quot;
+@interface CustomAnnotationView : MKAnnotationView
+
+@property (nonatomic, retain)UILabel *label;
+
+@end
+</code></pre><h2 id="大头针试图-CustomPinAnnotationView-m"><a href="#大头针试图-CustomPinAnnotationView-m" class="headerlink" title="大头针试图  CustomPinAnnotationView.m"></a>大头针试图  CustomPinAnnotationView.m</h2><pre><code>//
+//  CustomPinAnnotationView.m
+//  AddManyCustomAnnotation
+//
+//  Created by GG on 16/3/13.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;CustomAnnotationView.h&quot;
+
+@implementation CustomAnnotationView
+
+- (instancetype)initWithAnnotation:(id&lt;MKAnnotation&gt;)annotation reuseIdentifier:(NSString *)reuseIdentifier{
+
+    if ([super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier]) {
+        //在大头针旁边加一个label
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, -15, 50, 20)];
+        self.label.textColor = [UIColor grayColor];
+        self.label.textAlignment = NSTextAlignmentCenter;
+        self.label.font = [UIFont systemFontOfSize:10];
+        [self addSubview:self.label];
+
+    }
+
+    return self;
+}
+
+@end
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/30/H5面试题集合/" itemprop="url">
                   H5面试题集合
                 </a>
@@ -1266,7 +1680,7 @@ hexo deploy
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

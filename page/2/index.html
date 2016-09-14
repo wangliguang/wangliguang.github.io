@@ -256,6 +256,419 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/02/H5杂项面试题/" itemprop="url">
+                  H5杂项面试题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T14:39:59+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/H5面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">H5面试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/02/H5杂项面试题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/H5杂项面试题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="你能描述一下渐进增强和优雅降级之间的不同吗"><a href="#你能描述一下渐进增强和优雅降级之间的不同吗" class="headerlink" title="你能描述一下渐进增强和优雅降级之间的不同吗?"></a>你能描述一下渐进增强和优雅降级之间的不同吗?</h1><ul>
+<li><p><strong>优雅降级</strong></p>
+<p>  Web站点在所有新式浏览器中都能正常工作，如果用户使用的 是老式浏览器，则代码会检查以确认它们是否能正常工作。由于IE独特的盒模型布局问题，针对不同版本的IE的hack实践过优雅降级了,为那些无法支持功 能的浏览器增加候选方案，使之在旧式浏览器上以某种形式降级体验却不至于完全失效.</p>
+</li>
+<li><p><strong>渐进增强</strong></p>
+<p>  从被所有浏览器支持的基本功能开始，逐步地添加那些只有新式浏览器才支持的功能,向页面增加无害于基础浏览器的额外样式和功能的。当浏览器支持时，它们会自动地呈现出来并发挥作用。</p>
+</li>
+</ul>
+<h1 id="线程与进程的区别"><a href="#线程与进程的区别" class="headerlink" title="线程与进程的区别"></a>线程与进程的区别</h1><ul>
+<li><p>一个程序至少有一个进程，一个进程至少有一个线程。线程的划分尺度小于进程，使得多线程程序的并发性高。</p>
+</li>
+<li><p>另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。</p>
+</li>
+<li><p>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
+</li>
+<li><p>从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</p>
+</li>
+</ul>
+<h1 id="说说你对语义化的理解？"><a href="#说说你对语义化的理解？" class="headerlink" title="说说你对语义化的理解？"></a>说说你对语义化的理解？</h1><ul>
+<li><p>去掉或样式丢失的时候能让页面呈现清晰的结构：html本身是没有表现的，我们看到例如h1是粗体，字体大小2em，加 粗；strong是加粗的，不要认为这是html的表现，这些其实html默认的css样式在起作用，所以去掉或样式丢失的时候能让页面 呈现清晰的结构不是语义化的HTML结构的优点，但是浏览器都有有默认样式，默认样式的目的也是为了更好的表达html的语义，可以说浏览器的默认样式和 语义化的HTML结构是不可分割的。</p>
+</li>
+<li><p>屏幕阅读器（如果访客有视障）会完全根据你的标记来“读”你的网页。</p>
+</li>
+<li><p>PDA、手机等设备可能无法像普通电脑的浏览器一样来渲染网页（通常是因为这些设备对CSS的支持较弱）。</p>
+</li>
+<li><p>有利于SEO：和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息：爬虫依赖于标签来确定上下文和各个关键字的权重。</p>
+</li>
+<li><p>便于团队开发和维护，语义化更具可读性，是下一步吧网页的重要动向，遵循W3C标准的团队都遵循这个标准，可以减少差异化。</p>
+</li>
+</ul>
+<h1 id="你如何对网站的文件和资源进行优化？"><a href="#你如何对网站的文件和资源进行优化？" class="headerlink" title="你如何对网站的文件和资源进行优化？"></a>你如何对网站的文件和资源进行优化？</h1><p>   期待的解决方案包括：文件合并文件最小化/文件压缩使用CDN托管缓存的使用（多个域名来提供缓存）其他。</p>
+<h1 id="为什么利用多个域名来提供网站资源会更有效？"><a href="#为什么利用多个域名来提供网站资源会更有效？" class="headerlink" title="为什么利用多个域名来提供网站资源会更有效？"></a>为什么利用多个域名来提供网站资源会更有效？</h1><ol>
+<li><p>CDN缓存更方便</p>
+</li>
+<li><p>突破浏览器并发限制（一般每个域名建立的链接不超过6个）</p>
+</li>
+<li><p>Cookieless，节省带宽，尤其是上行带宽一般比下行要慢</p>
+</li>
+<li><p>对于UGC的内容和主站隔离，防止不必要的安全问题(上传js窃取主站cookie之类的)。正是这个原因要求用户内容的域名必须不是自己主站的子域名，而是一个完全独立的第三方域名。</p>
+</li>
+<li><p>数据做了划分，甚至切到了不同的物理集群，通过子域名来分流比较省事。这个可能被用的不多。</p>
+<p>PS: 关于Cookie的问题，带宽是次要的，安全隔离才是主要的。关于多域名，也不是越多越好，虽然服务器端可以做泛解释，浏览器做dns解释也是耗时间的，而且太多域名，如果要走https的话，还有要多买证书和部署的问题。</p>
+</li>
+</ol>
+<h1 id="请说出三种减少页面加载时间的方法。（加载时间指感知的时间或者实际加载时间）"><a href="#请说出三种减少页面加载时间的方法。（加载时间指感知的时间或者实际加载时间）" class="headerlink" title="请说出三种减少页面加载时间的方法。（加载时间指感知的时间或者实际加载时间）"></a>请说出三种减少页面加载时间的方法。（加载时间指感知的时间或者实际加载时间）</h1><ol>
+<li>优化图片</li>
+<li>图像格式的选择（GIF：提供的颜色较少，可用在一些对颜色要求不高的地方）</li>
+<li>优化CSS（压缩合并css，如margin-top,margin-left…)</li>
+<li>网址后加斜杠（如www.campr.com/目录，会判断这个“目录是什么文件类型，或者是目录。）</li>
+<li>标明高度和宽度（如果浏览器没有找到这两个参数，它需要一边下载图片一边计算大小，如果图片很多，浏览器需要不断地调整页面。这不但影响速 度，也影响浏览体验。当浏览器知道了高度和宽度参数后，即使图片暂时无法显示，页面上也会腾出图片的空位，然后继续加载后面的内容。从而加载时间快了，浏 览体验也更好了。）</li>
+<li>减少http请求（合并文件，合并图片）。</li>
+</ol>
+<h1 id="如果你参与到一个项目中，发现他们使用Tab来缩进代码，但是你喜欢空格，你会怎么做？"><a href="#如果你参与到一个项目中，发现他们使用Tab来缩进代码，但是你喜欢空格，你会怎么做？" class="headerlink" title="如果你参与到一个项目中，发现他们使用Tab来缩进代码，但是你喜欢空格，你会怎么做？"></a>如果你参与到一个项目中，发现他们使用Tab来缩进代码，但是你喜欢空格，你会怎么做？</h1><ol>
+<li>建议这个项目使用像<a href="http://editorconfig.org/" target="_blank" rel="external">EditorConfig</a> 之类的规范</li>
+<li>为了保持一致性，接受项目原有的风格</li>
+<li>直接使用VIM的retab命令</li>
+</ol>
+<h1 id="请写一个简单的幻灯效果页面"><a href="#请写一个简单的幻灯效果页面" class="headerlink" title="请写一个简单的幻灯效果页面"></a>请写一个简单的幻灯效果页面</h1><p>如果不使用JS来完成，可以加分。（如：纯CSS实现的幻灯片效果）</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+    img {
+      display: none;
+      width: 100px;
+      height: 100px;
+    }
+
+    input:checked + img {
+      display: block;
+    }
+
+    input {
+      position: absolute;
+      left: -9999px;
+    }
+
+    label {
+      cursor: pointer;
+    }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;cont&quot;&gt;
+      &lt;input id=&quot;img1&quot; name=&quot;img&quot; type=&quot;radio&quot; checked=&quot;checked&quot;&gt;
+      &lt;img src=&quot;a.png&quot;&gt;
+      &lt;input id=&quot;img2&quot; name=&quot;img&quot; type=&quot;radio&quot;&gt;
+      &lt;img src=&quot;b.png&quot;&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;nav&quot;&gt;
+      &lt;label for=&quot;img1&quot;&gt;第一张&lt;/label&gt;
+      &lt;label for=&quot;img2&quot;&gt;第二张&lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h1 id="你都使用哪些工具来测试代码的性能？"><a href="#你都使用哪些工具来测试代码的性能？" class="headerlink" title="你都使用哪些工具来测试代码的性能？"></a>你都使用哪些工具来测试代码的性能？</h1><p>Profiler,<a href="http://jsperf.com/nexttick-vs-setzerotimeout-vs-settimeout" target="_blank" rel="external">JSPerf</a>,Dromaeo。</p>
+<h1 id="如果今年你打算熟练掌握一项新技术，那会是什么？"><a href="#如果今年你打算熟练掌握一项新技术，那会是什么？" class="headerlink" title="如果今年你打算熟练掌握一项新技术，那会是什么？"></a>如果今年你打算熟练掌握一项新技术，那会是什么？</h1><p>nodejs，html5，css3，less等。</p>
+<h1 id="请谈一下你对网页标准和标准制定机构重要性的理解。"><a href="#请谈一下你对网页标准和标准制定机构重要性的理解。" class="headerlink" title="请谈一下你对网页标准和标准制定机构重要性的理解。"></a>请谈一下你对网页标准和标准制定机构重要性的理解。</h1><p>w3c存在的意义就是让浏览器兼容性问题尽量小，首先是他们对浏览器开发者的约束，然后是对开发者的约束。</p>
+<h1 id="什么是FOUC（无样式内容闪烁）？你如何来避免FOUC？"><a href="#什么是FOUC（无样式内容闪烁）？你如何来避免FOUC？" class="headerlink" title="什么是FOUC（无样式内容闪烁）？你如何来避免FOUC？"></a>什么是FOUC（无样式内容闪烁）？你如何来避免FOUC？</h1><blockquote>
+<p>FOUC(Flash Of Unstyled Content)–文档样式闪烁<br>style type=”text/css”media=”all”&gt;@import”../fouc.css”;&lt; /style&gt;而引用CSS文件的@import就是造成这个问题的罪魁祸首。IE会先加载整个HTML文档的DOM，然后再去导入外部的CSS文 件，因此，在页面DOM加载完成到CSS导入完成中间会有一段时间页面上的内容是没有样式的，这段时间的长短跟网速，电脑速度都有关系。解决方法简单的出奇，只要在<head>之间加入一个link或者script元素就可以了。</head></p>
+</blockquote>
+<h1 id="如果网页内容需要支持多语言，你会怎么做？"><a href="#如果网页内容需要支持多语言，你会怎么做？" class="headerlink" title="如果网页内容需要支持多语言，你会怎么做？"></a>如果网页内容需要支持多语言，你会怎么做？</h1><p>下面这些问题需要考虑</p>
+<ul>
+<li>应用字符集的选择，选择UTF-8编码</li>
+<li>语言书写习惯&amp;导航结构</li>
+<li>数据库驱动型网站</li>
+</ul>
+<h1 id="data-属性的作用是什么？"><a href="#data-属性的作用是什么？" class="headerlink" title="data-属性的作用是什么？"></a>data-属性的作用是什么？</h1><ul>
+<li><p>data-<em> 属性用于存储页面或应用程序的私有自定义数据。data-</em> 属性赋予我们在所有 HTML 元素上嵌入自定义 data 属性的能力。存储的（自定义）数据能够被页面的 JavaScript 中利用，以创建更好的用户体验（不进行 Ajax 调用或服务器端数据库查询）。</p>
+</li>
+<li><p>data-* 属性包括两部分：</p>
+<ul>
+<li>属性名不应该包含任何大写字母，并且在前缀 “data-“ 之后必须有至少一个字符</li>
+<li>属性值可以是任意字符串 </li>
+</ul>
+</li>
+</ul>
+<h1 id="请描述一下cookies，sessionStorage和localStorage的区别？"><a href="#请描述一下cookies，sessionStorage和localStorage的区别？" class="headerlink" title="请描述一下cookies，sessionStorage和localStorage的区别？"></a>请描述一下cookies，sessionStorage和localStorage的区别？</h1><p>sessionStorage和localStorage是HTML5 Web Storage API提供的，可以方便的在web请求之间保存数 据。有了本地数据，就可以避免数据在浏览器和服务器间不必要地来回传递。sessionStorage、localStorage、cookie都是在浏 览器端存储的数据，其中sessionStorage的概念很特别，引入了一个“浏览器窗口”的概念。sessionStorage是在同源的同窗口（或 tab）中，始终存在的数据。也就是说只要这个浏览器窗口没有关闭，即使刷新页面或进入同源另一页面，数据仍然存在。关闭窗口 后，sessionStorage即被销毁。同时“独立”打开的不同窗口，即使是同一页面，sessionStorage对象也是不同的cookies会 发送到服务器端。其余两个不会。Microsoft指出InternetExplorer8增加cookie限制为每个域名50个，但IE7似乎也允许每 个域名50个cookie。</p>
+<ul>
+<li>Firefox每个域名cookie限制为50个。</li>
+<li>Opera每个域名cookie限制为30个。</li>
+<li>Firefox和Safari允许cookie多达4097个字节，包括名（name）、值（value）和等号。</li>
+<li>Opera允许cookie多达4096个字节，包括：名（name）、值（value）和等号。</li>
+<li>InternetExplorer允许cookie多达4095个字节，包括：名（name）、值（value）和等号。</li>
+</ul>
+<h1 id="你最喜欢的图片替换方法是什么，你如何选择使用。"><a href="#你最喜欢的图片替换方法是什么，你如何选择使用。" class="headerlink" title="你最喜欢的图片替换方法是什么，你如何选择使用。"></a>你最喜欢的图片替换方法是什么，你如何选择使用。</h1><pre><code>&lt;h2&gt;&lt;span图片丢这里&gt;&lt;/span&gt;Hello World&lt;/h2&gt;
+</code></pre><p>   把span背景设成文字内容，这样又可以保证seo，也有图片的效果在上面。一般都是：alt，title，onerror。</p>
+<h1 id="如何视觉隐藏网页内容，只让它们在屏幕阅读器中可用？"><a href="#如何视觉隐藏网页内容，只让它们在屏幕阅读器中可用？" class="headerlink" title="如何视觉隐藏网页内容，只让它们在屏幕阅读器中可用？"></a>如何视觉隐藏网页内容，只让它们在屏幕阅读器中可用？</h1><ul>
+<li><p>display:none;的缺陷搜索引擎可能认为被隐藏的文字属于垃圾信息而被忽略屏幕阅读器（是为视觉上有障碍的人设计的读取屏幕内容的程序）会忽略被隐藏的文字。</p>
+</li>
+<li><p>visibility:hidden;的缺陷这个大家应该比较熟悉就是隐藏的内容会占据他所应该占据物理空间 </p>
+</li>
+<li><p>overflow:hidden;一个比较合理的方法.texthidden{display:block;/<em>统一转化为块级元素</em> /overflow:hidden;width:0;height:0;}就像上面的一段CSS所展示的方法，将宽度和高度设定为0，然后超过部分隐藏， 就会弥补上述一、二方法中的缺陷，也达到了隐藏内容的目的。</p>
+</li>
+</ul>
+<h1 id="你用过栅格系统吗？如果使用过，你最喜欢哪种？"><a href="#你用过栅格系统吗？如果使用过，你最喜欢哪种？" class="headerlink" title="你用过栅格系统吗？如果使用过，你最喜欢哪种？"></a>你用过栅格系统吗？如果使用过，你最喜欢哪种？</h1><p>比如：Bootstrap，流式栅格系统，<a href="http://960.gs/，栅格系统延续美学。" target="_blank" rel="external">http://960.gs/，栅格系统延续美学。</a></p>
+<h1 id="你用过媒体查询，或针对移动端的布局-CSS吗？"><a href="#你用过媒体查询，或针对移动端的布局-CSS吗？" class="headerlink" title="你用过媒体查询，或针对移动端的布局/CSS吗？"></a>你用过媒体查询，或针对移动端的布局/CSS吗？</h1><ul>
+<li><p>媒体查询，就是响应式布局。通过不同的媒介类型和条件定义样式表规则。媒介查询让CSS可以更精确作用于不同的媒介类型和同一媒介的不同条件。</p>
+</li>
+<li><p>语法结构及用法：@media 设备名 only （选取条件） not （选取条件） and（设备选取条件），设备二{sRules}。</p>
+</li>
+<li><p>示例</p>
+</li>
+</ul>
+<pre><code>/* 当浏览器的可视区域小于980px */
+@media screen and （max-width： 980px） {
+#wrap {width： 90%; margin:0 auto;}
+#content {width： 60%;padding： 5%;}
+#sidebar {width： 30%;}
+#footer {padding： 8% 5%;margin-bottom： 10px;}
+}
+/* 当浏览器的可视区域小于650px */
+@media screen and （max-width： 650px） {
+#header {height： auto;}
+#searchform {position： absolute;top： 5px;right： 0;}
+#content {width： auto; float： none; margin： 20px 0;}
+#sidebar {width： 100%; float： none; margin： 0;}
+}
+</code></pre><h1 id="你熟悉SVG样式的书写吗？"><a href="#你熟悉SVG样式的书写吗？" class="headerlink" title="你熟悉SVG样式的书写吗？"></a>你熟悉SVG样式的书写吗？</h1><ol>
+<li>SVG 指可伸缩矢量图形 (Scalable Vector Graphics)</li>
+<li>SVG 用来定义用于网络的基于矢量的图形</li>
+<li>SVG 使用 XML 格式定义图形</li>
+<li>SVG 图像在放大或改变尺寸的情况下其图形质量不会有所损失</li>
+<li>SVG 是万维网联盟的标准</li>
+<li><p>SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot;?&gt;
+      &lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot; &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;
+      &lt;svg width=&quot;100%&quot; height=&quot;100%&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+          &lt;circle cx=&quot;100&quot; cy=&quot;50&quot; r=&quot;40&quot; stroke=&quot;black&quot; stroke-width=&quot;2&quot; fill=&quot;red&quot;/&gt;
+      &lt;/svg&gt;
+</code></pre></li>
+</ol>
+<h1 id="如何优化网页的打印样式？"><a href="#如何优化网页的打印样式？" class="headerlink" title="如何优化网页的打印样式？"></a>如何优化网页的打印样式？</h1><pre><code>&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; media = &quot;screen&quot; href = &quot;xxx.css&quot;/&gt;
+</code></pre><p>   其中media指定的属性就是设备，显示器上就是screen，打印机则是print，电视是tv，投影仪是projection。打印样式示例如下：</p>
+<pre><code>&lt;link rel = &quot;stylesheet&quot; type = &quot;text/css&quot; media = &quot;print&quot; href = &quot;yyy.css&quot;/&gt;
+</code></pre><p>   但打印样式表也应注意以下事项：</p>
+<ol>
+<li>打印样式表中最好不要用背景图片，因为打印机不能打印CSS中的背景。如要显示图片，请使用html插入到页面中。</li>
+<li>最好不要使用像素作为单位，因为打印样式表要打印出来的会是实物，所以建议使用pt和cm。</li>
+<li>隐藏掉不必要的内容。（@print div{display:none;}）</li>
+<li>打印样式表中最好少用浮动属性，因为它们会消失。如果想要知道打印样式表的效果如何，直接在浏览器上选择打印预览就可以了。</li>
+</ol>
+<h1 id="如果设计中使用了非标准的字体，你该如何去实现？"><a href="#如果设计中使用了非标准的字体，你该如何去实现？" class="headerlink" title="如果设计中使用了非标准的字体，你该如何去实现？"></a>如果设计中使用了非标准的字体，你该如何去实现？</h1><p>所谓的标准字体是多数机器上都会有的，或者即使没有也可以由默认字体替代的字体。</p>
+<p>方法：</p>
+<ul>
+<li>用图片代替</li>
+<li><p>web fonts在线字库，如Google Webfonts，Typekit等等；http://- www.chinaz.com/free/2012/0815/269267.shtml</p>
+</li>
+<li><p>@font-face，Webfonts(字体服务例如：Google Webfonts，Typekit等等。)</p>
+</li>
+</ul>
+<h1 id="解释下浏览器是如何判断元素是否匹配某个CSS选择器？"><a href="#解释下浏览器是如何判断元素是否匹配某个CSS选择器？" class="headerlink" title="解释下浏览器是如何判断元素是否匹配某个CSS选择器？"></a>解释下浏览器是如何判断元素是否匹配某个CSS选择器？</h1><p>从后往前判断。浏览器先产生一个元素集合，这个集合往往由最后一个部分的索引产生（如果没有索引就是所有元素的集合）。然后向上匹配，如果不符合上一个部分，就把元素从集合中删除，直到真个选择器都匹配完，还在集合中的元素就匹配这个选择器了。举个例子，有选择器：</p>
+<pre><code>body.ready#wrapper&gt;.lol233
+</code></pre><p>先把所有class中有lol233的元素拿出来组成一个集合，然后上一层，对每一个集合中的元素，如果元素的parent id不 为#wrapper则把元素从集合中删去。再向上，从这个元素的父元素开始向上找，没有找到一个tagName为body且class中有ready的元 素，就把原来的元素从集合中删去。至此这个选择器匹配结束，所有还在集合中的元素满足。大体就是这样，不过浏览器还会有一些奇怪的优化。为什么从后往前匹 配因为效率和文档流的解析方向。效率不必说，找元素的父亲和之前的兄弟比遍历所哟儿子快而且方便。关于文档流的解析方向，是因为现在的CSS，一个元素只 要确定了这个元素在文档流之前出现过的所有元素，就能确定他的匹配情况。应用在即使html没有载入完成，浏览器也能根据已经载入的这一部分信息完全确定 出现过的元素的属性。为什么是用集合主要也还是效率。基于CSS Rule数量远远小于元素数量的假设和索引的运用，遍历每一条CSS Rule通过集合 筛选，比遍历每一个元素再遍历每一条Rule匹配要快得多。</p>
+<h1 id="解释一下你对盒模型的理解，以及如何在CSS中告诉浏览器使用不同的盒模型来渲染你的布局。"><a href="#解释一下你对盒模型的理解，以及如何在CSS中告诉浏览器使用不同的盒模型来渲染你的布局。" class="headerlink" title="解释一下你对盒模型的理解，以及如何在CSS中告诉浏览器使用不同的盒模型来渲染你的布局。"></a>解释一下你对盒模型的理解，以及如何在CSS中告诉浏览器使用不同的盒模型来渲染你的布局。</h1><p><a href="http://www.cnblogs.com/syfwhu/p/4319236.html" target="_blank" rel="external">关于盒模型请看文章CSS之布局与定位</a></p>
+<h1 id="请解释一下relative、fixed、absolute和static元素的区别？请解释一下inline和inline-block的区别？"><a href="#请解释一下relative、fixed、absolute和static元素的区别？请解释一下inline和inline-block的区别？" class="headerlink" title="请解释一下relative、fixed、absolute和static元素的区别？请解释一下inline和inline-block的区别？"></a>请解释一下relative、fixed、absolute和static元素的区别？请解释一下inline和inline-block的区别？</h1><p><a href="http://www.cnblogs.com/syfwhu/p/4319236.html" target="_blank" rel="external">关于第一个问题请看文章CSS之布局与定位</a></p>
+<p><strong>inline:</strong>此元素会被显示为内联元素，元素前后没有换行符。</p>
+<p><strong>inline-block:</strong>行内块元素。</p>
+<h1 id="解释下事件代理。"><a href="#解释下事件代理。" class="headerlink" title="解释下事件代理。"></a>解释下事件代理。</h1><p>JavaScript事件代理则是一种简单的技巧，通过它你可以把事件处理器添加到一个父级元素上，这样就避免了把事件处理器添加到多个子级元素 上。当我们需要对很多元素添加事件的时候，可以通过将事件添加到它们的父节点而将事件委托给父节点来触发处理函数。这主要得益于浏览器的事件冒泡机制。事 件代理用到了两个在JavaSciprt事件中常被忽略的特性：事件冒泡以及目标元素。</p>
+<pre><code>function getEventTarget(e) {
+  e=e||window.event;
+  return e.target||e.srcElement;
+}
+</code></pre><h1 id="AMD-vs-CommonJS？"><a href="#AMD-vs-CommonJS？" class="headerlink" title="AMD vs.CommonJS？"></a>AMD vs.CommonJS？</h1><p><a href="http://www.cnblogs.com/syfwhu/p/4883532.html" target="_blank" rel="external">请看文章JavaScript之模块化编程</a></p>
+<h1 id="什么是哈希表？"><a href="#什么是哈希表？" class="headerlink" title="什么是哈希表？"></a>什么是哈希表？</h1><p>散列表（也叫哈希表），是根据关键码值直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
+<h1 id="描述以下变量的区别：null，undefined或undeclared？"><a href="#描述以下变量的区别：null，undefined或undeclared？" class="headerlink" title="描述以下变量的区别：null，undefined或undeclared？"></a>描述以下变量的区别：null，undefined或undeclared？</h1><p>JavaScript的最初版本是这样区分的：null是一个表示”无”的对象，转为数值时为0；undefined是一个表示”无”的原始值，转为数值时为NaN。</p>
+<p>但是，上面这样的区分，在实践中很快就被证明不可行。目前，null和undefined基本是同义的，只有一些细微的差别。</p>
+<p>null表示”没有对象”，即该处不应该有值。典型用法是：</p>
+<ul>
+<li>用来初始化一个变量，这个变量可能被赋值为一个对象。</li>
+<li>用来和一个已经初始化的变量比较，这个变量可以是也可以不是一个对象。</li>
+<li>当函数的参数期望是对象时，被用作参数传入。</li>
+<li>当函数的返回值期望是对象时，被用作返回值传出。</li>
+<li>作为对象原型链的终点。</li>
+</ul>
+<p>undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是：</p>
+<ul>
+<li>变量被声明了，但没有赋值时，就等于undefined。</li>
+<li>调用函数时，应该提供的参数没有提供，该参数等于undefined。</li>
+<li>对象没有赋值的属性，该属性的值为undefined。</li>
+<li>函数没有返回值时，默认返回undefined。</li>
+</ul>
+<p>该如何检测它们？</p>
+<p>null：表示无值；undefined：表示一个未声明的变量，或已声明但没有赋值的变量，或一个并不存在的对象属性。</p>
+<p>==运算符将两者看作相等。如果要区分两者，要使用===或typeof运算符。</p>
+<p>以下是不正确的用法：</p>
+<pre><code>var exp = undefined;
+
+if (exp == undefined) {
+    alert(&quot;undefined&quot;);
+}
+</code></pre><p>exp为null时，也会得到与undefined相同的结果，虽然null和undefined不一样。注意：要同时判断undefined和null时可使用本法。</p>
+<p>typeof返回的是字符串，有六种可能：”number”、”string”、”boolean”、”object”、”function”、”undefined”。</p>
+<p>以下是正确的用法：</p>
+<pre><code>var exp = undefined;
+
+if(typeof(exp) == undefined) {
+    alert(&quot;undefined&quot;);
+}
+</code></pre><p>JS中如何判断null？</p>
+<p>以下是不正确的用法：</p>
+<pre><code>var exp = null;
+
+if(exp == null) {
+    alert(&quot;is null&quot;);
+}
+</code></pre><p>exp为undefined时，也会得到与null相同的结果，虽然null和undefined不一样。注意：要同时判断null和undefined时可使用本法。</p>
+<pre><code>var exp=null;
+
+if(!exp) {
+    alert(&quot;is null&quot;);
+}
+</code></pre><p>如果exp为undefined或者数字零，也会得到与null相同的结果，虽然null和二者不一样。注意：要同时判断null、undefined和数字零时可使用本法。</p>
+<pre><code>var exp = null;
+
+if(typeof(exp) == &quot;null&quot;) {
+    alert(&quot;is null&quot;);
+}
+</code></pre><p>为了向下兼容，exp为null时，typeof总返回object。这种方式也不太好。</p>
+<p>以下是正确的用法：</p>
+<pre><code>var exp = null;
+
+if(!exp&amp;&amp;typeof(exp) != &quot;undefined&quot; &amp;&amp; exp != 0) {
+    alert(&quot;is null&quot;);
+}
+</code></pre><h1 id="请指出浏览器特性检测，特性推断和浏览器UA字符串嗅探的区别？"><a href="#请指出浏览器特性检测，特性推断和浏览器UA字符串嗅探的区别？" class="headerlink" title="请指出浏览器特性检测，特性推断和浏览器UA字符串嗅探的区别？"></a>请指出浏览器特性检测，特性推断和浏览器UA字符串嗅探的区别？</h1><p><strong>特性检测：</strong>为特定浏览器的特性进行测试，并仅当特性存在时即可应用特性。</p>
+<p><strong>User-Agent检测：</strong>最早的浏览器嗅探即用户代理检测，服务端（以及后来的客户端）根据UA字符串屏蔽某些特定的浏览器查看网站内容。</p>
+<p><strong>特性推断：</strong>尝试使用多个特性但仅验证了其中之一。根据一个特性的存在推断另一个特性是否存在。问题是，推断是假设并非事实，而且可能导致可维护性的问题。</p>
+<h1 id="请尽可能详尽的解释AJAX的工作原理。"><a href="#请尽可能详尽的解释AJAX的工作原理。" class="headerlink" title="请尽可能详尽的解释AJAX的工作原理。"></a>请尽可能详尽的解释AJAX的工作原理。</h1><p><a href="http://www.cnblogs.com/mingmingruyuedlut/archive/2011/10/18/2216553.html" target="_blank" rel="external">请参考文章AJAX工作原理</a></p>
+<h1 id="请解释JSONP的工作原理，以及它为什么不是真正的AJAX。"><a href="#请解释JSONP的工作原理，以及它为什么不是真正的AJAX。" class="headerlink" title="请解释JSONP的工作原理，以及它为什么不是真正的AJAX。"></a>请解释JSONP的工作原理，以及它为什么不是真正的AJAX。</h1><p>JSONP (JSON with Padding)是一个简单高效的跨域方式，HTML中的script标签可以加载并执行其他域的javascript，于是我们可以通过script标 记来动态加载其他域的资源。例如我要从域A的页面pageA加载域B的数据，那么在域B的页面pageB中我以JavaScript的形式声明pageA 需要的数据，然后在 pageA中用script标签把pageB加载进来，那么pageB中的脚本就会得以执行。JSONP在此基础上加入了回调函数，pageB加载完之后 会执行pageA中定义的函数，所需要的数据会以参数的形式传递给该函数。JSONP易于实现，但是也会存在一些安全隐患，如果第三方的脚本随意地执行， 那么它就可以篡改页面内容，截获敏感数据。但是在受信任的双方传递数据，JSONP是非常合适的选择。</p>
+<p>AJAX是不跨域的，而JSONP是一个是跨域的，还有就是二者接收参数形式不一样！</p>
+<h1 id="请描述下事件冒泡机制。"><a href="#请描述下事件冒泡机制。" class="headerlink" title="请描述下事件冒泡机制。"></a>请描述下事件冒泡机制。</h1><p>冒泡型事件：事件按照从最特定的事件目标到最不特定的事件目标(document对象)的顺序触发。</p>
+<p>捕获型事件：事件从最不精确的对象(document 对象)开始触发，然后到最精确(也可以在窗口级别捕获事件，不过必须由开发人员特别指定)。</p>
+<p>支持W3C标准的浏览器在添加事件时用addEventListener(event,fn,useCapture)方法，基中第3个参数 useCapture是一个Boolean值，用来设置事件是在事件捕获时执行，还是事件冒泡时执行。而不兼容W3C的浏览器(IE)用 attachEvent()方法，此方法没有相关设置，不过IE的事件模型默认是在事件冒泡时执行的，也就是在useCapture等于false的时候 执行，所以把在处理事件时把useCapture设置为false是比较安全，也实现兼容浏览器的效果。</p>
+<p><img src="http://images2015.cnblogs.com/blog/716683/201510/716683-20151013185212819-847014694.jpg" alt=""></p>
+<h1 id="请解释-end-的用途。"><a href="#请解释-end-的用途。" class="headerlink" title="请解释.end()的用途。"></a>请解释.end()的用途。</h1><p>在官方的API上是这样描述end()方法的：“回到最近的一个”破坏性”操作之前。即，将匹配的元素列表变为前一次的状态。”；看样子好像是找到最后一次操作的元素的上一元素，在如下的例子中：html代码：</p>
+<p>复制代码代码如下:</p>
+<pre><code>&lt;div&gt;测试内容1&lt;/div&gt;&lt;div&gt;测试内容2&lt;/div&gt;
+</code></pre><p>jQuery代码：</p>
+<pre><code>$(&apos;&lt;p&gt;新增内容&lt;/p&gt;&apos;).appendTo(&apos;div&apos;).addClass(&apos;c1&apos;).end().addClass(&apos;c2&apos;);
+</code></pre><p>复制代码代码如下:</p>
+<pre><code>&lt;div&gt;测试内容1
+    &lt;p class=&quot;c1 c2&quot;&gt;新增内容&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;测试内容2
+    &lt;p class=&quot;c1&quot;&gt;新增内容&lt;/p&gt;
+&lt;/div&gt;
+</code></pre><p>这里我就有一点不太明白了，怎么只有第一个</p><p>标签有两个样式，end()方法后返回的是什么,在火狐里添加了监控，得到如下结 果：1.$(‘</p><p>新增内容</p>‘).appendTo(‘div’)返回的是：[p,p]对象数组，即新增后的两个p标 签；2.$(‘<p>新增内容</p>‘).appendTo(‘div’).addClass(‘c1’)返回的是： [p.c1,p.c1]对象数组，即添加了c1类样式后的p对象数组；3.$(‘<p>新增内 容</p>‘).appendTo(‘div’).addClass(‘c1’).end()返回的是[p.c1],是第1 个<div>中的<p>,在2操作中，最后“破坏”的是第2个<div>中的<p>,所以他的前一次操 作的对象是第1个<div>中的<p>,返回的就是它;4.$(‘</p><p>新增内 容</p>‘).appendTo(‘div’).addClass(‘c1’).end().addClass(‘c2’)返回的仍然是第 1个<div>中的<p>;现在算是有点明白了，关键是要搞清楚最后一次操作的元素的上一元素是什么。</p>
+<h1 id="你如何给一个事件处理函数命名空间，为什么要这样做？"><a href="#你如何给一个事件处理函数命名空间，为什么要这样做？" class="headerlink" title="你如何给一个事件处理函数命名空间，为什么要这样做？"></a>你如何给一个事件处理函数命名空间，为什么要这样做？</h1><p>任何作为type参数的字符串都是合法的；如果一个字符串不是原生的JavaScript事件名，那么这个事件处理函数会绑定到一个自定义事件上。 这些自定义事件绝对不会由浏览器触发，但可以通过使用.trigger()或者.triggerHandler()在其他代码中手动触发。如果type参 数的字符串中包含一个点(.)字符，那么这个事件就看做是有命名空间的了。这个点字符就用来分隔事件和他的命名空间。举例来说，如果执 行.bind(‘click.name’,handler)，那么字符串中的click是事件类型，而字符串name就是命名空间。命名空间允许我们取消 绑定或者触发一些特定类型的事件，而不用触发别的事件。参考unbind()来获取更多信息。</p>
+<p>jQuery的bind/unbind方法应该说使用很简单，而且大多数时候可能并不会用到，取而代之的是直接用click/keydown之类的事件名风格的方法来做事件绑定操作。</p>
+<p>但假设如下情况：需要在运行时根据用户交互的结果进行不同click事件处理逻辑的绑定，因而理论上会无数次对某一个事件进行 bind/unbind操作。但又希望unbind的时候只把自己绑上去的处理逻辑给释放掉而不是所有其他地方有可能的额外的同一事件绑定逻辑。这时候如 果直接用.click()/.bind(‘click’)加上.unbind(‘click’)来进行重复绑定的话，被unbind掉的将是所有绑定在元 素上的click处理逻辑，潜在会影响到该元素其他第三方的行为。</p>
+<p>当然如果在bind的时候是显示定义了function变量的话，可以在unbind的时候提供function作为第二个参数来指定只 unbind其中一个处理逻辑，但实际应用中很可能会碰到各种进行匿名函数绑定的情况。对于这种问题，jQuery的解决方案是使用事件绑定的命名空间。 即在事件名称后添加.something来区分自己这部分行为逻辑范围。</p>
+<p>比如用.bind(‘click.myCustomRoutine’,function(){…});同样是把匿名函数绑定到click事件 （你可以用自己的命名空间多次绑定不同的行为方法上去），当unbind的时候用.unbind(‘click.myCustomRoutine’)即可 释放所有绑定到.myCustomRoutine命名空间的click事件，而不会解除其他通过.bind(‘click’)或另外的命名空间所绑定的事 件行为。同时，使用命令空间还可以让你一次性unbind所有此命名空间下的自定义事件绑定，通 过.unbind(‘.myCustomRoutine’)即可。要注意的是，jQuery的命名空间并不支持多级空间。</p>
+<p>因为在jQuery里面，如果用.unbind(‘click.myCustomRoutine.myCustomSubone’)，解除的是命名 空间分别为myCustomRoutine和myCustomSubone的两个并列命名空间下的所有click事件，而不 是”myCustomRoutine下的myCustomSubone子空间”。</p>
+</div></div></p></div></p></div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/02/CSS面试题/" itemprop="url">
                   CSS面试题
                 </a>
@@ -3409,420 +3822,6 @@ showsBuildings = YES;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/30/添加多个自定义的大头针及自定义大头针动画/" itemprop="url">
-                  添加多个自定义的大头针及自定义大头针动画
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-30T19:57:07+08:00" content="2016-08-30">
-              2016-08-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/30/添加多个自定义的大头针及自定义大头针动画/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/添加多个自定义的大头针及自定义大头针动画/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>   编程之前，需要了解以下知识：</p>
-<p>   <a href="https://wangliguang.github.io/2016/08/30/iOS%E5%9C%B0%E5%9B%BE-%E5%9C%B0%E5%9B%BE%E6%98%BE%E7%A4%BA:%E5%A4%A7%E5%A4%B4%E9%92%88/" target="_blank" rel="external">iOS开发之地图-地图显示/大头针</a></p>
-<p>   <a href="https://wangliguang.github.io/2016/08/31/iOS%E5%9C%B0%E5%9B%BE-%E5%AE%9A%E4%BD%8D-%E7%BC%96%E7%A0%81%E4%B8%8E%E5%8F%8D%E7%BC%96%E7%A0%81/" target="_blank" rel="external">iOS开发之地图-定位/编码与反编码</a></p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>  下面直接将我建的MVC给大家，我已经尽可能的加上注释了，如有不清楚建议先看看上面推荐的两篇文章，如果还不清楚，请留言。</p>
-<h2 id="ViewController-m（声明文件中我没有写代码）"><a href="#ViewController-m（声明文件中我没有写代码）" class="headerlink" title="ViewController.m（声明文件中我没有写代码）"></a>ViewController.m（声明文件中我没有写代码）</h2><pre><code>//
-//  ViewController.m
-//  AddManyCustomAnnotation
-//
-//  Created by GG on 16/3/10.
-//  Copyright © 2016年 GG. All rights reserved.
-//
-
-#import &quot;ViewController.h&quot;
-#import &lt;MapKit/MapKit.h&gt;
-#import &quot;MyAnnotation.h&quot;
-#import &lt;CoreLocation/CoreLocation.h&gt;
-#import &quot;CustomAnnotationView.h&quot;
-@interface ViewController ()&lt;MKMapViewDelegate&gt;
-{
-    CLLocationManager *_locationManager;
-
-    MKMapView *_mapView;
-
-}
-
-@property (nonatomic,retain) NSMutableArray *locationArray;
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    //定位授权
-    _locationManager = [[CLLocationManager alloc]init];
-    [_locationManager requestAlwaysAuthorization];
-
-    //地图试图
-    _mapView = [[MKMapView alloc]initWithFrame:self.view.frame];
-    _mapView.showsUserLocation = YES;
-    _mapView.delegate = self;
-     [self.view addSubview:_mapView];
-
-}
-
-#pragma mark  private Method
-
-//添加大头针
-- (void)loadData{
-
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;PinData&quot; ofType:@&quot;plist&quot;];
-
-    NSArray *tempArray = [NSArray arrayWithContentsOfFile:filePath];
-
-    //将pist数据转换成大头针model
-    for (NSDictionary *dict in tempArray) {
-
-    MyAnnotation *myAnnotationModel = [[MyAnnotation alloc]initAnnotationModelWithDict:dict];
-
-    [self.locationArray addObject:myAnnotationModel];
-
-    }
-
-    [_mapView addAnnotations:self.locationArray];
-
-}
-
-#pragma mark delegate
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-
-    userLocation.title = @&quot;1234&quot;;
-    _mapView.centerCoordinate = userLocation.coordinate;
-
-    [_mapView setRegion:MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.3, 0.3)) animated:YES];
-
-    //如果你是在ViewDidload方法中添加大头针，大头针显示时会没有掉落效果，定位结束以后添加大头针才会有掉落效果
-    [self loadData];
-}
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id &lt;MKAnnotation&gt;)annotation{
-
-    /*
-
-     * 大头针分两种
-
-     * 1. MKPinAnnotationView：他是系统自带的大头针，继承于MKAnnotationView，形状跟棒棒糖类似，可以设置糖的颜色，和显示的时候是否有动画效果
-
-     * 2. MKAnnotationView：可以用指定的图片作为大头针的样式，但显示的时候没有动画效果，如果没有给图片的话会什么都不显示
-
-     * 3. mapview有个代理方法，当大头针显示在试图上时会调用，可以实现这个方法来自定义大头针的动画效果，我下面写有可以参考一下
-
-     * 4. 在这里我为了自定义大头针的样式，使用的是MKAnnotationView
-
-     */
-    if ([annotation isKindOfClass:[MKUserLocation class]]) {
-
-        MKAnnotationView *annotationView = [[MKAnnotationView alloc]init];
-
-        annotationView.image = [UIImage imageNamed:@&quot;user.png&quot;];
-
-        annotationView.canShowCallout = YES;
-
-       return annotationView;
-
-    }
-
-    CustomAnnotationView *annotationView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@&quot;otherAnnotationView&quot;];
-
-    if (annotationView == nil) {
-
-        annotationView = [[CustomAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@&quot;otherAnnotationView&quot;];
-
-    }
-
-    MyAnnotation *myAnnotation = annotation;
-
-    switch ([myAnnotation.type intValue]) {
-
-        case SUPER_MARKET:{
-
-            annotationView.image = [UIImage imageNamed:@&quot;buy.png&quot;];
-            annotationView.label.text = @&quot;超市&quot;;
-
-        }break;
-
-        case CREMATORY:{
-
-            annotationView.image = [UIImage imageNamed:@&quot;fire.png&quot;];
-            annotationView.label.text = @&quot;火葬场&quot;;
-
-        }break;
-
-        case INTEREST:{
-
-            annotationView.image = [UIImage imageNamed:@&quot;cammer.png&quot;];
-            annotationView.label.text = @&quot;景点&quot;;
-
-        }break;
-
-    }
-    return annotationView;
-
-}
-
-//大头针显示在试图上时调用，我在这里给大头针设置显示动画
-- (void) mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-
-    //获取到mapview的frame
-    CGRect visibleRect = [mapView annotationVisibleRect];
-
-    for (MKAnnotationView *view in views) {
-
-        CGRect endFrame = view.frame;
-        CGRect startFrame = endFrame;
-        startFrame.origin.y = visibleRect.origin.y - startFrame.size.height;
-        view.frame = startFrame;
-        [UIView beginAnimations:@&quot;drop&quot; context:NULL];
-        [UIView setAnimationDuration:1];
-        view.frame = endFrame;
-        [UIView commitAnimations];
-    }
-}
-
-#pragma mark lazy load
-
-- (NSMutableArray *)locationArray{
-
-    if (_locationArray == nil) {
-
-        _locationArray = [NSMutableArray new];
-
-    }
-    return _locationArray;
-}
-
-@end
-</code></pre><p>PS: 大头针的显示跟cell的显示机制一样，都是采用复用机制，可以对比着来理解。</p>
-<h2 id="大头针数据模型-MyAnnotation-h"><a href="#大头针数据模型-MyAnnotation-h" class="headerlink" title="大头针数据模型   MyAnnotation.h"></a>大头针数据模型   MyAnnotation.h</h2><pre><code>//
-//  MyAnnotation.h
-//  AddManyCustomAnnotation
-//
-//  Created by GG on 16/3/13.
-//  Copyright © 2016年 GG. All rights reserved.
-//
-
-#import &lt;Foundation/Foundation.h&gt;
-#import &lt;MapKit/MapKit.h&gt;
-
-typedef NS_ENUM(NSInteger, PinType) {
-    /**
-     *  超市
-     */
-    SUPER_MARKET = 0,
-    /**
-     *  火化场
-     */
-    CREMATORY,
-    /**
-     *  景点
-     */
-    INTEREST
-};
-
-//该模型是大头针模型，所以我必须实现MKAnnotation协议，而且必须实现CLLocationCoordinate2D coordinate属性
-@interface MyAnnotation : NSObject &lt;MKAnnotation&gt;
-
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-
-@property (nonatomic, copy) NSString *name;
-
-@property (nonatomic, copy) NSString *title;
-
-@property (nonatomic, retain) NSNumber *type;
-
-- (instancetype)initAnnotationModelWithDict:(NSDictionary *)dict;
-
-@end
-</code></pre><h2 id="大头针数据模型-MyAnnotation-m"><a href="#大头针数据模型-MyAnnotation-m" class="headerlink" title="大头针数据模型   MyAnnotation.m"></a>大头针数据模型   MyAnnotation.m</h2><pre><code>//
-//  MyAnnotation.m
-//  AddManyCustomAnnotation
-//
-//  Created by GG on 16/3/13.
-//  Copyright © 2016年 GG. All rights reserved.
-//
-
-#import &quot;MyAnnotation.h&quot;
-
-@implementation MyAnnotation
-
-- (instancetype)initAnnotationModelWithDict:(NSDictionary *)dict{
-
-    self = [super init];
-
-    if (self) {
-
-        self.coordinate = CLLocationCoordinate2DMake([dict[@&quot;coordinate&quot;][@&quot;latitude&quot;] doubleValue], [dict[@&quot;coordinate&quot;][@&quot;longitude&quot;] doubleValue]);
-
-        self.title = dict[@&quot;detail&quot;];
-
-        self.name = dict[@&quot;name&quot;];
-
-        self.type = dict[@&quot;type&quot;];
-
-    }
-
-    return self;
-
-}
-
-@end
-</code></pre><h2 id="大头针试图-CustomPinAnnotationView-h"><a href="#大头针试图-CustomPinAnnotationView-h" class="headerlink" title="大头针试图  CustomPinAnnotationView.h"></a>大头针试图  CustomPinAnnotationView.h</h2><pre><code>//
-//  CustomPinAnnotationView.h
-//  AddManyCustomAnnotation
-//
-//  Created by GG on 16/3/13.
-//  Copyright © 2016年 GG. All rights reserved.
-//
-
-#import &lt;MapKit/MapKit.h&gt;
-#import &quot;MyAnnotation.h&quot;
-@interface CustomAnnotationView : MKAnnotationView
-
-@property (nonatomic, retain)UILabel *label;
-
-@end
-</code></pre><h2 id="大头针试图-CustomPinAnnotationView-m"><a href="#大头针试图-CustomPinAnnotationView-m" class="headerlink" title="大头针试图  CustomPinAnnotationView.m"></a>大头针试图  CustomPinAnnotationView.m</h2><pre><code>//
-//  CustomPinAnnotationView.m
-//  AddManyCustomAnnotation
-//
-//  Created by GG on 16/3/13.
-//  Copyright © 2016年 GG. All rights reserved.
-//
-
-#import &quot;CustomAnnotationView.h&quot;
-
-@implementation CustomAnnotationView
-
-- (instancetype)initWithAnnotation:(id&lt;MKAnnotation&gt;)annotation reuseIdentifier:(NSString *)reuseIdentifier{
-
-    if ([super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier]) {
-        //在大头针旁边加一个label
-        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, -15, 50, 20)];
-        self.label.textColor = [UIColor grayColor];
-        self.label.textAlignment = NSTextAlignmentCenter;
-        self.label.font = [UIFont systemFontOfSize:10];
-        [self addSubview:self.label];
-
-    }
-
-    return self;
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -3868,7 +3867,7 @@ typedef NS_ENUM(NSInteger, PinType) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
