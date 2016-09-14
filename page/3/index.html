@@ -256,6 +256,811 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/30/H5面试题集合/" itemprop="url">
+                  H5面试题集合
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T15:59:34+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/H5面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">H5面试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/30/H5面试题集合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/H5面试题集合/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简述easeUI"><a href="#简述easeUI" class="headerlink" title="简述easeUI"></a>简述easeUI</h1><ul>
+<li><p>什么是easyUI</p>
+<p>  是一组基于jQuery的UI插件集合体，而jeaseyUI的目标是帮助web开发者更轻松的打造出功能丰富并且美观的UI界面。开发者不需要编写复杂的javascript,也不需要对css样式有深入的了解，开发者需要了解的只有一些简单的html标签。</p>
+</li>
+<li><p>特点</p>
+<p>它提供了大多数UI控件的使用，如：accordion/combobox/menu/dialog/tabs/validatebox/datagrid/window/tree等等。</p>
+</li>
+</ul>
+<h1 id="XMLHttpRequest对象的常用方法和属性"><a href="#XMLHttpRequest对象的常用方法和属性" class="headerlink" title="XMLHttpRequest对象的常用方法和属性"></a>XMLHttpRequest对象的常用方法和属性</h1><ul>
+<li><p>方法</p>
+<p>  open(“method”,”url”) 建立对服务器的调用:</p>
+<p>   参数1：HTTP请求方式<br>   参数2：请求页面的URL</p>
+<p>  send()  发送具体请求<br>  abort() 停止当前请求</p>
+</li>
+<li><p>属性</p>
+<p>  readyState:请求的状态，有五个可取的值</p>
+<pre><code>&gt;0 = 未初始化    
+1 = 正在加载   
+2 = 已加载     
+4 = 交互中   
+5 = 完成
+</code></pre><p>  responseText: 服务器的响应，表示为一个字符串</p>
+<p>  reponseXML： 服务器的响应，表示为XML</p>
+<p>  status: 服务器的HTTP状态码</p>
+</li>
+</ul>
+<h1 id="AJAX应用和传统Web应用有什么不同"><a href="#AJAX应用和传统Web应用有什么不同" class="headerlink" title="AJAX应用和传统Web应用有什么不同"></a>AJAX应用和传统Web应用有什么不同</h1><ul>
+<li><p>在传统的JS编程中，如果想得到服务器端数据库或文件上的信息，或者发送客户端信息到服务器，需要建立一个HTML form然后GET或者POST数据到服务器端。用户需要点击summit按钮来发送或者接受数据信息，然后等待服务器响应请求，<strong>页面重新加载。因为服务器每次都会返回一个新的页面，所以传统的web引用有可能很慢而且用户交互较差。</strong></p>
+</li>
+<li><p>使用AJAX技术，就可以使JavaScript通过XMLHttpRequest对象直接与服务器进行交互，通过HTTP Request，一个web页面可以发送一个请求到web服务器并且接受web服务器返回的信息（不用重新加载界面），<strong>展示给用户的还是同一页面，但是只实现页面的局部刷新，从而提高体验度。</strong></p>
+</li>
+</ul>
+<h1 id="介绍一下XMLHttprequest对象"><a href="#介绍一下XMLHttprequest对象" class="headerlink" title="介绍一下XMLHttprequest对象"></a>介绍一下XMLHttprequest对象</h1><ul>
+<li>AJAX的核心是JavaScript对象<strong>XMLHttpRequest</strong>。该对象在Internet Explorer 5中首次，他是一种支持异步请求的技术。</li>
+</ul>
+<ul>
+<li>XmlHttpRequest可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。通过XMLHttpRequest对象，Web开发人员可以在页面加载以后进行页面的局部刷新。</li>
+</ul>
+<h1 id="至少写出5种常见的http状态码以及代表的意义"><a href="#至少写出5种常见的http状态码以及代表的意义" class="headerlink" title="至少写出5种常见的http状态码以及代表的意义"></a>至少写出5种常见的http状态码以及代表的意义</h1><ul>
+<li><p><strong>200(OK)</strong><br>请求已成功，请求所希望的响应头或数据体将随此响应返回。</p>
+</li>
+<li><p><strong>303(See Other)</strong><br>告知客户端使用另一个URL来获取资源</p>
+</li>
+<li><p><strong>400(Bad Request)</strong><br> 请求格式错误</p>
+<ol>
+<li>语义有误，当前请求无法被服务器理解。</li>
+<li>请求参数有误。</li>
+</ol>
+</li>
+<li><p><strong>404(Not Found)</strong></p>
+<p> 请求失败，请求所希望得到的资源未在服务器上发现</p>
+</li>
+<li><p><strong>500(Internal Srver Error)</strong></p>
+<p>服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理</p>
+</li>
+</ul>
+<h1 id="jQuery中的Delegate-函数有什么用？"><a href="#jQuery中的Delegate-函数有什么用？" class="headerlink" title="jQuery中的Delegate()函数有什么用？"></a>jQuery中的Delegate()函数有什么用？</h1><ul>
+<li><p>给父元素其下的子元素添加事件，代码如下：</p>
+<pre><code>$(&quot;ul&quot;).delegate(&quot;li&quot;,&quot;click&quot;,function(){
+  $(this).hide();
+});
+</code></pre></li>
+<li><p>当元素在当前页面中不可用时，可以使用delegate()</p>
+</li>
+</ul>
+<h1 id="jQuery中有哪几种类型的选择器"><a href="#jQuery中有哪几种类型的选择器" class="headerlink" title="jQuery中有哪几种类型的选择器"></a>jQuery中有哪几种类型的选择器</h1><ul>
+<li><p><strong>基本选择器：</strong> 直接根据id/css类名/元素名返回dom元素</p>
+</li>
+<li><p><strong>层次选择器：</strong>也叫作路径选择器，可以根据路径层次来选择相应的dom元素</p>
+</li>
+<li><p><strong>过滤选择器：</strong>在前面的基础上过滤相关条件，得到匹配的dom元素</p>
+</li>
+</ul>
+<h1 id="body中的onload-和jQuery中的-document-ready-有什么区别"><a href="#body中的onload-和jQuery中的-document-ready-有什么区别" class="headerlink" title="body中的onload()和jQuery中的$(document).ready()有什么区别"></a>body中的onload()和jQuery中的$(document).ready()有什么区别</h1><ul>
+<li><p>可以在页面中使用多个document.ready(),但只能使用一次onload()</p>
+</li>
+<li><p>document.ready()函数在页面DOM元素加载完成以后就会被调用，而onload函数则要在所有的关联资源(包括图像、音频)加载完毕才会调用。</p>
+</li>
+</ul>
+<h1 id="HTML5中新增的表单元素有哪些"><a href="#HTML5中新增的表单元素有哪些" class="headerlink" title="HTML5中新增的表单元素有哪些"></a>HTML5中新增的表单元素有哪些</h1><ul>
+<li>datalist</li>
+<li>datatime</li>
+<li>output</li>
+<li>date</li>
+<li>month</li>
+<li>week</li>
+<li>time</li>
+<li>color</li>
+<li>number</li>
+<li>range</li>
+<li>email</li>
+<li>url</li>
+<li>search</li>
+</ul>
+<h1 id="HTML5应用程序缓存和浏览器缓存有什么区别"><a href="#HTML5应用程序缓存和浏览器缓存有什么区别" class="headerlink" title="HTML5应用程序缓存和浏览器缓存有什么区别"></a>HTML5应用程序缓存和浏览器缓存有什么区别</h1><p>应用程序缓存是HTML5的重要特性之一，提供了离线使用功能，让应用程序可以获取本地的网站内容，例如：HTML/CSS/图片以及JavScript。这个特性可以提高网站性能，他的实现借助于manifest文件，代码如下：</p>
+<pre><code>&lt;!doctype html&gt;
+    &lt;html manifest = &quot;example.appcache&quot;&gt;
+    ....
+ &lt;/html&gt;
+</code></pre><p>与传统浏览器相比，它不强制用户访问的网站内容被缓存。</p>
+<h1 id="什么是Web-Worker？为什么需要他们？"><a href="#什么是Web-Worker？为什么需要他们？" class="headerlink" title="什么是Web Worker？为什么需要他们？"></a>什么是Web Worker？为什么需要他们？</h1><p>查看如下代码(模拟会执行上百万此的繁重代码)：</p>
+<pre><code>function test(){
+   for(i = 0; i&lt; 10000000; i++){
+      x = x + i;
+   }
+}
+</code></pre><p>如果上诉代码在HTML按钮点击以后执行，这种执行是同步的，即浏览器必须等到此执行完毕之后才能进行其他操作。因为此操作耗时较长，那么这个操作会导致浏览器冻结并且没有响应，而且屏幕还会出现异常信息。</p>
+<p>如果可以将这些繁重的代码移动到JS文件中，并采用异步的方式运行，就可以解决这个问题。这就是web worker的作用。web worker用于异步执行javaScript文件，提高浏览器的敏捷度。</p>
+<h1 id="除了音频视频，HTML5还支持什么其他新的媒体元素"><a href="#除了音频视频，HTML5还支持什么其他新的媒体元素" class="headerlink" title="除了音频视频，HTML5还支持什么其他新的媒体元素"></a>除了音频视频，HTML5还支持什么其他新的媒体元素</h1><p>HTML5对媒体支持很强，除了audio和video外，还提供：</p>
+<ul>
+<li><strong>embed</strong>作为外部应用的容器</li>
+<li><strong>track</strong>定义媒体的文本跟踪</li>
+<li><strong>source</strong>多种媒体源的支持</li>
+</ul>
+<h1 id="HTML5有哪些不同类型的存储"><a href="#HTML5有哪些不同类型的存储" class="headerlink" title="HTML5有哪些不同类型的存储"></a>HTML5有哪些不同类型的存储</h1><ul>
+<li><p>HTM5支持本地存储，在之前的版本中是通过Cookie实现的。HTML5本地存储速度快而安全。</p>
+</li>
+<li><p>有两种不同的对象可用于存储数据。</p>
+<ol>
+<li><p>localStorage：适用于长期存储数据，浏览器关闭后数据不丢失。</p>
+</li>
+<li><p>sessionStorage: 存储的数据在浏览器关闭后自动删除。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="简要描述HTML5中Canvas的作用"><a href="#简要描述HTML5中Canvas的作用" class="headerlink" title="简要描述HTML5中Canvas的作用"></a>简要描述HTML5中Canvas的作用</h1><ul>
+<li><p>Canva是HTML5的出现的标签，拥有自己的属性、方法、事件，其中就有绘图的方法，JS能够调用它在网页上完成绘图</p>
+</li>
+<li><p>Canvas也是HTML5中最强大的特性之一，允许开发者使用动态和交互式可视化方法在Web上实现桌面应用程序的功能。</p>
+</li>
+</ul>
+<h1 id="简要描述HTML5中的本地存储"><a href="#简要描述HTML5中的本地存储" class="headerlink" title="简要描述HTML5中的本地存储"></a>简要描述HTML5中的本地存储</h1><ul>
+<li><p>很多时候我们会存储用户本地信息到电脑上，例如：用户有一个填充了一半的长表格，然后突然网络断开了，这样用户希望你能存储这些信息到本地，当网络恢复的时候，他想获取这些信息然后发送到服务器进行存储。</p>
+</li>
+<li><p>现代浏览器拥有的存储被叫做“Local Storage”,用于存储这些信息。</p>
+</li>
+</ul>
+<h1 id="描述Call和apply的区别"><a href="#描述Call和apply的区别" class="headerlink" title="描述Call和apply的区别"></a>描述Call和apply的区别</h1><ul>
+<li><p>Call()和apply()都用于间接调用函数</p>
+</li>
+<li><p>call方法用于调用一个对象的一个方法，并以另一个对象替换当前的对象。即，任何函数可以作为任何对象的方法来调用，哪怕这个函数并非那个那个对象的方法，语法如下：</p>
+<pre><code>call(thisObj[,arg1[,arg2[,.....[, .argN]]]]);
+</code></pre><p>   其中第一个参数thisObj要调用函数的上下文，即将被用作当前对象的对象。其他参数为可选参数，表示将被传递方法参数序列。</p>
+</li>
+<li><p>apply()和call()在作用上是相同的，但两者在参数上有区别，他两的第一个参数相同，不同的是第二个参数。对于apply()，第二个参数是一个参数数组，也就是将多个参数合成为一个数组传入。如:</p>
+<pre><code>func.call(func1,var1,var2,var3);
+func.apply(func1,[var1,var2,var3]);
+</code></pre></li>
+</ul>
+<h1 id="描述JS中的继承"><a href="#描述JS中的继承" class="headerlink" title="描述JS中的继承"></a>描述JS中的继承</h1><p>在JS中，继承都是源于原型，有多种实现方式。</p>
+<ol>
+<li><p>修改构造函数的原型，为该构造函数创建的对象指定统一的父级对象，代码如下：</p>
+<pre><code>B.prototype = new A();
+</code></pre></li>
+</ol>
+<ol>
+<li><p>只继承于原型（尽可能地将可重用的属性和方法添加到原型中），代码如下：</p>
+<pre><code>B.prototype = A.prototype;
+</code></pre></li>
+<li><p>单独修改一个对象的原型，而不影响其他对象的原型，代码如下：</p>
+<pre><code>var b1 = new B();
+Object.setPrototypeOf(b1,new A());
+</code></pre></li>
+<li><p>修改构造函数，这将影响使用该构造函数创建的所有对象，代码如下：</p>
+<pre><code>function B(){
+  Object.setPrototypeOf(this,new A());
+} 
+</code></pre></li>
+</ol>
+<h1 id="描述对原型链的理解"><a href="#描述对原型链的理解" class="headerlink" title="描述对原型链的理解"></a>描述对原型链的理解</h1><ul>
+<li><p>每个函数中都有prototype属性，该函数被new操作符用于创建对象。将一个函数的prototype属性指向某个对象，由此形成了一条链，称之为原型链。</p>
+</li>
+<li><p>可以使用isPrototypeOf()方法判定一个prototype对象是否存在于另一个对象的原型链中。如果是返回true,否则返回false。</p>
+</li>
+</ul>
+<h1 id="简述JS中的自有属性和原型属性"><a href="#简述JS中的自有属性和原型属性" class="headerlink" title="简述JS中的自有属性和原型属性"></a>简述JS中的自有属性和原型属性</h1><ul>
+<li><p>自有属性</p>
+<p>指通过对象的引用添加的属性，此时，其他对象可能无此属性。对于自有属性，是各个对象所持有的、彼此独立的属性。</p>
+<pre><code>emp1.job = &quot;Coder&quot;;
+</code></pre></li>
+<li><p>原型属性</p>
+<p> 指从原型对象中继承来的属性，一旦原型对象中的属性值改变，所有继承自该原型的对象属性均改变。</p>
+<pre><code>emp.prototype.dept  = &quot;研发部&quot;;
+</code></pre></li>
+</ul>
+<ul>
+<li><p>检测对象的属性</p>
+<ol>
+<li><p>当需要检测对象的自有属性时，可以使用hasOwnProperty()方法，另，还可以使用in操作检测对象及其原型链中是否具备指定属性。</p>
+</li>
+<li><p>在检测对象属性时，先检测自有属性，再检测原型属性。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="简述对JS中原型的理解"><a href="#简述对JS中原型的理解" class="headerlink" title="简述对JS中原型的理解"></a>简述对JS中原型的理解</h1><ul>
+<li><p>在JS中，函数本身就是一个包含了方法和属性的对象。每个函数中都有一个prototype属性，该属性所存储的就是原型对象。</p>
+</li>
+<li><p>原型对象用来保存共享属性和方法，可以通过原型来实现为对象扩展属性，实现继承。</p>
+</li>
+</ul>
+<h1 id="this关键字的作用是什么？"><a href="#this关键字的作用是什么？" class="headerlink" title="this关键字的作用是什么？"></a>this关键字的作用是什么？</h1><ul>
+<li><p>笼统的说，关键字this指向当前对象。比如：顶级代码中的this指向全局对象；在指定元素事件的时候，this指定当前发生事件的元素对象。</p>
+</li>
+<li><p>对于嵌套函数，如果嵌套函数作为方法被调用，其this指向调用它的对象；如果作为函数调用，this是全局对象或者为undefined（严格模式下）。</p>
+</li>
+</ul>
+<h1 id="JS中创建自定义对象的方式"><a href="#JS中创建自定义对象的方式" class="headerlink" title="JS中创建自定义对象的方式"></a>JS中创建自定义对象的方式</h1><p>自定义对象指由用户创建的对象，兼容性问题需要由编写者注意。创建自定义对象的方式有：</p>
+<ol>
+<li><p>对象直接量</p>
+</li>
+<li><p>new objec()</p>
+</li>
+<li><p>function 对象模板</p>
+</li>
+<li><p>Object.create()</p>
+</li>
+</ol>
+<h1 id="简要描述对闭包的理解"><a href="#简要描述对闭包的理解" class="headerlink" title="简要描述对闭包的理解"></a>简要描述对闭包的理解</h1><ul>
+<li><p>闭包的理解</p>
+<p>函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性称为闭包，这意味着函数变量可以隐藏于作用域链之内，看起来好像是函数将变量包裹了起来。这种方式常用于共享函数内的私有变量。</p>
+</li>
+</ul>
+<ul>
+<li><p>闭包的应用特征</p>
+<ol>
+<li><p><strong>局部变量：</strong>在函数中定义有共享意义(如：缓存、计数器等)的局部变量(注：定义成全局变量会对外造成污染);</p>
+</li>
+<li><p><strong>内嵌函数：</strong>在函数内声明有内嵌函数，内嵌函数对函数中的局部变量进行访问</p>
+</li>
+<li><p><strong>外部使用：</strong>函数向外返回此内嵌函数，外部可以通过此内嵌函数持有并访问声明在函数中的局部变量，而此变量在外部是通过其他途径无法访问的。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="简要描述JS中的作用域链-任何一段JS代码中都对应一个作用域链，作用域链中存放一系列对象，代码中声明的变量讲作为对象的属性存放。"><a href="#简要描述JS中的作用域链-任何一段JS代码中都对应一个作用域链，作用域链中存放一系列对象，代码中声明的变量讲作为对象的属性存放。" class="headerlink" title="简要描述JS中的作用域链- 任何一段JS代码中都对应一个作用域链，作用域链中存放一系列对象，代码中声明的变量讲作为对象的属性存放。"></a>简要描述JS中的作用域链- 任何一段JS代码中都对应一个作用域链，作用域链中存放一系列对象，代码中声明的变量讲作为对象的属性存放。</h1><ul>
+<li><p>在JS的顶层代码中，作用域链由一个全局对象组成；当定义一个函数时，他保存一个作用域链，作用域链上有两个对象，一个是函数对象，一个是全局对象。</p>
+</li>
+<li><p>每当一个函数被调用，会创建一个活动对象(也叫上下文对象)，函数中的局部变量将作为该对象的属性存放。</p>
+</li>
+<li><p>当需要使用一个变量时，将从作用域链中逐个查找对象的属性。<strong>比如：要使用变量a</strong></p>
+<ol>
+<li><p>将先查找作用域中的第一个对象是否有属性a,如果有就使用；</p>
+</li>
+<li><p>如果没有就查找作用域链中的下一个对象的属性，以此类推。</p>
+</li>
+<li><p>如果作用域链上没有任何一个对象函数属性a，则认为这段代码的作用域链上不存在a，将抛出引用错误异常。</p>
+</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>当函数调用完成后，如果没有其他引用指向为此次调用所创建的上下文对象，该对象将被回收。</li>
+</ol>
+<h1 id="简要描述JS中的匿名函数"><a href="#简要描述JS中的匿名函数" class="headerlink" title="简要描述JS中的匿名函数"></a>简要描述JS中的匿名函数</h1><ul>
+<li><p>匿名函数是指在定义时<strong>没有指定名字的函数</strong>，且定义后往往直接调用，如：</p>
+<pre><code>function(num1,num2){
+  console.log(num1+num2)；
+}
+</code></pre><p>这种方式所定义的匿名函数，往往需要直接调用，如：</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;    
+    (function(num1,num2){
+        console.log(num1+num2);
+    })(10,20);
+&lt;/script&gt;
+</code></pre><p> 其他任何代码都没写的情况下， 控制台输出：</p>
+<pre><code>30
+</code></pre></li>
+<li><p>匿名函数常用于定义不需要重复使用的函数，用完即释放。另外，对于直接调用的匿名函数而言，可以看成是一个临时的命名空间，其区域内定义的所有变量，不会污染到全局命名空间。</p>
+</li>
+</ul>
+<h1 id="什么是正则表达式，在JS中如何应用？"><a href="#什么是正则表达式，在JS中如何应用？" class="headerlink" title="什么是正则表达式，在JS中如何应用？"></a>什么是正则表达式，在JS中如何应用？</h1><ul>
+<li><p>什么是正则表达式</p>
+<ol>
+<li><p>正则表达式本身就一个字符串，由一些普通字符和特殊字符组成，用以秒速一种特定的字符规则的表达式。</p>
+</li>
+<li><p>正则表达式常用于在一段文本中搜索、匹配或替换特定形式的文本。如词语出现频率统计、验证字符串是否符合邮箱格式、屏蔽一篇帖子总的限制性词语等。许多程序设计语言都支持利用正则表达式进行字符串操作。</p>
+</li>
+</ol>
+</li>
+<li><p>在JS中，正则表达式的应用分为两种</p>
+<ol>
+<li><p>结合String对象的replace/search/match方法，实现对字符串的替换、查找和匹配。</p>
+</li>
+<li><p>定义正则表达式对象，实现对字符串的复杂匹配操作。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="什么是栈，在JS中，如何模拟栈操作"><a href="#什么是栈，在JS中，如何模拟栈操作" class="headerlink" title="什么是栈，在JS中，如何模拟栈操作"></a>什么是栈，在JS中，如何模拟栈操作</h1><ul>
+<li><p>栈(stack)是一种运算受限的线性表，其限制是仅允许在表的一端进行插入和删除运算。这一端被称为栈顶，相对的把另一端称为栈底。</p>
+</li>
+<li><p>向一个栈插入新元素又称作进栈、入栈或压栈，他是把新元素放到栈顶元素的上面，使之称为新的栈顶元素；</p>
+</li>
+<li><p>从一个栈删除元素又称作出栈或退栈，他是把栈顶元素给删掉，使其相邻的元素成为新的栈顶元素</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1338564-c076fec4a5af7f89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+</li>
+<li><p>在JS中，可以使用数组及其相关操作来模拟栈操作。</p>
+<ol>
+<li><p>首先使用数组存储一列元素，</p>
+</li>
+<li><p>然后使用数组的push()方法在数组的尾部添加指定的元素，类似于在栈顶添加元素，即顶部入；</p>
+</li>
+<li><p>然后使用数组的pop()删除并返回数组尾部的元素，类似于顶部出栈，即后入的元素先出。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="使用JS编写冒泡排序"><a href="#使用JS编写冒泡排序" class="headerlink" title="使用JS编写冒泡排序"></a>使用JS编写冒泡排序</h1><pre><code>var array = [5, 4, 3, 2, 1];
+var temp = 0;
+
+for (var i = 0; i &lt; array.length; i++)
+{
+   for (var j = 0; j &lt; array.length - i; j++)
+   {
+      if (array[j] &gt; array[j + 1])
+      {
+         temp = array[j + 1];
+         array[j + 1] = array[j];
+         array[j] = temp;
+       }
+   }
+}
+console.log(array);
+</code></pre><h1 id="列举几个JavaScript中常用的全局函数，并描述其作用"><a href="#列举几个JavaScript中常用的全局函数，并描述其作用" class="headerlink" title="列举几个JavaScript中常用的全局函数，并描述其作用"></a>列举几个JavaScript中常用的全局函数，并描述其作用</h1><ol>
+<li><p><strong>parseInt：</strong>解析一个字符串并返回一个整数</p>
+</li>
+<li><p><strong>parseFloat：</strong> 解析一个字符串并返回一个整数</p>
+</li>
+<li><p><strong>isNaN：</strong> 检查某个值是否是数字，返回true或者false</p>
+</li>
+<li><p><strong>encodeURI：</strong> 把字符串作为URI进行编码</p>
+</li>
+<li><p><strong>decodeURI：</strong> 对encodeURI() 函数编码过的URI进行解码</p>
+</li>
+<li><p><strong>eval：</strong> 计算某个字符串，以得到结果，或者用于执行其中的JavaScript代码。</p>
+</li>
+</ol>
+<h1 id="简述arguments对象的作用"><a href="#简述arguments对象的作用" class="headerlink" title="简述arguments对象的作用"></a>简述arguments对象的作用</h1><ul>
+<li><p>在函数代码中，使用特殊对象arguments可以访问函数的参数。即，开发者在定义函数时，无需明确的为方法声明参数，可以在方法体重使用argument来访问参数，这是因为，argument是一种特殊对象，在函数代码中，表示函数的参数数组。</p>
+</li>
+<li><p>正因为arguments表示参数组成的数组，因此，首先可以使用arguments.length检测函数的参数个数，其次，可以通过下标(arguments[index])来访问某个参数。这样可以用arguments对象判断传递给函数的参数个数并获取参数，适用于函数参数无法确定个数的情况下。</p>
+</li>
+</ul>
+<h1 id="什么是逻辑短路"><a href="#什么是逻辑短路" class="headerlink" title="什么是逻辑短路"></a>什么是逻辑短路</h1><ul>
+<li><p>逻辑短路时对于逻辑运算而言的。指仅计算逻辑表达式中的一部分便能确定结果，而不对整个表达式进行计算的现象</p>
+</li>
+<li><p>对于&amp;&amp;运算符，当第一个操作数为false时，将不会判断第二个操作数，因为此时无论第二个操作数为何，最后的运算结果一定是false</p>
+</li>
+<li><p>对于||运算符，当第一个操作数为true时，将不会判断第二个操作数，因为此时无论第二个操作数为何，最后的运算结果一定是true</p>
+</li>
+</ul>
+<h1 id="简要描述null和undefined的区别"><a href="#简要描述null和undefined的区别" class="headerlink" title="简要描述null和undefined的区别"></a>简要描述null和undefined的区别</h1><ul>
+<li><p><strong>null</strong><br>是JavaScript的关键字，用于描述”空值”，对其执行typeof操作，返回”Object”，即为一个特殊的对象值，可以表示数字、字符串和对象是”无值”的。</p>
+</li>
+<li><p><strong>undefined</strong><br>是预定义的全局变量，其值为”未定义”，他是变量的一种取值，表示变量没有初始化。当查询对象属性、数组元素的值时，如果返回undefined则表示属性或者元素不存在；如果函数没有任何返回值，也返回undefined。</p>
+</li>
+<li><p><strong>注意</strong></p>
+<p>虽然null和undefined是不同的，但是因为都表示『值的空缺』，两者可以互换，因此，使用”==”认为两者是相等的，需要使用”===”来区分它们。</p>
+</li>
+</ul>
+<h1 id="H5为什么这么火？H5是哪一年产生的？H5会火多久？"><a href="#H5为什么这么火？H5是哪一年产生的？H5会火多久？" class="headerlink" title="H5为什么这么火？H5是哪一年产生的？H5会火多久？"></a>H5为什么这么火？H5是哪一年产生的？H5会火多久？</h1><ul>
+<li><p>因为H5的后台很硬，是谷歌（google）和苹果（Apple）两大巨头公司，谷歌和苹果大力倡导H5的发展，也是H5的忠实的支持者和实践者（IOS+Android系统占据手机市场92.36%），H5的产生主要目的也是干掉flash，因为flash是adobe公司的，adobe不是W3C组织的成员之一，苹果和谷歌等万维网联盟也不希望在自己的产品中使用加载量过大的flash。</p>
+</li>
+<li><p>H5是2014年9月份W3C（万维网联盟，主要有苹果和谷歌公司）组织发布的。</p>
+</li>
+<li><p>刷脸时代（这里专指网站用户体验更加美观的时代）+移动端时代（手机+平板），会促使H5会在未来的有更加美好的发展前景，只要有网站，H5就会很火，UI也就很火，H5的发展会让UI更加提高用户的满意度，H5的火爆时代，会促进UI更好发展。  </p>
+</li>
+<li><p>微信的发展，O2O的促使H5更火。</p>
+<p>在这里不得不谈微信，如果没有微信，或许今天我们不会这样来讨论H5，微信无意中养成了用户扫码的习惯，并通过公众号的内容生产及分发，以及微信本身已有的庞大的用户群体及社交属性，使基于网页的内容可以快速传播，真正带来了APP即浏览器的时代，取消了输入内容网址的麻烦。以微信为代表的超级社交APP，解决了网页内容浏览及分发的通路。H5或许会没落，但会迎来H6、H7…，只会变得越来越好，所以没必要担心H5会不会死，当下重在实践与积累，至少现在，Html5的影响力，会超出你我的想象，也就意味着H5的好闺蜜UI会一直火下去。</p>
+</li>
+</ul>
+<h1 id="原生App与H5的区别"><a href="#原生App与H5的区别" class="headerlink" title="原生App与H5的区别"></a>原生App与H5的区别</h1><ol>
+<li><p>如果APP中出现大段文字（如新闻、攻略等），且格式比较丰富（如加粗，字体多样），那么用H5会比较方便。原因是原生开发解析json对字符串格式处理不算很好。</p>
+</li>
+<li><p>如果讲究APP反应速度（含页面切换流畅性），则选用原生开发，因为H5其本质是网页，换页时，基本要加载整个页面，就像是浏览器打开一个新页面一样，显得较慢，而原生系统则只加载变化部分。</p>
+</li>
+<li><p>如果APP对有无网络、网络优劣敏感（譬如有离线操作，在线操作），那么，基本选用原生开发，虽然H5可以做到，但是很复杂。</p>
+</li>
+<li><p>如果APP需要频繁调用硬件（摄像头、麦克风、未来的湿度检测仪等等）那么，基本选用原生开发，这样支持硬件更多，更容易扩展，且调用速度更快，H5就望尘莫及了。</p>
+</li>
+<li><p>如果APP用户常见页面频换，如（淘宝首页各种不同活动），那么用H5，维护起来更容易。</p>
+</li>
+<li><p>如果预算有限（H5开发一套可跨平台覆盖安卓、ios，黑莓、塞班），不是很讲究用户体验，不在乎加载速度，那非H5不可。</p>
+</li>
+</ol>
+<p>列举那么多，实际上有个采阴补阳的方法是H5+原生混合开发，对于固定格式、页面速度要求高，的模块（如PDB的即时通讯、宝典、我的项目）采用原生开发，对于新闻、大段文字、资讯类的（如信息广场、发表、问吧等）用H5页面来加载，将其嵌入到原生框架中那么，可以达到比较良好的体验。</p>
+<h1 id="前端工程师，平常访问的IT网站都有哪些？"><a href="#前端工程师，平常访问的IT网站都有哪些？" class="headerlink" title="前端工程师，平常访问的IT网站都有哪些？"></a>前端工程师，平常访问的IT网站都有哪些？</h1><ul>
+<li>W3C shool </li>
+<li>segmentFault</li>
+<li>csdn</li>
+<li>知乎论坛 </li>
+<li>博客园</li>
+</ul>
+<h1 id="如何居中div，如何居中一个浮动元素"><a href="#如何居中div，如何居中一个浮动元素" class="headerlink" title="如何居中div，如何居中一个浮动元素?"></a>如何居中div，如何居中一个浮动元素?</h1><p>确定容器的宽高 宽500 高 300 的层。  设置层的外边距    </p>
+<pre><code>.div {       
+  Width:500px ; 
+  height:300px;//高度可以不设     
+  Margin: -150px 0 0 -250px;      
+  position:relative;相对定位     
+  background-color:pink;//方便看效果   
+  left:50%;    
+  top:50%;    
+ } 
+</code></pre><h1 id="CSS-选择符有哪些？哪些属性可以继承？优先级算法如何计算？"><a href="#CSS-选择符有哪些？哪些属性可以继承？优先级算法如何计算？" class="headerlink" title="CSS 选择符有哪些？哪些属性可以继承？优先级算法如何计算？"></a>CSS 选择符有哪些？哪些属性可以继承？优先级算法如何计算？</h1><ul>
+<li><p>选择符</p>
+<ol>
+<li>id选择器（ # myid）       </li>
+<li>类选择器（.myclassname）        </li>
+<li>标签选择器（div, h1, p） </li>
+<li>相邻选择器（h1 + p）        </li>
+<li>子选择器（ul &lt; li）       </li>
+<li>后代选择器（li a）        </li>
+<li>通配符选择器（ * ）        </li>
+<li>属性选择器（a[rel = “external”]）        </li>
+<li>伪类选择器（a: hover, li: nth - child）    </li>
+</ol>
+</li>
+<li><p>继承问题</p>
+<ul>
+<li>可继承： font-size font-family color, ul li  dl  dd  dt;    </li>
+<li>不可继承：border padding margin width height ;    </li>
+</ul>
+</li>
+<li><p>优先级</p>
+<ul>
+<li><p>就近原则：样式定义最近者为准;    </p>
+</li>
+<li><p>载入样式：以最后载入的定位为准;</p>
+</li>
+<li><p>id/class/tag优先级为: </p>
+<blockquote>
+<p>  !important &gt;  id &gt; class &gt; tag         important 比 内联优先级高</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="做一个网站的团队都需要哪些人？"><a href="#做一个网站的团队都需要哪些人？" class="headerlink" title="做一个网站的团队都需要哪些人？"></a>做一个网站的团队都需要哪些人？</h1><ul>
+<li><p><strong>产品经理：</strong>设计这个产品，通常就是了解用户的网站需求，画原型图。   </p>
+</li>
+<li><p><strong>项目经理：</strong>通常是对整个产品有一个整理管理和负责，通常是会代码技术的人来构建整个网站的代码框架，以后网站实现的全面管理。  </p>
+</li>
+<li><p><strong>UI设计师：</strong>通过原型图画psd设计图的。   </p>
+</li>
+<li><p><strong>前端工程师：</strong>根据设计图来做静态网页，可能是原生app的IOS和安卓工程师，或者web端的web前端工程师。   </p>
+</li>
+<li><p><strong>后端工程师：</strong>通常就是做java、asp.net、php的工程师来写后端逻辑的工程师。</p>
+</li>
+</ul>
+<h1 id="html是什么？css是什么？js是什么？"><a href="#html是什么？css是什么？js是什么？" class="headerlink" title="html是什么？css是什么？js是什么？"></a>html是什么？css是什么？js是什么？</h1><ul>
+<li><p>html是超文本标记语言，他是做网站时候用的一些文本标记标签，比如div、span等。</p>
+</li>
+<li><p>css是层叠样式表，是做网站的时候给标签来美化网站的样式，比如说background（背景）、color（字体颜色）、height（高度）、width（宽度）等。</p>
+</li>
+<li><p>js=javascript是网站中写前后台交互效果、网页动画效果的一种开发语言，比如鼠标点击事件（click）、前后台数据请求（ajax）等。</p>
+</li>
+</ul>
+<h1 id="AJAX技术体系的组成部分有哪些"><a href="#AJAX技术体系的组成部分有哪些" class="headerlink" title="AJAX技术体系的组成部分有哪些"></a>AJAX技术体系的组成部分有哪些</h1><p>HTML、CSS、DOM、XML、xmlHttpRequest、JavaScript</p>
+<h1 id="什么是AJAX，为什么要使用AJAX"><a href="#什么是AJAX，为什么要使用AJAX" class="headerlink" title="什么是AJAX，为什么要使用AJAX?"></a>什么是AJAX，为什么要使用AJAX?</h1><ul>
+<li><p>什么是AJAX</p>
+<p> AJAX是『Asynchronoous JavaScript and XML』的缩写，他是指一种创建交互式网页应用的网页开发结束。AJAX包含下列技术：</p>
+<ul>
+<li>基于Web标准XHTML+CSS的表示</li>
+<li>使用DOM进行动态显示以及交互</li>
+<li>使用XML和XSLT进行数据交互及相关操作</li>
+<li>使用XMLHttpRequest进行异步数据查询、检索</li>
+<li>使用JavaScript将所有的东西绑定在一起</li>
+</ul>
+</li>
+<li><p>AJAX的优势</p>
+<ul>
+<li><p>通过异步模式，提升了用户体验</p>
+</li>
+<li><p>优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了宽带占用</p>
+</li>
+<li><p>AJAX引擎在客户端运行，承担了一部分本来由服务器承担的工作，从而减少了大用户量下的服务器负载</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="dom里添加、删除、移动、复制、创建节点的方法"><a href="#dom里添加、删除、移动、复制、创建节点的方法" class="headerlink" title="dom里添加、删除、移动、复制、创建节点的方法;"></a>dom里添加、删除、移动、复制、创建节点的方法;</h1><ul>
+<li><p>创建新节点</p>
+<pre><code>1.创建一个DOM片段
+createDocumentFragment()  
+2.创建一个具体的元素
+createElement_x()    
+3.创建一个文本节点createTextNode()                 
+</code></pre></li>
+<li><p>添加、移除、替换、插入</p>
+<pre><code>1.添加
+appendChild() 
+
+2.移除
+removeChild()
+
+3.替换
+replaceChild()
+
+4.插入
+insertBefore() 
+</code></pre></li>
+<li><p>查找</p>
+<pre><code>1.通过标签名称
+getElementsByTagName_r() 
+
+2.通过元素的Name属性的值
+getElementsByName() 
+
+3.通过元素Id，唯一性
+getElementById()
+</code></pre></li>
+</ul>
+<h1 id="你对前端界面工程师这个职位是怎么样理解的-它的前景会怎么样"><a href="#你对前端界面工程师这个职位是怎么样理解的-它的前景会怎么样" class="headerlink" title="你对前端界面工程师这个职位是怎么样理解的?它的前景会怎么样?"></a>你对前端界面工程师这个职位是怎么样理解的?它的前景会怎么样?</h1><ul>
+<li><p>前端界面工程师理解</p>
+<ol>
+<li>与交互设计师、视觉设计师协作，根据设计图完成页面制作。</li>
+<li>维护及优化网站前端性能。</li>
+</ol>
+</li>
+<li><p>前景</p>
+<p>长期以来，国内前端开发在整个软件开发行业内占得比重较小，发展较晚。网站也多倾向于赢利最大化而轻视用户体验。前后端比例悬殊大。近几年来，随着 以用户为中心 的思想普及发展。前端开发呈现出强劲的发展态势，前端开发人员在项目中的重要性日益突出。前端开发人员呈现出严重的人员短缺现象。</p>
+</li>
+</ul>
+<h1 id="js是什么，js和html-的开发如何结合"><a href="#js是什么，js和html-的开发如何结合" class="headerlink" title="js是什么，js和html 的开发如何结合?"></a>js是什么，js和html 的开发如何结合?</h1><p>js是一种基于对象和事件驱动，并具有安全性的脚本语言。可以html的三个地方编写js脚本语言</p>
+<ul>
+<li>一是在网页文件的标签对中直接编写脚本程序代码；</li>
+<li>二是将脚本程序代码放置在一个单独的文件中，在网页文件中引用这个脚本程序语言；</li>
+<li>三是将脚本程序代码作为某个元素的事件属性值或超链接的href属性值。</li>
+</ul>
+<h1 id="如果让你来制作一个访问量很大的大型网站，如何管理所有的css-js-图片文件"><a href="#如果让你来制作一个访问量很大的大型网站，如何管理所有的css-js-图片文件" class="headerlink" title="如果让你来制作一个访问量很大的大型网站，如何管理所有的css/js/图片文件"></a>如果让你来制作一个访问量很大的大型网站，如何管理所有的css/js/图片文件</h1><ul>
+<li>把所有的CSS文件都放入一个样式表中,通过把所有的脚本放到一个文件中来减少HTTP请求的方法。js文件也采用同样的方法。</li>
+</ul>
+<ul>
+<li>把所有的背景图像都放到一个图片文件中，然后通过CSS的background-image和background-position属性来显示图片的不同部分。</li>
+</ul>
+<h1 id="浏览器的内核分别是什么？经常遇到的浏览器兼容性问题有哪些，解决方法是什么？"><a href="#浏览器的内核分别是什么？经常遇到的浏览器兼容性问题有哪些，解决方法是什么？" class="headerlink" title="浏览器的内核分别是什么？经常遇到的浏览器兼容性问题有哪些，解决方法是什么？"></a>浏览器的内核分别是什么？经常遇到的浏览器兼容性问题有哪些，解决方法是什么？</h1><h2 id="浏览器内核"><a href="#浏览器内核" class="headerlink" title="浏览器内核"></a>浏览器内核</h2><p><strong>IE内核:</strong> 360/遨游/搜狗/世界之窗/腾讯TT</p>
+<p><strong>非IE内核:</strong> firefox/opera/safari/chrome</p>
+<h2 id="兼容性问题"><a href="#兼容性问题" class="headerlink" title="兼容性问题"></a>兼容性问题</h2><ol>
+<li><p>ie6双倍边距问题</p>
+<blockquote>
+<p>在使用了float的情况下，不管是向左还是向右都会出现双倍，</p>
+</blockquote>
+<p>最简单的解决方法就是用display:inline加到css里面去。</p>
+</li>
+<li><p>文字本身不兼容</p>
+<blockquote>
+<p>同样是font-size:14px的宋体文字，在不同浏览器下占的空间是不一样的，ie下实际占高16px，下留白3px。ff下实际占高17px，上留白1px,下留白3px。opera下就更不一样了。</p>
+</blockquote>
+<p>解决方法，给文字设定line-height。确保所有文字都有默认的line-height值，这点很重要，在高度上我们不能容忍1px的差异。</p>
+</li>
+<li><p>ff下容器高度限定，即容器定义了height之后，容器边框的外形就确定了，不会被内容撑大，而ie下是会被内容撑大，高度限定失效。所以不要轻易给容器定义height。</p>
+</li>
+<li><p>还讨论内容撑破容器问题，横向上的。</p>
+<blockquote>
+<p>如果float容器未定义宽度，ff下内容会尽可能撑开容器宽度，ie下则会优先考虑内容折行。</p>
+</blockquote>
+<p>内容可能撑破的浮动容器需要定义width</p>
+</li>
+<li><p>浮动的清除，ff下不清除浮动是不行的。</p>
+</li>
+<li><p>mirrormargin bug。</p>
+<blockquote>
+<p>当外层元素内有float元素时，外层元素如定义margin-top:14px，将自动生成margin-bootom:14px。padding也会出现类似问题，都是ie6下的特产，该类bug出现的情况较为复杂，远不只这一种出现条件，还没系统整理。</p>
+</blockquote>
+<p> 外层元素设定border或设定float</p>
+</li>
+<li><p>吞吃现象，限于篇幅，我就不展开了。</p>
+<blockquote>
+<p>还是ie6,上下两个div，上面的div设置背景，却发现下面没有设置背景的div也有了背景，这就是吞吃现象。对应上面的背景吞吃线程，还有滚动下边框缺失的线程，</p>
+</blockquote>
+<p> 解决方案：使用zoom:1,这个zoom好像是专门为解决ie6 bug而生的。</p>
+</li>
+<li><p>img下的留白</p>
+<p>  给imge设置display:block</p>
+</li>
+<li><p>失去line-height</p>
+<pre><code>&lt;div style = &quot;line-height:20px&quot;&gt;&lt;img/&gt; 文字&lt;/div&gt;
+</code></pre><blockquote>
+<p>很遗憾，在ie6下单行文字line-height效果消失了，原因是<img>这个inline-block元素和inline元素写在一起了</p>
+</blockquote>
+<p>解决方案： 让img和文字都float起来</p>
+</li>
+<li><p>链接的hover状态。</p>
+<p>   a:hover img{width:300px} 我们让鼠标hover时，链接里包含的图片宽度变化，可以在ie6下无效，ie7和ff下有效。</p>
+</li>
+<li><p>非链接的hover状态。div：hover{} 这样的样式ie6是不认的，在ie7/ff下才有效果</p>
+</li>
+<li><p>ie下的overflow:hidden对其下的绝对层postiton:absolute或者相对层positon:absolute，另外ie6支持overfolow-x或者overflow-y的特性，ie7/ff不支持</p>
+</li>
+<li><p>ff的缺点</p>
+<p>   width:100%这个东西在ie里面用很方便，会向上逐层搜索width值，忽视浮动层的影响，ff下搜索至浮动层结束，如此，只能给中间的所有浮动层加width100%才行，累啊，opera这点倒学乖了跟了ie。</p>
+</li>
+</ol>
+<h1 id="css的基本语句构成是什么"><a href="#css的基本语句构成是什么" class="headerlink" title="css的基本语句构成是什么"></a>css的基本语句构成是什么</h1><pre><code>选择器{属性1：值1；属性2：值2；....}
+</code></pre><h1 id="前端页面由哪三层构成，分别是什么，作用是什么"><a href="#前端页面由哪三层构成，分别是什么，作用是什么" class="headerlink" title="前端页面由哪三层构成，分别是什么，作用是什么"></a>前端页面由哪三层构成，分别是什么，作用是什么</h1><ul>
+<li><p>网页分成三个层次</p>
+<p>  结构层、表示层、行为层。</p>
+</li>
+</ul>
+<ul>
+<li><p>结构层</p>
+<p>   由HTML或XHTML之类的标记语言负责创建。标签，对网页内容的语义含义做出了描述，但这些标签不包含任何关于如何显示有关内容的信息。例如，P标签表达了这样的一种语义，”这是一个文本段”.</p>
+</li>
+<li><p>表示层</p>
+<p>  由css负责创建，css对”如何显示有关内容”的问题作出了回答。</p>
+</li>
+<li><p>行为层</p>
+<p>   负责回答”内容应该如何对事件作出反应”这一问题，这是JavaScript语言和DOM主宰的领域。</p>
+</li>
+</ul>
+<h1 id="Doctype-严格模式与混杂模式，如何触发这两种模式，区分它们有何意义"><a href="#Doctype-严格模式与混杂模式，如何触发这两种模式，区分它们有何意义" class="headerlink" title="Doctype? 严格模式与混杂模式，如何触发这两种模式，区分它们有何意义"></a>Doctype? 严格模式与混杂模式，如何触发这两种模式，区分它们有何意义</h1><ul>
+<li><p>Doctype声明位于文档中的最前面的位置，处于标签之前。</p>
+<ul>
+<li>此标签可告知浏览器文档使用哪种HTML或XHTML规范，</li>
+<li>该标签可声明三种DTD类型，分别表示严格版本、过渡版本以及基于框架的HTML文档。</li>
+</ul>
+</li>
+<li><p>当浏览器厂商开始创建于标准兼容的浏览器时，他们希望确保向后兼容性，为了实现这一点，他们创建了两种呈现模式：<strong>标准模式</strong>和<strong>混杂模式</strong>。</p>
+<ul>
+<li><p>在标准模式中，浏览器根据规范呈现页面；</p>
+</li>
+<li><p>在混杂模式中，页面以一种比较宽松的向后兼容的方式显示。混杂模式通常模拟老式浏览器的行为以防止老站点无法工作。</p>
+</li>
+</ul>
+</li>
+<li><p>浏览器根据DOCTYPE是否存在以及使用哪种DTD来选择要使用的呈现方法，如果XHTML文档包含形式完整的DOCTYPE，那么它一般以标准模式呈现。</p>
+</li>
+<li><p>对于HTML4.01文档，包含严格DTD的DOCTYPE常常导致页面以标准模式呈现。<br>包含过渡DTD和URL的DOCTYPE也导致页面以标准模式呈现，但是有过渡DTD而没有URL会导致页面以混杂模式呈现。</p>
+</li>
+<li><p>DOCTYPE不存在或形式不正确会导致HTML和XHTML文档以混杂模式呈现。</p>
+</li>
+</ul>
+<h1 id="行内、块级元素以及CSS的盒模型有哪些？"><a href="#行内、块级元素以及CSS的盒模型有哪些？" class="headerlink" title="行内、块级元素以及CSS的盒模型有哪些？"></a>行内、块级元素以及CSS的盒模型有哪些？</h1><ul>
+<li><p>行内元素：</p>
+<blockquote>
+<p>a b span I bem img input select strong</p>
+</blockquote>
+</li>
+<li><p>块级元素有</p>
+<blockquote>
+<p>div ul ol lidl dt dd h1 h2 h3 h4…p</p>
+</blockquote>
+</li>
+<li><p>css盒模型</p>
+<blockquote>
+<p>margin border padding width</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="CSS引入的方式有哪些-link和-import的区别是"><a href="#CSS引入的方式有哪些-link和-import的区别是" class="headerlink" title="CSS引入的方式有哪些? link和@import的区别是?"></a>CSS引入的方式有哪些? link和@import的区别是?</h1><h2 id="css引入的方式"><a href="#css引入的方式" class="headerlink" title="css引入的方式"></a>css引入的方式</h2><ol>
+<li><p>使用LINK标签</p>
+<p>将样式规则写在css的样式文件中，再以<link>标签引入。</p>
+<pre><code>&lt;link rel=stylesheet type= &quot;text/css&quot; href = &quot;example.css&quot;&gt;
+</code></pre></li>
+<li><p>使用@import引入</p>
+<p> 跟link方法很像，但必须放在<style>…</style>中</p>
+<pre><code>&lt;STYLE TYPE = &quot;text/css&quot;&gt;
+ &lt;!-- 
+    @import url(css/example.css);
+ --&gt;
+&lt;/STYLE&gt;
+</code></pre></li>
+<li><p>使用STYLE标签</p>
+<p>  将样式写在<style>…</style>标签之中。</p>
+<pre><code>&lt;STYLE TYPE = &quot;text/css&quot;&gt;
+&lt;!-- 
+   boby {color:#666;background:#f0f0f0;font-size:12px}
+--&gt;
+&lt;/STYLE&gt;
+</code></pre></li>
+<li><p>使用STYLE属性</p>
+<p>   将STYLE属性直接加载在个别的元件标签里， </p>
+<pre><code>&lt;元件(标签)STYLE=&quot;性质(属性)1&quot;：设定值1;...&gt;
+</code></pre></li>
+<li><p>使用<span></span>标记引入样式</p>
+<pre><code>&lt;span style = &quot;font:12px/20px #000000;&quot;&gt;cnwebshow.com&lt;/span&gt;
+</code></pre></li>
+</ol>
+<h2 id="link和-import区别"><a href="#link和-import区别" class="headerlink" title="link和@import区别"></a>link和@import区别</h2><ol>
+<li><p>加载顺序的区别，当一个页面被加载的时候，link引用css会同时被加载，而@import引用的css会等到页面全部被下载完再被加载。</p>
+</li>
+<li><p>@import可以在css中再次引入其他样式表，比如可以创建一个主样式表，在主样式表中再引入其他的样式表。<strong>这样做有一个缺点，会对网络服务器产生过多的HTTP请求，以前是一个文件，而现在却是两个或更多文件了，服务器的压力增大，服务器的压力增大，浏览量大的网站还是谨慎使用</strong>。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/30/搭建个人博客/" itemprop="url">
                   搭建个人博客
                 </a>
@@ -461,7 +1266,7 @@ hexo deploy
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -256,6 +256,139 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/14/C语言操作SQLite/" itemprop="url">
+                  C语言操作SQLite
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T16:29:01+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/C语言操作SQLite/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/C语言操作SQLite/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SQLite介绍"><a href="#SQLite介绍" class="headerlink" title="SQLite介绍"></a>SQLite介绍</h1><p>SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。</p>
+<h1 id="打开OR创建数据库"><a href="#打开OR创建数据库" class="headerlink" title="打开OR创建数据库"></a>打开OR创建数据库</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-cbe60e89c278d1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。</p>
+<p>2、每次打开都要将数据库和结果集置空，避免上次对数据库的操作影响当前的操作。</p>
+<h1 id="关闭结果集和数据库"><a href="#关闭结果集和数据库" class="headerlink" title="关闭结果集和数据库"></a>关闭结果集和数据库</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-6c79d670d08796eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>1、每次操作之后都要关闭，避免内存泄露。</p>
+<h1 id="在数据库中建表"><a href="#在数据库中建表" class="headerlink" title="在数据库中建表"></a>在数据库中建表</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-c9684c4db86369c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>0、SQLite语法不区分大小写,对数据库操作前打开数据库，操作结束后关闭数据库。</p>
+<p>1、SQLite3支持 NULL、INTEGER、REAL（浮点数字）、TEXT(字符串文本)和BLOB(二进制对象)数据类型，但实际上sqlite3也接受varchar(n)、char(n)、decimal(p,s) 等数据类型，只不过在运算或保存时会转成对应的五种数据类型。</p>
+<p>2、 SQLite最大的特点是你可以把各种类型的数据保存到任何字段中，而不用关心字段声明的数据类型是什么。例如：可以在Integer类型的字段中存放字符串，或者在布尔型字段中存放浮点数，或者在字符型字段中存放日期型值。 但有一种情况例外：定义为INTEGER PRIMARY KEY(PRIMARY KEY修饰表明这个字段是表的主键)的字段只能存储64位整数， 当向这种字段保存除整数以外的数据时，将会产生错误。</p>
+<h1 id="在表中插入数据"><a href="#在表中插入数据" class="headerlink" title="在表中插入数据"></a>在表中插入数据</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-3128123474761be0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>在表中插入数据<br>1、关于数据的删，改跟上面的插入的格式一样。只不过是sql语句不同而已。碰到不会写的sql语句，百度搜索即可。请原谅我的懒惰😄。</p>
+<h1 id="在表中查询数据"><a href="#在表中查询数据" class="headerlink" title="在表中查询数据"></a>在表中查询数据</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-722c0854f3f3324d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>1、Command+左键SQLite_ROW,里面有很多的宏，sqlite_step返回的值，在那些宏里都有相应的解释。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/14/日期NSDate/" itemprop="url">
                   日期NSDate
                 </a>
@@ -2483,179 +2616,6 @@ if(!exp&amp;&amp;typeof(exp) != &quot;undefined&quot; &amp;&amp; exp != 0) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/02/CSS面试题/" itemprop="url">
-                  CSS面试题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-02T14:37:54+08:00" content="2016-09-02">
-              2016-09-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/H5面试题/" itemprop="url" rel="index">
-                    <span itemprop="name">H5面试题</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/02/CSS面试题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/CSS面试题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="描述下“reset”CSS文件的作用和使用它的好处。"><a href="#描述下“reset”CSS文件的作用和使用它的好处。" class="headerlink" title="描述下“reset”CSS文件的作用和使用它的好处。"></a>描述下“reset”CSS文件的作用和使用它的好处。</h1><p>因为浏览器的品种很多，每个浏览器的默认样式也是不同的，所以定义一个css reset可以使各浏览器的默认样式统一。</p>
-<h1 id="解释下浮动和它的工作原理。"><a href="#解释下浮动和它的工作原理。" class="headerlink" title="解释下浮动和它的工作原理。"></a>解释下浮动和它的工作原理。</h1><p>关于浮动我们需要了解，浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。要想使元素浮动，必须为元素设置一个宽度（width）。虽然浮动元素不是文档流之中，但是它浮动后所处的位置依然是在浮动之前的水平方向上。由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样，下面的元素填补原来的位置。有些元素会在浮动元素的下方，但是这些元素的内容并不一定会被浮动的元素所遮盖，对内联元素进行定位时，这些元素会考虑浮动元素的边界，会围绕着浮动元素放置。也可以把浮动元素想象成是被块元素忽略的元素，而内联元素会关注浮动元素的。  </p>
-<h1 id="列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。"><a href="#列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。" class="headerlink" title="列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。"></a>列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。</h1><ol>
-<li><p>使用空标签清除浮动。这种方法是在所有浮动标签后面添加一个空标签定义css clear:both.弊端就是增加了无意义标签。</p>
-</li>
-<li><p>使用overflow。给包含浮动元素的父标签添加css属性overflow:auto;zoom:1;zoom:1用于兼容IE6。</p>
-</li>
-<li><p>使用after伪对象清除浮动。该方法只适用于非IE浏览器。具体写法可参照以下示例。使用中需注意以下几点。一、该方法中必须为需要清除浮 动元素的伪对象中设置height:0，否则该元素会比实际高出若干像素；二、content属性是必须的，但其值可以为空，content属性的值设 为”.”，空亦是可以的。</p>
-</li>
-<li><p>浮动外部元素</p>
-</li>
-</ol>
-<p><strong>此三种方法各有利弊，使用时应择优选择，比较之下第二种方法更为可取。</strong></p>
-<h1 id="解释下CSS-sprites，以及你要如何在页面或网站中使用它。"><a href="#解释下CSS-sprites，以及你要如何在页面或网站中使用它。" class="headerlink" title="解释下CSS sprites，以及你要如何在页面或网站中使用它。"></a>解释下CSS sprites，以及你要如何在页面或网站中使用它。</h1><p>CSS Sprites其实就是把网页中一些背景图片整合到一张图片文件中，再利用CSS的“background- image”，“background-repeat”，“background-position”的组合进行背景定位，background- position可以用数字能精确的定位出背景图片的位置。</p>
-<h1 id="讨论CSS-hacks，条件引用或者其他。"><a href="#讨论CSS-hacks，条件引用或者其他。" class="headerlink" title="讨论CSS hacks，条件引用或者其他。"></a>讨论CSS hacks，条件引用或者其他。</h1><pre><code>各个浏览器都认识，这里给firefox用；
-
-background-color:red\9;\9所有的ie浏览器可识别；
-
-background-color:yellow\0;\0是留给ie8的+background-color:pink;+ie7定了；
-
-_background-color:orange;_专门留给神奇的ie6；:root#test{background-color:purple\9;}:root是给ie9的，
-
-@media all and(min-width:0px){#test{background-color:black\0;}}这个是老是跟ie抢着认\0的神奇的opera，必须加个\0,不然firefox，chrome，safari也都认识。
-
-@media screen and(-webkit-min-device-pixel-ratio:0){#test{background-color:gray;}}最后这个是浏览器新贵chrome和safari的。
-</code></pre><h1 id="在书写高效CSS时会有哪些问题需要考虑？"><a href="#在书写高效CSS时会有哪些问题需要考虑？" class="headerlink" title="在书写高效CSS时会有哪些问题需要考虑？"></a>在书写高效CSS时会有哪些问题需要考虑？</h1><ol>
-<li>样式是：从右向左的解析一个选择器；</li>
-<li>ID最快，Universal最慢有四种类型的key selector，解析速度由快到慢依次是：ID、class、tag和universal ；</li>
-<li>不要tag-qualify（永远不要这样做ul#main-navigation{}ID已经是唯一的，不需要Tag来标识，这样做会让选择器变慢。）；</li>
-<li>后代选择器最糟糕（换句话说，下面这个选择器是很低效的：html body ul li a{}）；</li>
-<li>想清楚你为什么这样写；</li>
-<li>CSS3的效率问题（CSS3选择器（比如:nth-child）能够漂亮的定位我们想要的元素，又能保证我们的CSS整洁易读。但是这些神奇的选择器会浪费很多的浏览器资源。）；</li>
-<li>我们知道#ID速度是最快的，那么我们都用ID，是不是很快。但是我们不应该为了效率而牺牲可读性和可维护性。</li>
-</ol>
-<h1 id="使用CSS预处理器的优缺点有哪些？"><a href="#使用CSS预处理器的优缺点有哪些？" class="headerlink" title="使用CSS预处理器的优缺点有哪些？"></a>使用CSS预处理器的优缺点有哪些？</h1><ul>
-<li><p>LESS&amp;SassLESS是受Sass启发而开发的工具，它列出了如下开发的理由：</p>
-<p>  “为什么要开发一个Sass的替代品呢？原因很简单：首先是语法。Sass的一个关键特性是缩进式的语法，这种语法可以产生柱式外观的代码。但是你需要 花费时间学习一门新的语法以及重新构建你现在的样式表。LESS给CSS带来了很多特性，使得LESS能够和CSS无缝地紧密结合在一起。因此，你可以平 滑地由CSS迁移到LESS，如果你只是对使用变量或者操作感兴趣的话，你不需要学习一整门全新的语言。”</p>
-</li>
-<li><p>StylusStylus相对前两者较新，可以看官方文档介绍的功能。</p>
-<ol>
-<li>来自NodeJS社区，所以和NodeJS走得很近，与JavaScript联系非常紧密。还有专门JavaScript API：<a href="http://learnboost.github.io/stylus/docs/js.html" target="_blank" rel="external">http://learnboost.github.io/stylus/docs/js.html</a></li>
-<li>支持Ruby之类等等框架；</li>
-<li>更多更强大的支持和功能总结：Sass看起来在提供的特性上占有优势，但是LESS能够让开发者平滑地从现存CSS文件过渡到LESS，而不需要像Sass那样需要将CSS文件转换成Sass格式。Stylus功能上更为强壮，和js联系更加紧密。</li>
-</ol>
-</li>
-</ul>
-<h1 id="请解释一下-box-sizing-border-box-的作用-并且说明使用它有什么好处？"><a href="#请解释一下-box-sizing-border-box-的作用-并且说明使用它有什么好处？" class="headerlink" title="请解释一下*{box-sizing:border-box;}的作用,并且说明使用它有什么好处？"></a>请解释一下*{box-sizing:border-box;}的作用,并且说明使用它有什么好处？</h1><p>说到IE的bug，在IE6以前的版本中，IE对盒模型的解析出现一些问题，跟其它浏览器不同，将border与padding都包含在width之内。而另外一些浏览器则与它相反，是不包括border和padding的。</p>
-<p>在我们开发的过程中会发现，有时候，如果对页面中的大区域进行设置时，将border、padding计算到width和height之内，反而更 灵活。但W3C的CSS2.1规范却规定了他们并不能被包含其中。考虑到这个问题，css3中引入了一个新的属性：box-sizing，它具有 “content-box”和”border-box“两个值。</p>
-<pre><code>box-sizing:content-box
-</code></pre><p>当我们设置box-sizing:content-box;时，浏览器对盒模型的解释遵从我们之前认识到的W3C标准，当它定义width和height时，它的宽度不包括border和padding。</p>
-<pre><code>box-sizing:border-box
-</code></pre><p>当我们设置box-sizing:border-box;时，浏览器对盒模型的解释与IE6之前的版本相同，当它定义width和height 时，border和padding则是被包含在宽高之内的。内容的宽和高可以通过定义的“width”和“height”减去相应方向的 “padding”和“border”的宽度得到。内容的宽和高必须保证不能为负，必要时将自动增大该元素border box的尺寸以使其内容的宽或高 最小为0。</p>
-<h1 id="请罗列出你所知道的display属性的全部值"><a href="#请罗列出你所知道的display属性的全部值" class="headerlink" title="请罗列出你所知道的display属性的全部值"></a>请罗列出你所知道的display属性的全部值</h1><p><img src="http://images2015.cnblogs.com/blog/716683/201510/716683-20151013142822460-1264753317.jpg" alt="jlkjklj"></p>
-<h1 id="你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？"><a href="#你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？" class="headerlink" title="你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？"></a>你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？</h1><p>Bootstrap,PureCSS,Foundation等等</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2701,7 +2661,7 @@ _background-color:orange;_专门留给神奇的ie6；:root#test{background-color
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
