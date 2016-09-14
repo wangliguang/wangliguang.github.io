@@ -1,0 +1,955 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言   本文的内容可能跟之前相比会比较长，主要因为讲了通知、KVO、KVC三个知识点，但我自认为条理还算清晰。建议学完一个敲一下，再进行下一个知识点的学习。
+通知中心What  是一种一对多的信息广播机制,一个应用程序同时只能有一个NSNotificationCenter(通知中心)对象，因为如果有多个通知，发送通知的时候就不知道是该给谁发送了。
+Where  delegate和block也属于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通知中心、KVC、KVO">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/通知中心、KVC、KVO/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="前言   本文的内容可能跟之前相比会比较长，主要因为讲了通知、KVO、KVC三个知识点，但我自认为条理还算清晰。建议学完一个敲一下，再进行下一个知识点的学习。
+通知中心What  是一种一对多的信息广播机制,一个应用程序同时只能有一个NSNotificationCenter(通知中心)对象，因为如果有多个通知，发送通知的时候就不知道是该给谁发送了。
+Where  delegate和block也属于">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-368c9b1fa38a70e6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-3bfcde362f56fce7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-75fe25ec0e2a2160.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-f212cb4b2c467146.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-14T07:46:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通知中心、KVC、KVO">
+<meta name="twitter:description" content="前言   本文的内容可能跟之前相比会比较长，主要因为讲了通知、KVO、KVC三个知识点，但我自认为条理还算清晰。建议学完一个敲一下，再进行下一个知识点的学习。
+通知中心What  是一种一对多的信息广播机制,一个应用程序同时只能有一个NSNotificationCenter(通知中心)对象，因为如果有多个通知，发送通知的时候就不知道是该给谁发送了。
+Where  delegate和block也属于">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-368c9b1fa38a70e6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/通知中心、KVC、KVO/"/>
+
+  <title> 通知中心、KVC、KVO | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                通知中心、KVC、KVO
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T15:30:05+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/通知中心、KVC、KVO/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/通知中心、KVC、KVO/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>   本文的内容可能跟之前相比会比较长，主要因为讲了通知、KVO、KVC三个知识点，但我自认为条理还算清晰。建议学完一个敲一下，再进行下一个知识点的学习。</p>
+<h1 id="通知中心"><a href="#通知中心" class="headerlink" title="通知中心"></a>通知中心</h1><h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>  是一种一对多的信息广播机制,一个应用程序同时只能有一个NSNotificationCenter(通知中心)对象，因为如果有多个通知，发送通知的时候就不知道是该给谁发送了。</p>
+<h2 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h2><p>  delegate和block也属于一种信息传递机制，但这两种都是一对一的，每次执行的方法都不一样，而通知是一对多，只要有地方触发通知，执行的是同一个方法。</p>
+<h2 id="How"><a href="#How" class="headerlink" title="How"></a>How</h2><ol>
+<li><p>添加一个通知</p>
+<pre><code>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySalary) name:@&quot;发工资啦&quot; object:nil];
+</code></pre></li>
+<li><p>实现添加通知时方法选择器选择的方法</p>
+</li>
+<li><p>在需要发送通知的类中采用下面方法发送通知，发送成功便会执行步骤二实现的方法</p>
+<pre><code>[[NSNotificationCenter defaultCenter] postNotificationName:@&quot;发工资啦&quot; object:nil];
+</code></pre></li>
+<li><p>移除通知，个人习惯在delloc中释放</p>
+<pre><code>[[NSNotificationCenter defaultCenter] postNotificationName:nil object:nil userInfo:nil]; 
+</code></pre></li>
+</ol>
+<p>##代码示例</p>
+<ol>
+<li><p>在viewController.m的viewDidLoad方法中注册一个通知 </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1338564-368c9b1fa38a70e6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="注册通知"></p>
+</li>
+<li><p>在viewController.m实现在注册通知时方法选择器选择的方法。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1338564-3bfcde362f56fce7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+</li>
+<li><p>在NSNotificationViewController.m中的按钮点击事件方法中发送通知</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1338564-75fe25ec0e2a2160.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发送通知"></p>
+</li>
+<li>在viewController.m中重写delloc方法，在方法移除通知。</li>
+</ol>
+<p>   <img src="http://upload-images.jianshu.io/upload_images/1338564-f212cb4b2c467146.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="移除通知"></p>
+<h1 id="KVC"><a href="#KVC" class="headerlink" title="KVC"></a>KVC</h1><h2 id="What-1"><a href="#What-1" class="headerlink" title="What"></a>What</h2><p>  全称，key valued coding(键值编码)</p>
+<h2 id="Where-1"><a href="#Where-1" class="headerlink" title="Where"></a>Where</h2><p>  最常用的是将字典数据转model</p>
+<h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><p>  特殊情况下，更加简便，下文会进行分析。</p>
+<h2 id="How-1"><a href="#How-1" class="headerlink" title="How"></a>How</h2><p>  见代码</p>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><p>   <strong>该类中用到的Parent和Children类里面只有.h里面有东西，.m文件内什么都没。详情看最后附录。</strong></p>
+<pre><code>//
+//  KVCViewController.m
+//  NSNotification、KVC、KVO
+//
+//  Created by GG on 16/1/20.
+//  Copyright © 2016年 王立广. All rights reserved.
+//
+
+#import &quot;KVCViewController.h&quot;
+#import &quot;Parent.h&quot;
+@implementation KVCViewController
+
+/*
+
+- (void)viewDidLoad{
+
+    [super viewDidLoad];
+
+    self.title = @&quot;KVC&quot;;
+
+    /*
+
+     * 将字典@{@&quot;name&quot;:@&quot;红红&quot;,@&quot;children&quot;:@{@&quot;name&quot;:@&quot;小红&quot;}}采用多种方式转化为model.
+
+     */
+
+     NSDictionary *dict = @{@&quot;name&quot;:@&quot;红   红&quot;,@&quot;children&quot;:@{@&quot;name&quot;:@&quot;小红&quot;}};
+
+     #pragma mark -------------------老方式-------------------
+
+     //该类中用到的Parent和Children类里面只有.h里面有东西，.m文件内什么都没。详情看最后附录。
+
+     Parent *oldWayparent = [Parent new];
+
+     //给parent起名字
+     oldWayparent.name = dict[@&quot;name&quot;];
+
+     Children *children1 = [Children new];
+
+     children1.name = dict[@&quot;children&quot;][@&quot;name&quot;];
+
+     //给parent的孩子起名字
+     oldWayparent.children = children1;
+
+     NSLog(@&quot;oldWay ======= %@的孩子叫做%@&quot;,oldWayparent.name,oldWayparent.children.name);
+
+     #pragma mark -------------------KVC 方式-------------------
+
+     /*
+
+      * 采用kvc将字典转化为model的三种方式
+
+      * 方式一 : 存值：[id setValue:&lt;#value#&gt; forKey:&lt;#key#&gt;];
+
+                取值：[id valueForKey:&lt;#key#&gt;];
+
+                给id对象的key属性赋值value。此处key的值一定必须要和在id对象key属性一模一样。
+
+      * 方式二 : 存值：[id setValue:&lt;#value#&gt; forKeyPath:&lt;#key.key#&gt;];
+
+                取值：[id valueForKeyPath:&lt;#key#&gt;];
+
+                同样是给id对象的相应属性赋值，但此时后面将不再直接给出键，而是按照键值路径来查找出相应的键，系统会按『.』,自动进入对象内部，查找对象属性。坑①。
+
+      * 方式三 : [id setValuesForKeysWithDictionary:&lt;#NSDictionary#&gt;];
+
+      上面的两种方式都需要取出来字典中的值，赋值给对象的相应属性。如果该对象要是有八九十来个属性，就要写八九十来行代码。这样太麻烦。碰到这样情况直接采用方式三便可。直接将整个字典作为参数传进来，便可将字典转化为model对象。
+
+      * 温馨提示 ： 这三种方式并不是完全独立，不是不可混合使用的，要根据字典内容做决定，接下来我用上面的那个字典做一下简单分析。
+
+      */
+
+      Parent *kvcWayParent = [Parent new];  
+
+      //采用方式一给属性赋值，如果属性是用@property声明的可以直接用self.name = dict[@&quot;name&quot;]，如果没有用@property，而是在大括号内声明的属性要用这种方式。
+
+     [kvcWayParent setValue:dict[@&quot;name&quot;] forKey:@&quot;name&quot;];
+
+     Children *children2 = [Children new];
+
+     [kvcWayParent setValue:children2 forKey:@&quot;children&quot;];
+
+     /*
+      * 采用方式二给属性赋值。此时要注意以下两点：
+      *
+      * 1、是forKeyPath，不是forkey
+        2、forkeyPath后childeren一定必须要和kvcWayParent里面的children属性名字一样，它后面的name必须一定要和children里面的name属性名一样。
+
+      */
+
+      [kvcWayParent setValue:dict[@&quot;children&quot;][@&quot;name&quot;] forKeyPath:@&quot;children.name&quot;];
+
+      NSLog(@&quot;kvcWay ======= %@的孩子叫做%@&quot;,kvcWayParent.name,kvcWayParent.children.name);
+
+      Parent *newKvcWayParent = [Parent new];
+
+      /* 
+       * 采用第三种方式将字典转化为model,此时我们要注意以下几点：
+       * 1、字典里面有什么东西，挑出我们需要用的（一般都需要）在model类中给声明出来。例如字典里有name,我就要在model类中声明该属性。
+       * 2、声明属性的时候要注意匹配数据类型。如果是数字，建议声明成NSNumber,因为在进行编码的时候，kvc会自动将字典中的数字转化为NSNumber类型。
+
+       */
+       [newKvcWayParent setValuesForKeysWithDictionary:dict];
+
+       //坑②
+       NSLog(@&quot;newsKvcWay ======= %@你太伟大了%@&quot;,newKvcWayParent.name,newKvcWayParent.children);    
+
+ }
+
+ @end
+</code></pre><p>   坑①： 如果model类中还有其他自定义对象，在赋值之前一定要先给该自定义对象赋值，在给其属性赋值。如果直接按下面的方式赋值，是错误的。</p>
+<pre><code>Parent *testParent = [Parent new];
+//给children.name赋值之前没有给children赋值
+[testParent setValue:dict[@&quot;children&quot;][@&quot;name&quot;] forKeyPath:@&quot;children.name&quot;];
+</code></pre><p>   坑②：最后一句输出如下：</p>
+<pre><code>&gt; newsKvcWay =======   红红你太伟大了  {
+
+    name = &quot;\U5c0f\U7ea2&quot;;
+  }
+</code></pre><p>   出现这种情况的原因是我用一个Children的对象来接受字典里面的字典了。</p>
+<h1 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h1><h2 id="What-2"><a href="#What-2" class="headerlink" title="What"></a>What</h2><p>Key-Value Observing（键值观察），它提供一种机制，当指定的对象的属性被修改后（<strong>指的是属性的内存地址被修改</strong>），则对象就会接受到通知。简单的说就是每次指定的被观察的对象的属性被修改后，KVO就会自动通知相应的观察者了。</p>
+<h2 id="Where-2"><a href="#Where-2" class="headerlink" title="Where"></a>Where</h2><p>需要监听某对象某一属性的变化时</p>
+<h2 id="Why-1"><a href="#Why-1" class="headerlink" title="Why"></a>Why</h2><p> 能够实时监听对象属性的变化</p>
+<h2 id="How-2"><a href="#How-2" class="headerlink" title="How"></a>How</h2><ol>
+<li><p>采用下面这个方法给属性添加观察者,各参数详情见下文</p>
+<pre><code>- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(nullable void *)context;
+</code></pre></li>
+<li><p>观察者实现下面方法，如果监听的属性发生变化，便会调用该方法。</p>
+<pre><code>- (void)observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary&lt;NSString*, id&gt; *)change context:(nullable void *)context;
+</code></pre></li>
+<li><p>适时调用下面方法移除观察者,个人习惯在delloc中释放。</p>
+<pre><code>- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(nullable void *)context;
+</code></pre></li>
+</ol>
+<h2 id="代码示例-1"><a href="#代码示例-1" class="headerlink" title="代码示例"></a>代码示例</h2><pre><code>//
+//  KVOViewController.m
+//  NSNotification、KVC、KVO
+//
+//  Created by GG on 16/2/12.
+//  Copyright © 2016年 王立广. All rights reserved.
+//
+
+#import &quot;KVOViewController.h&quot;
+#import &quot;Parent.h&quot;
+@interface KVOViewController ()
+{
+    Parent *parent;
+
+    UILabel *label;
+}
+@end
+
+@implementation KVOViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.title = @&quot;KVO&quot;;
+
+    parent = [Parent new];
+
+    Children *children = [Children new];
+
+    parent.children = children;
+
+    //给parent的起名字，给parent的children起名字
+    parent.children.name = @&quot;闪闪&quot;;
+    parent.name = @&quot;小闪&quot;;
+
+    /*
+     * 监听parent的children的名字
+
+     * observer: 设置观察者
+
+     * forkeyPath: 设置对象的属性，要注意这里传入的是字符串。在这里我传入的是&quot;children.name&quot;。也就是说我要监听的是parent对象的children属性的name属性。所以说KVO是在KVC的基础上实现的。
+
+     * options: 
+         NSKeyValueObservingOptionNew：当options中包括了这个参数的时候，观察者收到的change参数中就会包含NSKeyValueChangeNewKey和它对应的值，也就是说，观察者可以得知这个property在被改变之后的新值。
+
+         NSKeyValueObservingOptionOld：和NSKeyValueObservingOptionNew的意思类似，当包含了这个参数的时候，观察者收到的change参数中就会包含NSKeyValueChangeOldKey和它对应的值。
+
+         NSKeyValueObservingOptionInitial：当包含这个参数的时候，在addObserver的这个过程中，就会有一个notification被发送到观察者那里，反之则没有。
+
+         NSKeyValueObservingOptionPrior：当包含这个参数的时候，在被观察的property的值改变前和改变后，系统各会给观察者发送一个change notification；在property的值改变之前发送的change notification中，change参数会包含NSKeyValueChangeNotificationIsPriorKey并且值为@YES，但不会包含NSKeyValueChangeNewKey和它对应的值。
+
+         可以指定多个NSKeyValueObservingOptions，将他们用“或”连接后，作为options参数。常用的就前三种，第四种知道便可。目前我们只需知道前三种便可。
+
+      * content: 可以将任意对象作为参数在这里传递。
+
+     */
+    [parent addObserver:self forKeyPath:@&quot;children.name&quot; options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial context:nil];
+
+    label = [[UILabel alloc]initWithFrame:CGRectMake(100, 200, kScreenWidth-200, 40)];
+    label.text = [NSString stringWithFormat:@&quot;%@的孩子名字叫做%@&quot;,parent.name,parent.children.name];
+    [self.view addSubview:label];
+
+    UITextField *textfiled = [[UITextField alloc]initWithFrame:CGRectMake(100, 300, kScreenWidth-200, 40)];
+    textfiled.placeholder = @&quot;重新输入孩子的名字&quot;;
+    [textfiled addTarget:self action:@selector(textfiledChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.view addSubview:textfiled];
+
+}
+
+- (void)textfiledChanged:(UITextField *)textfiled{
+
+    parent.children.name = textfiled.text;
+}
+
+/*
+ * 如果监听的属性发生了变化，调用该方法。
+
+ * keyPath: 传进来发生变化的属性。
+
+ * object: 所监听的对象
+
+ * change：是一个字典，包含了与property的值变化相关的信息。其中可能会有这样几个键值对，
+
+    NSKeyValueChangeKindKey：这是change中永远会包含的键值对，它的值时一个NSNumber对象，具体的数值有NSKeyValueChangeSetting(对属性进行赋值操作)、NSKeyValueChangeInsertion(对属性进行插入操作)、NSKeyValueChangeRemoval(对属性进行移除操作)、NSKeyValueChangeReplacement(对属性进行替换操作)这几个，其中后三个是针对于一对多关系的。
+
+    NSKeyValueChangeNewKey：只有当addObserver的时候在optional参数中加入NSKeyValueObservingOptionNew，这个键值对才会被change参数包含；它表示这个property改变后的新值。
+
+    NSKeyValueChangeNewOld：只有当addObserver的时候在optional参数中加入NSKeyValueObservingOptionOld，这个键值对才会被change参数包含；它表示这个property改变前的值。
+
+    NSKeyValueChangeIndexesKey：当被观察的property是一个ordered to-many relationship时，这个键值对才会被change参数包含；它的值是一个NSIndexSet对象。
+
+    NSKeyValueChangeNotificationIsPriorKey：只有当addObserver的时候在optional参数中加入NSKeyValueObservingOptionPrior，这个键值对才会被change参数包含；它的值是@YES。
+
+    用[change objectForKey:@&quot;old&quot;]获取变化前的值
+    用[change objectForKey:@&quot;new&quot;]获取变化后的值
+
+ *
+ */
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSString *,id&gt; *)change context:(void *)context{
+
+    label.text = [NSString stringWithFormat:@&quot;%@的孩子叫做%@&quot;,parent.name, [change objectForKey:@&quot;new&quot;]];
+
+    NSLog(@&quot;上次的名字是%@&quot;,[change objectForKey:@&quot;old&quot;]);
+
+}
+
+- (void)dealloc{
+
+    [parent removeObserver:self forKeyPath:@&quot;children.name&quot;];
+
+}
+
+@end
+</code></pre><p>1、 添加观察者时的options参数，目前我们最为常用的就是前三种，其他两种可不做深究。<br>2、属性发生变化，调用相应的方法，change字典参数最常用的两个键是『new』和『old』,其他暂不考虑。</p>
+<h1 id="附录-Parent-h和Children-h"><a href="#附录-Parent-h和Children-h" class="headerlink" title="附录 Parent.h和Children.h"></a>附录 Parent.h和Children.h</h1><h2 id="Parent-h，-m里什么都没有"><a href="#Parent-h，-m里什么都没有" class="headerlink" title="Parent.h，.m里什么都没有"></a>Parent.h，.m里什么都没有</h2><pre><code>#import &lt;Foundation/Foundation.h&gt;
+#import &quot;Children.h&quot;
+
+@interface Parent : NSObject
+
+@property (nonatomic,copy) NSString *name;
+
+@property (nonatomic,retain) Children *children;
+
+@end
+</code></pre><h2 id="Children-h-m里什么都没有"><a href="#Children-h-m里什么都没有" class="headerlink" title="Children.h .m里什么都没有"></a>Children.h .m里什么都没有</h2><pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+@interface Children : NSObject
+
+@property (nonatomic,copy) NSString *name;
+
+@end
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/14/网络协议TCP-IP、HTTP/" rel="next" title="网络协议TCP/IP、HTTP">
+                <i class="fa fa-chevron-left"></i> 网络协议TCP/IP、HTTP
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/14/通知中心、KVC、KVO/"
+           data-title="通知中心、KVC、KVO" data-url="http://yoursite.com/2016/09/14/通知中心、KVC、KVO/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通知中心"><span class="nav-number">2.</span> <span class="nav-text">通知中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What"><span class="nav-number">2.1.</span> <span class="nav-text">What</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Where"><span class="nav-number">2.2.</span> <span class="nav-text">Where</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How"><span class="nav-number">2.3.</span> <span class="nav-text">How</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KVC"><span class="nav-number">3.</span> <span class="nav-text">KVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-1"><span class="nav-number">3.1.</span> <span class="nav-text">What</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Where-1"><span class="nav-number">3.2.</span> <span class="nav-text">Where</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why"><span class="nav-number">3.3.</span> <span class="nav-text">Why</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-1"><span class="nav-number">3.4.</span> <span class="nav-text">How</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例"><span class="nav-number">3.5.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KVO"><span class="nav-number">4.</span> <span class="nav-text">KVO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-2"><span class="nav-number">4.1.</span> <span class="nav-text">What</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Where-2"><span class="nav-number">4.2.</span> <span class="nav-text">Where</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-1"><span class="nav-number">4.3.</span> <span class="nav-text">Why</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-2"><span class="nav-number">4.4.</span> <span class="nav-text">How</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例-1"><span class="nav-number">4.5.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录-Parent-h和Children-h"><span class="nav-number">5.</span> <span class="nav-text">附录 Parent.h和Children.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Parent-h，-m里什么都没有"><span class="nav-number">5.1.</span> <span class="nav-text">Parent.h，.m里什么都没有</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Children-h-m里什么都没有"><span class="nav-number">5.2.</span> <span class="nav-text">Children.h .m里什么都没有</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

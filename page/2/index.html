@@ -256,6 +256,732 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/01/多线程NSOperation/" itemprop="url">
+                  多线程NSOperation
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-01T09:10:35+08:00" content="2016-09-01">
+              2016-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/01/多线程NSOperation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/01/多线程NSOperation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这篇文章主要讲NSOperation的使用，相关博客如下：</p>
+<p><a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/" target="_blank" rel="external">iOS开发之多线程理论部分</a></p>
+<p><a href="https://wangliguang.github.io/2016/09/01/%E5%A4%9A%E7%BA%BF%E7%A8%8BGCD/" target="_blank" rel="external">GCD</a></p>
+<p><a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSThread/" target="_blank" rel="external">NSThread</a></p>
+<h1 id="什么是NSOperation"><a href="#什么是NSOperation" class="headerlink" title="什么是NSOperation"></a>什么是NSOperation</h1><p>使用NSOperation和NSOperationQueue进行多线程开发类似于线程池，只要将一个<strong>NSOperation(实际开发中需要使用其子类NSInvocationOperation、NSBlockOperation)放到NSOperationQueue这个队列中线程就会依次启动。</strong>NSOperationQueue负责管理、执行所有的NSOperation，在这个过程中<code>可以更加容易管理线程总数和控制线程之间的依赖关系。</code></p>
+<p><strong>NSOperation</strong>  利用他来创建线程操作，线程操作只有放在线程队列中才会在子线程中执行。</p>
+<p><strong>NSOperationQueue</strong>: 线程队列分两种类型。</p>
+<ul>
+<li><p>主队列</p>
+<ul>
+<li>[NSOperationQueue mainQueue]</li>
+<li>凡是添加到主队列中的任务(NSOperation),都会放到主线程中执行。</li>
+</ul>
+</li>
+<li><p>非主队列</p>
+<ul>
+<li>[[NSOperationQueue alloc]init]</li>
+<li>添加到这种队列中的任务，都会放到子线程中执行。</li>
+</ul>
+</li>
+</ul>
+<p>NSOperation常用子类用于创建线程操作：NSInvocationOperation和NSBlockOperation，两种方式本质没有区别，但后者使用block形式进行代码组织，使用相对方便。也可以用自定义的继承于NSOperation的类来创建线程操作。</p>
+<h1 id="NSOperation的三种用法"><a href="#NSOperation的三种用法" class="headerlink" title="NSOperation的三种用法"></a>NSOperation的三种用法</h1><p>配合使用NSOperation和NSOperationQueue实现多线程编程，一共有三种方式，但其实这三种方式都是采用NSOperation的子类与NSOperationQueue搭配实现多线程开发。这三个子类分别是NSInvocationOperation、NSBlockOperation和自定义继承于NSOperation的类，前两者是系统提供的子类。</p>
+<h2 id="NSInvocationOperation与NSOperationQueue搭配"><a href="#NSInvocationOperation与NSOperationQueue搭配" class="headerlink" title="NSInvocationOperation与NSOperationQueue搭配"></a>NSInvocationOperation与NSOperationQueue搭配</h2><ol>
+<li><p>创建一个线程操作，并实现方法选择器选择的方法</p>
+<pre><code>//创建一个线程操作
+NSInvocationOperation *invocationOperation = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(invocationOperation:) object:kurl];
+
+//让线程操作开始执行。但是如果这样做的话这个操作将会在主线程中执行，只有将这个操作放进队列，才会开辟一个子线程让这个操作在子线程中执行。
+//[invocationOperation start];
+</code></pre></li>
+<li><p>创建一个线程队列</p>
+<pre><code>NSOperationQueue *operationQueue = [NSOperationQueue new];
+</code></pre></li>
+<li><p>将创建好的线程操作放在线程队列中</p>
+<pre><code>//只有放在线程队列中的线程操作才会在子线程中执行。线程队列负责管理、执行所有的NSOperation
+[operationQueue addOperation:invocationOperation];
+</code></pre></li>
+<li><p>在创建线程操作时选择的方法内更新UI</p>
+<pre><code>- (void)invocationOperation:(NSString *)url{
+
+      //虽然没有采用NSThread创建线程，但仍可以使用[NSThread currentThread]来获取当前的线程。
+      NSLog(@&quot;invocationOperation方法所在的线程%@&quot;,[NSThread currentThread]);
+      NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:kurl]];
+      //在子线程中回到主线程更新UI
+      [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+
+          imageView.image = [UIImage imageWithData:data];
+
+     }];
+
+}
+</code></pre><p>   到目前为止是不是感觉跟NSThread挺相似的，接下来简单分析一下两者的区别。</p>
+<pre><code> 1. NSThread需要启动，也就是说需要费心管理声明周期，而采用Operation只需将线程操作放到线程队列中即可，线程队列负责管理、执行所有的NSOperation。
+
+ 2. 管理线程的最大并发数，也就是同时执行的任务数。
+
+      //默认是-1，不能设为0，如果设置为0就不执行任务。
+      operationQueue.maxConcurrentOperationCount = 1;
+
+ 3. 控制线程之间的依赖关系，NSOperation之间可以设置依赖来保证执行顺序,比如一定要让操作1执行完后，才能执行操作2。线程之间不能相互依赖，不如A依赖于B，B有依赖于A。  
+
+     //操作1依赖于操作2
+     [invocationOperation1 addDependency:invocationOperation2];
+
+ 4. 队列的取消、暂停、恢复
+
+      只要设置队列的suspended为YES, 那么就会暂停队列中其它任务的执行，也就是说不会再继续执行没有执行到得任务
+
+      self.queue.suspended = YES;
+
+      注意1: 设置为暂停之后, 不会立即暂停,会继续执行当前正在执行的任务, 直到当前任务执行完毕, 就不会执行下一个任务了,也就是说, 暂停其实是暂停下一个任务, 而不能暂停当前任务
+
+      注意2: 暂停是可以恢复的,只要设置队列的suspended为NO, 那么就会恢复队列中其它任务的执行
+
+5. 取消队列中所有的任务的执行
+
+    [self.queue cancelAllOperations];
+
+    取消和暂停一样, 是取消后面的任务, 不能取消当前正在执行的任务，取消是不可以恢复的
+</code></pre></li>
+</ol>
+<h2 id="NSBlockOperation与NSOperationQueue搭配，"><a href="#NSBlockOperation与NSOperationQueue搭配，" class="headerlink" title="NSBlockOperation与NSOperationQueue搭配，"></a>NSBlockOperation与NSOperationQueue搭配，</h2><p>   其实方式一和方式二没有什么本质区别。主要是后者使用block形式进行代码组织，使用相对方便。</p>
+<pre><code> - (void)viewDidLoad{
+
+     [super viewDidLoad];
+
+     imageView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 200, 200)];
+
+     [self.view addSubview:imageView];
+
+     //1. 创建线程操作
+     NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+
+        NSLog(@&quot;blockOperation线程操作所在的线程%@&quot;,[NSThread currentThread]);
+
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:kurl]];
+
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+
+              NSLog(@&quot;更新UI所在的线程%@&quot;,[NSThread currentThread]);
+
+              imageView.image = [UIImage imageWithData:data];
+
+         }];
+
+     }];
+
+     //2. 创建线程队列
+     NSOperationQueue *operationQueue = [NSOperationQueue new];
+
+     //3. 将线程操作放到线程队列中
+     [operationQueue addOperation:blockOperation];
+
+}
+</code></pre><p>   简化以上操作</p>
+<pre><code>//1. 创建一个线程队列
+NSOperationQueue *operationQueue = [NSOperationQueue new];
+
+//2. 直接利用线程队列的addOperationWithBlock添加线程操作。
+[operationQueue addOperationWithBlock:^{
+
+    NSLog(@&quot;更新UI所在的线程%@&quot;,[NSThread currentThread]);
+
+}];
+</code></pre><h2 id="继承于NSOperation的子类与NSOperationQueue的搭配"><a href="#继承于NSOperation的子类与NSOperationQueue的搭配" class="headerlink" title="继承于NSOperation的子类与NSOperationQueue的搭配"></a>继承于NSOperation的子类与NSOperationQueue的搭配</h2><ol>
+<li><p>创建一个继承于NSOperation的类，并在.m文件中重写main方法，main方法便是该线程要执行的操作。<strong>注意，如果是同步操作，该方法能够自动访问到主线程的自动释放池，如果是异步执行操作，那么将无法访问到主线程的自动释放池，需要再main中再新建一个自动释放池，来帮助管理内存。</strong></p>
+</li>
+<li><p>创建线程队列，并把线程操作放在线程队列中。</p>
+</li>
+</ol>
+<pre><code>  //
+  //  CoustomOperation.h
+  //  NSOperation
+  //
+  //  Created by GG on 16/2/26.
+  //  Copyright © 2016年 GG. All rights reserved.
+  //
+
+  #import &lt;Foundation/Foundation.h&gt;
+  #import &lt;UIKit/UIKit.h&gt;
+  @interface CoustomOperation : NSOperation
+
+  //接收传进来的图片对象
+  @property (nonatomic,retain) UIImageView *imageView;
+
+  //在该该类对象初始化时，将图片试图对象传到类中。
+  - (instancetype)initWithImageView:(UIImageView *)imageView;
+
+  @end
+
+
+----
+
+  //
+  //  CoustomOperation.m
+  //  NSOperation
+  //
+  //  Created by GG on 16/2/26.
+  //  Copyright © 2016年 GG. All rights reserved.
+  //
+
+  #import &quot;CoustomOperation.h&quot;
+
+  #define kurl @&quot;http://store.storeimages.cdn-apple.com/8748/as-images.apple.com/is/image/AppleInc/aos/published/images/s/38/s38ga/rdgd/s38ga-rdgd-sel-201601?wid=848&amp;hei=848&amp;fmt=jpeg&amp;qlt=80&amp;op_sharpen=0&amp;resMode=bicub&amp;op_usm=0.5,0.5,0,0&amp;iccEmbed=0&amp;layer=comp&amp;.v=1454777389943&quot;
+
+  @implementation CoustomOperation
+
+  - (instancetype)initWithImageView:(UIImageView *)imageView
+  {
+      self = [super init];
+      if (self) {
+
+         self.imageView = imageView;
+      }
+      return self;
+  }
+
+  - (void)main{
+
+        //新建一个自动释放池，因为如果是同步操作，该方法能够自动访问到主线程的自动释放池，如果是异步执行操作，那么将无法访问到主线程的自动释放池。
+        @autoreleasepool {
+
+             NSLog(@&quot;获取图片所在的线程%@&quot;,[NSThread currentThread]);
+             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:kurl]];
+
+             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+
+                 NSLog(@&quot;更新UI所在的线程%@&quot;,[NSThread currentThread]);
+
+                 self.imageView.image = [UIImage imageWithData:imageData];
+
+             }];
+
+        }            
+   }
+
+   @end  
+</code></pre><hr>
+<pre><code>ViewController.m
+- (void)viewDidLoad{
+
+    [super viewDidLoad];
+
+    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 200, 200)];
+
+    [self.view addSubview:imageView];
+
+    CoustomOperation *coustomOperation = [[CoustomOperation alloc] initWithImageView:(UIImageView *)imageView];
+
+    NSOperationQueue *operationQueue = [NSOperationQueue new];
+
+    [operationQueue addOperation:coustomOperation];
+
+}
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>  这三种方式中，感觉方式一是最麻烦的，方式二相对而已简洁不少，而方式三更适合于封装某一个线程操作。</p>
+<ol>
+<li>是用NSOperation加载一张图片</li>
+<li>使用NSOperation加载多张图片，并能使线程暂停，恢复，终止,</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/31/定位-编码与反编码/" itemprop="url">
+                  定位/编码与反编码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T08:28:39+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/31/定位-编码与反编码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/定位-编码与反编码/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  学习地图，我们必须要接触两个框架：</p>
+<ol>
+<li><p>Core Location，主要包含定位、地理编码、反编码功能</p>
+</li>
+<li><p>MapKit，利用他可以对地图进行精准的控制，如需了解请移步<a href="https://wangliguang.github.io/2016/08/30/iOS%E5%9C%B0%E5%9B%BE-%E5%9C%B0%E5%9B%BE%E6%98%BE%E7%A4%BA:%E5%A4%A7%E5%A4%B4%E9%92%88/" target="_blank" rel="external">iOS开发之地图-地图显示/大头针</a></p>
+<p>本文我们主要介绍的是使用Core Location来实现定位、地理编码(包括反编码)功能。</p>
+</li>
+</ol>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p> 定位是一个很常用的功能，打开地图软件后如果用户允许软件定位的话，软件便会自动锁定到手机所在位置，并且地图上的位置会随着手机的移动而移动。定位使用到的类是Core Location框架中的CLLocationManager类。</p>
+<h2 id="CLLocationManager中常用的方法"><a href="#CLLocationManager中常用的方法" class="headerlink" title="CLLocationManager中常用的方法"></a>CLLocationManager中常用的方法</h2><pre><code>  *******类方法**********
+  //当前系统是否打开定位服务,在设置-&gt;隐私里控制。这是能够控制手机上所有App的定位授权     
+  +(BOOL)locationServicesEnabled;
+
+  /* 定位服务授权状态，返回枚举类型，下面是类型解释
+
+   * kCLAuthorizationStatusNotDetermined： 用户尚未做出决定是否启用定位服务
+
+   * kCLAuthorizationStatusRestricted： 没有获得用户授权使用定位服务,可能用户没有自己禁止访问授权
+
+   * kCLAuthorizationStatusDenied ：用户已经明确禁止应用使用定位服务或者当前系统定位服务处于关闭状态
+
+   * kCLAuthorizationStatusAuthorizedAlways： 应用获得授权可以一直使用定位服务，即使应用不在使用状态
+
+   * kCLAuthorizationStatusAuthorizedWhenInUse： 使用此应用过程中允许访问定位服务
+
+   */ 
+   +(CLAuthorizationStatus)authorizationStatus;
+
+---
+
+   *******对象方法**********
+   //开始定位追踪，开始定位后将按照用户设置的更新频率执行-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;方法反馈定位信息
+   startUpdatingLocation
+
+   //停止定位追踪
+   stopUpdatingLocation
+
+   //请求获得应用使用时的定位服务授权，注意使用此方法前在要在info.plist中配置NSLocationWhenInUseUsageDescription
+   requestWhenInUseAuthorization
+
+   //请求获得应用一直使用定位服务授权，注意使用此方法前要在info.plist中配置NSLocationAlwaysUsageDescription
+   requestAlwaysAuthorization
+
+   //开始导航方向追踪
+   startUpdatingHeading
+
+   //停止导航方向追踪
+   stopUpdatingHeading
+
+   //开始对某个区域进行定位追踪，开始对某个区域进行定位后。如果用户进入或者走出某个区域会调用相应的代理方法反馈相关信息
+
+   //停止对某区域追踪
+   stopMonitoringForRegion:
+
+ ---
+
+   *******代理方法*******
+   //位置发生改变后执行（第一次定位到某个位置之后也会执行）
+   -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations;
+
+   //导航方向发生变化后执行
+   - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading;
+
+   // 进入某个区域之后执行
+   - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region;
+
+    //走出某个区域之后执行
+     - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+</code></pre><h2 id="实现定位的步骤"><a href="#实现定位的步骤" class="headerlink" title="实现定位的步骤"></a>实现定位的步骤</h2><pre><code>1. 导入框架         
+       #import &lt;CoreLocation/CoreLocation.h&gt;
+
+2. **声明全局**的定位管理器，因为定位是持续性动作，如果声明为局部变量，还没有退出这个界面，定位管理器对象就会被释放，从而造成定位失败，而如果声明为全局变量，只有该界面对象被释放，这个定位管理器才会被释放。另外如果是该定位管理器是局部变量，第一次打开的授权提示框会出现闪退现象。
+       CLLocationManager *_locationManager;
+
+3. 实例化定位管理器
+       _locationManager = [[CLLocationManager alloc]init];
+
+4. 判断当前系统是否打开定位服务,在设置-&gt;隐私里。这是能够控制手机上所有App的定位授权
+        if ([CLLocationManager locationServicesEnabled] == NO) {
+
+              //判断是否可以打开设置界面
+              if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
+
+                    //跳转到设置页面
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+
+              };
+
+              return;
+        }
+
+5. **定位授权，如果不授权就无法定位**
+
+       //使用中授权
+       [_locationManager requestWhenInUseAuthorization]; 
+
+       //永久授权，这种情况下，有时你应用没打开也会定位,如果苹果手机上有地图软件的话，你没有打开该软件，系统有时也会突然给你个提示框说某应用一直在使用定位功能，是否关闭。
+       // [_locationManager requestAlwaysAuthorization];  
+6. **在info.plist插入两个字段，不添加就无法定位**
+
+       //都string类型，和第五步的两种授权，写入的内容会出现在定位授权提示框上
+       NSLocationWhenInUseUsageDescription//使用中授权描述
+       NSLocationAlwaysUsageDescription//永久授权描述
+
+7.  挂上代理
+        _locationManager.delegate = self;
+
+8. 使用后台定位
+        _locationManager.allowsBackgroundLocationUpdates = YES;
+
+9. 设置定位信息
+
+       //设置定位精度
+       _locationManager.desiredAccuracy = 10;
+
+       //设置定位频率定位频率和定位精度并不应当越精确越好，需要视实际情况而定，因为越精确越耗性能，也就越费电。
+       CLLocationDistance distance=1.0;//1米定位一次
+       _locationManager.distanceFilter = distance;
+
+10. 开始追踪,**如果不需要定位了记得停止定位，要不然会有很大的耗电量**
+        [_locationManager startUpdatingLocation];
+
+11. 实现代理方法,**以后我们会常看到一个CLLocation类，它用于表示位置信息，包含地理坐标、海拔等信息，包含在CoreLoaction框架中。**
+         #pragma  mark delegate 
+        //定位成功，因为定位时刻都在进行，所以苹果将瞬时获得的多个位置信息放在一个数组中，我们只需获取到数组中的最后一个。
+        - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray&lt;CLLocation *&gt; *)locations{
+
+        /*
+         * 如果不需要定位了记得停止定位，要不然会有很大的耗电量
+         */
+        CLLocation *curLoc = locations.lastObject;
+
+        /*
+          * 当前位置的经纬度
+          *
+              typedef struct {
+                 CLLocationDegrees latitude;
+                 CLLocationDegrees longitude;
+              } CLLocationCoordinate2D;
+          *
+          */
+          CLLocationCoordinate2D coordinate = curLoc.coordinate;
+          NSLog(@&quot;经度:%f 纬度:%f&quot;,coordinate.longitude,coordinate.latitude);
+
+          //海拔高度
+          NSLog(@&quot;海拔高度:%f&quot;,curLoc.altitude);
+
+           //位置的精度，位置精度通过一个圆表示，实际位置可能位于这个圆内的任何地方。这个圆是由coordinate(坐标)和horizontalAccuracy(半径)共同决定的，horizontalAccuracy的值越大，那么定义的圆就越大，因此位置精度就越低。如果horizontalAccuracy的值为负，则表明coordinate的值无效。
+          NSLog(@&quot;位置的精度:%f&quot;,curLoc.horizontalAccuracy);
+
+          //海拔高度的精度。为正值表示海拔高度的误差为对应的米数；为负表示altitude(海拔高度)的值无效。
+          NSLog(@&quot;海拔的精度:%f&quot;,curLoc.verticalAccuracy);
+
+          //speed — 速度。该属性是通过比较当前位置和前一个位置，并比较它们之间的时间差异和距离计算得到的。鉴于Core Location更新的频率，speed属性的值不是非常精确，除非移动速度变化很小。
+          NSLog(@&quot;行驶速度：%f&quot;,curLoc.speed);
+
+          //当前定位的日期
+          NSLog(@&quot;定位日期%@&quot;,curLoc.timestamp);
+
+          //得到两个位置之间的距离，通过不断累加，来获取总距离
+          //    [curLoc distanceFromLocation:nil];
+
+          //得到两次更新的时间之间的间隔，通过累加来获取行驶总时间
+          //    [curLoc.timestamp timeIntervalSinceDate:lastLoc.timestamp];
+
+          //floor 楼层的高度 -&gt; level 几层
+          NSLog(@&quot;当前楼层%ld层&quot;,curLoc.floor.level);
+
+        } 
+
+         //定位失败
+        - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+
+           NSLog(@&quot;定位失败%@&quot;,error);
+
+        }
+</code></pre><h2 id="总结：如果定位失败，首先检查一下几点："><a href="#总结：如果定位失败，首先检查一下几点：" class="headerlink" title="总结：如果定位失败，首先检查一下几点："></a>总结：如果定位失败，首先检查一下几点：</h2><ol>
+<li><p>定位管理器是否为全局变量</p>
+</li>
+<li><p>info.plist中的字段是否配置</p>
+</li>
+<li><p>在代码中是否做授权处理</p>
+</li>
+<li><p><strong> 如果用模拟器的话，可能是因为没有给模拟器设置经纬度，点击模拟器模拟器 -&gt; 菜单栏Debug -&gt; Location -&gt; CustomLocation -&gt; 设置经纬度，如果想要让模拟器自动定位选择Location —&gt; Apple。</strong></p>
+</li>
+</ol>
+<h1 id="编码反编码"><a href="#编码反编码" class="headerlink" title="编码反编码"></a>编码反编码</h1><p>   编码与反编码用到的类都是CLGeocoder</p>
+<pre><code>1. 编码：将地址转化为经纬度
+2. 反编码：将经纬度转化为地址
+</code></pre><p>   <strong>之后我们会接触到一个CLPlacemark类，他是定位框架中地标类，封装了详细的地理信息</strong></p>
+<pre><code>  //编码
+  - (void)geocodeAddressString:(NSString *)addressString completionHandler:(CLGeocodeCompletionHandler)completionHandler;
+
+//反编码
+- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler;
+</code></pre><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>//
+//  CLGeocoderViewController.m
+//  Location
+//
+//  Created by GG on 16/3/9.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;CLGeocoderViewController.h&quot;
+#import &lt;CoreLocation/CoreLocation.h&gt;
+@interface CLGeocoderViewController ()
+{
+    CLGeocoder *_geocoder;
+}
+@end
+
+@implementation CLGeocoderViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    _geocoder=[[CLGeocoder alloc]init];
+    [self getCoordinateByAddress:@&quot;北京&quot;];
+    [self getAddressByLatitude:39.54 longitude:116.28];
+}
+
+#pragma mark 根据地名确定地理坐标
+-(void)getCoordinateByAddress:(NSString *)address{
+    //地理编码
+    [_geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error) {
+        //取得第一个地标，地标中存储了详细的地址信息，注意：一个地名可能搜索出多个地址
+        CLPlacemark *placemark=[placemarks firstObject];
+
+        CLLocation *location=placemark.location;//位置
+        CLRegion *region=placemark.region;//区域
+        NSDictionary *addressDic= placemark.addressDictionary;//详细地址信息字典,包含以下部分信息
+        //        NSString *name=placemark.name;//地名
+        //        NSString *thoroughfare=placemark.thoroughfare;//街道
+        //        NSString *subThoroughfare=placemark.subThoroughfare; //街道相关信息，例如门牌等
+        //        NSString *locality=placemark.locality; // 城市
+        //        NSString *subLocality=placemark.subLocality; // 城市相关信息，例如标志性建筑
+        //        NSString *administrativeArea=placemark.administrativeArea; // 州
+        //        NSString *subAdministrativeArea=placemark.subAdministrativeArea; //其他行政区域信息
+        //        NSString *postalCode=placemark.postalCode; //邮编
+        //        NSString *ISOcountryCode=placemark.ISOcountryCode; //国家编码
+        //        NSString *country=placemark.country; //国家
+        //        NSString *inlandWater=placemark.inlandWater; //水源、湖泊
+        //        NSString *ocean=placemark.ocean; // 海洋
+        //        NSArray *areasOfInterest=placemark.areasOfInterest; //关联的或利益相关的地标
+        NSLog(@&quot;位置:%@,区域:%@,详细信息:%@&quot;,location,region,addressDic);
+    }];
+}
+
+#pragma mark 根据坐标取得地名
+-(void)getAddressByLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude{
+    //反地理编码
+    CLLocation *location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
+    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *placemark=[placemarks firstObject];
+        NSLog(@&quot;详细信息:%@&quot;,placemark.addressDictionary);
+    }];
+}
+
+@end
+</code></pre><h2 id="总结我们目前在地图上接触到的几个类："><a href="#总结我们目前在地图上接触到的几个类：" class="headerlink" title="总结我们目前在地图上接触到的几个类："></a>总结我们目前在地图上接触到的几个类：</h2><pre><code>1.  CLLocationManager：定位管理器,用来设置管理定位，设置定位的精度、定位频率、后台运行等。
+
+2. CLGeocoder：主要用来编码与反编码。
+
+3. CLLocation：用于表示位置信息，包含地理坐标、海拔等信息，包含在CoreLoaction框架中。
+
+4. CLPlacemark：定位框架中地标类，封装了详细的地理信息。
+
+5. CLLocationCoordinate2D：他是一个结构体，用来表示经纬度。
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/30/地图显示:大头针/" itemprop="url">
                   地图显示/大头针
                 </a>
@@ -2221,7 +2947,7 @@ hexo deploy
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

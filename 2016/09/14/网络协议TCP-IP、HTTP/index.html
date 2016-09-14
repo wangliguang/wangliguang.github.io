@@ -1,0 +1,722 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="网络协议两台计算机要实现通讯必须遵守同一个规则，这就好比两个人交流，只会英文和只会中文的因为没有共同的语言(规则)根本就无法沟通，要使两台计算机能够正常通讯，两者必须遵守同样的规则，而这个规则就是就是网络协议。
+ 那么这个规则，也就是计算机通信的网络协议是谁规定的呢，国际上有这么一个组织ISO(国际标准化组织)，他定义了网络协议基本框架，叫做OSI模型。两台电脑在进行通讯时，要考虑很多很多的问题，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络协议TCP/IP、HTTP">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/网络协议TCP-IP、HTTP/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="网络协议两台计算机要实现通讯必须遵守同一个规则，这就好比两个人交流，只会英文和只会中文的因为没有共同的语言(规则)根本就无法沟通，要使两台计算机能够正常通讯，两者必须遵守同样的规则，而这个规则就是就是网络协议。
+ 那么这个规则，也就是计算机通信的网络协议是谁规定的呢，国际上有这么一个组织ISO(国际标准化组织)，他定义了网络协议基本框架，叫做OSI模型。两台电脑在进行通讯时，要考虑很多很多的问题，">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-a0a2a7fb67f60f59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-14T07:28:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络协议TCP/IP、HTTP">
+<meta name="twitter:description" content="网络协议两台计算机要实现通讯必须遵守同一个规则，这就好比两个人交流，只会英文和只会中文的因为没有共同的语言(规则)根本就无法沟通，要使两台计算机能够正常通讯，两者必须遵守同样的规则，而这个规则就是就是网络协议。
+ 那么这个规则，也就是计算机通信的网络协议是谁规定的呢，国际上有这么一个组织ISO(国际标准化组织)，他定义了网络协议基本框架，叫做OSI模型。两台电脑在进行通讯时，要考虑很多很多的问题，">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-a0a2a7fb67f60f59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/网络协议TCP-IP、HTTP/"/>
+
+  <title> 网络协议TCP/IP、HTTP | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                网络协议TCP/IP、HTTP
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T15:22:01+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/网络协议TCP-IP、HTTP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/网络协议TCP-IP、HTTP/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h1><p>两台计算机要实现通讯必须遵守同一个规则，这就好比两个人交流，只会英文和只会中文的因为没有共同的语言(规则)根本就无法沟通，要使两台计算机能够正常通讯，两者必须遵守同样的规则，而这个规则就是就是网络协议。</p>
+<p> 那么这个规则，也就是计算机通信的网络协议是谁规定的呢，国际上有这么一个组织<strong>ISO(国际标准化组织)，他定义了网络协议基本框架，叫做OSI模型</strong>。两台电脑在进行通讯时，要考虑很多很多的问题，例如A电脑如何找到B电脑，A电脑给B电脑什么类型的数据，A电脑怎么能收到B电脑的反馈等等，这些问题都需要一个标准，为了能够给以上问题分类设置标准，OSI模型进行了层次划分，每一层都有相应的协议去解决相应的问题。七层标准模型，如下：</p>
+<ul>
+<li>应用层 </li>
+<li>表示层</li>
+<li>会话层</li>
+<li>传输层</li>
+<li>网络层 </li>
+<li>数据链路层</li>
+<li>物理层。</li>
+</ul>
+<h1 id="TCP-IP协议"><a href="#TCP-IP协议" class="headerlink" title="TCP/IP协议"></a>TCP/IP协议</h1><h2 id="什么是TCP-IP协议"><a href="#什么是TCP-IP协议" class="headerlink" title="什么是TCP/IP协议"></a>什么是TCP/IP协议</h2><ul>
+<li><p><strong>OSI网络通讯协议模型，是一个参考模型，参考于他的TCP/IP协议才是目前网络上通用的网络通讯协议，</strong>接下来先了解一下TCP/IP协议。</p>
+</li>
+<li><p>通常所说的TCP/IP协议，其实是一个协议集合，这个集合里面包含了网络通讯所需的所有协议，里面不仅有TCP(传输控制协议)、IP(网际协议)，还有UDP、ICMP、RIP、TELNET、FTP、SMTP、ARP、TFTP等许多协议，但因为TCP协议和IP协议是保证数据完整传输的两个基本的重要协议，所以该协议集合就被命名为TCP/IP协议了。</p>
+</li>
+<li><p>TCP/IP协议的制定是参考于OSI模型的，但并没有严格按照OSI规定的七层去划分，而是划分了四层，</p>
+<ul>
+<li>应用层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>网络接口层</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1338564-a0a2a7fb67f60f59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="OSI和TCP/IP对比图"></p>
+</li>
+<li><p>目前我们已经知道TCP/IP协议分为四个层次，我举个例子简单说明一下各个层的作用，拿寄送邮件举例，A寄邮件给B，A关心的是用什么格式写什么内容给B(应用层内容)，是寄挂号信(信件丢失会赔偿)还是寄平信(信件丢失不赔偿)(应用层内容)，A是不会关注邮件传送过程中采用了哪条路线，邮递员是如何把信地道B手里的(网络层，网络接口层)。接下来再详细讲一下应用层和传输层。</p>
+<ol>
+<li><p><strong>传输层</strong> 传输层有多个协议，但最主要的是<code>TCP和UDP协议。两者的区别在与TCP协议需要接收方反馈，传输更可靠，而UDP协议虽然不需要反馈，但传输的速率比较高。</code>，至于具体采用哪种方式，需要具体问题具体分析，在不可靠的网络传送过程中一般选择TCP传送方式，在讲求效率或者不在乎传输失误的情况下可以选择UDP方式来提高传输速率。</p>
+</li>
+<li><p><strong>应用层</strong> 应用层协议有很多，每一个协议代表一种类型的服务。<br><code>HTTP协议，万维网服务</code><br><code>FTP协议，文件传送服务</code><br><code>POP3协议，邮件服务</code></p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><h2 id="HTTP介绍"><a href="#HTTP介绍" class="headerlink" title="HTTP介绍"></a>HTTP介绍</h2><p>   HTTP协议，属于应用层，是一种超文本传输协议。</p>
+<h2 id="HTTP协议的作用"><a href="#HTTP协议的作用" class="headerlink" title="HTTP协议的作用"></a>HTTP协议的作用</h2><ol>
+<li><p>规定客户端和服务器之间的数据传输格式</p>
+</li>
+<li><p>让客户端和服务器能有效地进行数据沟通</p>
+</li>
+</ol>
+<h2 id="为什么要选择使用HTTP协议"><a href="#为什么要选择使用HTTP协议" class="headerlink" title="为什么要选择使用HTTP协议"></a>为什么要选择使用HTTP协议</h2><ol>
+<li><p>支持客户/服务器模式。</p>
+</li>
+<li><p>简单快速。客户向服务器请求服务时，只需传送请求方法和路径，客户端与服务器之间的请求方法常用的有GET、HEAD、POST。另外，由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快因为HTTP协议简单，所以HTTP服务器的程序规模小，因而通信速度很快。</p>
+</li>
+<li><p>灵活。HTTP允许传输任意类型的数据，正在传输的类型由Content-Type加以标记。</p>
+</li>
+<li><p>无连接。限制每次链接只处理一个请求，服务器对客户端的请求做出响应后，马上断开链接，这种方式可以节省传输时间。</p>
+</li>
+<li><p>无状态。HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</p>
+</li>
+</ol>
+<h2 id="采用HTTP向服务器请求数据常用方式"><a href="#采用HTTP向服务器请求数据常用方式" class="headerlink" title="采用HTTP向服务器请求数据常用方式"></a>采用HTTP向服务器请求数据常用方式</h2><ol>
+<li><p>GET请求。get是获取数据的意思，数据以明文在URL中传递，受限于URL长度，所以传输数据量比较小。比如我在百度上搜索FMDB，那么他相应的url便是<a href="https://www.baidu.com/s?ie=UTF-8&amp;wd=FMDB" target="_blank" rel="external">https://www.baidu.com/s?ie=UTF-8&amp;wd=FMDB</a>，我要搜索的内容在url是可见的，如果我要搜索的内容过长，便会产生异常，不信的话，你可以将FMDB换成一个比较长的字符看下效果。</p>
+</li>
+<li><p>POST请求。post是向服务器提交数据的意思，提交的数据以实际内容形式存放到消息头中进行传递，无法在浏览器url中查看到，大小没有限制。在请求URL后面以?的形式跟上发给服务器的参数，多个参数之间用&amp;隔开，比如<a href="http://ww.test.com/login?username=123&amp;pwd=234&amp;type=JSON" target="_blank" rel="external">http://ww.test.com/login?username=123&amp;pwd=234&amp;type=JSON</a></p>
+</li>
+<li><p>HEAD请求：请求头信息，并不返回请求数据体，而只返回请求头信息，常用用于在文件下载中取得文件大小、类型等信息。</p>
+</li>
+<li><p>GET和POST的选择</p>
+<ul>
+<li>如果要传递大量数据，比如文件上传，只能用POST请求</li>
+<li>GET的安全性比POST要差些，如果包含机密\敏感信息，建议用POST</li>
+<li>如果仅仅是索取数据（数据查询），建议使用GET</li>
+<li>如果是增加、修改、删除数据，建议使用POST   </li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/13/JSON和XML/" rel="next" title="JSON和XML">
+                <i class="fa fa-chevron-left"></i> JSON和XML
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/14/通知中心、KVC、KVO/" rel="prev" title="通知中心、KVC、KVO">
+                通知中心、KVC、KVO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/14/网络协议TCP-IP、HTTP/"
+           data-title="网络协议TCP/IP、HTTP" data-url="http://yoursite.com/2016/09/14/网络协议TCP-IP、HTTP/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络协议"><span class="nav-number">1.</span> <span class="nav-text">网络协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP协议"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是TCP-IP协议"><span class="nav-number">2.1.</span> <span class="nav-text">什么是TCP/IP协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议"><span class="nav-number">3.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP介绍"><span class="nav-number">3.1.</span> <span class="nav-text">HTTP介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议的作用"><span class="nav-number">3.2.</span> <span class="nav-text">HTTP协议的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要选择使用HTTP协议"><span class="nav-number">3.3.</span> <span class="nav-text">为什么要选择使用HTTP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#采用HTTP向服务器请求数据常用方式"><span class="nav-number">3.4.</span> <span class="nav-text">采用HTTP向服务器请求数据常用方式</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
