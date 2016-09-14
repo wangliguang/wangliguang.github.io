@@ -256,6 +256,298 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/14/响应式编程RAC/" itemprop="url">
+                  响应式编程RAC
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T15:48:52+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/响应式编程RAC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/响应式编程RAC/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ReactiveCocoa是什么"><a href="#ReactiveCocoa是什么" class="headerlink" title="ReactiveCocoa是什么"></a>ReactiveCocoa是什么</h1><ul>
+<li><p>ReactiveCocoa（简称为<code>RAC</code>）,响应式框架,是由Github开源的一个应用于iOS和OS开发的新框架,Cocoa是苹果整套框架的简称，因此很多苹果框架喜欢以Cocoa结尾。</p>
+</li>
+<li><p>在我们iOS开发过程中，经常会响应某些事件来处理某些业务逻辑，例如按钮的点击，上下拉刷新，网络请求，属性的变化（通过KVO）或者用户位置的变化（通过CoreLocation）。但是这些事件都用不同的方式来处理，比如action、delegate、KVO、callback(回调)等。  </p>
+</li>
+<li><p>其实这些事件，都可以通过RAC处理，ReactiveCocoa为事件提供了很多处理方法，而且利用RAC处理事件很方便，可以把要处理的事情，和监听的事情的代码放在一起，这样非常方便我们管理，就不需要跳到对应的方法里。非常符合我们开发中<code>高聚合，低耦合</code>的思想。</p>
+</li>
+</ul>
+<h1 id="这个框架能为我们带来什么样的便利"><a href="#这个框架能为我们带来什么样的便利" class="headerlink" title="这个框架能为我们带来什么样的便利"></a>这个框架能为我们带来什么样的便利</h1><ul>
+<li>能使业务逻辑变得更加清晰</li>
+<li>大量减少开发代码量</li>
+<li>大量使用block块</li>
+</ul>
+<h1 id="什么时候能用到这个RAC呢"><a href="#什么时候能用到这个RAC呢" class="headerlink" title="什么时候能用到这个RAC呢"></a>什么时候能用到这个RAC呢</h1><ol>
+<li><p>当你需要用到代理的时候开始使用它。例如用RAC检测textfiled的实时输入，不需要繁琐的遵守协议、挂代理、实现方法</p>
+</li>
+<li><p>涉及到点击事件的时候可以用，不需要再addtarget及实现方法。</p>
+</li>
+<li>还有通知、KVO、回调等。</li>
+</ol>
+<h1 id="具体怎么使用"><a href="#具体怎么使用" class="headerlink" title="具体怎么使用"></a>具体怎么使用</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li><p>创建一个新项目，使用<a href="http://www.jianshu.com/p/24e0a451bca1" target="_blank" rel="external">Cocoapods</a>在项目中导入该框架。将下面的代码复制到Podfile文件然后更新。</p>
+<pre><code>use_frameworks!
+pod &apos;ReactiveCocoa&apos;, &apos;~&gt; 4.0.4-alpha-4&apos;
+</code></pre><p>PS：因为这个框架是采用Swift和OC混编的，所以在Podfile文件的最上面要写上use_frameworks</p>
+</li>
+<li><p>建pch文件，在pch文件中导入该框架。</p>
+<pre><code>#import &quot;ReactiveCocoa.h&quot;
+</code></pre></li>
+<li><p>利用这个框架实现下面需求，来具体说明他该如何使用。</p>
+<ul>
+<li>两个输入框内都有内容时，下面的按钮是红色。</li>
+<li>两个输入框内都没内容时，下面的按钮是灰色。</li>
+</ul>
+</li>
+<li><p>将下面代码粘贴到项目中的ViewController.m中。</p>
+<pre><code>#import &quot;ViewController.h&quot;
+
+#define kMargin 100
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenheight [UIScreen mainScreen].bounds.size.height
+
+@interface ViewController ()
+
+@property (nonatomic,strong) UITextField *passwordTextFiled;
+
+@property (nonatomic,strong) UITextField *accountTextFiled;
+
+@property (nonatomic,strong) UIButton *OKBtn;
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    //账号输入框
+    self.accountTextFiled = [[UITextField alloc]initWithFrame:CGRectMake(kMargin, kMargin, kScreenWidth-kMargin*2, 50)];
+    self.accountTextFiled.placeholder = @&quot;账号&quot;;
+    self.accountTextFiled.layer.masksToBounds = YES;
+    self.accountTextFiled.layer.cornerRadius = 5;
+    self.accountTextFiled.textAlignment = NSTextAlignmentCenter;
+    self.accountTextFiled.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.accountTextFiled];
+
+    //密码输入框
+    self.passwordTextFiled = [[UITextField alloc]initWithFrame:CGRectMake(kMargin, kMargin*2, kScreenWidth-kMargin*2, 50)];
+    self.passwordTextFiled.backgroundColor = [UIColor grayColor];
+    self.passwordTextFiled.placeholder = @&quot;密码&quot;;
+    self.passwordTextFiled.textAlignment = NSTextAlignmentCenter;
+    self.passwordTextFiled.layer.masksToBounds = YES;
+    self.passwordTextFiled.layer.cornerRadius = 5;
+
+    [self.view addSubview:self.passwordTextFiled];
+
+    //确定按钮
+    self.OKBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.OKBtn.frame = CGRectMake((kScreenWidth-150)/2, kMargin*3, 150, 50);
+    self.OKBtn.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.OKBtn];
+    self.OKBtn.layer.masksToBounds = YES;
+    self.OKBtn.layer.cornerRadius = 5;
+    [self.OKBtn setTitle:@&quot;登录&quot; forState:UIControlStateNormal];
+
+}
+
+@end
+</code></pre></li>
+</ol>
+<p>运行显示如下图：<br> <img src="http://upload-images.jianshu.io/upload_images/1338564-1e6e2436dce366cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"></p>
+<h2 id="不适用RAC来实现上面的需求-不写具体代码了，只写一些过程"><a href="#不适用RAC来实现上面的需求-不写具体代码了，只写一些过程" class="headerlink" title="不适用RAC来实现上面的需求(不写具体代码了，只写一些过程)"></a>不适用RAC来实现上面的需求(不写具体代码了，只写一些过程)</h2><p>1、遵守协议<br>2、挂代理<br>3、实现相应的代理方法<br>4、在方法内写业务逻辑</p>
+<h2 id="使用RAC来实现该业务逻辑"><a href="#使用RAC来实现该业务逻辑" class="headerlink" title="使用RAC来实现该业务逻辑"></a>使用RAC来实现该业务逻辑</h2><p><img src="http://upload-images.jianshu.io/upload_images/1338564-1984290c516ae19a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ol>
+<li>将上面方法写入ViewController.m中。上面的RAC()其实就是一个宏定义</li>
+<li>之前咱们说过RAC能帮助我们大量的减少代码而且逻辑更加清晰，在这里我们不需要在.m中找遵守协议的地方，不需要找控件挂代理，不需要去实现方法。</li>
+</ol>
+<h2 id="RAC的深入学习"><a href="#RAC的深入学习" class="headerlink" title="RAC的深入学习"></a>RAC的深入学习</h2><p>1、 使用RAC给按钮添加事件</p>
+<pre><code>//老办法，还要实现clickBtn方法
+[self.OKBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
+
+//rac方法
+[[self.OKBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+
+NSLog(@&quot;OK按钮被点击&quot;);
+
+}];
+</code></pre><ul>
+<li>通过rac_signalForControlEvents给按钮创建一个信号流，然后给这个信号指定一个subscribeNext(订阅者)。如果这个信号流的状态发生改变，订阅者便会受到他的改变。不仅仅button可以，segmentcontrol也同样可以。这样操作。</li>
+<li>订阅者受到信息以后的操作都在block中操作。block返回来的参数(id x)其实就是用户所点击的按钮。程序员可以直接将（id x）改为（UIButton *sender）。</li>
+<li><p>在找subcribeNext时，会看到这么一个方法</p>
+<pre><code>subscribeNext:nil error:nil completed:nil];
+</code></pre><p>第一个参数咱已经说过了，另外事件处理有问题会回调这个error这个block块，点击事件执行完毕以后会调用completed这个block块。</p>
+</li>
+</ul>
+<p>2、使用RAC监听TextFiled的输入变化</p>
+<pre><code>[self.accountTextFiled.rac_textSignal subscribeNext:^(id x) {
+
+ NSLog(@&quot;%@&quot;,x);
+
+}];
+</code></pre><ul>
+<li>self.accountTextFiled.rac_textSignal获得到textfiled的信号流。然后给这个信号指定一个（subscribeNext）订阅者。</li>
+<li>subscribeNext:^(id x)如果输入框发生变化，订阅者会收到信息，subscribeNext后的参数，便是输入框的内容。</li>
+</ul>
+<p>3、RAC的过滤效果</p>
+<pre><code>[[self.passwordTextfiled.rac_textSignal filter:^BOOL(id value) {
+
+    NSString *text = value;
+
+    BOOL k = [text isEqualToString:@&quot;123&quot;];
+
+    return k;
+
+}] subscribeNext:^(id x) {
+
+    NSLog(@&quot;======&quot;);
+}];
+</code></pre><ul>
+<li>这段代码最终实现的效果是，只有密码输入框输入的值是123的时候，subscribe中的代码才能执行。    </li>
+<li>之前我们已经接触过.rac_textSignal(信号流)和subscirbeNext(订阅者)。上面他们之间的filter的block块便是一个过滤器。在subscriber(订阅者)接受到文本信号变化之前，filter(过滤器)会首先拦截到这个信号。在这个filter进行一个判断，如果filter内返回一个yes，subscribe才会收到文本变化的信号流，返回NO，订阅者就不会收到信息。就好比一个母亲在给自己待嫁的女儿找婆家，只有这名母亲相中了，她才会让女儿去相亲。</li>
+</ul>
+<p>4、改变订阅者收到的信息。</p>
+<pre><code>[[self.passwordTextFiled.rac_textSignal map:^id(NSString  *str) {
+
+    return[str boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
+
+
+}] subscribeNext:^(UIColor *x) {
+
+    self.view.backgroundColor = x;
+}];
+</code></pre><ul>
+<li>实现的功能：输入框有变化时改变self.view的背景颜色</li>
+<li>之前我们subscribe收到的都是输入框的文本内容，现在我们要做的就是改变订阅者收到的信息。</li>
+<li>在3中我们提到一个filter(过滤器),在这里我们要用一个map(映射)来改变订阅者收到的信息。之前咱们说filter的时候，在订阅者收到信息之前filter会进行一个拦截。map(映射)其实也拦截一下，拦截的时候同样会收到文本框的变化。他两唯一的不同是在map(映射)中返回的是订阅者收到的东西。上面的母亲给女儿找到了一个对象，已经结婚了。老公的第一个月工资发了，老婆（map）拿着。她那里给老公（subscribe）给你买什么东西，老公用什么东西。</li>
+</ul>
+<p>5、对4优化</p>
+<pre><code>//对上面的优化
+RAC(self.view, backgroundColor) = [self.passwordTextFiled.rac_textSignal map:^id(NSString *passwordValid){
+
+
+    return[passwordValid boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
+
+}];
+</code></pre><ul>
+<li>刚开始咱们使用RAC实现咱们刚开始说的需求时，大家已经见到了RAC()。现在我们做的就是讲map(映射)中返回的颜色。赋值给RAC()中对象控件的对应属性。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>起初咱们说到RAC框架有以下几个特点：<br>1、能够使业务逻辑更清晰<br>2、减少代码量<br>3、大量使用block</p>
+<p>最后必须要记住的一点是它能做到这一步最为重要的一个原因是</p>
+<blockquote>
+<p>将代理、KVO、通知、callBack等一系列事件，做了一个统一管理。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/14/通知中心、KVC、KVO/" itemprop="url">
                   通知中心、KVC、KVO
                 </a>
@@ -3028,397 +3320,6 @@ if (thread.isCancelled == YES) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/01/多线程GCD/" itemprop="url">
-                  多线程GCD
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-01T10:00:43+08:00" content="2016-09-01">
-              2016-09-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/01/多线程GCD/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/01/多线程GCD/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 这篇文章主要讲GCD的使用，相关博客如下：</p>
-<p> <a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/" target="_blank" rel="external">iOS开发之多线程理论部分</a></p>
-<p> <a href="https://wangliguang.github.io/2016/09/01/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSOperation/" target="_blank" rel="external">NSOperation</a></p>
-<p><a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSThread/" target="_blank" rel="external">NSThread</a></p>
-<h1 id="什么是GCD"><a href="#什么是GCD" class="headerlink" title="什么是GCD"></a>什么是GCD</h1><p>全称是Grand Central Dispath，纯C语言，提供非常多强大的函数，是目前苹果官网推荐的多线程开发方法，NSOperation便是基于GCD的封装。</p>
-<h1 id="GCD的优势所在"><a href="#GCD的优势所在" class="headerlink" title="GCD的优势所在"></a>GCD的优势所在</h1><ol>
-<li>为多核的并行运算提出了解决方案</li>
-<li>GCD会自动利用更多的CPU内核，比如双核，四核。</li>
-<li>GCD会自动管理线程的生命周期(创建线程、调度任务、销毁线程)</li>
-<li>程序员只需要告诉GCD想要执行什么任务，不需要编写任何线程管理代码</li>
-</ol>
-<h1 id="GCD中有2个核心概念"><a href="#GCD中有2个核心概念" class="headerlink" title="GCD中有2个核心概念"></a>GCD中有2个核心概念</h1><ul>
-<li><strong>任务：</strong> 执行什么操作 </li>
-<li><strong>队列：</strong> 用来存放任务</li>
-</ul>
-<h1 id="队列可以分为两大类型"><a href="#队列可以分为两大类型" class="headerlink" title="队列可以分为两大类型"></a>队列可以分为两大类型</h1><ul>
-<li>串行队列(Serial Dispatch Queue)：只有一个线程，加入到队列中的操作按添加顺序依次执行，一个任务执行完毕后，才能再执行下一个任务。</li>
-<li>并发队列(Concurrent Dispatch Queue)：有多个线程，操作进来以后他会将这些线程安排在可用的处理器上，同时保证先进来的任务优先处理。</li>
-<li><strong>其实在GCD中还有一个特殊队列就是主队列，用来执行主线程上的操作任务</strong></li>
-</ul>
-<h1 id="GCD其实可以抽象为两步"><a href="#GCD其实可以抽象为两步" class="headerlink" title="GCD其实可以抽象为两步"></a>GCD其实可以抽象为两步</h1><h2 id="找到队列"><a href="#找到队列" class="headerlink" title="找到队列"></a>找到队列</h2><pre><code>//这是找到了更新UI的主线程所在的队列
-dispatch_queue_t mainQueue= dispatch_get_main_queue(); 
-
-/*
-  *  创建一个队列
-  *  第一个参数：队列名字
-  *  第二个参数：队列类类型
-         并行队列：DISPATCH_QUEUE_CONCURRENT
-         串行队列：DISPATCH_QUEUE_SERIAL
-  *
-  */
-dispatch_queue_t serialQueue = dispatch_queue_create(&quot;mySerialQueue&quot;, DISPATCH_QUEUE_SERIAL);
-
-/* 
-  * 系统内部给我们提供有一个现成的并发队列
-  * 第一个参数：线程的优先级, DISPATCH_QUEUE_PRIORITY_BACKGROUND是最低的。
-  * 第二个参数：系统保留的参数，永远传0
-  */
- dispatch_queue_t queue = dispatch_get_global_queue(0 , 0);
-</code></pre><h2 id="在队列中确定想做的事"><a href="#在队列中确定想做的事" class="headerlink" title="在队列中确定想做的事"></a>在队列中确定想做的事</h2><pre><code>//在找到的队列中确定想要做的事情，这里我采用的同步方式执行任务，asyn是异步。 
-dispatch_sync(mainQueue, ^{  
-
-});
-</code></pre><h2 id="执行队列中任务的两种方式"><a href="#执行队列中任务的两种方式" class="headerlink" title="执行队列中任务的两种方式"></a>执行队列中任务的两种方式</h2><ol>
-<li><p><strong>用同步的方式执行任务(同步：synchronization</strong>)，只能在当前线程中执行任务，不具备开启新线程的能力</p>
-<pre><code>/*
- *  第一个参数：该任务所在的队列
- *  第二个参数：该任务要做的事情
- */
-dispatch_sync(dispatch_queue_t queue, dispatch_block_t block);
-
-假如我指定的队列A是串行队列，则该队列中只能有一个线程，也就是说我放在队列A中的任务，所以必须得一个一个的执行。不仅如此，在上面我们还手动选择了在队列A中用同步的方式执行任务，这也限制了，队列中的任务只能一个一个执行。
-
-假如我指定的队列A是并行队列，则该队列中可以开辟多个线程去执行任务，虽然如此，但由于我们在上面手动选择了在队列A中用同步的方式执行线程，所以队列A中的任务也只能一个一个去执行，**不能开辟多线程同时执行**。
-</code></pre></li>
-<li><p><strong>用异步的方式执行任务(异步：asynchronous</strong>)，可以在新的线程中执行任务，具备开启新线程的能力。</p>
-<pre><code>dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
-
-假如此时我指定的队列B是并行队列，则表明该队列中可以存在多个线程，又因为我们采用的是异步的方式执行任务，所以在这个队列的任务可以实现同时运行。
-
-假如此时我指定的队列B是串行队列，则表明该队列中，只能有一个线程，所以尽管我采用异步的方式执行任务，但该队列中的任务还是只能一个一个的运行。
-</code></pre></li>
-</ol>
-<h1 id="GCD创建的线程任务有四种执行方式"><a href="#GCD创建的线程任务有四种执行方式" class="headerlink" title="GCD创建的线程任务有四种执行方式"></a>GCD创建的线程任务有四种执行方式</h1><h2 id="串行队列同步执行任务"><a href="#串行队列同步执行任务" class="headerlink" title="串行队列同步执行任务"></a>串行队列同步执行任务</h2><ul>
-<li><p>同步不具有开辟新线程的能力，不会开辟新的线程去执行任务，会在当前程序的主线程中执行任务。</p>
-</li>
-<li><p>按照串行的方式去执行任务</p>
-</li>
-</ul>
-<pre><code>#pragma mark ------------------串行队列同步执行任务--------------
-
-dispatch_queue_t serialQueue = dispatch_queue_create(&quot;serialQueue&quot;, DISPATCH_QUEUE_SERIAL);
-
-dispatch_sync(serialQueue, ^{
-
-     NSLog(@&quot;-%@&quot;,[NSThread currentThread]);
-
-});
-
-dispatch_sync(serialQueue, ^{
-
-     NSLog(@&quot;1 - %@&quot;, [NSThread currentThread]);
-
- });
-
- dispatch_sync(serialQueue, ^{
-
-     NSLog(@&quot;2 - %@&quot;, [NSThread currentThread]);
-
- });
-
- dispatch_sync(serialQueue, ^{
-
-      NSLog(@&quot;3 - %@&quot;, [NSThread currentThread]);
-
- });
-</code></pre><p><strong>打印结果</strong></p>
-<blockquote>
-<p><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 1 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong><br><br><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 2 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong><br><br><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 3 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong><br><br><strong>2016-03-01 11:44:15.071 GCD[22196:2030750] 4 = <nsthread: 0x7fade3707d80="">{number = 1, name = main}</nsthread:></strong></p>
-</blockquote>
-<pre><code>**由于是同步操作，不能开辟线程，所以都是在主线程并按照顺序执行**
-</code></pre><h2 id="串行队列异步执行任务"><a href="#串行队列异步执行任务" class="headerlink" title="串行队列异步执行任务"></a>串行队列异步执行任务</h2><ul>
-<li><p>异步具有创建新线程的能力，会开辟新的线程去执行任务</p>
-</li>
-<li><p>按照串行的方式去执行任务</p>
-<pre><code>#pragma mark ------------------串行队列异步执行任务------------
-
-dispatch_queue_t serialQueue1 = dispatch_queue_create(&quot;serialQueue1&quot;, DISPATCH_QUEUE_SERIAL);
-
-dispatch_async(serialQueue1, ^{
-
-    NSLog(@&quot;1 = %@&quot;,[NSThread currentThread]);
-
-});
-
-dispatch_async(serialQueue1, ^{
-
-     NSLog(@&quot;2 = %@&quot;,[NSThread currentThread]);
-
-});
-
-dispatch_async(serialQueue1, ^{
-
-     NSLog(@&quot;3 = %@&quot;,[NSThread currentThread]);
-
-});
-</code></pre><p>  <strong>打印结果</strong></p>
-<blockquote>
-<p><strong>2016-03-01 11:56:04.116 GCD[22310:2039747] 1 = <nsthread: 0x7f90ba60be60="">{number = 2, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 11:56:04.117 GCD[22310:2039747] 2 = <nsthread: 0x7f90ba60be60="">{number = 2, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 11:56:04.118 GCD[22310:2039747] 3 = <nsthread: 0x7f90ba60be60="">{number = 2, name = (null)}</nsthread:></strong></p>
-</blockquote>
-<p> <strong>因为是异步操作，所以有个编号为2的子线程被开辟，但有因为是串行队列，所以只开辟了一个线程。最终造就了三个线程顺序执行。</strong></p>
-</li>
-</ul>
-<h2 id="并行队列同步执行任务"><a href="#并行队列同步执行任务" class="headerlink" title="并行队列同步执行任务"></a>并行队列同步执行任务</h2><ul>
-<li><p>同步不具有创建新线程的能力，不会开辟新的线程去执行任务，会在当前程序的主线程去执行任务</p>
-</li>
-<li><p>按照同步的方式去执行任务</p>
-<pre><code>dispatch_queue_t concurrentQueue = dispatch_queue_create(&quot;concurrentQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
-
-dispatch_sync(concurrentQueue, ^{
-
-     NSLog(@&quot;1 = %@&quot;,[NSThread currentThread]);
-
-});
-
-dispatch_sync(concurrentQueue, ^{
-
-     NSLog(@&quot;2 = %@&quot;,[NSThread currentThread]);
-
-});
-
-dispatch_sync(concurrentQueue, ^{
-
-     NSLog(@&quot;3 = %@&quot;,[NSThread currentThread]);
-
-});
-</code></pre><p>  <strong>虽然并行队列决定了该队列中可以有多个线程，但由于是同步操作，不能开辟线程，所以还都是在主线程中按顺序执行。</strong></p>
-</li>
-</ul>
-<h2 id="并发队列异步执行任务-常用"><a href="#并发队列异步执行任务-常用" class="headerlink" title="并发队列异步执行任务(常用)"></a>并发队列异步执行任务(常用)</h2><ul>
-<li><p>异步具有创建新线程的能力，会开辟新的线程去执行任务，不会在当前程序的主线程去执行任务</p>
-</li>
-<li><p>按照并发的方式去执行任务</p>
-<pre><code>dispatch_queue_t concurrentQueue1 = dispatch_queue_create(&quot;concurrentQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
-
-dispatch_async(concurrentQueue1, ^{
-
-     NSLog(@&quot;1 = %@&quot;,[NSThread currentThread]);
-
-});
-
-dispatch_async(concurrentQueue1, ^{
-
-     NSLog(@&quot;2 = %@&quot;,[NSThread currentThread]);
-
-});
-
-dispatch_async(concurrentQueue1, ^{
-
-     NSLog(@&quot;3 = %@&quot;,[NSThread currentThread]);
-
-});
-</code></pre><p> <strong>打印结果</strong></p>
-<blockquote>
-<p><strong>2016-03-01 14:32:35.880 GCD[22990:2122064] 2 = <nsthread: 0x7f997ae09f00="">{number = 3, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 14:32:35.880 GCD[22990:2122063] 1 = <nsthread: 0x7f997af25510="">{number = 2, name = (null)}</nsthread:></strong><br><br><strong>2016-03-01 14:32:35.880 GCD[22990:2122065] 3 = <nsthread: 0x7f997ac02a10="">{number = 4, name = (null)}</nsthread:></strong></p>
-</blockquote>
-<p> <strong>并行队列可以里可以有多个线程，同步执行的方式又可以开辟多个线程，所以这里实现了多个线程并行执行。</strong></p>
-</li>
-</ul>
-<h1 id="线程锁"><a href="#线程锁" class="headerlink" title="线程锁"></a>线程锁</h1><p>   <strong>没线程锁的情况下：</strong>  我走进购票大厅，买票的人都没有排队，我好不容易挤到窗口前，正打算掏钱买票的时候，旁边有人已经把钱给了售票员。虽然你的线程已经开始执行买票的方法，但当你去拿票时，也就是将票数减一时，CPU将你的线程给中断，开始执行其他的线程，CPU返回继续执行你的线程的时候，票已经没了。</p>
-<p>  <strong>有线程锁的情况下：*</strong> 我走进购票大厅，买票的人都在排队，当我到柜台能保证我买票的关键过程，也就是报站、掏钱、拿票过程不受干扰，我采用线程锁将这个关键过程给锁起来，以保证我能顺利的买到票。</p>
-<pre><code>//
-//  ViewController.m
-//  GCD_ Train_Ticket 
-//
-//  Created by GG on 16/3/2.
-//  Copyright © 2016年 GG. All rights reserved.
-//
-
-#import &quot;GCDLockViewController.h&quot;
-
-@interface  GCDLockViewController()
-{
-   NSLock *lock;
-}
-
-@end
-
-@implementation GCDLockViewController
-
-- (void)viewDidLoad {
-
-    [super viewDidLoad];
-
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @&quot;线程锁&quot;;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-
-    lock = [NSLock new];
-
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-    __block int ticketNum = 10;
-
-    for (int index = 0; index&lt;15; index++) {
-
-          dispatch_async(concurrentQueue, ^{
-
-              #pragma mark *****************不用线程锁，下面的购票的关键      过程就可能会被打断，无法确认剩余的票数***********************
-              //            if (ticketNum&gt;0) {
-              //
-              //                ticketNum--;
-              //
-              //                NSLog(@&quot;还剩%d张票&quot;,ticketNum);
-              //            }
-
-             #pragma  mark *****************NSLock实现线程锁，能保证票数是按照预知的一张一张减少，对比不用线程所的输出可知*******************
-
-             //            //上锁，lock是一个NSLock的对象
-             //            [lock lock];
-             //
-             //            if (ticketNum&gt;0) {
-             //
-             //                ticketNum--;                   
-             //
-             //                NSLog(@&quot;还剩%d张票&quot;,ticketNum);
-             //            }
-             //            //解锁
-             //            [lock unlock];
-
-             #pragma mark *****************synchronized方式实现线程锁，能保证票数是按照预知的一张一张减少**********
-
-             //保证此时没有其它线程对self里的对象进行修改
-             @synchronized(self){
-
-                if (ticketNum&gt;0) {
-
-                  ticketNum--;
-
-                  NSLog(@&quot;还剩%d张票&quot;,ticketNum);
-
-                }
-
-             }
-
-         });
-
-
-     }
-
- }
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -3464,7 +3365,7 @@ dispatch_async(concurrentQueue1, ^{
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -3472,7 +3373,7 @@ dispatch_async(concurrentQueue1, ^{
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
