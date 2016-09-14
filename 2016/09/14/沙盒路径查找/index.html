@@ -102,30 +102,34 @@
 
 
 
-<meta name="description" content="前言如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。
-关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。
-准备工作
-创建NS">
+<meta name="description" content="前言
+默认情况下，每个沙盒含有3个文件夹：Documents, Library 和 tmp。
+
+
+Documents：苹果建议将程序中建立的或在程序中浏览到的文件数据保存在该目录下，iTunes备份和恢复的时候会包括此目录 
+
+Library：存储程序的默认设置或其它状态信息，里面还有一个二级目录Library/Caches：存放缓存文件，iTunes不会备份此目录，此目录下文件不会在应用退出删除">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日期NSDate">
-<meta property="og:url" content="http://yoursite.com/2016/09/14/日期NSDate/index.html">
+<meta property="og:title" content="沙盒路径查找">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/沙盒路径查找/index.html">
 <meta property="og:site_name" content="广广的技术博客">
-<meta property="og:description" content="前言如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。
-关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。
-准备工作
-创建NS">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-30f3836aa8be7bfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-74e276fe5e267ecb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-60f1483f05f739c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-9a81d42d818339d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-14T08:24:31.000Z">
+<meta property="og:description" content="前言
+默认情况下，每个沙盒含有3个文件夹：Documents, Library 和 tmp。
+
+
+Documents：苹果建议将程序中建立的或在程序中浏览到的文件数据保存在该目录下，iTunes备份和恢复的时候会包括此目录 
+
+Library：存储程序的默认设置或其它状态信息，里面还有一个二级目录Library/Caches：存放缓存文件，iTunes不会备份此目录，此目录下文件不会在应用退出删除">
+<meta property="og:updated_time" content="2016-09-14T08:46:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="日期NSDate">
-<meta name="twitter:description" content="前言如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。
-关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。
-准备工作
-创建NS">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-30f3836aa8be7bfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="沙盒路径查找">
+<meta name="twitter:description" content="前言
+默认情况下，每个沙盒含有3个文件夹：Documents, Library 和 tmp。
+
+
+Documents：苹果建议将程序中建立的或在程序中浏览到的文件数据保存在该目录下，iTunes备份和恢复的时候会包括此目录 
+
+Library：存储程序的默认设置或其它状态信息，里面还有一个二级目录Library/Caches：存放缓存文件，iTunes不会备份此目录，此目录下文件不会在应用退出删除">
 
 
 
@@ -146,9 +150,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/14/日期NSDate/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/沙盒路径查找/"/>
 
-  <title> 日期NSDate | 广广的技术博客 </title>
+  <title> 沙盒路径查找 | 广广的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -268,7 +272,7 @@
             
             
               
-                日期NSDate
+                沙盒路径查找
               
             
           </h1>
@@ -280,7 +284,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T16:19:17+08:00" content="2016-09-14">
+            <time itemprop="dateCreated" datetime="2016-09-14T16:42:32+08:00" content="2016-09-14">
               2016-09-14
             </time>
           </span>
@@ -310,8 +314,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/14/日期NSDate/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/日期NSDate/" itemprop="commentsCount"></span>
+                <a href="/2016/09/14/沙盒路径查找/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/沙盒路径查找/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -334,17 +338,122 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果没有做日历的需求。对日期经常用到的就是两个类NSDate(日期类)和NSDateFormatter(时间格式器)。NSDate的对象表示一个具体的时间点。使用NSDateFormatter对象将时间对象转化成字符串或者反转。</p>
-<p>关于日期类还有NSTimeZone,NSDateComponents,NSCalendar等。有需要的可以在深入研究。有关于这些好的资料欢迎分享。</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-30f3836aa8be7bfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h1 id="创建NSDate对象的几种方式以及区别"><a href="#创建NSDate对象的几种方式以及区别" class="headerlink" title="创建NSDate对象的几种方式以及区别"></a>创建NSDate对象的几种方式以及区别</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-74e276fe5e267ecb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、这上面的我用的都是类方法，用init方法也都可以的。例如：NSDate<em>date = [[NSDate alloc]init];和NSDate</em>date = [NSDatedate];是一样的。</p>
-<p>2、如果你用的时间戳是后台给你传过来的话，要记得核查是否该时间戳是否乘以1000。根据情况来决定是否除以1000。如果乘以过1000,表明后台给你传过来的是毫秒。<br>NSDate对象常用的方法</p>
-<h1 id="NSDate对象常用的方法"><a href="#NSDate对象常用的方法" class="headerlink" title="NSDate对象常用的方法"></a>NSDate对象常用的方法</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-60f1483f05f739c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、<a href="http://tool.chinaz.com/Tools/unixtime.aspx" target="_blank" rel="external">点击</a>进入时间戳在线转换工具。</p>
-<h1 id="时间格式转化器NSDateFormatter"><a href="#时间格式转化器NSDateFormatter" class="headerlink" title="时间格式转化器NSDateFormatter"></a>时间格式转化器NSDateFormatter</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-9a81d42d818339d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、啥也不说了，感情都在图里。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>默认情况下，每个沙盒含有3个文件夹：Documents, Library 和 tmp。</p>
+</blockquote>
+<ol>
+<li><p><strong>Documents</strong>：苹果建议将程序中建立的或在程序中浏览到的文件数据保存在该目录下，iTunes备份和恢复的时候会包括此目录 </p>
+</li>
+<li><p><strong>Library</strong>：存储程序的默认设置或其它状态信息，里面还有一个二级目录<strong>Library/Caches</strong>：存放缓存文件，iTunes不会备份此目录，此目录下文件不会在应用退出删除</p>
+</li>
+<li><p><strong>tmp</strong>：提供一个即时创建临时文件的地方，此目录下文件可能会在应用退出后删除</p>
+</li>
+<li><p>iTunes在与iPhone同步时，备份所有的Documents和Library文件。<br>iPhone在重启时，会丢弃所有的tmp文件。</p>
+</li>
+</ol>
+<h1 id="路径查找格式"><a href="#路径查找格式" class="headerlink" title="路径查找格式"></a>路径查找格式</h1><p>  比如我要查找，数据所在缓存的绝对路径,也就是Library下的Caches目录</p>
+<pre><code>/*
+  *  方法NSSearchPathForDirectoriesInDomains用于返回指定范围内的指定名称的目录的路径集合。有三个参数：
 
+  * 第一个参数：directoryNSSearchPathDirectory类型的enum值，表明我们要搜索的目录名称，
+
+  * 第二个参数：domainMaskNSSearchPathDomainMask类型的enum值，指定搜索范围
+
+  * 第三个参数：expandTildeBOOL值，表示是否展开波浪线~。我们知道在iOS中~的全写形式是/User/userName，该值为YES即表示写成全写形式，为NO就表示直接写成“~”。
+
+  */
+  NSString *libraryCachesPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+
+ 第一个参数可能的枚举值，也就是想要查找的目录：
+ typedef NS_ENUM(NSUInteger, NSSearchPathDirectory) {
+
+ // 到applications (Applications)目录下
+ NSApplicationDirectory = 1,
+
+ // 到Applications/Demos目录下
+ NSDemoApplicationDirectory,
+
+ // 到Developer/Applications目录下.
+ NSDeveloperApplicationDirectory,
+
+ // 到Applications/Utilities目录下
+ NSAdminApplicationDirectory,
+
+ // 到Library目录下
+ NSLibraryDirectory,
+
+ // 到Developer目录下.
+ NSDeveloperDirectory,
+
+ // 到用户的主目录下
+ NSUserDirectory,
+
+ // 到documentation (Documentation)的目录下
+ NSDocumentationDirectory,
+
+ // 到documents (Documents)目录下
+ NSDocumentDirectory,
+
+ // CoreServices目录的位置 (System/Library/CoreServices)
+ NSCoreServiceDirectory,
+
+ // 自动保存的文档位置 (Documents/Autosaved)
+ NSAutosavedInformationDirectory 
+
+ // 本地用户的桌面
+ NSDesktopDirectory = 12,
+
+ // 本地缓冲区目录(Library/Caches)
+ NSCachesDirectory = 13,
+
+ // 本地应用支持文件目录 (plug-ins, etc) (Library/Application Support)
+ NSApplicationSupportDirectory = 14,
+
+ // 本地下载downloads目录
+ NSDownloadsDirectory 
+
+ //输入方法目录 (Library/Input Methods)
+ NSInputMethodsDirectory 
+
+ // 电影目录 (~/Movies)
+ NSMoviesDirectory 
+
+ // 音乐目录 (~/Music)
+ NSMusicDirectory 
+
+ // 图片目录 (~/Pictures)
+ NSPicturesDirectory
+
+ // 本地用户分享目录 (~/Public)
+ NSSharedPublicDirectory 
+
+ };
+
+ 第二个参数可能的枚举值，查找的区域
+ typedef NS_OPTIONS(NSUInteger,        NSSearchPathDomainMask) {
+
+  // 用户的主目录
+  NSUserDomainMask = 1,
+
+  // 当前机器的本地目录
+  NSLocalDomainMask = 2,
+
+  // 在网络中公开可用的位置
+  NSNetworkDomainMask = 4,
+
+  // 被苹果系统提供的，不可更改的位置 (/System)
+  NSSystemDomainMask = 8,
+
+  // 上述所有及未来的位置
+  NSAllDomainsMask = 0x0ffff
+ };
+
+补充：
+  //获取应用程序的沙盒目录
+  NSString*homePtah =NSHomeDirectory()
+
+未完，待续。。。。
+</code></pre>
       
     </div>
 
@@ -369,17 +478,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/14/归档/" rel="next" title="归档">
-                <i class="fa fa-chevron-left"></i> 归档
+              <a href="/2016/09/14/FMDB/" rel="next" title="FMDB">
+                <i class="fa fa-chevron-left"></i> FMDB
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/14/C语言操作SQLite/" rel="prev" title="C语言操作SQLite">
-                C语言操作SQLite <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,8 +510,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/14/日期NSDate/"
-           data-title="日期NSDate" data-url="http://yoursite.com/2016/09/14/日期NSDate/">
+      <div class="ds-thread" data-thread-key="2016/09/14/沙盒路径查找/"
+           data-title="沙盒路径查找" data-url="http://yoursite.com/2016/09/14/沙盒路径查找/">
       </div>
     
   </div>
@@ -517,7 +622,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建NSDate对象的几种方式以及区别"><span class="nav-number">3.</span> <span class="nav-text">创建NSDate对象的几种方式以及区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSDate对象常用的方法"><span class="nav-number">4.</span> <span class="nav-text">NSDate对象常用的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时间格式转化器NSDateFormatter"><span class="nav-number">5.</span> <span class="nav-text">时间格式转化器NSDateFormatter</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路径查找格式"><span class="nav-number">2.</span> <span class="nav-text">路径查找格式</span></a></li></ol></div>
             
           </div>
         </section>
