@@ -256,6 +256,413 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/14/Mac自带的本地服务器/" itemprop="url">
+                  Mac自带的本地服务器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T17:10:32+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/Mac自带的本地服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Mac自带的本地服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p> 问：你认为，做程序猿最痛苦的事是有哪些？</p>
+<p> 答：没网，没网，没网。。。。</p>
+</blockquote>
+<p>   在做项目时，能够<strong>快速</strong>的访问服务器，可以提高不少的工作效率。但总有那么些时候，公司或者家里的网出现问题，无法访问项目的服务器，此时不要着急，不要放弃，这种情况下，我们可以将临时写的测试数据放在mac自带的Apache服务器中，正常通过服务器访问数据，从而避免影响工作。</p>
+<h1 id="How"><a href="#How" class="headerlink" title="How"></a>How</h1><ol>
+<li><p>打开终端，开启Apache:</p>
+<pre><code>//开启apache:
+sudo apachectl start
+
+//重启apache
+sudo apachectl restart
+
+//关闭apache
+sudo apachectl stop          
+</code></pre><p>回车会提示输入密码，也就是你电脑的密码，<a href="http://127.0.0.1/" target="_blank" rel="external">http://127.0.0.1/</a> 测试一下，成功则如下图：<br><img src="http://upload-images.jianshu.io/upload_images/1338564-ab86b75ab3abd27c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成功开启mac下Apache效果图"></p>
+</li>
+<li><p>点击Finder,然后Command+Shift+G,前往如下路径(mac下Apache服务器的文件路径)</p>
+<pre><code>/Library/WebServer/Documents
+</code></pre><p>如图：<br><img src="http://upload-images.jianshu.io/upload_images/1338564-0d18702b730fb5b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mac下Apache服务器文件路径"><br>在步骤1中只输入一个<a href="http://127.0.0.1" target="_blank" rel="external">http://127.0.0.1</a> 其实默认打开的是index.html.en(html是一个网页文件)，该文件的内容就是在步骤1中测试时浏览器所显示的内容，下面我会附上index.html中的内容。此时如果我在浏览器的网址框输入的是<a href="http://127.0.0.1/PoweredByMacOSX.gif" target="_blank" rel="external">http://127.0.0.1/PoweredByMacOSX.gif</a>, 浏览器就便会显示PoweredByMacOSX.gif图片,<strong>如果没有正常显示，提示说没有权限时，单击该文件，然后Command+I在末尾设置权限即可</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1338564-e8f2d01f4ef2f0f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9807B35C-A181-4F64-B6D4-3C9FE53F9FB8.png"></p>
+</li>
+<li><p>上面提到了html和图片，那么如何使该服务器返回json数据(<strong>其他类型同理</strong>)呢。</p>
+<blockquote>
+<p>  1、创建一个纯文本文档test(名字能够随意起)，</p>
+<p>  2、将JSON数据串复制到里面，然后将.txt扩展名去掉</p>
+<p>  3、保存后将这个文件放到服务器路径下<br><code>/Library/WebServer/Documents</code></p>
+<p>  4、接下来用浏览器访问<a href="http://127.0.0.1/test，" target="_blank" rel="external">http://127.0.0.1/test，</a> 你在浏览器中访问时中文可能会出现乱码，但在项目中请求回来，打印在控制台的是正常的。</p>
+<p>   附录：我测试用的json数据串。</p>
+<pre><code>{  
+  &quot;name&quot;:&quot;广广&quot;,
+  &quot;age&quot;:24,
+  &quot;sex&quot;:&quot;男&quot;,
+  &quot;jobs&quot;:&quot;老师&quot;
+}
+</code></pre></blockquote>
+</li>
+</ol>
+<h1 id="使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。"><a href="#使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。" class="headerlink" title="使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。"></a>使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。</h1>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/14/获取别人家iOS项目中的图片资源/" itemprop="url">
+                  获取别人家iOS项目中的图片资源
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T17:08:58+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/获取别人家iOS项目中的图片资源/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/获取别人家iOS项目中的图片资源/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>   拿起手机，将网络断开，打开一个软件，此时该软件所展示的图片，就是该项目中所包含的图片资源，如果我想在自己的项目中使用这些图片，该怎么破呢，不要急，再次我帮助大家来获取这些藏在iOS项目中的图片。如果你不满足仅仅获取项目中的，还想获取人家的网络资源，移步到<a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="external">Charles 从入门到精通</a></p>
+<h1 id="开工"><a href="#开工" class="headerlink" title="开工"></a>开工</h1><ol>
+<li><p>在<a href="http://soft.macx.cn/" target="_blank" rel="external">MacX</a>下载<code>Itools</code>软件，并安装，直接在百度上搜也能找到。Itools挺强大的，我在这里<a href="http://baike.baidu.com/link?url=zaIrA-gFUxy0CGugtvkEdtQPxQaQJAyS7trj7Dsmf8cKdbykklm9GYhxpiPSkj8KsjDBj9v5IVcsCzNFaFjSFq" target="_blank" rel="external">推荐</a>一下。</p>
+</li>
+<li><p>在Itools中点击<code>资源库</code>，如果你连接上你的iPhone，这个按钮就在右上角，若没有连接iPhone,该按钮就在坐下角。</p>
+</li>
+<li><p>左边有<code>网络资源</code>和<code>手机资源</code>,点击<code>网络资源</code>下的<code>苹果应用</code>，在右上角搜索菜谱。我选择第一个菜谱软件，点击下载，此时如果你连着iPhone显示的就不是下载而是安装，此时会提示你输入apple id。</p>
+</li>
+<li><p>下载完成以后，点击左下角的<code>下载管理</code>，然后再点击<code>本地资源</code>下的<code>苹果应用</code>。</p>
+</li>
+<li><p><code>选中</code>下载的软件，然后点击上面的那一排按钮中的<code>导出</code>。</p>
+</li>
+<li><p>在你的下载路径中便会有一个你下载项目的ipa文件，<code>右键</code>该文件，选择一个<code>解压软件</code>打开该文件，<strong>切记不要使用iTunes打开</strong>，此时该路径下便会有个文件夹名为项目名称的文件夹。</p>
+</li>
+<li><p>该文件内便是我们能看到的项目中的相关资源，<strong>找到Payload文件夹 -&gt; 右键那个圈内有个斜杠的文件 -&gt; 显示包内容</strong></p>
+</li>
+<li><p>想要什么拿什么</p>
+</li>
+</ol>
+<h1 id="发现苹果的显示包内容是个神器啊"><a href="#发现苹果的显示包内容是个神器啊" class="headerlink" title="发现苹果的显示包内容是个神器啊"></a>发现苹果的显示包内容是个神器啊</h1>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/14/在Mac上注册新用户/" itemprop="url">
+                  在Mac上注册新用户
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T17:04:45+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/软件/" itemprop="url" rel="index">
+                    <span itemprop="name">软件</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/在Mac上注册新用户/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/在Mac上注册新用户/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>开机，启动时按cmd+S，进入Single<br>User Mode，出现像DOS一样的提示符#root&gt;</p>
+</li>
+<li><p>在#root&gt;下输入（注意空格，大小写）<strong>每敲一句，回车后再进行下一句</strong></p>
+<blockquote>
+<p>fsck -y</p>
+<p>mount -uaw /</p>
+<p>rm /var/db/.AppleSetupDone</p>
+<p>reboot</p>
+</blockquote>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/14/subLime补全完整的html头部信息/" itemprop="url">
                   subLime补全完整的html头部信息
                 </a>
@@ -1379,556 +1786,6 @@ db = [FMDatabase databaseWithPath:path];  //指定路径创建一个数据库 dB
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/14/归档/" itemprop="url">
-                  归档
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T16:12:03+08:00" content="2016-09-14">
-              2016-09-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/14/归档/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/归档/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
-<li>归档：将对转序列化成二级制数据，并保存在文件中。</li>
-<li><p>解归档：将归档后的数据反序列化成明码（能够看懂）对象，供我们使用。</p>
-</li>
-<li><p>说明：只有遵守了NSCoding或 NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。</p>
-<pre><code> //归档时会自动调用encodeWithCoder:(NSCoder *)aCoder
-- (void)encodeWithCoder:(NSCoder *)aCoder
-
-// 解归档的时候 会自动调用 initWithCoder:(NSCoder *)aDecoder
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder
-</code></pre></li>
-</ul>
-<hr>
-<h1 id="将单个对象归档与解归档"><a href="#将单个对象归档与解归档" class="headerlink" title="将单个对象归档与解归档"></a>将单个对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-0ed0360e9ee38616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将单个对象归档与解归档"></p>
-<ol>
-<li><p>看不懂是怎么找路径给path赋值的，请移步<a href="http://www.jianshu.com/p/2d9ca94b584d" target="_blank" rel="external">这里</a>查看。</p>
-</li>
-<li><p>采用archiveRootObject方法在同一路经下只能归档一个对象。但如果此时我想将我传进来的名字和年龄都归档，只需将这两个数据放到一个字典对象里。让后将字典给归档便可。将归档方法变为如下即可。</p>
-<pre><code>- (void)archiverName:(NSString *)name WithAge:(NSNumber *)age {
-
-  //[NSKeyedArchiver archiveRootObject:name toFile:path];
-
-  //[NSKeyedArchiver archiveRootObject:age toFile:path];
-
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-
-  dict[@&quot;name&quot;] = name;
-  dict[@&quot;age&quot;] = age;
-
-  [NSKeyedArchiver archiveRootObject:dict toFile:path];
-
-  //验证是否将字典给归档
-  id content =  [NSKeyedUnarchiver unarchiveObjectWithFile:path];
- NSLog(@&quot;%@&quot;,content);
-}
-</code></pre></li>
-</ol>
-<h1 id="对自定义的类的单个对象创建的对象归档与解归档"><a href="#对自定义的类的单个对象创建的对象归档与解归档" class="headerlink" title="对自定义的类的单个对象创建的对象归档与解归档"></a>对自定义的类的单个对象创建的对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-3c160d48a7c706e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对自定义的类的单个对象创建的对象归档与解归档"></p>
-<ol>
-<li>Person是我自定义的一个类</li>
-<li><p>在前言部分咱们说过只有遵守了NSCoding或NSSecureCoding（更为安全的归档协议,想要深入了解可以留下评论）协议,并且实现了协议里归档与解归档的方法的的类创建的对象才能够进行归档。</p>
-<p>因此我们需要对Person类做以下操作。</p>
-<ul>
-<li>遵守NSCodeing协议（暂不考虑NSSecureCoding）</li>
-<li>实现-(void)encodeWithCoder:(NSCoder *)aCoder;</li>
-<li>实现-(nullable instancetype)initWithCoder:(NSCoder *)aDecoder;</li>
-</ul>
-</li>
-</ol>
-<h2 id="Person-h"><a href="#Person-h" class="headerlink" title="Person.h"></a>Person.h</h2><pre><code>#import &lt;Foundation/Foundation.h&gt;
-
-@interface Person : NSObject&lt;NSCoding&gt;
-
-@property (nonatomic,copy) NSString *name;
-@property (nonatomic,assign) NSInteger age;
-@property (nonatomic,copy) NSString *sex;
-
-@end
-</code></pre><h2 id="Peroson-m"><a href="#Peroson-m" class="headerlink" title="Peroson.m"></a>Peroson.m</h2><pre><code>#import &quot;Person.h&quot;
-
-@implementation Person
-
-//被归档的时候会调用者方法，aCoder就是归档时传过来的归档对象
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-
-    [aCoder encodeObject:self.name forKey:@&quot;name&quot;];
-
-    [aCoder encodeInteger:self.age forKey:@&quot;age&quot;];
-
-    [aCoder encodeObject:self.sex forKey:@&quot;sex&quot;];
-
-}
-
-//解归档的时候会调用这个方法
-  - (instancetype)initWithCoder:(NSCoder *)aDecoder{
-
-      //解归档时会产生一个Person对象，这里是给这个Person对象赋值。
-
-      self = [super init];
-
-      if (self) {
-
-        self.name = [aDecoder decodeObjectForKey:@&quot;name&quot;];
-
-        self.age = [aDecoder decodeIntegerForKey:@&quot;age&quot;];
-
-        self.sex = [aDecoder decodeObjectForKey:@&quot;sex&quot;];
-
-        }
-
-        return self;
-   }
-
-@end
-</code></pre><h1 id="同时将多个的对象归档与解归档"><a href="#同时将多个的对象归档与解归档" class="headerlink" title="同时将多个的对象归档与解归档"></a>同时将多个的对象归档与解归档</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-209968fac461b8ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="同时将多个系统类创建的对象归档与解归档"></p>
-<ol>
-<li>你自己可以试试在这里也将自定义的Person类给归档。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/14/Cocoapods配置/" itemprop="url">
-                  Cocoapods配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T16:03:33+08:00" content="2016-09-14">
-              2016-09-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/14/Cocoapods配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Cocoapods配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在iOS开发中势必会用到一些第三方依赖库，比如大家都熟悉的ASIHttpRequest、AFNetworking、JSONKit等。使用这些第三方类库能极大的方便项目的开发，但是，集成这些依赖库需要我们手动去配置，例如集成ASIHttpRequest库时除了加入源码以外还需要手动去添加一些系统框架，比如CFNetwork、MobileCoreServices等，如果这些第三方库发生了更新，还需要手动去更新项目。这就显得非常麻烦。有麻烦自然有解决办法，CocoaPods就是为了解决这个问题而生的。通过CocoaPods，我们可以将第三方的依赖库统一管理起来，配置和更新只需要通过简单的几行命令即可完成，大大的提高了实际开发中的工作效率，使我们的主要精力集中到更重要的事情上去。</p>
-<h1 id="安装Cocoapods"><a href="#安装Cocoapods" class="headerlink" title="安装Cocoapods"></a>安装Cocoapods</h1><blockquote>
-<p>mac系统自带ruby环境，网上有的教程是让你重新装svm,然后利用rvm再装ruby，注意区分。</p>
-</blockquote>
-<h2 id="将ruby的原生镜像移除"><a href="#将ruby的原生镜像移除" class="headerlink" title="将ruby的原生镜像移除"></a>将ruby的原生镜像移除</h2><pre><code>$ gem sources --remove https://rubygems.org/
-</code></pre><h2 id="用淘宝的镜像代替"><a href="#用淘宝的镜像代替" class="headerlink" title="用淘宝的镜像代替"></a>用淘宝的镜像代替</h2><pre><code>这一步是因为国内有墙的限制，会造成安装cocoapods的过程变的十分慢，替换为淘宝的镜像速度会相对较快。
-$ gem sources -a https://ruby.taobao.org/
-</code></pre><h2 id="查看是否设置成功"><a href="#查看是否设置成功" class="headerlink" title="查看是否设置成功"></a>查看是否设置成功</h2><pre><code>$ gem sources -l
-
-如果输出结果是如下这样，那说明这一步就成功了。
- *** CURRENT SOURCES ***
- http://ruby.taobao.org/
-</code></pre><h2 id="安装Cocoapods-1"><a href="#安装Cocoapods-1" class="headerlink" title="安装Cocoapods"></a>安装Cocoapods</h2><pre><code>$ sudo gem install cocoapods
-</code></pre><h2 id="查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。"><a href="#查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。" class="headerlink" title="查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。"></a>查看Cocoapods是否支持某个类库，只要能够查询到框架就表明这个这台电脑Cocoapods已经安装成功。</h2><pre><code>$ pod search 类库名
-支持模糊查询(如:AFNetworking),如果下面显示出AFNetworking框架的各个版本就代表Cocoapods安装完成。
-</code></pre><h2 id="可能碰到的问题"><a href="#可能碰到的问题" class="headerlink" title="可能碰到的问题"></a>可能碰到的问题</h2><p>1、ERROR:  While executing gem … (Errno::EACCES)    Permission denied - /Users/xxxxx/.gemrc</p>
-<pre><code>可以用sudo chown -R xxxx /Users/xxxx/.gemrc解决
-</code></pre><p>2、pod search 搜索库的时候报错Unable to find a specification for xxxxx</p>
-<pre><code>解决方法：在终端执行这两句代码，然后重新安装pod,在进行搜索。
-pod repo remove master  
-pod setup
-</code></pre><p>3、 安装的时候报错说selected xcode error<br>        解决方法:运行这句代码，然后重新安装</p>
-<pre><code>sudo xcode-select -switch /Applications/Xcode.app/
-</code></pre><p>–<br>Cocoapods相当于一款软件，在电脑上安装成功以后，以后就可以直接使用他来给项目集成框架。不需要重复上面的操作。</p>
-<h1 id="在项目中如何使用Cocoapods"><a href="#在项目中如何使用Cocoapods" class="headerlink" title="在项目中如何使用Cocoapods"></a>在项目中如何使用Cocoapods</h1><p>　　我们通过集成MJRefresh类库来演示如何使用CocoaPods来做依赖库管理。首先，建立一个xcode工程，命名为CocoaPodsTest，现在的工程结构如下图所示。<br><img src="http://upload-images.jianshu.io/upload_images/1338564-e771007bf3c576ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正常新建工程结构图"></p>
-<h2 id="检查MJRefresh是否支持Cocoapods-支持模糊查询"><a href="#检查MJRefresh是否支持Cocoapods-支持模糊查询" class="headerlink" title="检查MJRefresh是否支持Cocoapods,支持模糊查询"></a>检查MJRefresh是否支持Cocoapods,支持模糊查询</h2><pre><code>$ pod search mjrefresh
-</code></pre><p>　　出现Setting up CocoaPods master repo，说明Cocoapods正在将它的信息下载到 ~/.cocoapods里，<strong>保持这个终端不动，新打开一个终端</strong>，cd到该目录里，用du -sh <em>命令来查看文件大小，每隔几分钟查看一次，我的这个目录最终大小是211M，就是完成了。如果不成功，在下面会显示一个git的网址，在这个网址下载相应的文件放在~/.cocoapods相应的文件夹便可。<br>　　<strong>执</strong>行后通过输出结果可以看到mjrefresh是支持CocoaPods的，注意红框标记的内容，这是待会我们配置xcode时需要的信息，这条配置项就是告诉CocoaPods去下载和管理第三方库的哪一个版本。*</em>   如果搜索过后最下面出现一个：,则直接点击q便可退出。<br><img src="http://upload-images.jianshu.io/upload_images/1338564-19797b3bc2e34241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MJRefresh库的把版本信息"></p>
-<h2 id="检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。"><a href="#检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。" class="headerlink" title="检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。"></a>检测完毕后我们在终端里来到工程CocoaPodsTest的目录下。</h2><pre><code>$ cd /Users/GG/Desktop/CocoaPodsTest  我这里是放在GG用户的桌面上了。你们需要改成你们自己的路径。
-</code></pre><h2 id="管理第三方库的PodFile文件"><a href="#管理第三方库的PodFile文件" class="headerlink" title="管理第三方库的PodFile文件"></a>管理第三方库的PodFile文件</h2><pre><code>$ vim Podfile　
-</code></pre><p>　　利用终端运行以上代码会在工程里打开一个名为Podfile（注意大小写）的文件。如果有这个文件会在终端中打开，如果没有这个文件会新建后打开。这个Podfile文件的作用是配置依赖库信息，就是告诉CocoaPods去下载和管理哪些依赖库。</p>
-<h2 id="在文件里写入你想用的框架。"><a href="#在文件里写入你想用的框架。" class="headerlink" title="在文件里写入你想用的框架。"></a>在文件里写入你想用的框架。</h2><p>　　文件创建好以后，需要写的内容就是在上图中的红圈表示的信息。版本号可以根据自己的需求改变。vim打开文件后按i进入插入模式，编辑完成后按esc退出编辑模式，接着输入:wq保存并退出文件。保存以后可以在C文件夹里验证一下是否有Cocoapods这个文件。下图中我写了好几个框架。<br> <img src="http://upload-images.jianshu.io/upload_images/1338564-f218bd8bfe9d7155.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在Podfile文件里写入你想用的框架"></p>
-<h2 id="将第三方库集成到项目中"><a href="#将第三方库集成到项目中" class="headerlink" title="将第三方库集成到项目中"></a>将第三方库集成到项目中</h2><p>　　如果之前的全部工作都完成了，工程目录下就会有一个Podfile文件了，注意必须和.xcodeproj在同一个目录下。接下来就可以使用CocoaPods来安装并管理JSONKit库了，首先确保终端当前路径是在CocoaPodsTest目录下。</p>
-<pre><code>$ pwd   可以查看当前终端所处的路径。
-</code></pre><p>路径没有问题后运行</p>
-<pre><code>$ pod install  将Podfile文件中的第三方库集成在项目中。
-</code></pre><p>安装结束以后会有如下提示</p>
-<pre><code>Analyzing dependencies
-Downloading dependencies
-Installing MJRefresh (3.0.8)
-Generating Pods project
-Integrating client project
-
-[!] Please close any current Xcode sessions and use     `CocoaPodsTest.xcworkspace` for this project from now on.
-Sending stats
-Pod installation complete! There is 1 dependency from the Podfile and 1 total
-pod installed.
-</code></pre><p>最重要的是这句话：</p>
-<pre><code>请关闭Xcode，从此使用CocoapodsTest.xcworkspace打开项目
-Please close any current Xcode sessions and use     `CocoaPodsTest.xcworkspace` for this project from now on. 
-</code></pre><h2 id="通过xcoworkspace打开项目"><a href="#通过xcoworkspace打开项目" class="headerlink" title="通过xcoworkspace打开项目"></a>通过xcoworkspace打开项目</h2><p><img src="http://upload-images.jianshu.io/upload_images/1338564-59b24a5f8156aa11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通过xcoworkspace打开项目的目录结果"></p>
-<p>会多出一个名为Pods的依赖工程，打开/Pods/Pods文件夹后，能找到我们在Podfile写的各种第三方库。</p>
-<h2 id="至此用Cocoapods管理第三方框架的所有工作做完。"><a href="#至此用Cocoapods管理第三方框架的所有工作做完。" class="headerlink" title="至此用Cocoapods管理第三方框架的所有工作做完。"></a>至此用Cocoapods管理第三方框架的所有工作做完。</h2><p>　　如果需要依赖多个第三方类库，只需要修改Podfile文件的配置，然后运行pod update命令即可，比如新增一个AFNetworking的依赖库，首先执行pod search AFNetworking查看一下AFNetworking的配置信息，修改Podfile文件，在后面增加AFNetworking的对应配置信息，然后运行pod update命令就完成了对AFNetworking的集成。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/14/Block/" itemprop="url">
-                  Block
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T15:55:45+08:00" content="2016-09-14">
-              2016-09-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/14/Block/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Block/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>block是一个从iOS4后开始引入的代码块语法，能够代替代理来实现反向传值。接下来我将从以下几个方面介绍block,帮助大家一点一点揭开block的神秘面纱。</p>
-<ul>
-<li><p>block基础 </p>
-</li>
-<li><p>block作为参数</p>
-</li>
-<li><p>block和delegate</p>
-</li>
-<li><p>block的内存管理</p>
-</li>
-</ul>
-<hr>
-<h1 id="block基础"><a href="#block基础" class="headerlink" title="block基础"></a>block基础</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-2ec0b58c7856882b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="声明block"></p>
-<p>1、返回值类型可以是nil，block名字随意，参数只需数据类型就可，多个参数用逗号隔开。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-0964b465896f0680.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="实现block"></p>
-<p>1、因为我在定义oneFrom这个block的时候，设置了一个返回值，所以我实现这个block的时候需要return一下。</p>
-<p>2、我在这里写的是加法运算，如果我想做其他运算，我只需要修改一下这个block块便可。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-ba1994d8990bdbf2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="调用block"></p>
-<p>1、oneFrame这个block在声明时设置什么类型的返回值就要用什么来接收。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-2f8c4fe250cde147.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="block基础用法总结"></p>
-<h1 id="block作为参数"><a href="#block作为参数" class="headerlink" title="block作为参数"></a>block作为参数</h1><h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p><img src="http://upload-images.jianshu.io/upload_images/1338564-d14b346695ca3a3d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将block作为参数的方式1"></p>
-<p>1、 在blockParameterTwo的参数里我直接声明了一个无返回值无参数的block。<br>如果想要设置有参数有返回值的，按照如下声明便可。</p>
-<pre><code>- (void)blockParameterTwo:(int (^)(int a,int b))clickView
-</code></pre><p>2、当我点击屏幕时，调用blockParameterTwo的同时会将我的代码块也给传入到该方法中。最终在这个方法中调用我的传入的block,才会执行我调用该方法时设置的代码块。</p>
-<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p><img src="http://upload-images.jianshu.io/upload_images/1338564-6dea73364eb1e3b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通过typedef将block转会为一种数据类型使用"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-a780814ac7f071cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通过步骤1创建的block数据类型申明一个对象"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-6d2385ff6957b2ea.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="实现一个带block参数的方法"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-461448cdf35c6171.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="调用第三步实现的方法"></p>
-<p>1、通过第二种方式，能够方便的同时声明多个同样的block。</p>
-<h1 id="block与代理"><a href="#block与代理" class="headerlink" title="block与代理"></a>block与代理</h1><blockquote>
-<p>我分别采用delegate和block两种方式自定义一个能够被点击的label</p>
-<p>DelegateTapLabel: 采用代理来监听Label的点击事件(代理的具体实现方式，在这里我就不写了,在我给的demo已经写好)</p>
-<p>BlockTapLabel:采用block来监听Label的点击事件</p>
-</blockquote>
-<p>BlockTapLabel.h</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-092edf99c80f5eff.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BlockTapLabel.h"></p>
-<p>1、我这里声明的是无参无返回值的一个block</p>
-<p>BlockTapLabel.m<br><img src="http://upload-images.jianshu.io/upload_images/1338564-a3ce98f80429a16a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BlockTapLabel.m"></p>
-<p>使用这个能点击的label</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1338564-ca04b8ba22be2dd3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用这个能点击的label"></p>
-<p>1、使用block来实现反向传值，不用遵守协议不用挂代理，不用再去实现代理方法。</p>
-<h1 id="block的内存管理"><a href="#block的内存管理" class="headerlink" title="block的内存管理"></a>block的内存管理</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-cf47a585b0c65ca5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="block的内存管理"></p>
-<p>1、建议自己可以试试如果把<strong>__</strong>block修饰去掉或者不对self做处理会报什么样的错误。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1974,7 +1831,7 @@ Please close any current Xcode sessions and use     `CocoaPodsTest.xcworkspace` 
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1991,7 +1848,7 @@ Please close any current Xcode sessions and use     `CocoaPodsTest.xcworkspace` 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

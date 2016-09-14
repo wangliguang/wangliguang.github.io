@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="软件," />
 
 
 
@@ -102,31 +102,41 @@
 
 
 
-<meta name="description" content="SQLite介绍SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。
-打开OR创建数据库
-1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。
-2、每次打开都要将数据">
+<meta name="description" content="前言
+ 问：你认为，做程序猿最痛苦的事是有哪些？
+ 答：没网，没网，没网。。。。
+
+   在做项目时，能够快速的访问服务器，可以提高不少的工作效率。但总有那么些时候，公司或者家里的网出现问题，无法访问项目的服务器，此时不要着急，不要放弃，这种情况下，我们可以将临时写的测试数据放在mac自带的Apache服务器中，正常通过服务器访问数据，从而避免影响工作。
+How
+打开终端，开启Apache:
+//">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言操作SQLite">
-<meta property="og:url" content="http://yoursite.com/2016/09/14/C语言操作SQLite/index.html">
+<meta property="og:title" content="Mac自带的本地服务器">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/Mac自带的本地服务器/index.html">
 <meta property="og:site_name" content="广广的技术博客">
-<meta property="og:description" content="SQLite介绍SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。
-打开OR创建数据库
-1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。
-2、每次打开都要将数据">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-cbe60e89c278d1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-6c79d670d08796eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-c9684c4db86369c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-3128123474761be0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-722c0854f3f3324d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-14T08:33:46.000Z">
+<meta property="og:description" content="前言
+ 问：你认为，做程序猿最痛苦的事是有哪些？
+ 答：没网，没网，没网。。。。
+
+   在做项目时，能够快速的访问服务器，可以提高不少的工作效率。但总有那么些时候，公司或者家里的网出现问题，无法访问项目的服务器，此时不要着急，不要放弃，这种情况下，我们可以将临时写的测试数据放在mac自带的Apache服务器中，正常通过服务器访问数据，从而避免影响工作。
+How
+打开终端，开启Apache:
+//">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-ab86b75ab3abd27c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-0d18702b730fb5b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-e8f2d01f4ef2f0f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-14T09:11:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言操作SQLite">
-<meta name="twitter:description" content="SQLite介绍SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。
-打开OR创建数据库
-1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。
-2、每次打开都要将数据">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-cbe60e89c278d1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Mac自带的本地服务器">
+<meta name="twitter:description" content="前言
+ 问：你认为，做程序猿最痛苦的事是有哪些？
+ 答：没网，没网，没网。。。。
+
+   在做项目时，能够快速的访问服务器，可以提高不少的工作效率。但总有那么些时候，公司或者家里的网出现问题，无法访问项目的服务器，此时不要着急，不要放弃，这种情况下，我们可以将临时写的测试数据放在mac自带的Apache服务器中，正常通过服务器访问数据，从而避免影响工作。
+How
+打开终端，开启Apache:
+//">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-ab86b75ab3abd27c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -147,9 +157,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/14/C语言操作SQLite/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/Mac自带的本地服务器/"/>
 
-  <title> C语言操作SQLite | 广广的技术博客 </title>
+  <title> Mac自带的本地服务器 | 广广的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +279,7 @@
             
             
               
-                C语言操作SQLite
+                Mac自带的本地服务器
               
             
           </h1>
@@ -281,38 +291,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T16:29:01+08:00" content="2016-09-14">
+            <time itemprop="dateCreated" datetime="2016-09-14T17:10:32+08:00" content="2016-09-14">
               2016-09-14
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/14/C语言操作SQLite/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/C语言操作SQLite/" itemprop="commentsCount"></span>
+                <a href="/2016/09/14/Mac自带的本地服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/Mac自带的本地服务器/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,21 +326,45 @@
       
 
       
-        <h1 id="SQLite介绍"><a href="#SQLite介绍" class="headerlink" title="SQLite介绍"></a>SQLite介绍</h1><p>SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。</p>
-<h1 id="打开OR创建数据库"><a href="#打开OR创建数据库" class="headerlink" title="打开OR创建数据库"></a>打开OR创建数据库</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-cbe60e89c278d1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。</p>
-<p>2、每次打开都要将数据库和结果集置空，避免上次对数据库的操作影响当前的操作。</p>
-<h1 id="关闭结果集和数据库"><a href="#关闭结果集和数据库" class="headerlink" title="关闭结果集和数据库"></a>关闭结果集和数据库</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-6c79d670d08796eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、每次操作之后都要关闭，避免内存泄露。</p>
-<h1 id="在数据库中建表"><a href="#在数据库中建表" class="headerlink" title="在数据库中建表"></a>在数据库中建表</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-c9684c4db86369c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>0、SQLite语法不区分大小写,对数据库操作前打开数据库，操作结束后关闭数据库。</p>
-<p>1、SQLite3支持 NULL、INTEGER、REAL（浮点数字）、TEXT(字符串文本)和BLOB(二进制对象)数据类型，但实际上sqlite3也接受varchar(n)、char(n)、decimal(p,s) 等数据类型，只不过在运算或保存时会转成对应的五种数据类型。</p>
-<p>2、 SQLite最大的特点是你可以把各种类型的数据保存到任何字段中，而不用关心字段声明的数据类型是什么。例如：可以在Integer类型的字段中存放字符串，或者在布尔型字段中存放浮点数，或者在字符型字段中存放日期型值。 但有一种情况例外：定义为INTEGER PRIMARY KEY(PRIMARY KEY修饰表明这个字段是表的主键)的字段只能存储64位整数， 当向这种字段保存除整数以外的数据时，将会产生错误。</p>
-<h1 id="在表中插入数据"><a href="#在表中插入数据" class="headerlink" title="在表中插入数据"></a>在表中插入数据</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-3128123474761be0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>在表中插入数据<br>1、关于数据的删，改跟上面的插入的格式一样。只不过是sql语句不同而已。碰到不会写的sql语句，百度搜索即可。请原谅我的懒惰😄。</p>
-<h1 id="在表中查询数据"><a href="#在表中查询数据" class="headerlink" title="在表中查询数据"></a>在表中查询数据</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-722c0854f3f3324d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、Command+左键SQLite_ROW,里面有很多的宏，sqlite_step返回的值，在那些宏里都有相应的解释。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p> 问：你认为，做程序猿最痛苦的事是有哪些？</p>
+<p> 答：没网，没网，没网。。。。</p>
+</blockquote>
+<p>   在做项目时，能够<strong>快速</strong>的访问服务器，可以提高不少的工作效率。但总有那么些时候，公司或者家里的网出现问题，无法访问项目的服务器，此时不要着急，不要放弃，这种情况下，我们可以将临时写的测试数据放在mac自带的Apache服务器中，正常通过服务器访问数据，从而避免影响工作。</p>
+<h1 id="How"><a href="#How" class="headerlink" title="How"></a>How</h1><ol>
+<li><p>打开终端，开启Apache:</p>
+<pre><code>//开启apache:
+sudo apachectl start
 
+//重启apache
+sudo apachectl restart
+
+//关闭apache
+sudo apachectl stop          
+</code></pre><p>回车会提示输入密码，也就是你电脑的密码，<a href="http://127.0.0.1/" target="_blank" rel="external">http://127.0.0.1/</a> 测试一下，成功则如下图：<br><img src="http://upload-images.jianshu.io/upload_images/1338564-ab86b75ab3abd27c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成功开启mac下Apache效果图"></p>
+</li>
+<li><p>点击Finder,然后Command+Shift+G,前往如下路径(mac下Apache服务器的文件路径)</p>
+<pre><code>/Library/WebServer/Documents
+</code></pre><p>如图：<br><img src="http://upload-images.jianshu.io/upload_images/1338564-0d18702b730fb5b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mac下Apache服务器文件路径"><br>在步骤1中只输入一个<a href="http://127.0.0.1" target="_blank" rel="external">http://127.0.0.1</a> 其实默认打开的是index.html.en(html是一个网页文件)，该文件的内容就是在步骤1中测试时浏览器所显示的内容，下面我会附上index.html中的内容。此时如果我在浏览器的网址框输入的是<a href="http://127.0.0.1/PoweredByMacOSX.gif" target="_blank" rel="external">http://127.0.0.1/PoweredByMacOSX.gif</a>, 浏览器就便会显示PoweredByMacOSX.gif图片,<strong>如果没有正常显示，提示说没有权限时，单击该文件，然后Command+I在末尾设置权限即可</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1338564-e8f2d01f4ef2f0f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9807B35C-A181-4F64-B6D4-3C9FE53F9FB8.png"></p>
+</li>
+<li><p>上面提到了html和图片，那么如何使该服务器返回json数据(<strong>其他类型同理</strong>)呢。</p>
+<blockquote>
+<p>  1、创建一个纯文本文档test(名字能够随意起)，</p>
+<p>  2、将JSON数据串复制到里面，然后将.txt扩展名去掉</p>
+<p>  3、保存后将这个文件放到服务器路径下<br><code>/Library/WebServer/Documents</code></p>
+<p>  4、接下来用浏览器访问<a href="http://127.0.0.1/test，" target="_blank" rel="external">http://127.0.0.1/test，</a> 你在浏览器中访问时中文可能会出现乱码，但在项目中请求回来，打印在控制台的是正常的。</p>
+<p>   附录：我测试用的json数据串。</p>
+<pre><code>{  
+  &quot;name&quot;:&quot;广广&quot;,
+  &quot;age&quot;:24,
+  &quot;sex&quot;:&quot;男&quot;,
+  &quot;jobs&quot;:&quot;老师&quot;
+}
+</code></pre></blockquote>
+</li>
+</ol>
+<h1 id="使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。"><a href="#使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。" class="headerlink" title="使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。"></a>使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。</h1>
       
     </div>
 
@@ -369,22 +384,24 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/软件/" rel="tag">#软件</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/14/日期NSDate/" rel="next" title="日期NSDate">
-                <i class="fa fa-chevron-left"></i> 日期NSDate
+              <a href="/2016/09/14/获取别人家iOS项目中的图片资源/" rel="next" title="获取别人家iOS项目中的图片资源">
+                <i class="fa fa-chevron-left"></i> 获取别人家iOS项目中的图片资源
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/14/FMDB/" rel="prev" title="FMDB">
-                FMDB <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -410,8 +427,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/14/C语言操作SQLite/"
-           data-title="C语言操作SQLite" data-url="http://yoursite.com/2016/09/14/C语言操作SQLite/">
+      <div class="ds-thread" data-thread-key="2016/09/14/Mac自带的本地服务器/"
+           data-title="Mac自带的本地服务器" data-url="http://yoursite.com/2016/09/14/Mac自带的本地服务器/">
       </div>
     
   </div>
@@ -522,7 +539,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQLite介绍"><span class="nav-number">1.</span> <span class="nav-text">SQLite介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打开OR创建数据库"><span class="nav-number">2.</span> <span class="nav-text">打开OR创建数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关闭结果集和数据库"><span class="nav-number">3.</span> <span class="nav-text">关闭结果集和数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在数据库中建表"><span class="nav-number">4.</span> <span class="nav-text">在数据库中建表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在表中插入数据"><span class="nav-number">5.</span> <span class="nav-text">在表中插入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在表中查询数据"><span class="nav-number">6.</span> <span class="nav-text">在表中查询数据</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How"><span class="nav-number">2.</span> <span class="nav-text">How</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。"><span class="nav-number">3.</span> <span class="nav-text">使用过后，记得关闭服务器，要不然会一直消耗你电脑内存，后果你懂的。</span></a></li></ol></div>
             
           </div>
         </section>

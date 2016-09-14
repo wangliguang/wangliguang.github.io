@@ -102,31 +102,22 @@
 
 
 
-<meta name="description" content="SQLite介绍SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。
-打开OR创建数据库
-1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。
-2、每次打开都要将数据">
+<meta name="description" content="前言   拿起手机，将网络断开，打开一个软件，此时该软件所展示的图片，就是该项目中所包含的图片资源，如果我想在自己的项目中使用这些图片，该怎么破呢，不要急，再次我帮助大家来获取这些藏在iOS项目中的图片。如果你不满足仅仅获取项目中的，还想获取人家的网络资源，移步到Charles 从入门到精通
+开工
+在MacX下载Itools软件，并安装，直接在百度上搜也能找到。Itools挺强大的，我在这里推荐一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言操作SQLite">
-<meta property="og:url" content="http://yoursite.com/2016/09/14/C语言操作SQLite/index.html">
+<meta property="og:title" content="获取别人家iOS项目中的图片资源">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/获取别人家iOS项目中的图片资源/index.html">
 <meta property="og:site_name" content="广广的技术博客">
-<meta property="og:description" content="SQLite介绍SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。
-打开OR创建数据库
-1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。
-2、每次打开都要将数据">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-cbe60e89c278d1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-6c79d670d08796eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-c9684c4db86369c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-3128123474761be0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-722c0854f3f3324d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-14T08:33:46.000Z">
+<meta property="og:description" content="前言   拿起手机，将网络断开，打开一个软件，此时该软件所展示的图片，就是该项目中所包含的图片资源，如果我想在自己的项目中使用这些图片，该怎么破呢，不要急，再次我帮助大家来获取这些藏在iOS项目中的图片。如果你不满足仅仅获取项目中的，还想获取人家的网络资源，移步到Charles 从入门到精通
+开工
+在MacX下载Itools软件，并安装，直接在百度上搜也能找到。Itools挺强大的，我在这里推荐一">
+<meta property="og:updated_time" content="2016-09-14T09:09:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言操作SQLite">
-<meta name="twitter:description" content="SQLite介绍SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。
-打开OR创建数据库
-1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。
-2、每次打开都要将数据">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-cbe60e89c278d1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="获取别人家iOS项目中的图片资源">
+<meta name="twitter:description" content="前言   拿起手机，将网络断开，打开一个软件，此时该软件所展示的图片，就是该项目中所包含的图片资源，如果我想在自己的项目中使用这些图片，该怎么破呢，不要急，再次我帮助大家来获取这些藏在iOS项目中的图片。如果你不满足仅仅获取项目中的，还想获取人家的网络资源，移步到Charles 从入门到精通
+开工
+在MacX下载Itools软件，并安装，直接在百度上搜也能找到。Itools挺强大的，我在这里推荐一">
 
 
 
@@ -147,9 +138,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/14/C语言操作SQLite/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/获取别人家iOS项目中的图片资源/"/>
 
-  <title> C语言操作SQLite | 广广的技术博客 </title>
+  <title> 获取别人家iOS项目中的图片资源 | 广广的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +260,7 @@
             
             
               
-                C语言操作SQLite
+                获取别人家iOS项目中的图片资源
               
             
           </h1>
@@ -281,7 +272,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-14T16:29:01+08:00" content="2016-09-14">
+            <time itemprop="dateCreated" datetime="2016-09-14T17:08:58+08:00" content="2016-09-14">
               2016-09-14
             </time>
           </span>
@@ -311,8 +302,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/14/C语言操作SQLite/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/C语言操作SQLite/" itemprop="commentsCount"></span>
+                <a href="/2016/09/14/获取别人家iOS项目中的图片资源/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/获取别人家iOS项目中的图片资源/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,21 +326,26 @@
       
 
       
-        <h1 id="SQLite介绍"><a href="#SQLite介绍" class="headerlink" title="SQLite介绍"></a>SQLite介绍</h1><p>SQLite，是一款轻型的数据库(按照数据结构来组织、存储和管理数据的仓库)，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。</p>
-<h1 id="打开OR创建数据库"><a href="#打开OR创建数据库" class="headerlink" title="打开OR创建数据库"></a>打开OR创建数据库</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-cbe60e89c278d1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、由于sqlite使用C语言写的，所以sqlite他不是一个对象，而只是一个指针变量而已。</p>
-<p>2、每次打开都要将数据库和结果集置空，避免上次对数据库的操作影响当前的操作。</p>
-<h1 id="关闭结果集和数据库"><a href="#关闭结果集和数据库" class="headerlink" title="关闭结果集和数据库"></a>关闭结果集和数据库</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-6c79d670d08796eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、每次操作之后都要关闭，避免内存泄露。</p>
-<h1 id="在数据库中建表"><a href="#在数据库中建表" class="headerlink" title="在数据库中建表"></a>在数据库中建表</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-c9684c4db86369c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>0、SQLite语法不区分大小写,对数据库操作前打开数据库，操作结束后关闭数据库。</p>
-<p>1、SQLite3支持 NULL、INTEGER、REAL（浮点数字）、TEXT(字符串文本)和BLOB(二进制对象)数据类型，但实际上sqlite3也接受varchar(n)、char(n)、decimal(p,s) 等数据类型，只不过在运算或保存时会转成对应的五种数据类型。</p>
-<p>2、 SQLite最大的特点是你可以把各种类型的数据保存到任何字段中，而不用关心字段声明的数据类型是什么。例如：可以在Integer类型的字段中存放字符串，或者在布尔型字段中存放浮点数，或者在字符型字段中存放日期型值。 但有一种情况例外：定义为INTEGER PRIMARY KEY(PRIMARY KEY修饰表明这个字段是表的主键)的字段只能存储64位整数， 当向这种字段保存除整数以外的数据时，将会产生错误。</p>
-<h1 id="在表中插入数据"><a href="#在表中插入数据" class="headerlink" title="在表中插入数据"></a>在表中插入数据</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-3128123474761be0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>在表中插入数据<br>1、关于数据的删，改跟上面的插入的格式一样。只不过是sql语句不同而已。碰到不会写的sql语句，百度搜索即可。请原谅我的懒惰😄。</p>
-<h1 id="在表中查询数据"><a href="#在表中查询数据" class="headerlink" title="在表中查询数据"></a>在表中查询数据</h1><p><img src="http://upload-images.jianshu.io/upload_images/1338564-722c0854f3f3324d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>1、Command+左键SQLite_ROW,里面有很多的宏，sqlite_step返回的值，在那些宏里都有相应的解释。</p>
-
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>   拿起手机，将网络断开，打开一个软件，此时该软件所展示的图片，就是该项目中所包含的图片资源，如果我想在自己的项目中使用这些图片，该怎么破呢，不要急，再次我帮助大家来获取这些藏在iOS项目中的图片。如果你不满足仅仅获取项目中的，还想获取人家的网络资源，移步到<a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="external">Charles 从入门到精通</a></p>
+<h1 id="开工"><a href="#开工" class="headerlink" title="开工"></a>开工</h1><ol>
+<li><p>在<a href="http://soft.macx.cn/" target="_blank" rel="external">MacX</a>下载<code>Itools</code>软件，并安装，直接在百度上搜也能找到。Itools挺强大的，我在这里<a href="http://baike.baidu.com/link?url=zaIrA-gFUxy0CGugtvkEdtQPxQaQJAyS7trj7Dsmf8cKdbykklm9GYhxpiPSkj8KsjDBj9v5IVcsCzNFaFjSFq" target="_blank" rel="external">推荐</a>一下。</p>
+</li>
+<li><p>在Itools中点击<code>资源库</code>，如果你连接上你的iPhone，这个按钮就在右上角，若没有连接iPhone,该按钮就在坐下角。</p>
+</li>
+<li><p>左边有<code>网络资源</code>和<code>手机资源</code>,点击<code>网络资源</code>下的<code>苹果应用</code>，在右上角搜索菜谱。我选择第一个菜谱软件，点击下载，此时如果你连着iPhone显示的就不是下载而是安装，此时会提示你输入apple id。</p>
+</li>
+<li><p>下载完成以后，点击左下角的<code>下载管理</code>，然后再点击<code>本地资源</code>下的<code>苹果应用</code>。</p>
+</li>
+<li><p><code>选中</code>下载的软件，然后点击上面的那一排按钮中的<code>导出</code>。</p>
+</li>
+<li><p>在你的下载路径中便会有一个你下载项目的ipa文件，<code>右键</code>该文件，选择一个<code>解压软件</code>打开该文件，<strong>切记不要使用iTunes打开</strong>，此时该路径下便会有个文件夹名为项目名称的文件夹。</p>
+</li>
+<li><p>该文件内便是我们能看到的项目中的相关资源，<strong>找到Payload文件夹 -&gt; 右键那个圈内有个斜杠的文件 -&gt; 显示包内容</strong></p>
+</li>
+<li><p>想要什么拿什么</p>
+</li>
+</ol>
+<h1 id="发现苹果的显示包内容是个神器啊"><a href="#发现苹果的显示包内容是个神器啊" class="headerlink" title="发现苹果的显示包内容是个神器啊"></a>发现苹果的显示包内容是个神器啊</h1>
       
     </div>
 
@@ -374,16 +370,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/14/日期NSDate/" rel="next" title="日期NSDate">
-                <i class="fa fa-chevron-left"></i> 日期NSDate
+              <a href="/2016/09/14/在Mac上注册新用户/" rel="next" title="在Mac上注册新用户">
+                <i class="fa fa-chevron-left"></i> 在Mac上注册新用户
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/09/14/FMDB/" rel="prev" title="FMDB">
-                FMDB <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/14/Mac自带的本地服务器/" rel="prev" title="Mac自带的本地服务器">
+                Mac自带的本地服务器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -410,8 +406,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/14/C语言操作SQLite/"
-           data-title="C语言操作SQLite" data-url="http://yoursite.com/2016/09/14/C语言操作SQLite/">
+      <div class="ds-thread" data-thread-key="2016/09/14/获取别人家iOS项目中的图片资源/"
+           data-title="获取别人家iOS项目中的图片资源" data-url="http://yoursite.com/2016/09/14/获取别人家iOS项目中的图片资源/">
       </div>
     
   </div>
@@ -522,7 +518,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQLite介绍"><span class="nav-number">1.</span> <span class="nav-text">SQLite介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打开OR创建数据库"><span class="nav-number">2.</span> <span class="nav-text">打开OR创建数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关闭结果集和数据库"><span class="nav-number">3.</span> <span class="nav-text">关闭结果集和数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在数据库中建表"><span class="nav-number">4.</span> <span class="nav-text">在数据库中建表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在表中插入数据"><span class="nav-number">5.</span> <span class="nav-text">在表中插入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在表中查询数据"><span class="nav-number">6.</span> <span class="nav-text">在表中查询数据</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开工"><span class="nav-number">2.</span> <span class="nav-text">开工</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发现苹果的显示包内容是个神器啊"><span class="nav-number">3.</span> <span class="nav-text">发现苹果的显示包内容是个神器啊</span></a></li></ol></div>
             
           </div>
         </section>
