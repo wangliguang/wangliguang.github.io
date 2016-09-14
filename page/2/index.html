@@ -256,6 +256,444 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/02/多线程NSThread/" itemprop="url">
+                  多线程NSThread
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T10:16:55+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/02/多线程NSThread/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/多线程NSThread/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 这篇文章主要讲NSThread的使用，相关博客如下：<br> <a href="https://wangliguang.github.io/2016/09/02/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%90%86%E8%AE%BA%E9%83%A8%E5%88%86/" target="_blank" rel="external">iOS开发之多线程理论部分</a><br> <a href="https://wangliguang.github.io/2016/09/01/%E5%A4%9A%E7%BA%BF%E7%A8%8BNSOperation/" target="_blank" rel="external">NSOperation</a></p>
+<h1 id="什么是NSThread"><a href="#什么是NSThread" class="headerlink" title="什么是NSThread"></a>什么是NSThread</h1><p>NSThread是轻量级的多线程开发，使用并不复杂，但使用NSThread需要自己管理线程的生命周期。</p>
+<h1 id="使用NSThread开辟线程的两种方式"><a href="#使用NSThread开辟线程的两种方式" class="headerlink" title="使用NSThread开辟线程的两种方式"></a>使用NSThread开辟线程的两种方式</h1><ol>
+<li>创建并手动开启线程<pre><code>NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(compete) object:nil];   
+[thread start];
+</code></pre></li>
+<li>创建并自动开启线程<pre><code>[NSThread detachNewThreadSelector:@selector(compete) toTarget:self withObject:nil];
+</code></pre></li>
+</ol>
+<h1 id="NSThread的常用方法"><a href="#NSThread的常用方法" class="headerlink" title="NSThread的常用方法"></a>NSThread的常用方法</h1><ol>
+<li><p><strong>判断当前进程是否是多线程</strong></p>
+<pre><code>BOOL isMultiThread = [NSThread isMultiThreaded];
+</code></pre></li>
+<li><p><strong>获取当前线程对象</strong></p>
+<pre><code>//输出当前线程的信息
+NSLog(@&quot;当前所在的线程=%@&quot;,[NSThread currentThread]);
+</code></pre><p>控制台</p>
+<blockquote>
+<p>NSThread[10433:1182963] viewDidLoad 方法所在的线程=<nsthread: 0x7fca98507b10="">{number = 1, name = main}</nsthread:></p>
+<p><strong>number = 1 ： 线程的编号，由系统设置，主线程的编号为1</strong><br><strong>name = main：指当前所在的线程的名字叫做main,可以自己设置，主线程的名字默认是main，其他线程如果不给他设置名字默认是nil。</strong></p>
+</blockquote>
+</li>
+<li><p><strong>使当前线程睡眠指定的时间，单位为秒</strong></p>
+<pre><code>//这句代码在哪个线程执行就让哪个线程睡眠。
+[NSThread sleepForTimeInterval:2];
+</code></pre><p><strong>线程一旦休眠就进入阻塞状态，就是正在运行的线程没有运行结束，暂时让出CPU，这时其他处于就绪状态的线程就可以获得CPU时间，进入运行状态。</strong></p>
+</li>
+<li><p><strong>设置线程的优先级</strong></p>
+<pre><code>//取值范围(0.0~1.0),默认为0.5,取值越大,优先级越大。
+thread.threadPriority = 1.0;
+</code></pre></li>
+<li><p><strong>判断当前线程是否为主线程</strong></p>
+<pre><code>[NSThread isMainThread];
+</code></pre></li>
+<li><p><strong>给线程设置名字</strong></p>
+<pre><code>[thread setName:@&quot;线程名字&quot;]; 
+</code></pre></li>
+<li><p><strong>NSThread对象可知的三种状态</strong></p>
+<pre><code>isExecuting：是否正在执行，只读
+isFinished：是否已经完成，只读
+isCancellled：是否已经取消，可通过[thread cancel]手动设置，线程取消意味着该线程处于准备退出状态，但不会影响线程的运行。
+</code></pre></li>
+<li><strong>退出当前线程</strong><pre><code>//线程退出前，必须要要，该线程之后的代码将不在执行
+if (thread.isCancelled == YES) {
+    [NSThread exit];
+}
+</code></pre></li>
+</ol>
+<h1 id="怎么使用"><a href="#怎么使用" class="headerlink" title="怎么使用"></a>怎么使用</h1><h2 id="使用多线程加载一张url图片"><a href="#使用多线程加载一张url图片" class="headerlink" title="使用多线程加载一张url图片"></a>使用多线程加载一张url图片</h2><ol>
+<li>在self.view上放一个UIImageView试图</li>
+<li>开辟一条子线程</li>
+<li>在<code>子线程</code>中将url图片转成image对象</li>
+<li>回到<code>主线程</code></li>
+<li><p>在主线程中将image对象给UIImageView试图</p>
+<pre><code>//
+//  ViewController.m
+//  NSThread
+//
+//  Created by GG on 16/2/18.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+
+#define kUrl @&quot;http://store.storeimages.cdn-apple.com/8748/as-images.apple.com/is/image/AppleInc/aos/published/images/s/38/s38ga/rdgd/s38ga-rdgd-sel-201601?wid=848&amp;hei=848&amp;fmt=jpeg&amp;qlt=80&amp;op_sharpen=0&amp;resMode=bicub&amp;op_usm=0.5,0.5,0,0&amp;iccEmbed=0&amp;layer=comp&amp;.v=1454777389943&quot;
+
+@interface ViewController ()
+{
+    UIImageView *imageView;
+}
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    /*
+     * 1、在self.view上放一个UIImageView试图
+     */
+    imageView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 200, 200)];
+    [self.view addSubview:imageView];
+
+    /*
+     * 2、 开辟一条子线程(我这里采用创建并手动开启线程的方式)
+
+     * target: 信息发送者
+
+     * selector: 方法选择器选择一个方法
+
+     * object: 如果上面选择的方法有参数，则object便是这个方法的参数
+
+     */
+    NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(downloadImage:) object:kUrl];
+
+    //给线程起名字
+    thread.name = @&quot;子线程&quot;;
+
+    // 开启线程
+    [thread start];
+
+}
+
+/*
+ * 3、 在`子线程`中将url图片转成image对象
+
+ *  downloadImage该方法的参数取决于创建线程时传给object的参数
+
+ */
+- (void)downloadImage:(NSString *)url{
+
+    //将图片的url地址转化为data对象
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:kUrl]];
+
+    //将data对象转化为image对象
+    UIImage *image = [UIImage imageWithData:data];
+
+    /* 
+     * 4. 是NSObject的一个方法，用来回到主线程
+
+     * 方法updataUI将在主线程中执行
+
+     * withObject:updateUI的参数
+
+     * waitUntilDone: 设为YES，会阻塞当前子线程，去主线程执行updateUI方法，也就是更新UI，直到UI更新完毕。设为NO,意味着在主线程updateUI方法执行到一半时可能会被打断去做其他线程的工作，也就是说我主线程的UI还没有显示完就程序就跳出了主线程。
+     */
+    [self performSelectorOnMainThread:@selector(updateUI:) withObject:image waitUntilDone:YES];
+
+    /*
+
+     * 查看打印结果
+
+     * number = 1 ：线程的编号，由系统设置，主线程的编号为1
+
+     * name = main：指当前所在的线程的名字叫做main,可以自己设置，主线程的名字默认是main，其他线程如果不给他设置名字默认是nil
+
+     */
+    NSLog(@&quot;downlaodImage方法所在的线程 = %@&quot;,[NSThread currentThread]);
+
+            }
+
+/*
+ * 5、 在主线程中将image对象给UIImageView试图
+ */
+
+- (void)updateUI:(UIImage *)image{
+
+    imageView.image = image;
+
+    NSLog(@&quot;downlaodImage方法所在的线程 = %@&quot;,[NSThread currentThread]);
+
+}
+
+@end
+</code></pre></li>
+</ol>
+<h2 id="使用多线程加载多张图片"><a href="#使用多线程加载多张图片" class="headerlink" title="使用多线程加载多张图片"></a>使用多线程加载多张图片</h2><ol>
+<li>在self.view上放多个UIImageView试图</li>
+<li>开辟多条子线程</li>
+<li>在<code>子线程</code>中将url图片转成image对象</li>
+<li>回到<code>主线程</code></li>
+<li><p>在主线程中将image对象给UIImageView试图</p>
+<pre><code>//
+//  MoreImageViewViewController.m
+//  NSThread
+//
+//  Created by GG on 16/2/22.
+//  Copyright © 2016年 GG. All rights reserved.
+//
+
+#pragma mark ------------------NSThread分析详解 http://www.jianshu.com/p/b1c2bd572e81-------------
+
+#import &quot;MoreImageViewViewController.h&quot;
+
+#define kUrl @&quot;http://store.storeimages.cdn-apple.com/8748/as-images.apple.com/is/image/AppleInc/aos/published/images/s/38/s38ga/rdgd/s38ga-rdgd-sel-201601?wid=848&amp;hei=848&amp;fmt=jpeg&amp;qlt=80&amp;op_sharpen=0&amp;resMode=bicub&amp;op_usm=0.5,0.5,0,0&amp;iccEmbed=0&amp;layer=comp&amp;.v=1454777389943&quot;
+
+@interface MoreImageViewViewController ()
+{
+    int imageIndex;
+
+    NSMutableArray *threadArrays;
+
+    UIImage *image;
+}
+
+@end
+
+@implementation MoreImageViewViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(100, 300, 0, 0)];
+    lable.text = @&quot;点击屏幕停止加载&quot;;
+    lable.textColor = [UIColor blackColor];
+    [lable sizeToFit];
+    [self.view addSubview:lable];
+
+    //创建多个UIImageView
+    self.title = @&quot;多线程加载多张图片&quot;;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    imageIndex = 100;
+
+    for (int  row= 0; row&lt;3; row++) {
+        for (int list = 0; list&lt;2; list++) {
+
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10+list*200, 10+row*200, 200, 200)];
+
+            imageView.tag = imageIndex++;
+
+            [self.view addSubview:imageView];
+
+        }
+    }
+
+    threadArrays = [NSMutableArray array];
+
+    //创建多个线程
+    for (int index = 0; index&lt;6; index++) {
+        //此时我传的参数是线程创建的顺序
+        NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(downloadImage:) object:@(index)];
+
+        //给线程设置优先级（0-1），优先级越高，被优先调用的几率越高。
+//        thread.threadPriority = index/10.0;
+        thread.name = [NSString stringWithFormat:@&quot;线程%d&quot;,index];
+        [thread start];
+
+        [threadArrays addObject:thread];
+
+    }
+}
+
+//每条线程都会走这个方法，来下载相应的图片，在这里为了方便起见，我采用了同一个url图片
+- (void)downloadImage:(NSNumber *)index{
+
+    /*
+
+     * 通过线程的休眠来实现图片的顺序加载
+
+        1. 第一个线程，休眠0秒，第二个线程休眠1秒...第六个线程休眠5面
+
+        2. 正常的流程如下（基于线程同时执行的原理，多线程理论部分有介绍到）
+
+           1. 多线程开启，并在线程中写上线程休眠代码
+           2. 线程执行到休眠代码，停止执行
+           3. 点击屏幕，将为完成的线程设为取消状态
+           4. 休眠结束，线程进行判断是否被取消，被取消就退出
+
+        3. 错误流程
+
+           1. 多线程开启，并在线程中写上线程休眠代码
+           2. 线程进行判断是否被取消，被取消就退出
+           3. 线程执行到休眠代码，停止执行
+           4. 点击屏幕，将为完成的线程设为取消状态
+           5. 休眠结束，继续执行线程
+
+     */
+    [NSThread sleepForTimeInterval:[index integerValue]];
+
+    NSThread *currentThread = [NSThread currentThread];
+    //如果当前线程处于取消状态，则退出当前线程
+    if (currentThread.isCancelled) {
+        NSLog(@&quot;thread(%@) will be cancelled!&quot;,currentThread);
+        [NSThread exit];//退出当前线程
+    }
+
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:kUrl]];
+
+    image = [UIImage imageWithData:data];
+
+    //用index找到相应线程的数据，赋给相应的图片试图。
+    [self performSelectorOnMainThread:@selector(updateUI:) withObject:index waitUntilDone:YES];
+
+    NSThread *thread = [NSThread currentThread];
+    NSLog(@&quot;当前线程是 = %@&quot;,thread.name);
+
+}
+
+- (void)updateUI:(NSNumber *)ktest{
+
+        UIImageView *imageView = [self.view viewWithTag:100+[ktest integerValue]];
+
+        imageView.image = image;
+
+}
+
+//点击屏幕将没有完成的线程设置为取消状态
+- (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event{
+
+    for (int i=0; i&lt;6; i++) {
+        NSThread *thread= threadArrays[i];
+        //判断线程是否完成，如果没有完成则设置为取消状态
+        //注意设置为取消状态仅仅是改变了线程状态而言，并不能终止线程
+        if (!thread.isFinished) {
+            [thread cancel];
+
+            NSLog(@&quot;============&quot;);
+
+        }
+    }
+
+}
+
+@end
+</code></pre><p>顺序启动的线程一般不会按照启动顺序执行，这是因为线程都创建好以后，CPU会根据实际情况（网速、启动时间、优先级等）来决定执行线程的先后顺序，<strong>在这里我采用线程sleep的方式实现了线程的顺序执行。</strong></p>
+</li>
+</ol>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p> 为了简化多线程开发过程，苹果官方对NSObject进行分类扩展(本质还是创建NSThread)，对于简单的多线程操作可以直接使用这些扩展方法。</p>
+<pre><code>//在后台执行一个操作，本质就是重新创建一个线程执行当前方法。
+- (void)performSelectorInBackground:(SEL)aSelector withObject:(id)arg：
+
+//在指定的线程上执行一个方法，需要用户创建一个线程对象。
+- (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait：
+
+//在主线程上执行一个方法（前面已经使用过）。
+- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg waitUntilDone:(BOOL)wait：
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/01/多线程GCD/" itemprop="url">
                   多线程GCD
                 </a>
@@ -3338,7 +3776,7 @@ hexo deploy
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
