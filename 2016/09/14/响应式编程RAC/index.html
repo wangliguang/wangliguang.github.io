@@ -1,0 +1,829 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Robot Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="ReactiveCocoa是什么
+ReactiveCocoa（简称为RAC）,响应式框架,是由Github开源的一个应用于iOS和OS开发的新框架,Cocoa是苹果整套框架的简称，因此很多苹果框架喜欢以Cocoa结尾。
+
+在我们iOS开发过程中，经常会响应某些事件来处理某些业务逻辑，例如按钮的点击，上下拉刷新，网络请求，属性的变化（通过KVO）或者用户位置的变化（通过CoreLocation）。但">
+<meta property="og:type" content="article">
+<meta property="og:title" content="响应式编程RAC">
+<meta property="og:url" content="http://yoursite.com/2016/09/14/响应式编程RAC/index.html">
+<meta property="og:site_name" content="广广的技术博客">
+<meta property="og:description" content="ReactiveCocoa是什么
+ReactiveCocoa（简称为RAC）,响应式框架,是由Github开源的一个应用于iOS和OS开发的新框架,Cocoa是苹果整套框架的简称，因此很多苹果框架喜欢以Cocoa结尾。
+
+在我们iOS开发过程中，经常会响应某些事件来处理某些业务逻辑，例如按钮的点击，上下拉刷新，网络请求，属性的变化（通过KVO）或者用户位置的变化（通过CoreLocation）。但">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-1e6e2436dce366cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1338564-1984290c516ae19a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-14T07:53:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="响应式编程RAC">
+<meta name="twitter:description" content="ReactiveCocoa是什么
+ReactiveCocoa（简称为RAC）,响应式框架,是由Github开源的一个应用于iOS和OS开发的新框架,Cocoa是苹果整套框架的简称，因此很多苹果框架喜欢以Cocoa结尾。
+
+在我们iOS开发过程中，经常会响应某些事件来处理某些业务逻辑，例如按钮的点击，上下拉刷新，网络请求，属性的变化（通过KVO）或者用户位置的变化（通过CoreLocation）。但">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1338564-1e6e2436dce366cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/14/响应式编程RAC/"/>
+
+  <title> 响应式编程RAC | 广广的技术博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">广广的技术博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                响应式编程RAC
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-14T15:48:52+08:00" content="2016-09-14">
+              2016-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/14/响应式编程RAC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/14/响应式编程RAC/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ReactiveCocoa是什么"><a href="#ReactiveCocoa是什么" class="headerlink" title="ReactiveCocoa是什么"></a>ReactiveCocoa是什么</h1><ul>
+<li><p>ReactiveCocoa（简称为<code>RAC</code>）,响应式框架,是由Github开源的一个应用于iOS和OS开发的新框架,Cocoa是苹果整套框架的简称，因此很多苹果框架喜欢以Cocoa结尾。</p>
+</li>
+<li><p>在我们iOS开发过程中，经常会响应某些事件来处理某些业务逻辑，例如按钮的点击，上下拉刷新，网络请求，属性的变化（通过KVO）或者用户位置的变化（通过CoreLocation）。但是这些事件都用不同的方式来处理，比如action、delegate、KVO、callback(回调)等。  </p>
+</li>
+<li><p>其实这些事件，都可以通过RAC处理，ReactiveCocoa为事件提供了很多处理方法，而且利用RAC处理事件很方便，可以把要处理的事情，和监听的事情的代码放在一起，这样非常方便我们管理，就不需要跳到对应的方法里。非常符合我们开发中<code>高聚合，低耦合</code>的思想。</p>
+</li>
+</ul>
+<h1 id="这个框架能为我们带来什么样的便利"><a href="#这个框架能为我们带来什么样的便利" class="headerlink" title="这个框架能为我们带来什么样的便利"></a>这个框架能为我们带来什么样的便利</h1><ul>
+<li>能使业务逻辑变得更加清晰</li>
+<li>大量减少开发代码量</li>
+<li>大量使用block块</li>
+</ul>
+<h1 id="什么时候能用到这个RAC呢"><a href="#什么时候能用到这个RAC呢" class="headerlink" title="什么时候能用到这个RAC呢"></a>什么时候能用到这个RAC呢</h1><ol>
+<li><p>当你需要用到代理的时候开始使用它。例如用RAC检测textfiled的实时输入，不需要繁琐的遵守协议、挂代理、实现方法</p>
+</li>
+<li><p>涉及到点击事件的时候可以用，不需要再addtarget及实现方法。</p>
+</li>
+<li>还有通知、KVO、回调等。</li>
+</ol>
+<h1 id="具体怎么使用"><a href="#具体怎么使用" class="headerlink" title="具体怎么使用"></a>具体怎么使用</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li><p>创建一个新项目，使用<a href="http://www.jianshu.com/p/24e0a451bca1" target="_blank" rel="external">Cocoapods</a>在项目中导入该框架。将下面的代码复制到Podfile文件然后更新。</p>
+<pre><code>use_frameworks!
+pod &apos;ReactiveCocoa&apos;, &apos;~&gt; 4.0.4-alpha-4&apos;
+</code></pre><p>PS：因为这个框架是采用Swift和OC混编的，所以在Podfile文件的最上面要写上use_frameworks</p>
+</li>
+<li><p>建pch文件，在pch文件中导入该框架。</p>
+<pre><code>#import &quot;ReactiveCocoa.h&quot;
+</code></pre></li>
+<li><p>利用这个框架实现下面需求，来具体说明他该如何使用。</p>
+<ul>
+<li>两个输入框内都有内容时，下面的按钮是红色。</li>
+<li>两个输入框内都没内容时，下面的按钮是灰色。</li>
+</ul>
+</li>
+<li><p>将下面代码粘贴到项目中的ViewController.m中。</p>
+<pre><code>#import &quot;ViewController.h&quot;
+
+#define kMargin 100
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenheight [UIScreen mainScreen].bounds.size.height
+
+@interface ViewController ()
+
+@property (nonatomic,strong) UITextField *passwordTextFiled;
+
+@property (nonatomic,strong) UITextField *accountTextFiled;
+
+@property (nonatomic,strong) UIButton *OKBtn;
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    //账号输入框
+    self.accountTextFiled = [[UITextField alloc]initWithFrame:CGRectMake(kMargin, kMargin, kScreenWidth-kMargin*2, 50)];
+    self.accountTextFiled.placeholder = @&quot;账号&quot;;
+    self.accountTextFiled.layer.masksToBounds = YES;
+    self.accountTextFiled.layer.cornerRadius = 5;
+    self.accountTextFiled.textAlignment = NSTextAlignmentCenter;
+    self.accountTextFiled.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.accountTextFiled];
+
+    //密码输入框
+    self.passwordTextFiled = [[UITextField alloc]initWithFrame:CGRectMake(kMargin, kMargin*2, kScreenWidth-kMargin*2, 50)];
+    self.passwordTextFiled.backgroundColor = [UIColor grayColor];
+    self.passwordTextFiled.placeholder = @&quot;密码&quot;;
+    self.passwordTextFiled.textAlignment = NSTextAlignmentCenter;
+    self.passwordTextFiled.layer.masksToBounds = YES;
+    self.passwordTextFiled.layer.cornerRadius = 5;
+
+    [self.view addSubview:self.passwordTextFiled];
+
+    //确定按钮
+    self.OKBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.OKBtn.frame = CGRectMake((kScreenWidth-150)/2, kMargin*3, 150, 50);
+    self.OKBtn.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.OKBtn];
+    self.OKBtn.layer.masksToBounds = YES;
+    self.OKBtn.layer.cornerRadius = 5;
+    [self.OKBtn setTitle:@&quot;登录&quot; forState:UIControlStateNormal];
+
+}
+
+@end
+</code></pre></li>
+</ol>
+<p>运行显示如下图：<br> <img src="http://upload-images.jianshu.io/upload_images/1338564-1e6e2436dce366cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"></p>
+<h2 id="不适用RAC来实现上面的需求-不写具体代码了，只写一些过程"><a href="#不适用RAC来实现上面的需求-不写具体代码了，只写一些过程" class="headerlink" title="不适用RAC来实现上面的需求(不写具体代码了，只写一些过程)"></a>不适用RAC来实现上面的需求(不写具体代码了，只写一些过程)</h2><p>1、遵守协议<br>2、挂代理<br>3、实现相应的代理方法<br>4、在方法内写业务逻辑</p>
+<h2 id="使用RAC来实现该业务逻辑"><a href="#使用RAC来实现该业务逻辑" class="headerlink" title="使用RAC来实现该业务逻辑"></a>使用RAC来实现该业务逻辑</h2><p><img src="http://upload-images.jianshu.io/upload_images/1338564-1984290c516ae19a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ol>
+<li>将上面方法写入ViewController.m中。上面的RAC()其实就是一个宏定义</li>
+<li>之前咱们说过RAC能帮助我们大量的减少代码而且逻辑更加清晰，在这里我们不需要在.m中找遵守协议的地方，不需要找控件挂代理，不需要去实现方法。</li>
+</ol>
+<h2 id="RAC的深入学习"><a href="#RAC的深入学习" class="headerlink" title="RAC的深入学习"></a>RAC的深入学习</h2><p>1、 使用RAC给按钮添加事件</p>
+<pre><code>//老办法，还要实现clickBtn方法
+[self.OKBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
+
+//rac方法
+[[self.OKBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+
+NSLog(@&quot;OK按钮被点击&quot;);
+
+}];
+</code></pre><ul>
+<li>通过rac_signalForControlEvents给按钮创建一个信号流，然后给这个信号指定一个subscribeNext(订阅者)。如果这个信号流的状态发生改变，订阅者便会受到他的改变。不仅仅button可以，segmentcontrol也同样可以。这样操作。</li>
+<li>订阅者受到信息以后的操作都在block中操作。block返回来的参数(id x)其实就是用户所点击的按钮。程序员可以直接将（id x）改为（UIButton *sender）。</li>
+<li><p>在找subcribeNext时，会看到这么一个方法</p>
+<pre><code>subscribeNext:nil error:nil completed:nil];
+</code></pre><p>第一个参数咱已经说过了，另外事件处理有问题会回调这个error这个block块，点击事件执行完毕以后会调用completed这个block块。</p>
+</li>
+</ul>
+<p>2、使用RAC监听TextFiled的输入变化</p>
+<pre><code>[self.accountTextFiled.rac_textSignal subscribeNext:^(id x) {
+
+ NSLog(@&quot;%@&quot;,x);
+
+}];
+</code></pre><ul>
+<li>self.accountTextFiled.rac_textSignal获得到textfiled的信号流。然后给这个信号指定一个（subscribeNext）订阅者。</li>
+<li>subscribeNext:^(id x)如果输入框发生变化，订阅者会收到信息，subscribeNext后的参数，便是输入框的内容。</li>
+</ul>
+<p>3、RAC的过滤效果</p>
+<pre><code>[[self.passwordTextfiled.rac_textSignal filter:^BOOL(id value) {
+
+    NSString *text = value;
+
+    BOOL k = [text isEqualToString:@&quot;123&quot;];
+
+    return k;
+
+}] subscribeNext:^(id x) {
+
+    NSLog(@&quot;======&quot;);
+}];
+</code></pre><ul>
+<li>这段代码最终实现的效果是，只有密码输入框输入的值是123的时候，subscribe中的代码才能执行。    </li>
+<li>之前我们已经接触过.rac_textSignal(信号流)和subscirbeNext(订阅者)。上面他们之间的filter的block块便是一个过滤器。在subscriber(订阅者)接受到文本信号变化之前，filter(过滤器)会首先拦截到这个信号。在这个filter进行一个判断，如果filter内返回一个yes，subscribe才会收到文本变化的信号流，返回NO，订阅者就不会收到信息。就好比一个母亲在给自己待嫁的女儿找婆家，只有这名母亲相中了，她才会让女儿去相亲。</li>
+</ul>
+<p>4、改变订阅者收到的信息。</p>
+<pre><code>[[self.passwordTextFiled.rac_textSignal map:^id(NSString  *str) {
+
+    return[str boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
+
+
+}] subscribeNext:^(UIColor *x) {
+
+    self.view.backgroundColor = x;
+}];
+</code></pre><ul>
+<li>实现的功能：输入框有变化时改变self.view的背景颜色</li>
+<li>之前我们subscribe收到的都是输入框的文本内容，现在我们要做的就是改变订阅者收到的信息。</li>
+<li>在3中我们提到一个filter(过滤器),在这里我们要用一个map(映射)来改变订阅者收到的信息。之前咱们说filter的时候，在订阅者收到信息之前filter会进行一个拦截。map(映射)其实也拦截一下，拦截的时候同样会收到文本框的变化。他两唯一的不同是在map(映射)中返回的是订阅者收到的东西。上面的母亲给女儿找到了一个对象，已经结婚了。老公的第一个月工资发了，老婆（map）拿着。她那里给老公（subscribe）给你买什么东西，老公用什么东西。</li>
+</ul>
+<p>5、对4优化</p>
+<pre><code>//对上面的优化
+RAC(self.view, backgroundColor) = [self.passwordTextFiled.rac_textSignal map:^id(NSString *passwordValid){
+
+
+    return[passwordValid boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
+
+}];
+</code></pre><ul>
+<li>刚开始咱们使用RAC实现咱们刚开始说的需求时，大家已经见到了RAC()。现在我们做的就是讲map(映射)中返回的颜色。赋值给RAC()中对象控件的对应属性。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>起初咱们说到RAC框架有以下几个特点：<br>1、能够使业务逻辑更清晰<br>2、减少代码量<br>3、大量使用block</p>
+<p>最后必须要记住的一点是它能做到这一步最为重要的一个原因是</p>
+<blockquote>
+<p>将代理、KVO、通知、callBack等一系列事件，做了一个统一管理。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/14/通知中心、KVC、KVO/" rel="next" title="通知中心、KVC、KVO">
+                <i class="fa fa-chevron-left"></i> 通知中心、KVC、KVO
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/14/响应式编程RAC/"
+           data-title="响应式编程RAC" data-url="http://yoursite.com/2016/09/14/响应式编程RAC/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://i1.buimg.com/8311/e0cc1a1fed3a4bda.jpg"
+               alt="涅槃广广" />
+          <p class="site-author-name" itemprop="name">涅槃广广</p>
+          <p class="site-description motion-element" itemprop="description">说不定世界上根本就没有偶然，就如一切都是必然那样</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangliguang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5987686599/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ReactiveCocoa是什么"><span class="nav-number">1.</span> <span class="nav-text">ReactiveCocoa是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这个框架能为我们带来什么样的便利"><span class="nav-number">2.</span> <span class="nav-text">这个框架能为我们带来什么样的便利</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么时候能用到这个RAC呢"><span class="nav-number">3.</span> <span class="nav-text">什么时候能用到这个RAC呢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体怎么使用"><span class="nav-number">4.</span> <span class="nav-text">具体怎么使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">4.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不适用RAC来实现上面的需求-不写具体代码了，只写一些过程"><span class="nav-number">4.2.</span> <span class="nav-text">不适用RAC来实现上面的需求(不写具体代码了，只写一些过程)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用RAC来实现该业务逻辑"><span class="nav-number">4.3.</span> <span class="nav-text">使用RAC来实现该业务逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAC的深入学习"><span class="nav-number">4.4.</span> <span class="nav-text">RAC的深入学习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">涅槃广广</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gg-ios"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
