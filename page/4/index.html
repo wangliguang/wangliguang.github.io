@@ -105,7 +105,7 @@
 <meta name="description" content="说不定世界上根本就没有偶然，就如一切都是必然那样">
 <meta property="og:type" content="website">
 <meta property="og:title" content="广广的技术博客">
-<meta property="og:url" content="http://yoursite.com/archives/2016/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="广广的技术博客">
 <meta property="og:description" content="说不定世界上根本就没有偶然，就如一切都是必然那样">
 <meta name="twitter:card" content="summary">
@@ -131,9 +131,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/page/2/"/>
+  <link rel="canonical" href="http://yoursite.com/page/4/"/>
 
-  <title> 归档 | 广广的技术博客 </title>
+  <title> 广广的技术博客 - 说不定世界上根本就没有偶然，就如一切都是必然那样 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +154,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -231,402 +233,195 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  
+  
 
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! 目前共计 31 篇日志。 继续努力。
-    </span>
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/30/搭建个人博客/" itemprop="url">
+                  搭建个人博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T09:03:33+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/30/搭建个人博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/搭建个人博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/09/14/日期NSDate/" itemprop="url">
-              
-                <span itemprop="name">日期NSDate</span>
-              
-            </a>
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  之前共用过两个博客平台，一个是做开发时使用的<a href="http://www.cnblogs.com/g-ios/" target="_blank" rel="external">博客园</a>，另一个是做教育工作时用得<a href="www.baidu.com">简书</a>，其中我更喜欢简书。因为最近感觉有必要对自己的博客进行一个大整理，所以就自己搭建了一个个人博客平台，现在我就把搭建这个平台的流程(流程参考的是<a href="http://baixin.io/2015/08/HEXO搭建个人博客/" target="_blank" rel="external">潘柏信大牛的博客</a>)</p>
+<h1 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h1><ul>
+<li><h2 id="安装Node-必须"><a href="#安装Node-必须" class="headerlink" title="安装Node(必须)"></a>安装Node(必须)</h2><p>作用：用来生成静态页面。 到Node.js<a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>下载相应平台的最新版本，一路安装即可。</p>
+</li>
+<li><h2 id="安装Git-必须"><a href="#安装Git-必须" class="headerlink" title="安装Git(必须)"></a>安装Git(必须)</h2><p> 作用：把本地的hexo内容提交到gitHub上，安装Xcode就自带有git,我就不多说了。</p>
+</li>
+<li><h2 id="申请GitHub-必须"><a href="#申请GitHub-必须" class="headerlink" title="申请GitHub(必须)"></a>申请GitHub(必须)</h2><p> 作用：是用来做博客的远程仓库、域名、服务器之类的，github的申请可以在网上搜教程，按教程一步一步配置即可。<strong>怎么与本地hexo建立连接等下讲</strong></p>
+</li>
+</ul>
+<h1 id="安装Hexo环境"><a href="#安装Hexo环境" class="headerlink" title="安装Hexo环境"></a>安装Hexo环境</h1><p>   Node和Git都安装好后，可执行如下命令安装hexo</p>
+<pre><code>sudo npm install -g hexo
+</code></pre><h1 id="Hexo的基础配置"><a href="#Hexo的基础配置" class="headerlink" title="Hexo的基础配置"></a>Hexo的基础配置</h1><ol>
+<li><h2 id="Hexo初始化"><a href="#Hexo初始化" class="headerlink" title="Hexo初始化"></a>Hexo初始化</h2><p>执行init命令初始化hexo到你终端此时所在的目录。</p>
+<pre><code>hexo init //结束以后hexo会有如下一堆文件
+</code></pre><p>效果图</p>
+<p><img src="http://i4.buimg.com/567571/b019939baf9d73ec.png" alt="">   </p>
+</li>
+<li><h2 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h2><p>cd到你的init目录，执行如下命令，生成静态页面至public\目录</p>
+<pre><code>hexo generate (hexo g 也可以)
+</code></pre></li>
+<li><h2 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h2><pre><code>hexo server (hexo s 也可以)
+</code></pre><p> 浏览器输入<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> ,便能看到初始化界面了。</p>
+</li>
+<li><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>至此，我们搭建出来一个最为基本的一个hexo环境，但现在我们只能本地访问,而且还不知道怎么写博客，部署博客。下面我们讲这部分内容。</p>
+</li>
+<li><p>另外在做基本配置的时候，碰到的一些问题，在文章的最后面会做整理。</p>
+</li>
+<li><p><strong>使用hexo命令时，一定要保证终端的路径处于hexo初始化时的路径下</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="配置GitHub"><a href="#配置GitHub" class="headerlink" title="配置GitHub"></a>配置GitHub</h1><h2 id="建立与你用户名对应的仓库，"><a href="#建立与你用户名对应的仓库，" class="headerlink" title="建立与你用户名对应的仓库，"></a>建立与你用户名对应的仓库，</h2><p>   在自己的Github账号上创建一个仓库，仓库名必须为<strong>【your_user_name.github.io】</strong>，固定写法 </p>
+<h2 id="建立关联，"><a href="#建立关联，" class="headerlink" title="建立关联，"></a>建立关联，</h2><p>   我的blog在本地/Users/GG/hexo，有以下文件</p>
+<pre><code>_config.yml  node_modules  public  source　
+ 　　　
+db.json  package.json  scaffolds  themes　　      
+</code></pre><p>   现在我们需要_config.yml文件，来建立关联,打开_config.yml文件，翻到最下面，改成我这样子的，<strong>注意： : 后面要有空格</strong>，改完后保存</p>
+<pre><code>deploy:
+type: git
+repository: https://github.com/wangliguang/wangliguang.github.io.git
+branch: master
+</code></pre><h2 id="执行如下命令才能使用git部署"><a href="#执行如下命令才能使用git部署" class="headerlink" title="执行如下命令才能使用git部署"></a>执行如下命令才能使用git部署</h2><pre><code>npm install hexo-deployer-git --save
+</code></pre><h2 id="最后执行如下命令部署一下"><a href="#最后执行如下命令部署一下" class="headerlink" title="最后执行如下命令部署一下"></a>最后执行如下命令部署一下</h2><pre><code>hexo deploy (hexo d也可以)
+</code></pre><p>   现在在浏览器中输入 <a href="http://wangliguang.github.io/" target="_blank" rel="external">http://wangliguang.github.io/</a> 就行了，我的github的账户叫wangliguang,把这个改成你github的账户名就行了</p>
+<h1 id="hexo的写作配置"><a href="#hexo的写作配置" class="headerlink" title="hexo的写作配置"></a>hexo的写作配置</h1><ol>
+<li><p>上面我们做的基础配置，只需要做一次就行，但每次我们写作完成以后，需要把我们的文章部署到github服务器上，需要做一下三步。</p>
+<pre><code>hexo clean
+hexo generate
+hexo deploy
+</code></pre></li>
+<li><p>hexo一些常用的命令</p>
+<pre><code>hexo new &quot;postName&quot; #新建文章
+ hexo new page &quot;pageName&quot; #新建页面
+ hexo generate #生成静态页面至public目录
+ hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）
+ hexo deploy #将.deploy目录部署到GitHub
+ hexo help  # 查看帮助
+ hexo version  #查看Hexo的版本
+</code></pre></li>
+<li><p>总结</p>
+<ol>
+<li><p>至于写作的详情自己按按上面的操作来就型。</p>
+</li>
+<li><p><strong>使用hexo命令时，一定要保证终端的路径处于hexo初始化时的路径下</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="博客主题"><a href="#博客主题" class="headerlink" title="博客主题"></a>博客主题</h1><ol>
+<li><p>如果不想用hexo默认的主题，可以在<a href="https://hexo.io/themes/" target="_blank" rel="external">hexo主题</a>进行更换，上面的流程人家说的也比较详细。</p>
+</li>
+<li><p>主题配置过后，可以先使用hexo s命令在本地查看一下，再通过命令行部署到服务器上</p>
+<pre><code>hexo clean
+hexo generate
+hexo deploy
+</code></pre></li>
+<li><p>目前做的比较好的主题是next,<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">官网</a>里面有超级超级详细的说明，强烈推荐。</p>
+</li>
+</ol>
+
+          
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-14T16:19:17+08:00"
-              content="2016-09-14" >
-          09-14
-        </time>
-      </div>
+    <div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
-
     
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/14/归档/" itemprop="url">
-              
-                <span itemprop="name">归档</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-14T16:12:03+08:00"
-              content="2016-09-14" >
-          09-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/14/Cocoapods配置/" itemprop="url">
-              
-                <span itemprop="name">Cocoapods配置</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-14T16:03:33+08:00"
-              content="2016-09-14" >
-          09-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/14/Block/" itemprop="url">
-              
-                <span itemprop="name">Block</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-14T15:55:45+08:00"
-              content="2016-09-14" >
-          09-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/14/响应式编程RAC/" itemprop="url">
-              
-                <span itemprop="name">响应式编程RAC</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-14T15:48:52+08:00"
-              content="2016-09-14" >
-          09-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/14/通知中心、KVC、KVO/" itemprop="url">
-              
-                <span itemprop="name">通知中心、KVC、KVO</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-14T15:30:05+08:00"
-              content="2016-09-14" >
-          09-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/14/网络协议TCP-IP、HTTP/" itemprop="url">
-              
-                <span itemprop="name">网络协议TCP/IP、HTTP</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-14T15:22:01+08:00"
-              content="2016-09-14" >
-          09-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/13/JSON和XML/" itemprop="url">
-              
-                <span itemprop="name">JSON和XML</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-13T17:48:30+08:00"
-              content="2016-09-13" >
-          09-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/02/H5杂项面试题/" itemprop="url">
-              
-                <span itemprop="name">H5杂项面试题</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-02T14:39:59+08:00"
-              content="2016-09-02" >
-          09-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/02/CSS面试题/" itemprop="url">
-              
-                <span itemprop="name">CSS面试题</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-02T14:37:54+08:00"
-              content="2016-09-02" >
-          09-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2016/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2016/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2016/page/3/">3</a><a class="page-number" href="/archives/2016/page/4/">4</a><a class="extend next" rel="next" href="/archives/2016/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
-
 
 
 
@@ -821,12 +616,6 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   
 
